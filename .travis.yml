@@ -13,7 +13,7 @@ addons:
 
 install:
   # Install ansible
-  #- pip install ansible
+  # - pip install ansible
   - pip install git+https://github.com/ansible/ansible.git@devel
 
   # Check ansible version
