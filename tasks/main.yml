@@ -5,5 +5,7 @@
 - { include: displays.yml, tags: "displays" }
 - { include: dock.yml, tags: "dock" }
 - { include: general.yml, tags: "general" }
+- { include: icloud.yml, tags: "icloud" }
 - { include: keyboard.yml, tags: "keyboard" }
+- { include: language-region.yml, tags: "language-region" }
 - { include: mission-control.yml, tags: "mission-control" }

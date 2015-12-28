@@ -1,0 +1,20 @@
+---
+- name: "Language & Region - Prefered languages (in order of preference)"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleLanguages', type: array, value: "{{ LanguageRegion.Languages }}" }
+  when: LanguageRegion.Languages is defined
+
+- name: "Language & Region - Locale and Currency"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleLocale', type: string, value: "{{LanguageRegion.Locale}}" }
+  when: LanguageRegion.Locale is defined
+
+- name: "Language & Region - Measure Units"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleMeasurementUnits', type: string, value: "{{LanguageRegion.MeasurementUnits}}" }
+  when: LanguageRegion.MeasurementUnits is defined
+
+- name: "Language & Region - Force 12/24 hour time"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleICUForce24HourTime', type: bool, value: "{{LanguageRegion.Force24HourTime}}" }
+  when: LanguageRegion.Force24HourTime is defined
+
+- name: "Language & Region - Set Metric Units"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleMetricUnits', type: bool, value: "{{LanguageRegion.MetricUnits}}" }
+  when: LanguageRegion.MetricUnits is defined

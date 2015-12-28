@@ -30,13 +30,13 @@ Displays:
   ShowInMenuBarIfPresent: "true"              # Show mirroring options in the menu bar when available
 
 Dock:
-  TileSize: 32                                # Dock size
-  Autohide: "true"                            # Automatically hide and show the Dock
+  TileSize: 64                                # Dock size
+  Autohide: "false"                           # Automatically hide and show the Dock
   Magnification: "true"                       # Dock magnification
-  LargeSize: 64                               # Icon size of magnified Dock items
+  LargeSize: 128                              # Icon size of magnified Dock items
   MinEffect: "genie"                          # Minimization effect: genie, scale, suck
   Orientation: "bottom"                       # Dock orientation: left, bottom, right
-  ShowHidden: "true"                          # Display translucent Dock icons for hidden applications
+  ShowHidden: "false"                         # Display translucent Dock icons for hidden applications
 
 General:
   AppleAquaColorVariant: 1                    # Set appearance (1: Blue, 6: Graphite)
@@ -47,6 +47,9 @@ General:
   AppleShowScrollBars: "Automatic"            # Scroll bar visibility (WhenScrolling, Automatic, Always)
   NSScrollAnimationEnabled: "true"            # Smooth scrolling (Disable on older Macs)
   NSQuitAlwaysKeepsWindows: "false"           # Close windows when quitting an application
+
+ICloud:
+  NSDocumentSaveNewDocumentsToCloud: "false"  # Save to iCloud by default
 
 Keyboard:
   PressAndHoldEnabled: "true"                 # Disable press-and-hold for keys in favor of key repeat
@@ -60,6 +63,13 @@ Keyboard:
   AutomaticDashSubstitutionEnabled: "false"   # Use smart dashes
   AutomaticSpellingCorrectionEnabled: "false" # Correct spelling automatically
   PowerButtonSleepsSystem: "false"            # Prevent accidental Power button presses from sleeping system
+
+LanguageRegion:
+  Languages: [ "en", "fr" ]                   # Prefered languages (in order of preference)
+  Locale: "en_US@currency=USD"                # Locale and Currency (United States : en_US@currency=USD, Great Britian : en_GB@currency=EUR)
+  MeasurementUnits: "Inches"                  # Measure Units (Inches, Centimeters)
+  Force24HourTime: "true"                     # Force 12/24 hour time
+  MetricUnits: "false"                        # Set Metric Units
 
 MissionControl:
   MruSpaces: "false"                          # Automatically rearrange Spaces based on most recent use
