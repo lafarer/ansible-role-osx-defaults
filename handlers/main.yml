@@ -1,0 +1,9 @@
+---
+- name: restart AppStore
+  command: ps aux | grep "AppStore.app" | grep -v grep && osascript -e 'tell application "AppStore" to quit' && open -a "AppStore"
+
+- name: restart MenuBar
+  command: killall SystemUIServer
+
+- name: restart Dock
+  command: killall Dock

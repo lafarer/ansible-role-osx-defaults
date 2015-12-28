@@ -1,0 +1,43 @@
+---
+- name: "General - Set appearance"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleAquaColorVariant', type: int, value: "{{General.AppleAquaColorVariant}}" }
+  when: General.AppleAquaColorVariant is defined
+
+- name: "General - Highlight color"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleHighlightColor', type: string, value: "{{item.value}}" }
+  with_items:
+    - { name: Red, value: "1.000000 0.733333 0.721569" }
+    - { name: Orange, value: "1.000000 0.874510 0.701961" }
+    - { name: Yellow, value: "1.000000 0.937255 0.690196" }
+    - { name: Green, value: "0.752941 0.964706 0.678431" }
+    - { name: Blue, value: "0.695422 0.843986 0.997528" }
+    - { name: Purple, value: "0.968627 0.831373 1.000000" }
+    - { name: Pink, value: "1.000000 0.749020 0.823529" }
+    - { name: Brown, value: "0.929412 0.870588 0.792157" }
+    - { name: Graphite, value: "0.847059 0.847059 0.862745" }
+  when: General.AppleHighlightColor is defined and item.name == General.AppleHighlightColor
+
+- name: "General - Use Dark menu bar and Dock"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleInterfaceStyle', type: string, value: "{{General.AppleInterfaceStyle}}" }
+  when: General.AppleInterfaceStyle is defined
+
+- name: "General - Automatically hide and show the menu bar"
+  osx_defaults: { domain: 'NSGlobalDomain', key: '_HIHideMenuBar', type: bool, value: "{{General.AutoHideMenuBar}}" }
+  when: General.AutoHideMenuBar is defined
+
+- name: "General - Sidebar icon size"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSTableViewDefaultSizeMode', type: int, value: "{{General.NSTableViewDefaultSizeMode}}" }
+  when: General.NSTableViewDefaultSizeMode is defined
+
+- name: "General - Scroll bar visibility"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowScrollBars', type: string, value: "{{General.AppleShowScrollBars}}" }
+  when: General.AppleShowScrollBars is defined
+
+- name: "General - Smooth scrolling"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSScrollAnimationEnabled', type: bool, value: "{{General.NSScrollAnimationEnabled}}" }
+  when: General.NSScrollAnimationEnabled is defined
+
+- name: "General - Close windows when quitting an application"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSQuitAlwaysKeepsWindows', type: bool, value: "{{General.NSQuitAlwaysKeepsWindows}}" }
+  when: General.NSQuitAlwaysKeepsWindows is defined
+

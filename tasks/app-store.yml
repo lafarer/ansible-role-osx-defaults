@@ -1,0 +1,42 @@
+---
+- name: "AppStore - Check for software updates frequency"
+  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ScheduleFrequency', type: int, value: "{{AppStore.ScheduleFrequency}}" }
+  when: AppStore.ScheduleFrequency is defined
+  notify: restart AppStore
+
+- name: "AppStore - Automatically check for updates"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{AppStore.AutomaticCheckEnabled}}" }
+  when: AppStore.AutomaticCheckEnabled is defined
+  become: true
+  notify: restart AppStore
+
+- name: "AppStore - Download newly available updates in the background"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{AppStore.AutomaticDownload}}" }
+  when: AppStore.AutomaticDownload is defined
+  become: true
+  notify: restart AppStore
+
+- name: "AppStore - Install app updates"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{AppStore.AutoUpdate}}" }
+  when: AppStore.AutoUpdate is defined
+  become: true
+  notify: restart AppStore
+
+- name: "AppStore - Install OSX updates"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{AppStore.AutoUpdateRestartRequired}}" }
+  when: AppStore.AutoUpdateRestartRequired is defined
+  become: true
+  notify: restart AppStore
+
+- name: "AppStore - Install system data files"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{AppStore.ConfigDataInstall}}" }
+  when: AppStore.ConfigDataInstall is defined
+  become: true
+  notify: restart AppStore
+
+- name: "AppStore - Install security updates"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{AppStore.CriticalUpdateInstall}}" }
+  when: AppStore.CriticalUpdateInstall is defined
+  become: true
+  notify: restart AppStore
+

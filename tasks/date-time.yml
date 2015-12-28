@@ -1,0 +1,53 @@
+---
+- name: "Date Time - Get the current timezone"
+  command: "systemsetup -gettimezone"
+  become: true
+  register: result
+  changed_when: False
+  when: DateTime.TimeZone is defined
+- name: "Date Time - Set the timezone"
+  command: "systemsetup -settimezone '{{DateTime.TimeZone}}'"
+  become: true
+  when: DateTime.TimeZone is defined and DateTime.TimeZone not in result.stdout
+  notify: restart MenuBar
+
+- name: "Date Time - Set date and time automatically"
+  command: "systemsetup -setusingnetworktime {{DateTime.AutomaticDateTime}}"
+  become: true
+  when: DateTime.AutomaticDateTime is defined
+  register: result
+  changed_when: "'already' not in result.stdout"
+  notify: restart MenuBar
+
+- name: "Date Time - Get the current time server"
+  command: "systemsetup -getnetworktimeserver"
+  become: true
+  register: result
+  changed_when: False
+  when: DateTime.TimeServer is defined
+- name: "Date Time - Set time server"
+  command: "systemsetup -setnetworktimeserver '{{DateTime.TimeServer}}'"
+  become: true
+  when: DateTime.TimeServer is defined and DateTime.TimeServer not in result.stdout
+  notify: restart MenuBar
+
+- name: "Date Time - Set time zome automatically using current location"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{DateTime.AutomaticTimeZone}}" }
+  become: true
+  when: DateTime.AutomaticTimeZone is defined
+  notify: restart MenuBar
+
+- name: "Date Time - Menu bar clock format"
+  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'DateFormat', type: string, value: "{{DateTime.DateFormat}}" }
+  when: DateTime.DateFormat is defined
+  notify: restart MenuBar
+
+- name: "Date Time - Flash the time separators"
+  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'FlashDateSeparators', type: string, value: "{{DateTime.FlashDateSeparators}}" }
+  when: DateTime.FlashDateSeparators is defined
+  notify: restart MenuBar
+
+- name: "Date Time - Analog menu bar clock"
+  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'IsAnalog', type: string, value: "{{DateTime.IsAnalog}}" }
+  when: DateTime.IsAnalog is defined
+  notify: restart MenuBar

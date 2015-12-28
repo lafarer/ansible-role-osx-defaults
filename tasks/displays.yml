@@ -1,0 +1,23 @@
+---
+- name: "Displays - Automatically adjust brightness  (BezelServices)"
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'dAuto', type: bool, value: "{{Displays.AutomaticallyAdjustBrightness}}" }
+  when: Displays.AutomaticallyAdjustBrightness is defined
+
+- name: "Displays - Automatically adjust brightness  (AmbientLightSensor)"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Display Enabled', type: bool, value: "{{Displays.AutomaticallyAdjustBrightness}}" }
+  become: true
+  when: Displays.AutomaticallyAdjustBrightness is defined
+
+- name: "Displays - Subpixel font rendering on non-Apple LCDs"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{Displays.AppleFontSmoothing}}" }
+  when: Displays.AppleFontSmoothing is defined
+
+- name: "Displays - Enable HiDPI display modes (requires restart)"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.windowserver', key: 'DisplayResolutionEnabled', type: bool, value: "{{Displays.DisplayResolutionEnabled}}" }
+  become: true
+  when: Displays.DisplayResolutionEnabled is defined
+
+- name: "Displays - Show mirroring options in the menu bar when available"
+  osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{Displays.ShowInMenuBarIfPresent}}" }
+  when: Displays.ShowInMenuBarIfPresent is defined
+  notify: restart MenuBar

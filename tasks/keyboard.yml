@@ -1,0 +1,54 @@
+---
+- name: "Keyboard - Disable press-and-hold for keys in favor of key repeat"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'ApplePressAndHoldEnabled', type: bool, value: "{{keyboard.PressAndHoldEnabled}}" }
+  when: keyboard.PressAndHoldEnabled is defined
+
+- name: "Keyboard - Set key repeat rate"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'KeyRepeat', type: int, value: "{{keyboard.KeyRepeat}}" }
+  when: keyboard.KeyRepeat is defined
+
+- name: "Keyboard - Set delay until repeat (in milliseconds)"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'InitialKeyRepeat', type: int, value: "{{keyboard.InitialKeyRepeat}}" }
+  when: keyboard.InitialKeyRepeat is defined
+
+- name: "Keyboard - Adjust keyboard brightness in low light (BezelServices)"
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDim', type: bool, value: "{{keyboard.kDim}}"  }
+  when: keyboard.kDim is defined
+
+- name: "Keyboard - Adjust keyboard brightness in low light (AmbientLightSensor)"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Keyboard Enabled', type: bool, value: "{{keyboard.kDim}}" }
+  become: true
+  when: keyboard.kDim is defined
+
+- name: "Keyboard - Dim keyboard after idle time in seconds (BezelServices)"
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDimTime', type: int , value: "{{keyboard.kDimTime}}" }
+  when: keyboard.kDimTime is defined
+
+- name: "Keyboard - Dim keyboard after idle time in seconds (AmbientLightSensor)"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Keyboard Dim Time', type: int, value: "{{keyboard.kDimTime}}" }
+  become: true
+  when: keyboard.kDimTime is defined
+
+- name: "Keyboard - Full Keyboard Access"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{keyboard.AppleKeyboardUIMode}}" }
+  when: keyboard.AppleKeyboardUIMode is defined
+
+- name: "Keyboard - Use F1, F2, etc. keys as standard function keys"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'com.apple.keyboard.fnState', type: bool, value: "{{keyboard.fnState}}" }
+  when: keyboard.fnState is defined
+
+- name: "Keyboard - Use smart quotes"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticQuoteSubstitutionEnabled', type: bool, value: "{{keyboard.AutomaticQuoteSubstitutionEnabled}}" }
+  when: keyboard.AutomaticQuoteSubstitutionEnabled is defined
+
+- name: "Keyboard - Use smart dashes"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticDashSubstitutionEnabled', type: bool, value: "{{keyboard.AutomaticDashSubstitutionEnabled}}" }
+  when: keyboard.AutomaticDashSubstitutionEnabled is defined
+
+- name: "Keyboard - Correct spelling automatically"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticSpellingCorrectionEnabled', type: bool, value: "{{keyboard.AutomaticSpellingCorrectionEnabled}}"  }
+  when: keyboard.AutomaticSpellingCorrectionEnabled is defined
+
+- name: "Keyboard - Prevent accidental Power button presses from sleeping system"
+  osx_defaults: { domain: 'com.apple.loginwindow', key: 'PowerButtonSleepsSystem', type: bool, value: "{{keyboard.PowerButtonSleepsSystem}}"  }
+  when: keyboard.PowerButtonSleepsSystem is defined
