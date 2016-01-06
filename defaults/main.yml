@@ -8,6 +8,9 @@ AppStore:
   ConfigDataInstall: "false"                  # Install system data files
   CriticalUpdateInstall: "false"              # Install security updates
 
+Bluetooth:
+  ShowInMenuBar: "false"            # Show Bluetooth in menu bar
+
 Dashboard:
   McxDisabled: "true"                         # Disable Dashboard
   EnabledState: 1                             # Dashboard state (1: Off, 2: As Space, 3: As Overlay)

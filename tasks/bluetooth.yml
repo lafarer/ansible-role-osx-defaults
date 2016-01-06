@@ -1,0 +1,6 @@
+---
+- name: "Bluetooth - Show Bluetooth in menu bar"
+  osx_defaults: { domain: 'com.apple.systemuiserver', key: 'menuExtras', type: array, array_add: "true", value: [ "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" ] }
+  when: Bluetooth.ShowInMenuBar is defined and Bluetooth.ShowInMenuBar == "true"
+  notify: restart MenuBar
+
