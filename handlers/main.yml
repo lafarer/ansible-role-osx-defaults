@@ -1,9 +1,20 @@
 ---
 - name: restart AppStore
-  command: ps aux | grep "AppStore.app" | grep -v grep && osascript -e 'tell application "AppStore" to quit' && open -a "AppStore"
+  command: killall "App Store"
+  ignore_errors: yes
 
 - name: restart MenuBar
   command: killall SystemUIServer
+  ignore_errors: yes
 
 - name: restart Dock
   command: killall Dock
+  ignore_errors: yes
+
+- name: restart Finder
+  command: killall Finder
+  ignore_errors: yes
+
+- name: restart Safari
+  command: killall Safari
+  ignore_errors: yes

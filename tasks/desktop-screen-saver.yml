@@ -1,0 +1,15 @@
+---
+- name: "Get the current background image"
+  command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data";
+  changed_when: false
+  register: BackGroundImage_Current
+
+- name: "Check if background image exists"
+  stat: path={{ DesktopScreenSaver_BackGroundImage }}
+  changed_when: false
+  register: BackGroundImage_New
+
+- name: "Desktop & Screen Saver - Change desktop background"
+  command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ DesktopScreenSaver_BackGroundImage}}'";
+  when: DesktopScreenSaver_BackGroundImage is defined and BackGroundImage_New.stat.exists and BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
+  notify: restart Dock

@@ -1,23 +1,23 @@
 ---
 - name: "Displays - Automatically adjust brightness  (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'dAuto', type: bool, value: "{{Displays.AutomaticallyAdjustBrightness}}" }
-  when: Displays.AutomaticallyAdjustBrightness is defined
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'dAuto', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
+  when: Displays_AutomaticallyAdjustBrightness is defined
 
 - name: "Displays - Automatically adjust brightness  (AmbientLightSensor)"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Display Enabled', type: bool, value: "{{Displays.AutomaticallyAdjustBrightness}}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Display Enabled', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
   become: true
-  when: Displays.AutomaticallyAdjustBrightness is defined
+  when: Displays_AutomaticallyAdjustBrightness is defined
 
 - name: "Displays - Subpixel font rendering on non-Apple LCDs"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{Displays.AppleFontSmoothing}}" }
-  when: Displays.AppleFontSmoothing is defined
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ Displays_AppleFontSmoothing }}" }
+  when: Displays_AppleFontSmoothing is defined
 
 - name: "Displays - Enable HiDPI display modes (requires restart)"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.windowserver', key: 'DisplayResolutionEnabled', type: bool, value: "{{Displays.DisplayResolutionEnabled}}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.windowserver', key: 'DisplayResolutionEnabled', type: bool, value: "{{ Displays_DisplayResolutionEnabled }}" }
   become: true
-  when: Displays.DisplayResolutionEnabled is defined
+  when: Displays_DisplayResolutionEnabled is defined
 
 - name: "Displays - Show mirroring options in the menu bar when available"
-  osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{Displays.ShowInMenuBarIfPresent}}" }
-  when: Displays.ShowInMenuBarIfPresent is defined
+  osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{ Displays_ShowInMenuBarIfPresent }}" }
+  when: Displays_ShowInMenuBarIfPresent is defined
   notify: restart MenuBar

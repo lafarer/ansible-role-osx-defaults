@@ -1,0 +1,260 @@
+---
+- name: "Safari - General - Safari opens with"
+  osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: bool, value: "{{ item.value }}" }
+  with_items:
+    - { name: "A new window", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 0 }
+    - { name: "A new window", key: AlwaysRestoreSessionAtLaunch, value: 0}
+    - { name: "A new private window", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 1 }
+    - { name: "A new private window", key: AlwaysRestoreSessionAtLaunch, value: 0}
+    - { name: "All windows from last session", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 0 }
+    - { name: "All windows from last session", key: AlwaysRestoreSessionAtLaunch, value: 1}
+  when: Safari_OpensWith is defined and item.name == Safari_OpensWith
+  notify: restart Safari
+
+- name: "Safari - General - New windows open with"
+  osx_defaults: { domain: 'com.apple.safari', key: 'NewWindowBehavior', type: int, value: "{{ Safari_NewWindowBehavior }}" }
+  when: Safari_NewWindowBehavior is defined
+  notify: restart Safari
+
+- name: "Safari - General - New tabs open with"
+  osx_defaults: { domain: 'com.apple.safari', key: 'NewTabBehavior', type: int, value: "{{ Safari_NewTabBehavior }}" }
+  when: Safari_NewTabBehavior is defined
+  notify: restart Safari
+
+#- name: "Safari - General - Homepage"
+
+- name: "Safari - General - Remove history items"
+  osx_defaults: { domain: 'com.apple.safari', key: 'HistoryAgeInDaysLimit', type: int, value: "{{ Safari_HistoryAgeInDaysLimit }}" }
+  when: Safari_HistoryAgeInDaysLimit is defined
+  notify: restart Safari
+
+#- name: "Safari - General - Favorites shows"
+
+- name: "Safari - General - Top Sites shows"
+  osx_defaults: { domain: 'com.apple.safari', key: 'TopSitesGridArrangement', type: int, value: "{{ Safari_TopSitesGridArrangement }}" }
+  when: Safari_TopSitesGridArrangement is defined
+  notify: restart Safari
+
+#- name: "Safari - General - File download location
+
+- name: "Safari - General - Remove download list items"
+  osx_defaults: { domain: 'com.apple.safari', key: 'DownloadsClearingPolicy', type: int, value: "{{ Safari_DownloadsClearingPolicy }}" }
+  when: Safari_DownloadsClearingPolicy is defined
+  notify: restart Safari
+
+- name: "Safari - General - Open 'safe' files after downloading"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AutoOpenSafeDownloads', type: bool, value: "{{ Safari_AutoOpenSafeDownloads }}" }
+  when: Safari_AutoOpenSafeDownloads is defined
+  notify: restart Safari
+
+- name: "Safari - Tabs - Open pages in tabs instead of windows"
+  osx_defaults: { domain: 'com.apple.safari', key: 'TabCreationPolicy', type: int, value: "{{ Safari_TabCreationPolicy }}" }
+  when: Safari_TabCreationPolicy is defined
+  notify: restart Safari
+
+- name: "Safari - Tabs - cmd+click opens a link in a new tab"
+  osx_defaults: { domain: 'com.apple.safari', key: 'CommandClickMakesTabs', type: bool, value: "{{ Safari_CommandClickMakesTabs }}" }
+  when: Safari_CommandClickMakesTabs is defined
+  notify: restart Safari
+
+- name: "Safari - Tabs - When a new tab or window opens, make it active"
+  osx_defaults: { domain: 'com.apple.safari', key: 'OpenNewTabsInFront', type: bool, value: "{{ Safari_OpenNewTabsInFront }}" }
+  when: Safari_OpenNewTabsInFront is defined
+  notify: restart Safari
+
+- name: "Safari - Tabs - Use cmd+1 through cmd+9 to switch tabs"
+  osx_defaults: { domain: 'com.apple.safari', key: 'Command1Through9SwitchesTabs', type: bool, value: "{{ Safari_Command1Through9SwitchesTabs }}" }
+  when: Safari_Command1Through9SwitchesTabs is defined
+  notify: restart Safari
+
+- name: "Safari - Autofill - Using info from my Contact card"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillFromAddressBook', type: bool, value: "{{ Safari_AutoFillFromAddressBook }}" }
+  when: Safari_AutoFillFromAddressBook is defined
+  notify: restart Safari
+
+- name: "Safari - Autofill - Using names and passwords"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillPasswords', type: bool, value: "{{ Safari_AutoFillPasswords }}" }
+  when: Safari_AutoFillPasswords is defined
+  notify: restart Safari
+
+- name: "Safari - Autofill - Credit cards"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillCreditCardData', type: bool, value: "{{ Safari_AutoFillCreditCardData }}" }
+  when: Safari_AutoFillCreditCardData is defined
+  notify: restart Safari
+
+- name: "Safari - Autofill - Other forms"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillMiscellaneousForms', type: bool, value: "{{ Safari_AutoFillMiscellaneousForms }}" }
+  when: Safari_AutoFillMiscellaneousForms is defined
+  notify: restart Safari
+
+- name: "Safari - Search - Search engine"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDefaultDisplayName', type: string, value: "{{ Safari_SearchEngine }}" }
+  when: Safari_SearchEngine is defined
+  notify: restart Safari
+
+- name: "Safari - Search - Search engine"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSProviderIdentifier', type: string, value: "{{ item.value }}" }
+  with_items:
+    - { name: Yahoo, value: "com.yahoo.www" }
+    - { name: Google, value: "com.google.www" }
+    - { name: Bing, value: "com.bing.www" }
+    - { name: DuckDuckGo, value: "com.duckduckgo" }
+  when: Safari_SearchEngine is defined and item.name == Safari_SearchEngine
+
+- name: "Safari - Search - Include search engine suggestions"
+  osx_defaults: { domain: 'com.apple.safari', key: 'SuppressSearchSuggestions', type: bool, value: "{{ not Safari_IncludeSearchSuggestions }}" }
+  when: Safari_IncludeSearchSuggestions is defined
+  notify: restart Safari
+
+#- name: "Safari - Search - Smart Search Field - Include Safari suggestions"
+
+- name: "Safari - Search - Smart Search Field - Enable Quick Website Search"
+  osx_defaults: { domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: bool, value: "{{ Safari_WebsiteSpecificSearchEnabled }}" }
+  when: Safari_WebsiteSpecificSearchEnabled is defined
+  notify: restart Safari
+
+- name: "Safari - Search - Smart Search Field - Preload Top Hit in the background"
+  osx_defaults: { domain: 'com.apple.safari', key: 'PreloadTopHit', type: bool, value: "{{ Safari_PreloadTopHit }}" }
+  when: Safari_PreloadTopHit is defined
+  notify: restart Safari
+
+- name: "Safari - Search - Smart Search Field - Show Favorites"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: bool, value: "{{ Safari_ShowFavoritesUnderSmartSearchField }}" }
+  when: Safari_ShowFavoritesUnderSmartSearchField is defined
+  notify: restart Safari
+
+- name: "Safari - Security - Fraudulent Sites - Warn when visiting a fraudulent website"
+  osx_defaults: { domain: 'com.apple.safari', key: 'WarnAboutFraudulentWebsites', type: bool, value: "{{ Safari_WarnAboutFraudulentWebsites }}" }
+  when: Safari_WarnAboutFraudulentWebsites is defined
+  notify: restart Safari
+
+- name: "Safari - Security - Web Content - Enable Javascript"
+  osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled', type: bool, value: "{{ Safari_JavaScriptEnabled }}" }
+  when: Safari_JavaScriptEnabled is defined
+  notify: restart Safari
+
+- name: "Safari - Security - Web Content - Block pop-up windows"
+  osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically', type: bool, value: "{{ not Safari_BlockPopupWindows }}" }
+  when: Safari_BlockPopupWindows is defined
+  notify: restart Safari
+
+- name: "Safari - Security - Web Content - Allow WebGL"
+  osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled', type: bool, value: "{{ Safari_AllowWebGL }}" }
+  when: Safari_AllowWebGL is defined
+  notify: restart Safari
+
+- name: "Safari - Security - Internet plug-ins - Allow Plug-ins"
+  osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled', type: bool, value: "{{ Safari_AllowPlugins }}" }
+  when: Safari_AllowPlugins is defined
+  notify: restart Safari
+
+- name: "Safari - Privacy - Cookies and website data"
+  osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: int, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Always block", key: "BlockStoragePolicy", value: 0 }
+    - { name: "Always block", key: "WebKitStorageBlockingPolicy", value: 2 }
+    - { name: "Always block", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 2 }
+    - { name: "Always from current website only", key: "BlockStoragePolicy", value: 3 }
+    - { name: "Always from current website only", key: "WebKitStorageBlockingPolicy", value: 1 }
+    - { name: "Always from current website only", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
+    - { name: "Allow from websites I visit", key: "BlockStoragePolicy", value: 2 }
+    - { name: "Allow from websites I visit", key: "WebKitStorageBlockingPolicy", value: 1 }
+    - { name: "Allow from websites I visit", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
+    - { name: "Always allow", key: "BlockStoragePolicy", value: 1 }
+    - { name: "Always allow", key: "WebKitStorageBlockingPolicy", value: 0 }
+    - { name: "Always allow", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 0 }
+  when: Safari_Cookies is defined and item.name == Safari_Cookies
+  notify: restart Safari
+
+- name: "Safari - Privacy - Website use of location services"
+  osx_defaults: { domain: 'com.apple.safari', key: 'SafariGeolocationPermissionPolicy', type: int, value: "{{ Safari_SafariGeolocationPermissionPolicy }}" }
+  when: Safari_SafariGeolocationPermissionPolicy is defined
+  notify: restart Safari
+
+- name: "Safari - Privacy - Website tracking - Ask websites not to track me"
+  osx_defaults: { domain: 'com.apple.safari', key: 'SendDoNotTrackHTTPHeader', type: bool, value: "{{ Safari_SendDoNotTrackHTTPHeader }}" }
+  when: Safari_SendDoNotTrackHTTPHeader is defined
+  notify: restart Safari
+
+- name: "Safari - Notification - Allow websites to ask for permission to send push notifications"
+  osx_defaults: { domain: 'com.apple.safari', key: 'CanPromptForPushNotifications', type: bool, value: "{{ Safari_CanPromptForPushNotifications }}" }
+  when: Safari_CanPromptForPushNotifications is defined
+  notify: restart Safari
+
+- name: "Safari - Exensions - Automatically update extensions from Safari Extensions Gallery"
+  osx_defaults: { domain: 'com.apple.safari', key: 'InstallExtensionUpdatesAutomatically', type: bool, value: "{{ Safari_InstallExtensionUpdatesAutomatically }}" }
+  when: Safari_InstallExtensionUpdatesAutomatically is defined
+  notify: restart Safari
+
+- name: "Safari - Advanced - Smart Search Field - Show full website address"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: bool, value: "{{ Safari_ShowFullURLInSmartSearchField }}" }
+  when: Safari_ShowFullURLInSmartSearchField is defined
+  notify: restart Safari
+
+- name: "Safari - Advanced - Accessibility - Never use font sizes smaller than"
+  osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: '{{ item.type }}', value: "{{ Safari_WebKitMinimumFontSize }}" }
+  with_items:
+    - { key: "WebKitMinimumFontSize", type: "int" }
+    - { key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2MinimumFontSize", type: "float" }
+  when: Safari_WebKitMinimumFontSize is defined
+  notify: restart Safari
+
+- name: "Safari - Advanced - Accessibility - Press Tab to highlight ach item on a webpage"
+  osx_defaults: { domain: 'com.apple.safari', key: '{{ item }}', type: bool, value: "{{ Safari_WebKitTabToLinksPreferenceKey }}" }
+  with_items: [ "WebKitTabToLinksPreferenceKey", "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks" ]
+  when: Safari_WebKitTabToLinksPreferenceKey is defined
+  notify: restart Safari
+
+- name: "Safari - Advanced - Bonjour - Include Bonjour in the Bookmarks Menu"
+  osx_defaults: { domain: 'com.apple.safari', key: 'BookmarksMenuIncludesRendezvous', type: bool, value: "{{ Safari_BookmarksMenuIncludesRendezvous }}" }
+  when: Safari_BookmarksMenuIncludesRendezvous is defined
+  notify: restart Safari
+
+#- name: "Safari - Advanced - Bonjour - Include Bonjour in the Favorites bar
+
+- name: "Safari - Advanced - Internet plug-ins - Stop plug-ins to saver power"
+  osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: bool, value: "{{ Safari_StopPuginsToSavePower }}" }
+  when: Safari_StopPuginsToSavePower is defined
+  notify: restart Safari
+
+#- name: "Safari - Advanced - Style sheet
+
+#- name: "Safari - Advanced - Default encoding
+
+#- name: "Safari - Advanced - Proxies
+
+- name: "Safari - Advanced - Show Develop menu in menu bar"
+  osx_defaults: { domain: 'com.apple.safari', key: '{{ item }}', type: bool, value: "{{ Safari_ShowDeloperMenu }}" }
+  with_items: [ "IncludeDevelopMenu", "WebKitDeveloperExtrasEnabledPreferenceKey", "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" ]
+  when: Safari_ShowDeloperMenu is defined
+  notify: restart Safari
+
+- name: "Safari - View - Show Favorites Bar"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesBar-v2', type: bool, value: "{{ Safari_ShowFavoritesBar }}" }
+  when: Safari_ShowFavoritesBar is defined
+  notify: restart Safari
+
+- name: "Safari - View - Show Tab Bar"
+  osx_defaults: { domain: 'com.apple.safari', key: 'AlwaysShowTabBar', type: bool, value: "{{ Safari_AlwaysShowTabBar }}" }
+  when: Safari_AlwaysShowTabBar is defined
+  notify: restart Safari
+
+- name: "Safari - View - Show Status Bar"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowOverlayStatusBar', type: bool, value: "{{ Safari_ShowOverlayStatusBar }}" }
+  when: Safari_ShowOverlayStatusBar is defined
+  notify: restart Safari
+
+- name: "Safari - View - Show Sidebar"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowSidebarInNewWindows', type: bool, value: "{{ Safari_ShowSidebarInNewWindows }}" }
+  when: Safari_ShowSidebarInNewWindows is defined
+  notify: restart Safari
+
+- name: "Safari - View - Show Sidebar Mode"
+  osx_defaults: { domain: 'com.apple.safari', key: 'SidebarViewModeIdentifier', type: string, value: "{{ Safari_SidebarViewModeIdentifier }}" }
+  when: Safari_SidebarViewModeIdentifier is defined
+  notify: restart Safari
+
+- name: "Safari - Bookmarks - Show Frequently Visited in Favorites"
+  osx_defaults: { domain: 'com.apple.safari', key: 'ShowFrequentlyVisitedSites', type: bool, value: "{{ Safari_ShowFrequentlyVisitedSites }}" }
+  when: Safari_ShowFrequentlyVisitedSites is defined
+  notify: restart Safari

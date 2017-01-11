@@ -1,35 +1,55 @@
 ---
 - name: "Dock - Size"
-  osx_defaults: { domain: 'com.apple.dock', key: 'tilesize', type: int, value: "{{Dock.TileSize}}" }
-  when: Dock.TileSize is defined
-  notify: restart Dock
-
-- name: "Dock - Automatically hide and show"
-  osx_defaults: { domain: 'com.apple.dock', key: 'autohide', type: bool, value: "{{Dock.Autohide}}" }
-  when: Dock.Autohide is defined
+  osx_defaults: { domain: 'com.apple.dock', key: 'tilesize', type: float, value: "{{ Dock_TileSize }}" }
+  when: Dock_TileSize is defined
   notify: restart Dock
 
 - name: "Dock - Magnification"
-  osx_defaults: { domain: 'com.apple.dock', key: 'magnification', type: bool, value: "{{Dock.Magnification}}" }
-  when: Dock.Magnification is defined
+  osx_defaults: { domain: 'com.apple.dock', key: 'magnification', type: bool, value: "{{ Dock_Magnification }}" }
+  when: Dock_Magnification is defined
   notify: restart Dock
 
 - name: "Dock - Icon size of magnified Dock items"
-  osx_defaults: { domain: 'com.apple.dock', key: 'largesize', type: int, value: "{{Dock.LargeSize}}" }
-  when: Dock.LargeSize is defined
+  osx_defaults: { domain: 'com.apple.dock', key: 'largesize', type: float, value: "{{ Dock_LargeSize }}" }
+  when: Dock_LargeSize is defined
+  notify: restart Dock
+
+- name: "Dock - Position on screen"
+  osx_defaults: { domain: 'com.apple.dock', key: 'orientation', type: string, value: "{{ Dock_Orientation }}" }
+  when: Dock_Orientation is defined
   notify: restart Dock
 
 - name: "Dock - Minimization effect"
-  osx_defaults: { domain: 'com.apple.dock', key: 'mineffect', type: string, value: "{{Dock.MinEffect}}" }
-  when: Dock.MinEffect is defined
+  osx_defaults: { domain: 'com.apple.dock', key: 'mineffect', type: string, value: "{{Dock_MinEffect}}" }
+  when: Dock_MinEffect is defined
   notify: restart Dock
 
-- name: "Dock - Orientation"
-  osx_defaults: { domain: 'com.apple.dock', key: 'orientation', type: string, value: "{{Dock.Orientation}}" }
-  when: Dock.Orientation is defined
+- name: "Dock - Window's title title bar double-click action"
+  osx_defaults: { domain: 'com.apple.dock', key: 'AppleActionOnDoubleClick', type: string, value: "{{Dock_AppleActionOnDoubleClick}}" }
+  when: Dock_AppleActionOnDoubleClick is defined
   notify: restart Dock
 
-- name: "Dock - Display translucent Dock icons for hidden applications"
-  osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{Dock.ShowHidden}}" }
-  when: Dock.ShowHidden is defined
+- name: "Dock - Minimize windows appliction into icon"
+  osx_defaults: { domain: 'com.apple.dock', key: 'minimize-to-application', type: boolean, value: "{{Dock_MinimizeToApplication}}" }
+  when: Dock_MinimizeToApplication is defined
+  notify: restart Dock
+
+- name: "Dock - Animate opening applications"
+  osx_defaults: { domain: 'com.apple.dock', key: 'launchanim', type: boolean, value: "{{Dock_LaunchAnim}}" }
+  when: Dock_LaunchAnim is defined
+  notify: restart Dock
+
+- name: "Dock - Automatically hide and show"
+  osx_defaults: { domain: 'com.apple.dock', key: 'autohide', type: bool, value: "{{Dock_Autohide}}" }
+  when: Dock_Autohide is defined
+  notify: restart Dock
+
+- name: "Dock - Show indicator for open applications"
+  osx_defaults: { domain: 'com.apple.dock', key: 'show-process-indicators', type: boolean, value: "{{Dock_ShowProcessIndicators}}" }
+  when: Dock_ShowProcessIndicators is defined
+  notify: restart Dock
+
+- name: "Dock - Extra - Display translucent Dock icons for hidden applications"
+  osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{Dock_ShowHidden}}" }
+  when: Dock_ShowHidden is defined
   notify: restart Dock

@@ -1,0 +1,124 @@
+---
+- name: "Finder - General - Show hard disks on the desktop"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowHardDrivesOnDesktop }}" }
+  when: Finder_ShowHardDrivesOnDesktop is defined
+  notify: restart Finder
+
+- name: "Finder - General - Show external disks on the desktop"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowExternalHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowExternalHardDrivesOnDesktop }}" }
+  when: Finder_ShowExternalHardDrivesOnDesktop is defined
+  notify: restart Finder
+
+- name: "Finder - General - Show CDs, DVDs and iPods on the desktop"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowRemovableMediaOnDesktop', type: bool, value: "{{ Finder_ShowRemovableMediaOnDesktop }}" }
+  when: Finder_ShowRemovableMediaOnDesktop is defined
+  notify: restart Finder
+
+- name: "Finder - General - Show connected servers on the desktop"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowMountedServersOnDesktop', type: bool, value: "{{ Finder_ShowMountedServersOnDesktop }}" }
+  when: Finder_ShowMountedServersOnDesktop is defined
+  notify: restart Finder
+
+- name: "Finder - General - New Finder windows show"
+  osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTarget', type: string, value: "{{ Finder_NewWindowTarget }}" }
+  when: Finder_NewWindowTarget is defined
+  register: result
+  notify: restart Finder
+
+- name: "Finder - General - New Finder windows show"
+  osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
+  with_items:
+    - { name: "PfCm", value: "" }
+    - { name: "PfVo", value: "file:///" }
+    - { name: "PfHm", value: "file://${HOME}/" }
+    - { name: "PfDe", value: "file://${HOME}/Desktop/" }
+    - { name: "PfDo", value: "file://${HOME}/Documents/" }
+    - { name: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
+  when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget and result.changed
+  notify: restart Finder
+
+- name: "Finder - General - Open folders in tabs instead of new windows"
+  osx_defaults: { domain: 'com.apple.finder', key: 'FinderSpawnTab', type: bool, value: "{{ Finder_FinderSpawnTab }}" }
+  when: Finder_FinderSpawnTab is defined
+  notify: restart Finder
+
+- name: "Finder - Advanced - Show all filename extensions"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ Finder_AppleShowAllExtensions }}" }
+  when: Finder_AppleShowAllExtensions is defined
+  notify: restart Finder
+
+- name: "Finder - Advanced - Show warning before changing an extension"
+  osx_defaults: { domain: 'com.apple.finder', key: 'FXEnableExtensionChangeWarning', type: bool, value: "{{ Finder_FXEnableExtensionChangeWarning }}" }
+  when: Finder_FXEnableExtensionChangeWarning is defined
+  notify: restart Finder
+
+- name: "Finder - Advanced - Show warning before emptying the trash"
+  osx_defaults: { domain: 'com.apple.finder', key: 'WarnOnEmptyTrash', type: bool, value: "{{ Finder_WarnOnEmptyTrash }}" }
+  when: Finder_WarnOnEmptyTrash is defined
+  notify: restart Finder
+
+- name: "Finder - Advanced - When performing a search"
+  osx_defaults: { domain: 'com.apple.finder', key: 'FXDefaultSearchScope', type: string, value: "{{ Finder_FXDefaultSearchScope }}" }
+  when: Finder_FXDefaultSearchScope is defined
+  notify: restart Finder
+
+- name: "Finder - View - View as"
+  osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredViewStyle', type: string, value: "{{ Finder_FXPreferredViewStyle }}" }
+  when: Finder_FXPreferredViewStyle is defined
+  notify: restart Finder
+
+- name: "Finder - View - Arrange By"
+  osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredGroupBy', type: string, value: "{{ Finder_FXPreferredGroupBy }}" }
+  when: Finder_FXPreferredGroupBy is defined
+  notify: restart Finder
+
+- name: "Finder - View - Show Tab Bar"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowTabView', type: bool, value: "{{ Finder_ShowTabView }}" }
+  when: Finder_ShowTabView is defined
+  notify: restart Finder
+
+- name: "Finder - View - Show Path Bar"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowPathbar', type: bool, value: "{{ Finder_ShowPathbar }}" }
+  when: Finder_ShowPathbar is defined
+  notify: restart Finder
+
+- name: "Finder - View - Show Status Bar"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowStatusBar', type: bool, value: "{{ Finder_ShowStatusBar }}" }
+  when: Finder_ShowStatusBar is defined
+  notify: restart Finder
+
+- name: "Finder - View - Show Side Bar"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ShowSidebar', type: bool, value: "{{ Finder_ShowSidebar }}" }
+  when: Finder_ShowSidebar is defined
+  notify: restart Finder
+
+- name: "Finder - View - Show Preview"
+  osx_defaults: { domain: 'com.apple.finder', key: 'ColumnShowIcons', type: bool, value: "{{ Finder_ColumnShowIcons }}" }
+  when: Finder_ColumnShowIcons is defined
+  notify: restart Finder
+
+- name: "Finder - Extra - Show full POSIX path as Finder window title"
+  osx_defaults: { domain: 'com.apple.finder', key: '_FXShowPosixPathInTitle', type: bool, value: "{{ Finder_FXShowPosixPathInTitle }}" }
+  when: Finder_FXShowPosixPathInTitle is defined
+  notify: restart Finder
+
+- name: "Finder - Extra - Show Hidden Files"
+  osx_defaults: { domain: 'com.apple.finder', key: 'AppleShowAllFiles', type: bool, value: "{{ Finder_AppleShowAllFiles }}" }
+  when: Finder_AppleShowAllFiles is defined
+  notify: restart Finder
+
+- name: "Finder - Extra - Avoid creation of .DS_Store files on network volumes"
+  osx_defaults: { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: bool, value: "{{ Finder_DSDontWriteNetworkStores }}" }
+  when: Finder_DSDontWriteNetworkStores is defined
+  notify: restart Finder
+
+- name: "Finder - Extra - Disable disk image verification"
+  osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: '{{ item }}', type: bool, value: "{{ Finder_DisableDiskImageVerrification }}" }
+  when: Finder_DisableDiskImageVerrification is defined
+  with_items: [ "skip-verify", "skip-verify-locked", "skip-verify-remote"]
+  notify: restart Finder
+
+- name: "Finder - Extra - Allow text selection in Quick Look/Preview"
+  osx_defaults: { domain: 'com.apple.finder', key: 'QLEnableTextSelection', type: bool, value: "{{ Finder_QLEnableTextSelection }}" }
+  when: Finder_QLEnableTextSelection is defined
+  notify: restart Finder

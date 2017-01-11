@@ -1,42 +1,46 @@
 ---
-- name: "AppStore - Check for software updates frequency"
-  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ScheduleFrequency', type: int, value: "{{AppStore.ScheduleFrequency}}" }
-  when: AppStore.ScheduleFrequency is defined
-  notify: restart AppStore
-
 - name: "AppStore - Automatically check for updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{AppStore.AutomaticCheckEnabled}}" }
-  when: AppStore.AutomaticCheckEnabled is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{ AppStore_AutomaticCheckEnabled }}" }
+  when: AppStore_AutomaticCheckEnabled is defined
   become: true
   notify: restart AppStore
 
 - name: "AppStore - Download newly available updates in the background"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{AppStore.AutomaticDownload}}" }
-  when: AppStore.AutomaticDownload is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{ AppStore_AutomaticDownload }}" }
+  when: AppStore_AutomaticDownload is defined
   become: true
   notify: restart AppStore
 
 - name: "AppStore - Install app updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{AppStore.AutoUpdate}}" }
-  when: AppStore.AutoUpdate is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{ AppStore_AutoUpdate }}" }
+  when: AppStore_AutoUpdate is defined
   become: true
   notify: restart AppStore
 
 - name: "AppStore - Install OSX updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{AppStore.AutoUpdateRestartRequired}}" }
-  when: AppStore.AutoUpdateRestartRequired is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{ AppStore_AutoUpdateRestartRequired }}" }
+  when: AppStore_AutoUpdateRestartRequired is defined
   become: true
   notify: restart AppStore
 
 - name: "AppStore - Install system data files"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{AppStore.ConfigDataInstall}}" }
-  when: AppStore.ConfigDataInstall is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{ AppStore_ConfigDataInstall }}" }
+  when: AppStore_ConfigDataInstall is defined
   become: true
   notify: restart AppStore
 
 - name: "AppStore - Install security updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{AppStore.CriticalUpdateInstall}}" }
-  when: AppStore.CriticalUpdateInstall is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{ AppStore_CriticalUpdateInstall }}" }
+  when: AppStore_CriticalUpdateInstall is defined
   become: true
   notify: restart AppStore
 
+- name: "AppStore - Check for software updates frequency"
+  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ScheduleFrequency', type: int, value: "{{ AppStore_ScheduleFrequency }}" }
+  when: AppStore_ScheduleFrequency is defined
+  notify: restart AppStore
+
+- name: "AppStore - Show debug menu"
+  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ShowDebugMenu', type: bool, value: "{{ AppStore_ShowDebugMenu }}" }
+  when: AppStore_ShowDebugMenu is defined
+  notify: restart AppStore
