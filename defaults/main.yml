@@ -136,6 +136,7 @@ MissionControl_GroupByApp: true                  # Group windows by application 
 MissionControl_SpansDisplays: true               # Displays have separate Spaces
 
 Safari_Enabled: false                            # Enable Safari configuration
+Safari_DebugMenu: false                          # Debug Menu
 Safari_OpensWith: "A new window"                 # General - Safari opens with ("A new window", "A new private window", "All windows from last session")
 Safari_NewWindowBehavior: 4                      # General - New windows open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites, 5:Tabs for Favorites)
 Safari_NewTabBehavior: 4                         # General - New tabs open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites)

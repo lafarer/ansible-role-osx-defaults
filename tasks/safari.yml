@@ -258,3 +258,8 @@
   osx_defaults: { domain: 'com.apple.safari', key: 'ShowFrequentlyVisitedSites', type: bool, value: "{{ Safari_ShowFrequentlyVisitedSites }}" }
   when: Safari_ShowFrequentlyVisitedSites is defined
   notify: restart Safari
+
+- name: "Safari - Debug Menu"
+  osx_defaults: { domain: 'com.apple.safari', key: 'IncludeInternalDebugMenu', type: bool, value: "{{ Safari_DebugMenu }}" }
+  when: Safari_DebugMenu is defined
+  notify: restart Safari
