@@ -156,3 +156,27 @@ Safari_ShowOverlayStatusBar: false               # View - Show Status Bar
 Safari_ShowSidebarInNewWindows: false            # View - Show Sidebar
 Safari_SidebarViewModeIdentifier: "Bookmarks"    # View - Show Sidebar Mode ("Bookmarks","Reading List","Social Links")
 Safari_ShowFrequentlyVisitedSites: true          # Bookmarks - Show Frequently Visited in Favorites
+
+Trackpad_Enabled: false                          # Enable Trackpad configuration
+Trackpad_Clicking: false                         # Tap to Click
+Trackpad_DragLock: false                         # DragLock
+Trackpad_Dragging: false                         # Dragging
+Trackpad_TrackpadCornerSecondaryClick: 0         # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadFiveFingerPinchGesture: 2       # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadFourFingerHorizSwipeGesture: 2  # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadFourFingerPinchGesture: 2       # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadFourFingerVertSwipeGesture: 2   # Trackpad Four Finger Vert SwipeGesture
+Trackpad_TrackpadHandResting: false              # Trackpad Hand Resting
+Trackpad_TrackpadHorizScroll: false              # Trackpad Horizontal Scroll
+Trackpad_TrackpadMomentumScroll: false           # Trackpad Momentum Scroll
+Trackpad_TrackpadPinch: false                    # Trackpad Pinch
+Trackpad_TrackpadRightClick: false               # Trackpad Right Click
+Trackpad_TrackpadRotate: false                   # Trackpad Rotate
+Trackpad_TrackpadScroll: false                   # Trackpad Scroll
+Trackpad_TrackpadThreeFingerDrag: false          # Trackpad Three Finger Drag
+Trackpad_TrackpadThreeFingerHorizSwipeGesture: false # Trackpad Three Finger Horizontal Swipe Gesture
+Trackpad_TrackpadThreeFingerTapGesture: false    # Trackpad Three Finger Tap Gesture
+Trackpad_TrackpadThreeFingerVertSwipeGesture: 2  # 0 - Disabled, 1 - Four Fingers Mission Control/App Exposé, # 2 - Three and Four Fingers Mission Control/App Exposé
+Trackpad_TrackpadTwoFingerDoubleTapGesture: false # Trackpad Two Finger Double TapGesture
+Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture: 3 #  0 - Disabled, 3 - Notification Center
+Trackpad_USBMouseStopsTrackpad: false            # USB Mouse Stops Trackpad
