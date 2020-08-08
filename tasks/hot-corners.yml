@@ -1,0 +1,32 @@
+---
+- name: "Hot Corners - Bottom Left Action"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-corner', type: int, value: "{{ HotCornders_BottomLeftAction }}" }
+  when: HotCornders_BottomLeftAction is defined
+
+- name: "Hot Corners - Bottom Left Modifier"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-modifier', type: int, value: "{{ HotCornders_BottomLeftModifier }}" }
+  when: HotCornders_BottomLeftModifier is defined
+
+- name: "Hot Corners - Bottom Right Action"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-corner', type: int, value: "{{ HotCornders_BottomRightAction }}" }
+  when: HotCornders_BottomRightAction is defined
+
+- name: "Hot Corners - Bottom Right Modifier"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-modifier', type: int, value: "{{ HotCornders_BottomRightModifier }}" }
+  when: HotCornders_BottomRightModifier is defined
+
+- name: "Hot Corners - Top Left Action"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-corner', type: int, value: "{{ HotCornders_TopLeftAction }}" }
+  when: HotCornders_TopLeftAction is defined
+
+- name: "Hot Corners - Top Left Modifier"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-modifier', type: int, value: "{{ HotCornders_TopLeftModifier }}" }
+  when: HotCornders_TopLeftModifier is defined
+
+- name: "Hot Corners - Top Right Action"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-corner', type: int, value: "{{ HotCornders_TopRightAction }}" }
+  when: HotCornders_TopRightAction is defined
+
+- name: "Hot Corners - Top Right Modifier"
+  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-modifier', type: int, value: "{{ HotCornders_TopRightModifier }}" }
+  when: HotCornders_TopRightModifier is defined

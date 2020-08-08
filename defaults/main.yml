@@ -84,6 +84,27 @@ General_NSCloseAlwaysConfirmsChanges: false      # Ask to keep changes when clos
 General_CloseWindowsWhenQuittingApp: false       # Close windows when quitting an application
 General_NSScrollAnimationEnabled: true           # Smooth scrolling (Disable on older Macs)
 
+# Hot Corners possible values:
+#  0: no-op
+#  1: Disabled
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+HotCornders_BottomLeftAction: 2                  # Chose one of the above possible values
+HotCornders_BottomLeftModifier: 0                # 0 - Enabled, 1048576 - Disabled
+HotCornders_BottomRightAction: 3                 # Chose one of the above possible values
+HotCornders_BottomRightModifier: 0               # 0 - Enabled, 1048576 - Disabled
+HotCornders_TopLeftAction: 1                     # Chose one of the above possible values
+HotCornders_TopLeftModifier: 1048576             # 0 - Enabled, 1048576 - Disabled
+HotCornders_TopRightAction: 4                    # Chose one of the above possible values
+HotCornders_TopRightModifier: 0                  # 0 - Enabled, 1048576 - Disabled
+
 ICloud_Enabled: false                            # Enable iCloud configuration
 ICloud_NSDocumentSaveNewDocumentsToCloud: true   # Save to iCloud by default
 

@@ -8,6 +8,7 @@
 - { include: dock.yml,                  tags: "dock",                  when: Dock_Enabled|default(false)|bool }
 - { include: finder.yml,                tags: "finder",                when: Finder_Enabled|default(false)|bool }
 - { include: general.yml,               tags: "general",               when: General_Enabled|default(false)|bool }
+- { include: hot-corners.yml,           tags: "hot-corners",           when: HotCorners_Enabled|default(false)|bool }
 - { include: icloud.yml,                tags: "icloud",                when: ICloud_Enabled|default(false)|bool }
 - { include: keyboard.yml,              tags: "keyboard",              when: Keyboard_Enabled|default(false)|bool }
 - { include: language-region.yml,       tags: "language-region",       when: LanguageRegion_Enabled|default(false)|bool }
