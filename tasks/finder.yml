@@ -132,3 +132,8 @@
   osx_defaults: { domain: 'com.apple.finder', key: 'DesktopViewSettings:IconViewSettings:iconSize', type: int, value: "{{ Finder_DVSIVSiconSize }}" }
   when: Finder_DVSIVSiconSize is defined
   notify: restart Finder
+
+- name: "Finder - Desktop - View - Icon - iconSize"
+  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize {{ Finder_DVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_DVSIVSiconSize is defined
+  notify: restart Finder
