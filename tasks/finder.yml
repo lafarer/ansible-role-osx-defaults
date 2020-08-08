@@ -122,3 +122,13 @@
   osx_defaults: { domain: 'com.apple.finder', key: 'QLEnableTextSelection', type: bool, value: "{{ Finder_QLEnableTextSelection }}" }
   when: Finder_QLEnableTextSelection is defined
   notify: restart Finder
+
+- name: "Finder - Extra - Allow quitting via ⌘ + Q"
+  osx_defaults: { domain: 'com.apple.finder', key: 'QuitMenuItem', type: bool, value: "{{ Finder_QuitMenuItem }}" }
+  when: Finder_QuitMenuItem is defined
+  notify: restart Finder
+
+- name: "Finder - Extra - Allow quitting via ⌘ + Q"
+  osx_defaults: { domain: 'com.apple.finder', key: 'DesktopViewSettings:IconViewSettings:iconSize', type: int, value: "{{ Finder_DVSIVSiconSize }}" }
+  when: Finder_DVSIVSiconSize is defined
+  notify: restart Finder
