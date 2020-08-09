@@ -123,7 +123,7 @@ General_NSCloseAlwaysConfirmsChanges: false      # Ask to keep changes when clos
 General_CloseWindowsWhenQuittingApp: false       # Close windows when quitting an application
 General_NSScrollAnimationEnabled: true           # Smooth scrolling (Disable on older Macs)
 
-HotCorners_Enable: false                        # Enable Hot Corners configurations
+HotCorners_Enabled: false                        # Enable Hot Corners configurations
 HotCorners_AvailableModifiers:
     - { name: "Enabled", value: 0 }
     - { name: "Disabled", value: 1048576 }
