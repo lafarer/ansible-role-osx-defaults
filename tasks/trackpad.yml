@@ -84,5 +84,5 @@
   when: Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture is defined
 
 - name: "Trackpad - Set USB Mouse Stops Trackpad"
-  osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'USBMouseStopsTrackpad', type: bool, value: "{{Trackpad_USBMouseStopsTrackpad}}"  }
+  osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'USBMouseStopsTrackpad', type: int, value: "{{Trackpad_USBMouseStopsTrackpad}}"  }
   when: Trackpad_USBMouseStopsTrackpad is defined

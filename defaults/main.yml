@@ -275,4 +275,4 @@ Trackpad_TrackpadThreeFingerTapGesture: 0        # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadThreeFingerVertSwipeGesture: 2  # 0 - Disabled, 1 - Four Fingers Mission Control/App Exposé, # 2 - Three and Four Fingers Mission Control/App Exposé
 Trackpad_TrackpadTwoFingerDoubleTapGesture: 0    # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture: 3 #  0 - Disabled, 3 - Notification Center
-Trackpad_USBMouseStopsTrackpad: false            # USB Mouse Stops Trackpad
+Trackpad_USBMouseStopsTrackpad: 0                # 0 - Disabled, 1 - Enabled
