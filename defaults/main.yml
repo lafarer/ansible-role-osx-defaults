@@ -31,6 +31,11 @@ DesktopScreenSaver_Enabled: false                # Enable Desktop and Screen Sav
 DesktopScreenSaver_BackGroundImage: ""           # Background iamge
 #/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
 
+DiskImages_Enabled: false                        # Enable DiskImages configuration
+DiskImages_SkipVerify: false                     # Skip Verification
+DiskImages_SkipVerifyLocked: false               # Skip Verification for Locked Disk Images
+DiskImages_SkipVerifyRemote: false               # Skip Verification for Remote Disk Images
+
 Displays_Enabled: false                          # Enable Displays configuration
 Displays_AutomaticallyAdjustBrightness: false    # Automatically adjust brightness
 Displays_ShowInMenuBarIfPresent: true            # Show mirroring options in the menu bar when available

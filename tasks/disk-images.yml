@@ -1,0 +1,12 @@
+---
+- name: "Disk Images - Disable disk image verification"
+  osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: 'skip-verify', type: bool, value: "{{ DiskImages_SkipVerify }}" }
+  when: DiskImages_SkipVerify is defined
+
+- name: "Disk Images - Disable locked disk image verification"
+  osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: 'skip-verify-locked', type: bool, value: "{{ DiskImages_SkipVerifyLocked }}" }
+  when: DiskImages_SkipVerifyLocked is defined
+
+- name: "Disk Images - Disable remote disk image verification"
+  osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: 'skip-verify-remote', type: bool, value: "{{ DiskImages_SkipVerifyRemote }}" }
+  when: DiskImages_SkipVerifyRemote is defined

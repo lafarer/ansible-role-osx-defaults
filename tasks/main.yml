@@ -4,6 +4,7 @@
 - { include: dashboard.yml,             tags: "dashboard",             when: Dashboard_Enabled|default(false)|bool }
 - { include: date-time.yml,             tags: "date-time",             when: DateTime_Enabled|default(false)|bool }
 - { include: desktop-screen-saver.yml,  tags: "desktop-screen-saver",  when: DesktopScreenSaver_Enabled|default(false)|bool }
+- { include: disk-images.yml,           tags: "disk-images",           when: DiskImages_Enabled|default(false)|bool }
 - { include: displays.yml,              tags: "displays",              when: Displays_Enabled|default(false)|bool }
 - { include: dock.yml,                  tags: "dock",                  when: Dock_Enabled|default(false)|bool }
 - { include: finder.yml,                tags: "finder",                when: Finder_Enabled|default(false)|bool }
