@@ -24,5 +24,11 @@
   ignore_errors: yes
 
 - name: restart Spotlight
-  command: killall Spotlight
+  command: killall mds
+  become: true
+  ignore_errors: yes
+
+- name: restart LaunchServices
+  command: killall launchservicesd
+  become: true
   ignore_errors: yes

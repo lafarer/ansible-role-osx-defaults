@@ -14,6 +14,7 @@
 - { include: icloud.yml,                tags: "icloud",                when: ICloud_Enabled|default(false)|bool }
 - { include: keyboard.yml,              tags: "keyboard",              when: Keyboard_Enabled|default(false)|bool }
 - { include: language-region.yml,       tags: "language-region",       when: LanguageRegion_Enabled|default(false)|bool }
+- { include: launch-services.yml,       tags: "launch-services",       when: LaunchServices_Enabled|default(false)|bool }
 - { include: mission-control.yml,       tags: "mission-control",       when: MissionControl_Enabled|default(false)|bool }
 - { include: safari.yml,                tags: "safari",                when: Safari_Enabled|default(false)|bool }
 - { include: spotlight.yml,             tags: "spotlight",             when: Spotlight_Enable|default(false)|bool }

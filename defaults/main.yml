@@ -168,6 +168,9 @@ LanguageRegion_MeasurementUnits: "Inches"        # Measure Units (Inches, Centim
 LanguageRegion_Force24HourTime: "true"           # Force 12/24 hour time
 LanguageRegion_MetricUnits: "false"              # Set Metric Units
 
+LaunchServices_Enabled: false                    # Enable Launch Services configuration
+LaunchServices_LSQuarantine: true                # false = disable the “Are you sure you want to open this application?” dialog
+
 MissionControl_Enabled: false                    # Enable Mission Control configuration
 MissionControl_MruSpaces: false                  # Automatically rearrange Spaces based on most recent use
 MissionControl_SwitchOnActivate: true            # When switching to an application, switch to a Space with open windows for the application
