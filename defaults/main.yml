@@ -1,4 +1,23 @@
 ---
+ActivityMonitor_Enabled: false                   # Enable ActivyMonitor configuration
+ActivityMonitor_OpenMainWindow: false            # Show the main window when launching Activity Monitor
+ActivityMonitor_IconType: 5                      # Activity Monitor Dock icon
+                                                 # 0 Show Application Icon
+                                                 # 2 Show Network Usage
+                                                 # 3 Show Disk Activity
+                                                 # 5 Show CPU Usage
+                                                 # 6 Show CPU History
+ActivityMonitor_ShowCategory: 100                # Show all processes in Activity Monitor
+                                                 # 100 Show All Processes
+                                                 # 101 Show All Processes, Hierarchically
+                                                 # 102 My Processes
+                                                 # 103 System Processes
+                                                 # 104 Other Processes
+                                                 # 105 Active Processes
+                                                 # 106 Inactive Processes
+                                                 # 107 Windowed Processes
+                                                 # 110 GPU Processes
+
 AppStore_Enabled: false                          # Enable AppStore configuration
 AppStore_AutomaticCheckEnabled: false            # Automatically check for updates
 AppStore_AutomaticDownload: false                # Download newly available updates in the background

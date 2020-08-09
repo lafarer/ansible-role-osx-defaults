@@ -1,4 +1,8 @@
 ---
+- name: restart ActivyMonitor
+  command: killall "Activity Monitor"
+  ignore_errors: yes
+
 - name: restart AppStore
   command: killall "App Store"
   ignore_errors: yes
