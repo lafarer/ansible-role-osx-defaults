@@ -257,22 +257,22 @@ Trackpad_Enabled: false                          # Enable Trackpad configuration
 Trackpad_Clicking: false                         # Tap to Click
 Trackpad_DragLock: false                         # DragLock
 Trackpad_Dragging: false                         # Dragging
-Trackpad_TrackpadCornerSecondaryClick: 0         # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadCornerSecondaryClick: 2         # 0 - Disabled, 2 - Enabled
 Trackpad_TrackpadFiveFingerPinchGesture: 2       # 0 - Disabled, 2 - Enabled
 Trackpad_TrackpadFourFingerHorizSwipeGesture: 2  # 0 - Disabled, 2 - Enabled
 Trackpad_TrackpadFourFingerPinchGesture: 2       # 0 - Disabled, 2 - Enabled
-Trackpad_TrackpadFourFingerVertSwipeGesture: 2   # Trackpad Four Finger Vert SwipeGesture
-Trackpad_TrackpadHandResting: false              # Trackpad Hand Resting
-Trackpad_TrackpadHorizScroll: false              # Trackpad Horizontal Scroll
-Trackpad_TrackpadMomentumScroll: false           # Trackpad Momentum Scroll
-Trackpad_TrackpadPinch: false                    # Trackpad Pinch
-Trackpad_TrackpadRightClick: false               # Trackpad Right Click
-Trackpad_TrackpadRotate: false                   # Trackpad Rotate
-Trackpad_TrackpadScroll: false                   # Trackpad Scroll
-Trackpad_TrackpadThreeFingerDrag: false          # Trackpad Three Finger Drag
-Trackpad_TrackpadThreeFingerHorizSwipeGesture: false # Trackpad Three Finger Horizontal Swipe Gesture
-Trackpad_TrackpadThreeFingerTapGesture: false    # Trackpad Three Finger Tap Gesture
+Trackpad_TrackpadFourFingerVertSwipeGesture: 2   # 0 - Disabled, 2 - Enabled
+Trackpad_TrackpadHandResting: 1                  # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadHorizScroll: 1                  # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadMomentumScroll: 1               # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadPinch: 1                        # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadRightClick: 1                   # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadRotate: 1                       # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadScroll: 1                       # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadThreeFingerDrag: 0              # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadThreeFingerHorizSwipeGesture: 0 # 0 - Disabled, 1 - Enabled
+Trackpad_TrackpadThreeFingerTapGesture: 0        # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadThreeFingerVertSwipeGesture: 2  # 0 - Disabled, 1 - Four Fingers Mission Control/App Exposé, # 2 - Three and Four Fingers Mission Control/App Exposé
-Trackpad_TrackpadTwoFingerDoubleTapGesture: false # Trackpad Two Finger Double TapGesture
+Trackpad_TrackpadTwoFingerDoubleTapGesture: 0    # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture: 3 #  0 - Disabled, 3 - Notification Center
 Trackpad_USBMouseStopsTrackpad: false            # USB Mouse Stops Trackpad
