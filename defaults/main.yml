@@ -1,5 +1,5 @@
 ---
-ActivityMonitor_Enabled: false                   # Enable ActivyMonitor configuration
+ActivityMonitor_Enabled: false                   # Enable ActivityMonitor configuration
 ActivityMonitor_OpenMainWindow: false            # Show the main window when launching Activity Monitor
 ActivityMonitor_IconType: 5                      # Activity Monitor Dock icon
                                                  # 0 Show Application Icon

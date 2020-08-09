@@ -1,5 +1,5 @@
 ---
-- name: restart ActivyMonitor
+- name: restart ActivityMonitor
   command: killall "Activity Monitor"
   ignore_errors: yes
 
