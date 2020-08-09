@@ -50,6 +50,7 @@ Dock_Autohide: false                             # Automatically hide and show t
 Dock_Autohide_Time_Modifier: 0                   # 0 - Disable, Floating value - Define Animation timing when hiding/showing the Dock
 Dock_ShowProcessIndicators: true                 # Show indicator for open applications
 Dock_ShowHidden: false                           # Display translucent Dock icons for hidden applications
+Dock_MouseOverHiliteStack: true                  # Enable highlight hover effect for the grid view of a stack (Dock)
 
 Finder_Enabled: false                            # Enable Finder configuration
 Finder_ShowHardDrivesOnDesktop: false            # Show hard drives on the desktop
@@ -72,7 +73,19 @@ Finder_ShowSidebar: true                         # Show Side Bar
 Finder_ColumnShowIcons: true                     # Show Preview
 Finder_FXShowPosixPathInTitle: false             # Show full POSIX path as Finder window title
 Finder_QuitMenuItem: false                       # Allow quitting via ⌘ + Q
-Finder_DVSIVSiconSize: 64                        # Desktop View Settings, Icon View Settings, iconSize
+Finder_DVSIVSarrangeBy: grid                     # Desktop, Enable snap-to-grid for icons on the desktop and in other icon views
+Finder_DVSIVSiconSize: 64                        # Desktop, Set the size of icons on the desktop and in other icon views
+Finder_DVSIVSshowItemInfo: false                 # Desktop, Show item info near icons on the desktop and in other icon views
+Finder_DVSIVSgridSpacing: 54                     # Desktop, Increase grid spacing for icons on the desktop and in other icon views
+Finder_DVSIVSlabelOnBottom: true                 # Desktop, Show item info to the right of the icons on the desktop
+Finder_SVSIVSarrangeBy: grid                     # Standard, Enable snap-to-grid for icons on the desktop and in other icon views
+Finder_SVSIVSiconSize: 64                        # Standard, Set the size of icons on the desktop and in other icon views
+Finder_SVSIVSshowItemInfo: false                 # Standard, Show item info near icons on the desktop and in other icon views
+Finder_SVSIVSgridSpacing: 54                     # Standard, Increase grid spacing for icons on the desktop and in other icon views
+Finder_FKSVSIVSarrangeBy: grid                   # FK_Standard, Enable snap-to-grid for icons on the desktop and in other icon views
+Finder_FKSVSIVSiconSize: 64                      # FK_Standard, Set the size of icons on the desktop and in other icon views
+Finder_FKSVSIVSshowItemInfo: false               # FK_Standard, Show item info near icons on the desktop and in other icon views
+Finder_FKSVSIVSgridSpacing: 54                   # FK_Standard, Increase grid spacing for icons on the desktop and in other icon views
 
 General_Enabled: false                           # Enable General configuration
 General_AppleAquaColorVariant: 1                 # Set appearance (1: Blue, 6: Graphite)

@@ -58,3 +58,8 @@
   osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{Dock_ShowHidden}}" }
   when: Dock_ShowHidden is defined
   notify: restart Dock
+
+- name: "Dock - Extra - Enable highlight hover effect for the grid view of a stack"
+  osx_defaults: { domain: 'com.apple.dock', key: 'mouse-over-hilite-stack', type: boolean, value: "{{Dock_MouseOverHiliteStack}}" }
+  when: Dock_MouseOverHiliteStack is defined
+  notify: restart Dock

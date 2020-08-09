@@ -128,12 +128,67 @@
   when: Finder_QuitMenuItem is defined
   notify: restart Finder
 
-- name: "Finder - Extra - Allow quitting via ⌘ + Q"
-  osx_defaults: { domain: 'com.apple.finder', key: 'DesktopViewSettings:IconViewSettings:iconSize', type: int, value: "{{ Finder_DVSIVSiconSize }}" }
-  when: Finder_DVSIVSiconSize is defined
+- name: "Finder - Desktop - View - Icon - arrangeBy"
+  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy {{ Finder_DVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_DVSIVSarrangeBy is defined
   notify: restart Finder
 
 - name: "Finder - Desktop - View - Icon - iconSize"
   command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize {{ Finder_DVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
   when: Finder_DVSIVSiconSize is defined
+  notify: restart Finder
+
+- name: "Finder - Desktop - View - Icon - showItemInfo"
+  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo {{ Finder_DVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_DVSIVSshowItemInfo is defined
+  notify: restart Finder
+
+- name: "Finder - Desktop - View - Icon - gridSpacing"
+  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing {{ Finder_DVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_DVSIVSgridSpacing is defined
+  notify: restart Finder
+
+- name: "Finder - Desktop - View - Icon - labelOnBottom"
+  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom {{ Finder_DVSIVSlabelOnBottom }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_DVSIVSlabelOnBottom is defined
+  notify: restart Finder
+
+- name: "Finder - Standard - View - Icon - arrangeBy"
+  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy {{ Finder_SVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_SVSIVSarrangeBy is defined
+  notify: restart Finder
+
+- name: "Finder - Standard - View - Icon - iconSize"
+  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize {{ Finder_SVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_SVSIVSiconSize is defined
+  notify: restart Finder
+
+- name: "Finder - Standard - View - Icon - showItemInfo"
+  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo {{ Finder_SVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_SVSIVSshowItemInfo is defined
+  notify: restart Finder
+
+- name: "Finder - Standard - View - Icon - gridSpacing"
+  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing {{ Finder_SVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_SVSIVSgridSpacing is defined
+  notify: restart Finder
+
+- name: "Finder - FK_Standard - View - Icon - arrangeBy"
+  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy {{ Finder_FKSVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_FKSVSIVSarrangeBy is defined
+  notify: restart Finder
+
+- name: "Finder - FK_Standard - View - Icon - iconSize"
+  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize {{ Finder_FKSVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_FKSVSIVSiconSize is defined
+  notify: restart Finder
+
+- name: "Finder - FK_Standard - View - Icon - showItemInfo"
+  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo {{ Finder_FKSVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_FKSVSIVSshowItemInfo is defined
+  notify: restart Finder
+
+- name: "Finder - FK_Standard - View - Icon - gridSpacing"
+  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing {{ Finder_FKSVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
+  when: Finder_FKSVSIVSgridSpacing is defined
   notify: restart Finder
