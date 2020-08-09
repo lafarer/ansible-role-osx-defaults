@@ -123,26 +123,31 @@ General_NSCloseAlwaysConfirmsChanges: false      # Ask to keep changes when clos
 General_CloseWindowsWhenQuittingApp: false       # Close windows when quitting an application
 General_NSScrollAnimationEnabled: true           # Smooth scrolling (Disable on older Macs)
 
-# Hot Corners possible values:
-#  0: no-op
-#  1: Disabled
-#  2: Mission Control
-#  3: Show application windows
-#  4: Desktop
-#  5: Start screen saver
-#  6: Disable screen saver
-#  7: Dashboard
-# 10: Put display to sleep
-# 11: Launchpad
-# 12: Notification Center
-HotCornders_BottomLeftAction: 2                  # Chose one of the above possible values
-HotCornders_BottomLeftModifier: 0                # 0 - Enabled, 1048576 - Disabled
-HotCornders_BottomRightAction: 3                 # Chose one of the above possible values
-HotCornders_BottomRightModifier: 0               # 0 - Enabled, 1048576 - Disabled
-HotCornders_TopLeftAction: 1                     # Chose one of the above possible values
-HotCornders_TopLeftModifier: 1048576             # 0 - Enabled, 1048576 - Disabled
-HotCornders_TopRightAction: 4                    # Chose one of the above possible values
-HotCornders_TopRightModifier: 0                  # 0 - Enabled, 1048576 - Disabled
+HotCorners_Enable: false                        # Enable Hot Corners configurations
+HotCorners_AvailableModifiers:
+    - { name: "Enabled", value: 0 }
+    - { name: "Disabled", value: 1048576 }
+HotCorners_AvailableActions:
+    - { name: "no-op", value: 0 }
+    - { name: "Disabled", value: 1 }
+    - { name: "Mission Control", value: 2 }
+    - { name: "Show Application Windows", value: 3 }
+    - { name: "Desktop", value: 4 }
+    - { name: "Start Screen Saver", value: 5 }
+    - { name: "Disable Screen Saver", value: 6 }
+    - { name: "Dashboard", value: 7 }
+    - { name: "Put Display To Sleep", value: 10 }
+    - { name: "Launchpad", value: 11 }
+    - { name: "Notification Center", value: 12 }
+HotCorners_BottomLeftModifier: "Enabled"        # Enabled, Disabled
+HotCorners_BottomRightModifier: "Enabled"       # Enabled, Disabled
+HotCorners_TopLeftModifier: "Disabled"          # Enabled, Disabled
+HotCorners_TopRightModifier: "Enabled"          # Enabled, Disabled
+
+HotCorners_BottomLeftAction: "Mission Control"  # Chose one of the availlable actions
+HotCorners_BottomRightAction: "Show Application Windows" # Chose one of the availlable actions
+HotCorners_TopLeftAction: "Disabled"            # Chose one of the availlable actions
+HotCorners_TopRightAction: "Desktop"            # Chose one of the availlable actions
 
 ICloud_Enabled: false                            # Enable iCloud configuration
 ICloud_NSDocumentSaveNewDocumentsToCloud: true   # Save to iCloud by default
