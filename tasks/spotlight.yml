@@ -1,0 +1,5 @@
+---
+- name: "Spotlight - Indexing Items"
+  osx_defaults: { domain: 'com.apple.safari', key: 'orderedItems', type: array, value: "{{ Spotlight_OrderedItems }}" }
+  when: Spotlight_OrderedItems is defined
+  notify: restart Spotlight

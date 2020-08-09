@@ -22,3 +22,7 @@
 - name: restart Safari
   command: killall Safari
   ignore_errors: yes
+
+- name: restart Spotlight
+  command: killall Spotlight
+  ignore_errors: yes
