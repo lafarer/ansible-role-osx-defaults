@@ -1,22 +1,22 @@
 ---
 ActivityMonitor_Enabled: false                   # Enable ActivityMonitor configuration
 ActivityMonitor_OpenMainWindow: false            # Show the main window when launching Activity Monitor
-ActivityMonitor_IconType: 5                      # Activity Monitor Dock icon
-                                                 # 0 Show Application Icon
-                                                 # 2 Show Network Usage
-                                                 # 3 Show Disk Activity
-                                                 # 5 Show CPU Usage
-                                                 # 6 Show CPU History
-ActivityMonitor_ShowCategory: 100                # Show all processes in Activity Monitor
-                                                 # 100 Show All Processes
-                                                 # 101 Show All Processes, Hierarchically
-                                                 # 102 My Processes
-                                                 # 103 System Processes
-                                                 # 104 Other Processes
-                                                 # 105 Active Processes
-                                                 # 106 Inactive Processes
-                                                 # 107 Windowed Processes
-                                                 # 110 GPU Processes
+ActivityMonitor_IconType: ""                     # Activity Monitor Dock icon
+                                                 # Show Application Icon
+                                                 # Show Network Usage
+                                                 # Show Disk Activity
+                                                 # Show CPU Usage
+                                                 # Show CPU History
+ActivityMonitor_ShowCategory: ""                 # Show all processes in Activity Monitor
+                                                 # Show All Processes
+                                                 # Show All Processes, Hierarchically
+                                                 # My Processes
+                                                 # System Processes
+                                                 # Other Processes
+                                                 # Active Processes
+                                                 # Inactive Processes
+                                                 # Windowed Processes
+                                                 # GPU Processes
 
 AppStore_Enabled: false                          # Enable AppStore configuration
 AppStore_AutomaticCheckEnabled: false            # Automatically check for updates
