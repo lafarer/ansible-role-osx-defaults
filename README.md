@@ -98,7 +98,7 @@ Dock_AppleActionOnDoubleClick: "Maximize"        # Double-click a window's title
 Dock_MinimizeToApplication: false                # Minimize windows appliction into icon (true, false)
 Dock_LaunchAnim: true                            # Animate opening applications
 Dock_Autohide: false                             # Automatically hide and show the Dock
-Dock_Autohide_Time_Modifier: 0                   # 0 - Disable, Floating value - Define Animation timing when hiding/showing the Dock
+Dock_Autohide_Time_Modifier: 0                   # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
 Dock_ShowProcessIndicators: true                 # Show indicator for open applications
 Dock_ShowHidden: false                           # Display translucent Dock icons for hidden applications
 Dock_MouseOverHiliteStack: true                  # Enable highlight hover effect for the grid view of a stack (Dock)
