@@ -17,5 +17,5 @@
 - { include: launch-services.yml,       tags: "launch-services",       when: LaunchServices_Enabled|default(false)|bool }
 - { include: mission-control.yml,       tags: "mission-control",       when: MissionControl_Enabled|default(false)|bool }
 - { include: safari.yml,                tags: "safari",                when: Safari_Enabled|default(false)|bool }
-- { include: spotlight.yml,             tags: "spotlight",             when: Spotlight_Enable|default(false)|bool }
+- { include: spotlight.yml,             tags: "spotlight",             when: Spotlight_Enabled|default(false)|bool }
 - { include: trackpad.yml,              tags: "Trackpad",              when: Trackpad_Enabled|default(false)|bool }

@@ -273,7 +273,7 @@ Safari_ShowFrequentlyVisitedSites: true          # Bookmarks - Show Frequently V
 ```
 
 ```
-Spotlight_Enable: false
+Spotlight_Enabled: false
 # Spotlight_OrderedItems is an Array
 Spotlight_OrderedItems:
   - '{"enabled" = 1;"name" = "APPLICATIONS";}'
