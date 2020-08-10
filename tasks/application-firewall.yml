@@ -10,18 +10,27 @@
   become: true
 
 - name: "Application Firewall - Allow Downloaded Signed Software"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowdownloadsignedenabled', type: bool, value: "{{ ApplicationFirewall_AllowDownloadSigned }}" }
-  when: ApplicationFirewall_AllowDownloadSigned is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowdownloadsignedenabled', type: bool, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Disabled", value: false }
+    - { name: "Enabled", value: true }
+  when: ApplicationFirewall_AllowDownloadSigned is defined and item.name == ApplicationFirewall_AllowDownloadSigned
   become: true
 
 - name: "Application Firewall - Allow Built-in Software"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowsignedenabled', type: int, value: "{{ ApplicationFirewall_AllowSigned }}" }
-  when: ApplicationFirewall_AllowDownloadSigned is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowsignedenabled', type: int, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Disabled", value: 0 }
+    - { name: "Enabled", value: 1 }
+  when: ApplicationFirewall_AllowSigned is defined and item.name == ApplicationFirewall_AllowSigned
   become: true
 
 - name: "Application Firewall - Enable Logging"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingenabled', type: int, value: "{{ ApplicationFirewall_Logging }}" }
-  when: ApplicationFirewall_Logging is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingenabled', type: int, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Disabled", value: 0 }
+    - { name: "Enabled", value: 1 }
+  when: ApplicationFirewall_Logging is defined and item.name == ApplicationFirewall_Logging
   become: true
 
 - name: "Application Firewall - Global State"
@@ -34,6 +43,9 @@
   become: true
 
 - name: "Application Firewall - Stealth Mode"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: bool, value: "{{ ApplicationFirewall_Stealth }}" }
-  when: ApplicationFirewall_Stealth is defined
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: bool, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Disabled", value: false }
+    - { name: "Enabled", value: true }
+  when: ApplicationFirewall_Stealth is defined and item.name == ApplicationFirewall_Stealth
   become: true
