@@ -1,0 +1,39 @@
+---
+
+- name: "Application Firewall - Global State"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'globalstate', type: int, value: "{{ item.value }}" }
+  with_items:
+    - { name: "Off", value: 0 }
+    - { name: "Off", value: 1 }
+    - { name: "Block All Incoming Connections", value: 2 }
+  when: ApplicationFirewall_GlobalState is defined and item.name == ApplicationFirewall_GlobalState
+  become: true
+
+- name: "Application Firewall - Allow Downloaded Signed Software"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowdownloadsignedenabled', type: bool, value: "{{ ApplicationFirewall_AllowDownloadSigned }}" }
+  when: ApplicationFirewall_AllowDownloadSigned is defined
+  become: true
+
+- name: "Application Firewall - Allow Built-in Software"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowsignedenabled', type: bool, value: "{{ ApplicationFirewall_AllowSigned }}" }
+  when: ApplicationFirewall_AllowDownloadSigned is defined
+  become: true
+
+- name: "Application Firewall - Enable Logging"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingenabled', type: bool, value: "{{ ApplicationFirewall_Logging }}" }
+  when: ApplicationFirewall_Logging is defined
+  become: true
+
+- name: "Application Firewall - Global State"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingoption', type: int, value: "{{ item.value }}" }
+  with_items:
+    - { name: "throttled", value: 0 }
+    - { name: "brief", value: 1 }
+    - { name: "detail", value: 2 }
+  when: ApplicationFirewall_LoggingOption is defined and item.name == ApplicationFirewall_LoggingOption
+  become: true
+
+- name: "Application Firewall - Stealth Mode"
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: bool, value: "{{ ApplicationFirewall_Stealth }}" }
+  when: ApplicationFirewall_Stealth is defined
+  become: true

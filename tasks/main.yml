@@ -1,6 +1,7 @@
 ---
 - { include: app-store.yml,             tags: "app-store",             when: AppStore_Enabled|default(false)|bool }
 - { include: activity-monitor.yml,      tags: "activity-monitor",      when: ActivityMonitor_Enabled|default(false)|bool }
+- { include: application-firewall.yml,      tags: "application-firewall",      when: ApplicationFirewall_Enabled|default(false)|bool }
 - { include: bluetooth.yml,             tags: "bluetooth",             when: Bluetooth_Enabled|default(false)|bool }
 - { include: dashboard.yml,             tags: "dashboard",             when: Dashboard_Enabled|default(false)|bool }
 - { include: date-time.yml,             tags: "date-time",             when: DateTime_Enabled|default(false)|bool }
