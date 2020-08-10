@@ -1,5 +1,4 @@
 ---
-os: osx
 language: python
 python: "2.7"
 
@@ -10,12 +9,11 @@ sudo: false
 addons:
   apt:
     packages:
-    - python-pip
+      - python-pip
 
 install:
   # Install ansible
-  # - pip install ansible
-  - pip install git+https://github.com/ansible/ansible.git@devel
+  - pip install ansible
 
   # Check ansible version
   - ansible --version
