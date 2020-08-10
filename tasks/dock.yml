@@ -20,46 +20,46 @@
   notify: restart Dock
 
 - name: "Dock - Minimization effect"
-  osx_defaults: { domain: 'com.apple.dock', key: 'mineffect', type: string, value: "{{Dock_MinEffect}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'mineffect', type: string, value: "{{ Dock_MinEffect }}" }
   when: Dock_MinEffect is defined
   notify: restart Dock
 
 - name: "Dock - Window's title title bar double-click action"
-  osx_defaults: { domain: 'com.apple.dock', key: 'AppleActionOnDoubleClick', type: string, value: "{{Dock_AppleActionOnDoubleClick}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'AppleActionOnDoubleClick', type: string, value: "{{ Dock_AppleActionOnDoubleClick }}" }
   when: Dock_AppleActionOnDoubleClick is defined
   notify: restart Dock
 
 - name: "Dock - Minimize windows appliction into icon"
-  osx_defaults: { domain: 'com.apple.dock', key: 'minimize-to-application', type: boolean, value: "{{Dock_MinimizeToApplication}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'minimize-to-application', type: boolean, value: "{{ Dock_MinimizeToApplication }}" }
   when: Dock_MinimizeToApplication is defined
   notify: restart Dock
 
 - name: "Dock - Animate opening applications"
-  osx_defaults: { domain: 'com.apple.dock', key: 'launchanim', type: boolean, value: "{{Dock_LaunchAnim}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'launchanim', type: boolean, value: "{{ Dock_LaunchAnim }}" }
   when: Dock_LaunchAnim is defined
   notify: restart Dock
 
 - name: "Dock - Automatically hide and show"
-  osx_defaults: { domain: 'com.apple.dock', key: 'autohide', type: bool, value: "{{Dock_Autohide}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'autohide', type: bool, value: "{{ Dock_Autohide }}" }
   when: Dock_Autohide is defined
   notify: restart Dock
 
 - name: "Dock - Define Animation timing when hiding/showing the Dock"
-  osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{Dock_Autohide_Time_Modifier}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{ Dock_Autohide_Time_Modifier} }" }
   when: Dock_Autohide_Time_Modifier is defined
   notify: restart Dock
 
 - name: "Dock - Show indicator for open applications"
-  osx_defaults: { domain: 'com.apple.dock', key: 'show-process-indicators', type: boolean, value: "{{Dock_ShowProcessIndicators}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'show-process-indicators', type: boolean, value: "{{ Dock_ShowProcessIndicators }}" }
   when: Dock_ShowProcessIndicators is defined
   notify: restart Dock
 
 - name: "Dock - Extra - Display translucent Dock icons for hidden applications"
-  osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{Dock_ShowHidden}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{ Dock_ShowHidden }}" }
   when: Dock_ShowHidden is defined
   notify: restart Dock
 
 - name: "Dock - Extra - Enable highlight hover effect for the grid view of a stack"
-  osx_defaults: { domain: 'com.apple.dock', key: 'mouse-over-hilite-stack', type: boolean, value: "{{Dock_MouseOverHiliteStack}}" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'mouse-over-hilite-stack', type: boolean, value: "{{ Dock_MouseOverHiliteStack }}" }
   when: Dock_MouseOverHiliteStack is defined
   notify: restart Dock

@@ -48,7 +48,7 @@
 - name: "General - Close windows when quitting an application"
   osx_defaults: { domain: 'NSGlobalDomain', key: 'NSQuitAlwaysKeepsWindows', type: bool, value: "{{ not General_CloseWindowsWhenQuittingApp }}" }
   when: General_CloseWindowsWhenQuittingApp is defined
-  
+
 - name: "General - Extra - Smooth scrolling"
   osx_defaults: { domain: 'NSGlobalDomain', key: 'NSScrollAnimationEnabled', type: bool, value: "{{ General_NSScrollAnimationEnabled }}" }
   when: General_NSScrollAnimationEnabled is defined

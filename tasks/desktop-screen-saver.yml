@@ -10,6 +10,6 @@
   register: BackGroundImage_New
 
 - name: "Desktop & Screen Saver - Change desktop background"
-  command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ DesktopScreenSaver_BackGroundImage}}'";
+  command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ DesktopScreenSaver_BackGroundImage }}'";
   when: DesktopScreenSaver_BackGroundImage is defined and BackGroundImage_New.stat.exists and BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
   notify: restart Dock

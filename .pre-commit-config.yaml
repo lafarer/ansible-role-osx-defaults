@@ -3,3 +3,7 @@ repos:
     rev: v1.24.2
     hooks:
       - id: yamllint
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v4.2.0
+    hooks:
+      - id: ansible-lint
