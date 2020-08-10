@@ -12,7 +12,7 @@
   when: Keyboard_fnState is defined
 
 - name: "Keyboard - Adjust keyboard brightness in low light (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDim', type: bool, value: "{{Keyboard_kDim}}"  }
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDim', type: bool, value: "{{Keyboard_kDim}}" }
   when: Keyboard_kDim is defined
 
 - name: "Keyboard - Adjust keyboard brightness in low light (AmbientLightSensor)"
@@ -21,7 +21,7 @@
   when: Keyboard_kDim is defined
 
 - name: "Keyboard - Dim keyboard after idle time in seconds (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDimTime', type: int , value: "{{Keyboard_kDimTime}}" }
+  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDimTime', type: int, value: "{{Keyboard_kDimTime}}" }
   when: Keyboard_kDim is defined and Keyboard_kDim == "true" and Keyboard_kDimTime is defined
 
 - name: "Keyboard - Dim keyboard after idle time in seconds (AmbientLightSensor) {{Keyboard_kDimTime}}"
@@ -30,7 +30,7 @@
   when: Keyboard_kDim is defined and Keyboard_kDim == "true" and Keyboard_kDimTime is defined
 
 - name: "Keyboard - Correct spelling automatically"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticSpellingCorrectionEnabled', type: bool, value: "{{Keyboard_AutomaticSpellingCorrectionEnabled}}"  }
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticSpellingCorrectionEnabled', type: bool, value: "{{Keyboard_AutomaticSpellingCorrectionEnabled}}" }
   when: Keyboard_AutomaticSpellingCorrectionEnabled is defined
 
 - name: "Keyboard - Use smart quotes"
@@ -46,7 +46,7 @@
   when: Keyboard_AppleKeyboardUIMode is defined
 
 - name: "Keyboard - Prevent accidental Power button presses from sleeping system"
-  osx_defaults: { domain: 'com.apple.loginwindow', key: 'PowerButtonSleepsSystem', type: bool, value: "{{Keyboard_PowerButtonSleepsSystem}}"  }
+  osx_defaults: { domain: 'com.apple.loginwindow', key: 'PowerButtonSleepsSystem', type: bool, value: "{{Keyboard_PowerButtonSleepsSystem}}" }
   when: Keyboard_PowerButtonSleepsSystem is defined
 
 - name: "Keyboard - Disable press-and-hold for keys in favor of key repeat"
