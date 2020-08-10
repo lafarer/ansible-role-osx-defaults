@@ -1,4 +1,8 @@
 ---
+- name: restart ActivityMonitor
+  command: killall "Activity Monitor"
+  ignore_errors: yes
+
 - name: restart AppStore
   command: killall "App Store"
   ignore_errors: yes
@@ -17,4 +21,14 @@
 
 - name: restart Safari
   command: killall Safari
+  ignore_errors: yes
+
+- name: restart Spotlight
+  command: killall mds
+  become: true
+  ignore_errors: yes
+
+- name: restart LaunchServices
+  command: killall launchservicesd
+  become: true
   ignore_errors: yes

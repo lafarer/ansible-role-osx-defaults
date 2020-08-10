@@ -44,6 +44,11 @@
   when: Dock_Autohide is defined
   notify: restart Dock
 
+- name: "Dock - Define Animation timing when hiding/showing the Dock"
+  osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{Dock_Autohide_Time_Modifier}}" }
+  when: Dock_Autohide_Time_Modifier is defined
+  notify: restart Dock
+
 - name: "Dock - Show indicator for open applications"
   osx_defaults: { domain: 'com.apple.dock', key: 'show-process-indicators', type: boolean, value: "{{Dock_ShowProcessIndicators}}" }
   when: Dock_ShowProcessIndicators is defined
@@ -52,4 +57,9 @@
 - name: "Dock - Extra - Display translucent Dock icons for hidden applications"
   osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{Dock_ShowHidden}}" }
   when: Dock_ShowHidden is defined
+  notify: restart Dock
+
+- name: "Dock - Extra - Enable highlight hover effect for the grid view of a stack"
+  osx_defaults: { domain: 'com.apple.dock', key: 'mouse-over-hilite-stack', type: boolean, value: "{{Dock_MouseOverHiliteStack}}" }
+  when: Dock_MouseOverHiliteStack is defined
   notify: restart Dock

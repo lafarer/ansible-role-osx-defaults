@@ -1,0 +1,5 @@
+---
+- name: "Launch Services - Apps Quarantine"
+  osx_defaults: { domain: 'com.apple.LaunchServices', key: 'LSQuarantine', type: bool, value: "{{ LaunchServices_LSQuarantine }}" }
+  when: LaunchServices_LSQuarantine is defined
+  notify: restart LaunchServices

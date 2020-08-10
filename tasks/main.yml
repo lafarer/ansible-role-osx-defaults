@@ -1,15 +1,22 @@
 ---
 - { include: app-store.yml,             tags: "app-store",             when: AppStore_Enabled|default(false)|bool }
+- { include: activity-monitor.yml,      tags: "activity-monitor",      when: ActivityMonitor_Enabled|default(false)|bool }
+- { include: application-firewall.yml,      tags: "application-firewall",      when: ApplicationFirewall_Enabled|default(false)|bool }
 - { include: bluetooth.yml,             tags: "bluetooth",             when: Bluetooth_Enabled|default(false)|bool }
 - { include: dashboard.yml,             tags: "dashboard",             when: Dashboard_Enabled|default(false)|bool }
 - { include: date-time.yml,             tags: "date-time",             when: DateTime_Enabled|default(false)|bool }
 - { include: desktop-screen-saver.yml,  tags: "desktop-screen-saver",  when: DesktopScreenSaver_Enabled|default(false)|bool }
+- { include: disk-images.yml,           tags: "disk-images",           when: DiskImages_Enabled|default(false)|bool }
 - { include: displays.yml,              tags: "displays",              when: Displays_Enabled|default(false)|bool }
 - { include: dock.yml,                  tags: "dock",                  when: Dock_Enabled|default(false)|bool }
 - { include: finder.yml,                tags: "finder",                when: Finder_Enabled|default(false)|bool }
 - { include: general.yml,               tags: "general",               when: General_Enabled|default(false)|bool }
+- { include: hot-corners.yml,           tags: "hot-corners",           when: HotCorners_Enabled|default(false)|bool }
 - { include: icloud.yml,                tags: "icloud",                when: ICloud_Enabled|default(false)|bool }
 - { include: keyboard.yml,              tags: "keyboard",              when: Keyboard_Enabled|default(false)|bool }
 - { include: language-region.yml,       tags: "language-region",       when: LanguageRegion_Enabled|default(false)|bool }
+- { include: launch-services.yml,       tags: "launch-services",       when: LaunchServices_Enabled|default(false)|bool }
 - { include: mission-control.yml,       tags: "mission-control",       when: MissionControl_Enabled|default(false)|bool }
 - { include: safari.yml,                tags: "safari",                when: Safari_Enabled|default(false)|bool }
+- { include: spotlight.yml,             tags: "spotlight",             when: Spotlight_Enabled|default(false)|bool }
+- { include: trackpad.yml,              tags: "Trackpad",              when: Trackpad_Enabled|default(false)|bool }

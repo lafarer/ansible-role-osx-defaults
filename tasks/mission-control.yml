@@ -2,6 +2,7 @@
 - name: "Mission Control - Automatically rearrange Spaces based on most recent use"
   osx_defaults: { domain: 'com.apple.dock', key: 'mru-spaces', type: bool, value: "{{ MissionControl_MruSpaces }}" }
   when: MissionControl_MruSpaces is defined
+  notify: restart Dock
 
 - name: "Mission Control - When switching to an application, switch to a Space with open windows for the application"
   osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleSpacesSwitchOnActivate', type: bool, value: "{{ MissionControl_SwitchOnActivate }}" }
@@ -10,6 +11,7 @@
 - name: "Mission Control - Group windows by application in Mission Control"
   osx_defaults: { domain: 'com.apple.dock', key: 'expose-group-apps', type: bool, value: "{{ MissionControl_GroupByApp }}" }
   when: MissionControl_GroupByApp is defined
+  notify: restart Dock
 
 - name: "Mission Control - Displays have separate Spaces"
   osx_defaults: { domain: 'com.apple.spaces', key: 'spans-displays', type: bool, value: "{{ MissionControl_SpansDisplays }}" }
