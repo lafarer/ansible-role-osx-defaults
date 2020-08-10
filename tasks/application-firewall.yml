@@ -4,7 +4,7 @@
   osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'globalstate', type: int, value: "{{ item.value }}" }
   with_items:
     - { name: "Off", value: 0 }
-    - { name: "Off", value: 1 }
+    - { name: "On", value: 1 }
     - { name: "Block All Incoming Connections", value: 2 }
   when: ApplicationFirewall_GlobalState is defined and item.name == ApplicationFirewall_GlobalState
   become: true
@@ -15,12 +15,12 @@
   become: true
 
 - name: "Application Firewall - Allow Built-in Software"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowsignedenabled', type: bool, value: "{{ ApplicationFirewall_AllowSigned }}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowsignedenabled', type: int, value: "{{ ApplicationFirewall_AllowSigned }}" }
   when: ApplicationFirewall_AllowDownloadSigned is defined
   become: true
 
 - name: "Application Firewall - Enable Logging"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingenabled', type: bool, value: "{{ ApplicationFirewall_Logging }}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'loggingenabled', type: int, value: "{{ ApplicationFirewall_Logging }}" }
   when: ApplicationFirewall_Logging is defined
   become: true
 
