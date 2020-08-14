@@ -13,3 +13,7 @@
   command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ DesktopScreenSaver_BackGroundImage }}'";
   when: DesktopScreenSaver_BackGroundImage is defined and BackGroundImage_New.stat.exists and BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
   notify: restart Dock
+
+- name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
+  osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: bool, value: "{{ DesktopScreenSaver_askForPassword }}" }
+  when: DesktopScreenSaver_askForPassword is defined

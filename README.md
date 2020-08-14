@@ -80,6 +80,7 @@ DateTime_IsAnalog: false                         # Analog menu bar clock
 DesktopScreenSaver_Enabled: false                # Enable Desktop and Screen Saver configuration
 DesktopScreenSaver_BackGroundImage: ""           # Background iamge
 #/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
+DesktopScreenSaver_askForPassword: false         # Require password after sleep or screen saver begins
 ```
 
 ```
