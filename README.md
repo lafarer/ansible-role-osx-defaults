@@ -116,6 +116,12 @@ Dock_MouseOverHiliteStack: true                  # Enable highlight hover effect
 ```
 
 ```
+EnergySaver_Enabled: false                       # Enable Energy Saver configuration
+EnergySaver_ComputerSleepTime: "Never"           # Never, or number of minutes
+EnergySaver_DisplaySleepTime: "10"               # Never, or number of minutes
+```
+
+```
 Finder_Enabled: false                            # Enable Finder configuration
 Finder_ShowHardDrivesOnDesktop: false            # Show hard drives on the desktop
 Finder_ShowExternalHardDrivesOnDesktop: true     # Show external hard drives on the desktop

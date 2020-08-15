@@ -1,0 +1,9 @@
+- name: "Energy Saver - Set the computer sleep time"
+  command: systemsetup -setcomputersleep "{{ EnergySaver_ComputerSleepTime }}"
+  when: EnergySaver_ComputerSleepTime is defined
+  become: true
+
+- name: "Energy Saver - Set the display sleep time"
+  command: systemsetup -setdisplaysleep "{{ EnergySaver_DisplaySleepTime }}"
+  when: EnergySaver_DisplaySleepTime is defined
+  become: true

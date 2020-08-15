@@ -9,6 +9,7 @@
 - { include: disk-images.yml,           tags: "disk-images",           when: DiskImages_Enabled|default(false)|bool }
 - { include: displays.yml,              tags: "displays",              when: Displays_Enabled|default(false)|bool }
 - { include: dock.yml,                  tags: "dock",                  when: Dock_Enabled|default(false)|bool }
+- { include: energy-saver.yml,          tags: "energy-saver",          when: EnergySaver_Enabled|default(false)|bool }
 - { include: finder.yml,                tags: "finder",                when: Finder_Enabled|default(false)|bool }
 - { include: general.yml,               tags: "general",               when: General_Enabled|default(false)|bool }
 - { include: hot-corners.yml,           tags: "hot-corners",           when: HotCorners_Enabled|default(false)|bool }
