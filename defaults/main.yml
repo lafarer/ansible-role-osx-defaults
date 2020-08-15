@@ -185,6 +185,16 @@ LanguageRegion_MetricUnits: "false"              # Set Metric Units
 LaunchServices_Enabled: false                    # Enable Launch Services configuration
 LaunchServices_LSQuarantine: true                # false = disable the “Are you sure you want to open this application?” dialog
 
+LoginWindow_Enabled: false                       # Enable Launch Services configuration
+LoginWindow_DisableConsoleAccess: false          # Toggle login for hidden user '>Console'
+LoginWindow_GuestEnabled: false                  # Toggle guest login
+LoginWindow_LoginwindowText: ""                     # Text message to show in the login screen
+LoginWindow_DesktopPicture: ""                   # Change login screen background
+LoginWindow_ShutDownDisabled: false              # Disable shutdown and restart button on login Window
+LoginWindow_showInputMenu: false                 # Show input menu in login window
+LoginWindow_RetriesUntilHint: 0                  # Show password hints - Retries until hint, 0=disable, any other number to define the number of tries
+LoginWindow_Display: "List of users"             # Display Login Window as list or fields: 'List of users' or 'Name and password'
+
 MissionControl_Enabled: false                    # Enable Mission Control configuration
 MissionControl_MruSpaces: false                  # Automatically rearrange Spaces based on most recent use
 MissionControl_SwitchOnActivate: true            # When switching to an application, switch to a Space with open windows for the application
