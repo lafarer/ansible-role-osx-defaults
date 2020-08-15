@@ -214,6 +214,7 @@ Keyboard_kDimTime: 0                               # Dim keyboard after idle tim
 Keyboard_AutomaticSpellingCorrectionEnabled: false # Correct spelling automatically
 Keyboard_AutomaticQuoteSubstitutionEnabled: false  # Use smart quotes
 Keyboard_AutomaticDashSubstitutionEnabled: false   # Use smart dashes
+Keyboard_AutomaticPeriodSubstitutionEnabled: false # Automatic period substitution
 Keyboard_AppleKeyboardUIMode: 3                    # Full Keyboard Access (1 : Text boxes and lists only, 3 : All controls)
 Keyboard_PowerButtonSleepsSystem: false            # Prevent accidental Power button presses from sleeping system
 Keyboard_PressAndHoldEnabled: false                # Disable press-and-hold for keys in favor of key repeat

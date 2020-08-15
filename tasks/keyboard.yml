@@ -41,6 +41,10 @@
   osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticDashSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticDashSubstitutionEnabled }}" }
   when: Keyboard_AutomaticDashSubstitutionEnabled is defined
 
+- name: "Keyboard - Automatic period substitution"
+  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticPeriodSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticPeriodSubstitutionEnabled }}" }
+  when: Keyboard_AutomaticPeriodSubstitutionEnabled is defined
+
 - name: "Keyboard - Full Keyboard Access"
   osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{ Keyboard_AppleKeyboardUIMode }}" }
   when: Keyboard_AppleKeyboardUIMode is defined
