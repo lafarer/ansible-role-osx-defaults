@@ -45,7 +45,7 @@
   notify: restart Dock
 
 - name: "Dock - Define Animation timing when hiding/showing the Dock"
-  osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{ Dock_Autohide_Time_Modifier} }" }
+  osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{ Dock_Autohide_Time_Modifier }}" }
   when: Dock_Autohide_Time_Modifier is defined
   notify: restart Dock
 

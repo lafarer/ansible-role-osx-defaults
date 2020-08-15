@@ -10,10 +10,10 @@
   become: true
 
 - name: "Application Firewall - Allow Downloaded Signed Software"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowdownloadsignedenabled', type: bool, value: "{{ item.value }}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'allowdownloadsignedenabled', type: int, value: "{{ item.value }}" }
   with_items:
-    - { name: "Disabled", value: false }
-    - { name: "Enabled", value: true }
+    - { name: "Disabled", value: 0 }
+    - { name: "Enabled", value: 1 }
   when: ApplicationFirewall_AllowDownloadSigned is defined and item.name == ApplicationFirewall_AllowDownloadSigned
   become: true
 
@@ -45,7 +45,7 @@
 - name: "Application Firewall - Stealth Mode"
   osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: bool, value: "{{ item.value }}" }
   with_items:
-    - { name: "Disabled", value: false }
-    - { name: "Enabled", value: true }
+    - { name: "Disabled", value: 0 }
+    - { name: "Enabled", value: 1 }
   when: ApplicationFirewall_Stealth is defined and item.name == ApplicationFirewall_Stealth
   become: true
