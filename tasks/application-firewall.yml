@@ -43,7 +43,7 @@
   become: true
 
 - name: "Application Firewall - Stealth Mode"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: bool, value: "{{ item.value }}" }
+  osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: 'stealthenabled', type: int, value: "{{ item.value }}" }
   with_items:
     - { name: "Disabled", value: 0 }
     - { name: "Enabled", value: 1 }
