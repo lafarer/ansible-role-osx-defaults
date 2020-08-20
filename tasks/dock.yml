@@ -1,4 +1,47 @@
 ---
+## inspired from https://https://github.com/ideasonpurpose/ansible-playbooks/roles/dock/tasks/apps.yml
+## MIT License, Copyright (c) 2013 Ideas On Purpose
+
+- name: "Dock - Persistent Apps - Reset"
+  osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: [] }
+  when: Dock_PersistentApps is defined and Dock_PersistentApps != []
+  notify: restart Dock
+
+- name: "Dock - Persistent Apps - Buils apps list"
+  set_fact:
+    persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]"
+  with_items: "{{ Dock_PersistentApps }}"
+  when: Dock_PersistentApps is defined and Dock_PersistentApps != []
+
+- debug:
+    msg: "{{ persistent_apps_array }}"
+  when: verbose|bool
+
+- name: "Dock - Persistent Apps - Add apps"
+  osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ persistent_apps_array }}" }
+  when: persistent_apps_array is defined and persistent_apps_array != []
+  notify: restart Dock
+
+- name: "Dock - Persistent Others - Reset"
+  osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: [] }
+  when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
+  notify: restart Dock
+
+- name: "Dock - Persistent Others - Buils items list"
+  set_fact:
+    persistent_others_array: "{{ persistent_others_array|default([])  }} + [ '<dict><key>tile-type</key><string>{{ item.type | default('directory') }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>' ]"
+  with_items: "{{ Dock_PersistentOthers }}"
+  when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
+
+- debug:
+    msg: "{{ persistent_others_array }}"
+  when: verbose|bool
+
+- name: "Dock - Persistent Others - Add "
+  osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ persistent_others_array }}" }
+  when: persistent_others_array is defined and persistent_others_array != []
+  notify: restart Dock
+
 - name: "Dock - Size"
   osx_defaults: { domain: 'com.apple.dock', key: 'tilesize', type: float, value: "{{ Dock_TileSize }}" }
   when: Dock_TileSize is defined

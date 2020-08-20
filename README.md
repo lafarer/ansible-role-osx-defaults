@@ -100,6 +100,13 @@ Displays_DisplayResolutionEnabled: true          # Enable HiDPI display modes (r
 
 ```
 Dock_Enabled: false                              # Enable Dock configuration
+Dock_PersistentApps: []                          # A plain path string, if empty [] it won't change anything
+  # - /Applications/Safari.app
+  # - /Applications/System Preferences.app
+Dock_PersistentOthers: []                        # Either a plain path string or a dict like "{path: /path, type: [file | directory], arrange: [1-5] }"
+  # - /Applications/Setapp
+  # - { path: "/Users/{{ ansible_user_id }}/Downloads", type: directory, arrange: 2}
+  # - { path: "/Applications/Firefox.app", type: file, arrange: 3}
 Dock_TileSize: 64                                # Dock size
 Dock_Magnification: true                         # Dock magnification
 Dock_LargeSize: 128                              # Icon size of magnified Dock items
