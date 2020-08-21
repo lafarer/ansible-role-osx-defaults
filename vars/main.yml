@@ -17,9 +17,9 @@ ApplicationFirewall_GlobalStates:
   - { name: "Block All Incoming Connections", value: 2 }
 
 ApplicationFirewall_LoggingOptions:
-  - { name: "throttled", value: 0 }
-  - { name: "brief", value: 1 }
-  - { name: "detail", value: 2 }
+  - { name: "Throttled", value: 0 }
+  - { name: "Brief", value: 1 }
+  - { name: "Detail", value: 2 }
 
 HotCorners_AvailableModifiers:
   - { name: "Enabled", value: 0 }

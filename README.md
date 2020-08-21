@@ -52,7 +52,7 @@ ApplicationFirewall_GlobalState: "Off"            # "On", "Off", "Block All Inco
 ApplicationFirewall_AllowDownloadSigned: "Disabled"  # Automatically allow downloaded signed software to receive incoming connections
 ApplicationFirewall_AllowSigned: "Disabled"      # Automatically Allow built-in software to receive incoming connections - s0 Disable, 1 Enable
 ApplicationFirewall_Logging: "Disabled"          # Set logging to on or off - 0 Disable, 1 Enable
-ApplicationFirewall_LoggingOption: "throttled"   # Logging options: "throttled", "brief", "detail"
+ApplicationFirewall_LoggingOption: "Throttled"   # Logging options: "Throttled", "Brief", "Detail"
 ApplicationFirewall_Stealth: "Disabled"          # Enable stealth mode
 ```
 
