@@ -37,19 +37,13 @@
   become: yes
 
 - block:
-  - name: "Date Time - Menu bar clock format"
-    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'DateFormat', type: string, value: "{{ DateTime_DateFormat }}" }
-    when: DateTime_DateFormat is defined
-    notify: restart MenuBar
-
-  - name: "Date Time - Flash the time separators"
-    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'FlashDateSeparators', type: bool, value: "{{ DateTime_FlashDateSeparators }}" }
-    when: DateTime_FlashDateSeparators is defined
-    notify: restart MenuBar
-
-  - name: "Date Time - Analog menu bar clock"
-    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'IsAnalog', type: bool, value: "{{ DateTime_IsAnalog }}" }
-    when: DateTime_IsAnalog is defined
+  - name: "Date Time - Menu bar settings"
+    osx_defaults: { domain: 'com.apple.menuextra.clock', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { key: 'DateFormat', type: 'string', value: '{{ DateTime_DateFormat }}'}
+      - { key: 'FlashDateSeparators', type: 'bool', value: '{{ DateTime_FlashDateSeparators }}'}
+      - { key: 'IsAnalog', type: 'bool', value: '{{ DateTime_IsAnalog }}'}
+    when: item.value != ''
     notify: restart MenuBar
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

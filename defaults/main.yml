@@ -1,5 +1,5 @@
 ---
-target_user_id: "{{ ansible_user_id }}"       # Define the username for which you want to apply the configurations
+target_user_id: "{{ ansible_user_id }}"          # Define the username for which you want to apply the configurations
 
 ActivityMonitor_Enabled: no                   # Enable ActivityMonitor configuration
 ActivityMonitor_OpenMainWindow: no            # Show the main window when launching Activity Monitor
@@ -20,18 +20,18 @@ ActivityMonitor_ShowCategory: ""                 # Show all processes in Activit
                                                  # Windowed Processes
                                                  # GPU Processes
 
-AppStore_Enabled: no                          # Enable AppStore configuration
-AppStore_AutomaticCheckEnabled: no            # Automatically check for updates
-AppStore_AutomaticDownload: no                # Download newly available updates in the background
-AppStore_AutoUpdate: no                       # Install app updates
-AppStore_AutoUpdateRestartRequired: no        # Install OSX updates
-AppStore_ConfigDataInstall: no                # Install system data files
-AppStore_CriticalUpdateInstall: no            # Install security updates
-AppStore_ScheduleFrequency: 7                    # Check for software updates (in days)
-AppStore_ShowDebugMenu: no                    # Show debug menu
+AppStore_Enabled: no                                 # Enable AppStore configuration
+AppStore_AutomaticCheckEnabled: no                   # Automatically check for updates
+AppStore_AutomaticDownload: no                       # Download newly available updates in the background
+AppStore_AutoUpdate: no                              # Install app updates
+AppStore_AutoUpdateRestartRequired: no               # Install OSX updates
+AppStore_ConfigDataInstall: no                       # Install system data files
+AppStore_CriticalUpdateInstall: no                   # Install security updates
+AppStore_ScheduleFrequency: 7                        # Check for software updates (in days)
+AppStore_ShowDebugMenu: no                           # Show debug menu
 
-ApplicationFirewall_Enabled: no               # Enable Application Firewall
-ApplicationFirewall_GlobalState: "Off"           # "On", "Off", "Block All Incoming Connections"
+ApplicationFirewall_Enabled: no                      # Enable Application Firewall
+ApplicationFirewall_GlobalState: "Off"               # "On", "Off", "Block All Incoming Connections"
 ApplicationFirewall_AllowDownloadSigned: "Disabled"  # Automatically allow downloaded signed software to receive incoming connections
 ApplicationFirewall_AllowSigned: "Disabled"      # Automatically Allow built-in software to receive incoming connections - s0 Disable, 1 Enable
 ApplicationFirewall_Logging: "Disabled"          # Set logging to on or off - 0 Disable, 1 Enable
@@ -119,6 +119,7 @@ Finder_ShowSidebar: yes                         # Show Side Bar
 Finder_ColumnShowIcons: yes                     # Show Preview
 Finder_FXShowPosixPathInTitle: no             # Show full POSIX path as Finder window title
 Finder_QuitMenuItem: no                       # Allow quitting via ⌘ + Q
+Finder_QLEnableTextSelection: no                # Select and Copy Text from Quick Look
 Finder_DVSIVSarrangeBy: grid                     # Desktop, Enable snap-to-grid for icons on the desktop and in other icon views
 Finder_DVSIVSiconSize: 64                        # Desktop, Set the size of icons on the desktop and in other icon views
 Finder_DVSIVSshowItemInfo: no                 # Desktop, Show item info near icons on the desktop and in other icon views
@@ -141,22 +142,19 @@ General_NSCloseAlwaysConfirmsChanges: no      # Ask to keep changes when closing
 General_CloseWindowsWhenQuittingApp: no       # Close windows when quitting an application
 General_NSScrollAnimationEnabled: yes           # Smooth scrolling (Disable on older Macs)
 
-HotCorners_Enabled: no                        # Enable Hot Corners configurations
-HotCorners_AvailableModifiers:
-    - { name: "Enabled", value: 0 }
-    - { name: "Disabled", value: 1048576 }
-HotCorners_AvailableActions:
-    - { name: "no-op", value: 0 }
-    - { name: "Disabled", value: 1 }
-    - { name: "Mission Control", value: 2 }
-    - { name: "Show Application Windows", value: 3 }
-    - { name: "Desktop", value: 4 }
-    - { name: "Start Screen Saver", value: 5 }
-    - { name: "Disable Screen Saver", value: 6 }
-    - { name: "Dashboard", value: 7 }
-    - { name: "Put Display To Sleep", value: 10 }
-    - { name: "Launchpad", value: 11 }
-    - { name: "Notification Center", value: 12 }
+HotCorners_Enabled: no                          # Enable Hot Corners configura  tions
+                                                # HotCorners Available Actions:
+                                                #     - { name: "no-op", value: 0 }
+                                                #     - { name: "Disabled", value: 1 }
+                                                #     - { name: "Mission Control", value: 2 }
+                                                #     - { name: "Show Application Windows", value: 3 }
+                                                #     - { name: "Desktop", value: 4 }
+                                                #     - { name: "Start Screen Saver", value: 5 }
+                                                #     - { name: "Disable Screen Saver", value: 6 }
+                                                #     - { name: "Dashboard", value: 7 }
+                                                #     - { name: "Put Display To Sleep", value: 10 }
+                                                #     - { name: "Launchpad", value: 11 }
+                                                #     - { name: "Notification Center", value: 12 }
 HotCorners_BottomLeftModifier: "Enabled"        # Enabled, Disabled
 HotCorners_BottomRightModifier: "Enabled"       # Enabled, Disabled
 HotCorners_TopLeftModifier: "Disabled"          # Enabled, Disabled

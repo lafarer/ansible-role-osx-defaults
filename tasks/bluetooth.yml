@@ -5,10 +5,6 @@
     register: menuExtras_result
     changed_when: False
 
-  - debug:
-      msg: "{{ menuExtras_result }}"
-    when: verbose|bool
-
   - name: "Bluetooth - Show Bluetooth in menu bar"
     command: defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
     when: Bluetooth_ShowInMenuBar is defined and Bluetooth_ShowInMenuBar == "true" and 'Bluetooth.menu' not in menuExtras_result.stdout

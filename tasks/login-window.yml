@@ -1,16 +1,23 @@
 ---
 - block:
-  - name: "Login Window - Toggle login for hidden user '>Console'"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'DisableConsoleAccess', type: bool, value: "{{ LoginWindow_DisableConsoleAccess }}" }
-    when: LoginWindow_DisableConsoleAccess is defined
 
-  - name: "Login Window - Toggle guest login"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'GuestEnabled', type: bool, value: "{{ LoginWindow_GuestEnabled }}" }
-    when: LoginWindow_GuestEnabled is defined
+  - name: "Login Window - Settings"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { description: "Toggle login for hidden user '>Console'", key: 'DisableConsoleAccess', type: 'bool', value: '{{ LoginWindow_DisableConsoleAccess }}'}
+      - { description: "Toggle guest login", key: 'GuestEnabled', type: 'bool', value: '{{ LoginWindow_GuestEnabled }}'}
+      - { description: "Add a message to the login screen", key: 'LoginwindowText', type: 'string', value: '{{ LoginWindow_LoginwindowText }}'}
+      - { description: "Disable shutdown and restart button on login Window", key: 'PowerOffDisabled', type: 'bool', value: '{{ LoginWindow_ShutDownDisabled }}'}
+      - { description: "Show input menu", key: 'showInputMenu', type: 'bool', value: '{{ LoginWindow_showInputMenu }}'}
+      - { description: "Show password hints - Retries until hint", key: 'RetriesUntilHint', type: 'int', value: '{{ LoginWindow_RetriesUntilHint }}'}
+    when: item.value != ''
 
-  - name: "Login Window - Add a message to the login screen"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'LoginwindowText', type: string, value: "{{ LoginWindow_LoginwindowText }}" }
-    when: LoginWindow_LoginwindowText is defined
+  - name: "Login Window - Display Login Window as list or fields"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'SHOWFULLNAME', type: bool, value: "{{ item.value }}" }
+    with_items:
+      - { name: "List of users", value: 0 }
+      - { name: "Name and password", value: 1 }
+    when: LoginWindow_Display is defined and item.name == LoginWindow_Display
 
   - name: "Check if login screen background image exists"
     stat: path={{ LoginWindow_DesktopPicture }}
@@ -20,24 +27,5 @@
   - name: "Login Window - Change login screen background"
     osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'DesktopPicture', type: string, value: "{{ LoginWindow_DesktopPicture }}" }
     when: LoginWindow_DesktopPicture is defined  and LoginWindow_DesktopPicture != "" and LoginWindow_DesktopPicture_New.stat.exists
-
-  - name: "Login Window - Disable shutdown and restart button on login Window"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'PowerOffDisabled', type: bool, value: "{{ LoginWindow_ShutDownDisabled }}" }
-    when: LoginWindow_ShutDownDisabled is defined
-
-  - name: "Login Window - Show input menu"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'showInputMenu', type: bool, value: "{{ LoginWindow_showInputMenu }}" }
-    when: LoginWindow_showInputMenu is defined
-
-  - name: "Login Window - Show password hints - Retries until hint"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'RetriesUntilHint', type: int, value: "{{ LoginWindow_RetriesUntilHint }}" }
-    when: LoginWindow_RetriesUntilHint is defined
-
-  - name: "Login Window - Display Login Window as list or fields"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'SHOWFULLNAME', type: bool, value: "{{ item.value }}" }
-    with_items:
-      - { name: "List of users", value: 0 }
-      - { name: "Name and password", value: 1 }
-    when: LoginWindow_Display is defined and item.name == LoginWindow_Display
   # the above block is run as superuser
   become: yes

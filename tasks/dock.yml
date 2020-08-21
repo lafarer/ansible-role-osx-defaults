@@ -13,10 +13,6 @@
     with_items: "{{ Dock_PersistentApps }}"
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
-  - debug:
-      msg: "{{ persistent_apps_array }}"
-    when: verbose|bool
-
   - name: "Dock - Persistent Apps - Add apps"
     osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ persistent_apps_array }}" }
     when: persistent_apps_array is defined and persistent_apps_array != []
@@ -33,78 +29,28 @@
     with_items: "{{ Dock_PersistentOthers }}"
     when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
 
-  - debug:
-      msg: "{{ persistent_others_array }}"
-    when: verbose|bool
-
   - name: "Dock - Persistent Others - Add "
     osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ persistent_others_array }}" }
     when: persistent_others_array is defined and persistent_others_array != []
     notify: restart Dock
 
-  - name: "Dock - Size"
-    osx_defaults: { domain: 'com.apple.dock', key: 'tilesize', type: float, value: "{{ Dock_TileSize }}" }
-    when: Dock_TileSize is defined
-    notify: restart Dock
-
-  - name: "Dock - Magnification"
-    osx_defaults: { domain: 'com.apple.dock', key: 'magnification', type: bool, value: "{{ Dock_Magnification }}" }
-    when: Dock_Magnification is defined
-    notify: restart Dock
-
-  - name: "Dock - Icon size of magnified Dock items"
-    osx_defaults: { domain: 'com.apple.dock', key: 'largesize', type: float, value: "{{ Dock_LargeSize }}" }
-    when: Dock_LargeSize is defined
-    notify: restart Dock
-
-  - name: "Dock - Position on screen"
-    osx_defaults: { domain: 'com.apple.dock', key: 'orientation', type: string, value: "{{ Dock_Orientation }}" }
-    when: Dock_Orientation is defined
-    notify: restart Dock
-
-  - name: "Dock - Minimization effect"
-    osx_defaults: { domain: 'com.apple.dock', key: 'mineffect', type: string, value: "{{ Dock_MinEffect }}" }
-    when: Dock_MinEffect is defined
-    notify: restart Dock
-
-  - name: "Dock - Window's title title bar double-click action"
-    osx_defaults: { domain: 'com.apple.dock', key: 'AppleActionOnDoubleClick', type: string, value: "{{ Dock_AppleActionOnDoubleClick }}" }
-    when: Dock_AppleActionOnDoubleClick is defined
-    notify: restart Dock
-
-  - name: "Dock - Minimize windows appliction into icon"
-    osx_defaults: { domain: 'com.apple.dock', key: 'minimize-to-application', type: boolean, value: "{{ Dock_MinimizeToApplication }}" }
-    when: Dock_MinimizeToApplication is defined
-    notify: restart Dock
-
-  - name: "Dock - Animate opening applications"
-    osx_defaults: { domain: 'com.apple.dock', key: 'launchanim', type: boolean, value: "{{ Dock_LaunchAnim }}" }
-    when: Dock_LaunchAnim is defined
-    notify: restart Dock
-
-  - name: "Dock - Automatically hide and show"
-    osx_defaults: { domain: 'com.apple.dock', key: 'autohide', type: bool, value: "{{ Dock_Autohide }}" }
-    when: Dock_Autohide is defined
-    notify: restart Dock
-
-  - name: "Dock - Define Animation timing when hiding/showing the Dock"
-    osx_defaults: { domain: 'com.apple.dock', key: 'autohide-time-modifier', type: int, value: "{{ Dock_Autohide_Time_Modifier }}" }
-    when: Dock_Autohide_Time_Modifier is defined
-    notify: restart Dock
-
-  - name: "Dock - Show indicator for open applications"
-    osx_defaults: { domain: 'com.apple.dock', key: 'show-process-indicators', type: boolean, value: "{{ Dock_ShowProcessIndicators }}" }
-    when: Dock_ShowProcessIndicators is defined
-    notify: restart Dock
-
-  - name: "Dock - Extra - Display translucent Dock icons for hidden applications"
-    osx_defaults: { domain: 'com.apple.dock', key: 'showhidden', type: boolean, value: "{{ Dock_ShowHidden }}" }
-    when: Dock_ShowHidden is defined
-    notify: restart Dock
-
-  - name: "Dock - Extra - Enable highlight hover effect for the grid view of a stack"
-    osx_defaults: { domain: 'com.apple.dock', key: 'mouse-over-hilite-stack', type: boolean, value: "{{ Dock_MouseOverHiliteStack }}" }
-    when: Dock_MouseOverHiliteStack is defined
+  - name: "Dock - Appearance"
+    osx_defaults: { domain: 'com.apple.dock', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { key: 'tilesize',                 type: 'float',   value: '{{ Dock_TileSize }}'}
+      - { key: 'magnification',            type: 'bool',    value: '{{ Dock_Magnification }}'}
+      - { key: 'largesize',                type: 'float',   value: '{{ Dock_LargeSize }}'}
+      - { key: 'orientation',              type: 'string',  value: '{{ Dock_Orientation }}'}
+      - { key: 'mineffect',                type: 'string',  value: '{{ Dock_MinEffect }}'}
+      - { key: 'AppleActionOnDoubleClick', type: 'string',  value: '{{ Dock_AppleActionOnDoubleClick }}'}
+      - { key: 'minimize-to-application',  type: 'boolean', value: '{{ Dock_MinimizeToApplication }}'}
+      - { key: 'launchanim',               type: 'boolean', value: '{{ Dock_LaunchAnim }}'}
+      - { key: 'autohide',                 type: 'bool',    value: '{{ Dock_Autohide }}'}
+      - { key: 'autohide-time-modifier',   type: 'int',     value: '{{ Dock_Autohide_Time_Modifier }}'}
+      - { key: 'show-process-indicators',  type: 'boolean', value: '{{ Dock_ShowProcessIndicators }}'}
+      - { key: 'showhidden',               type: 'boolean', value: '{{ Dock_ShowHidden }}'}
+      - { key: 'mouse-over-hilite-stack',  type: 'boolean', value: '{{ Dock_MouseOverHiliteStack }}'}
+    when: item.value != ''
     notify: restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

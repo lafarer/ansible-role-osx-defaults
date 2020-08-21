@@ -1,16 +1,16 @@
 ---
 - block:
-  - name: "AppStore - Automatically check for updates"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{ AppStore_AutomaticCheckEnabled }}" }
-    when: AppStore_AutomaticCheckEnabled is defined
+  - name: "AppStore - SoftwareUpdate"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: '{{ item.key }}', type: bool, value: "{{ item.value }}" }
+    loop:
+      - { key: 'AutomaticCheckEnabled', value: '{{ AppStore_AutomaticCheckEnabled }}'}
+      - { key: 'AutomaticDownload',     value: '{{ AppStore_AutomaticDownload }}'}
+      - { key: 'ConfigDataInstall',     value: '{{ AppStore_ConfigDataInstall }}'}
+      - { key: 'CriticalUpdateInstall', value: '{{ AppStore_CriticalUpdateInstall }}'}
+    when: item.value != ''
     notify: restart AppStore
 
-  - name: "AppStore - Download newly available updates in the background"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{ AppStore_AutomaticDownload }}" }
-    when: AppStore_AutomaticDownload is defined
-    notify: restart AppStore
-
-  - name: "AppStore - Install app updates"
+  - name: "AppStore - Install Apps updates"
     osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{ AppStore_AutoUpdate }}" }
     when: AppStore_AutoUpdate is defined
     notify: restart AppStore
@@ -18,16 +18,6 @@
   - name: "AppStore - Install OSX updates"
     osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{ AppStore_AutoUpdateRestartRequired }}" }
     when: AppStore_AutoUpdateRestartRequired is defined
-    notify: restart AppStore
-
-  - name: "AppStore - Install system data files"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{ AppStore_ConfigDataInstall }}" }
-    when: AppStore_ConfigDataInstall is defined
-    notify: restart AppStore
-
-  - name: "AppStore - Install security updates"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{ AppStore_CriticalUpdateInstall }}" }
-    when: AppStore_CriticalUpdateInstall is defined
     notify: restart AppStore
   # the above block is run as superuser
   become: yes

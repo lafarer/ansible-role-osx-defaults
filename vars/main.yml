@@ -1,0 +1,51 @@
+---
+EnabledDisabled_Options:                      # to be used as selector
+  - { name: "Disabled", value: 0 }
+  - { name: "Enabled", value: 1 }
+
+ApplicationFirewall_Options:
+  - { description: 'Global State', key: 'globalstate', type: 'int', value: '{{ ApplicationFirewall_GlobalStates }}'}
+  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: '{{ ApplicationFirewall_LoggingOptions }}'}
+  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
+
+ApplicationFirewall_GlobalStates:
+  - { name: "Off", value: 0 }
+  - { name: "On", value: 1 }
+  - { name: "Block All Incoming Connections", value: 2 }
+
+ApplicationFirewall_LoggingOptions:
+  - { name: "throttled", value: 0 }
+  - { name: "brief", value: 1 }
+  - { name: "detail", value: 2 }
+
+HotCorners_AvailableModifiers:
+  - { name: "Enabled", value: 0 }
+  - { name: "Disabled", value: 1048576 }
+
+HotCorners_AvailableActions:
+  - { name: "no-op", value: 0 }
+  - { name: "Disabled", value: 1 }
+  - { name: "Mission Control", value: 2 }
+  - { name: "Show Application Windows", value: 3 }
+  - { name: "Desktop", value: 4 }
+  - { name: "Start Screen Saver", value: 5 }
+  - { name: "Disable Screen Saver", value: 6 }
+  - { name: "Dashboard", value: 7 }
+  - { name: "Put Display To Sleep", value: 10 }
+  - { name: "Launchpad", value: 11 }
+  - { name: "Notification Center", value: 12 }
+
+HotCorners_Modifiers:
+  - { description: 'Bottom Left',  key: 'wvous-bl-modifier', value: '{{ HotCorners_AvailableModifiers }}'}
+  - { description: 'Bottom Right', key: 'wvous-br-modifier', value: '{{ HotCorners_AvailableModifiers }}'}
+  - { description: 'Top Left',     key: 'wvous-tl-modifier', value: '{{ HotCorners_AvailableModifiers }}'}
+  - { description: 'Top Right',    key: 'wvous-tr-modifier', value: '{{ HotCorners_AvailableModifiers }}'}
+
+HotCorners_Actions:
+  - { description: 'Bottom Left',  key: 'wvous-bl-corner', value: '{{ HotCorners_AvailableActions }}'}
+  - { description: 'Bottom Right', key: 'wvous-br-corner', value: '{{ HotCorners_AvailableActions }}'}
+  - { description: 'Top Left',     key: 'wvous-tl-corner', value: '{{ HotCorners_AvailableActions }}'}
+  - { description: 'Top Right',    key: 'wvous-tr-corner', value: '{{ HotCorners_AvailableActions }}'}

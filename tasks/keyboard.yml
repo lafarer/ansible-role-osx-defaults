@@ -11,6 +11,10 @@
   become: yes
 
 - block:
+  - name: "Keyboard - Use F1, F2, etc. keys as standard function keys"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'com.apple.Keyboard_fnState', type: bool, value: "{{ Keyboard_fnState }}" }
+    when: Keyboard_fnState is defined
+
   - name: "Keyboard - Set key repeat rate"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'KeyRepeat', type: int, value: "{{ Keyboard_KeyRepeat }}" }
     when: Keyboard_KeyRepeat is defined
@@ -18,10 +22,6 @@
   - name: "Keyboard - Set delay until repeat (in milliseconds)"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'InitialKeyRepeat', type: int, value: "{{ Keyboard_InitialKeyRepeat }}" }
     when: Keyboard_InitialKeyRepeat is defined
-
-  - name: "Keyboard - Use F1, F2, etc. keys as standard function keys"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'com.apple.Keyboard_fnState', type: bool, value: "{{ Keyboard_fnState }}" }
-    when: Keyboard_fnState is defined
 
   - name: "Keyboard - Adjust keyboard brightness in low light (BezelServices)"
     osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDim', type: bool, value: "{{ Keyboard_kDim }}" }
@@ -35,17 +35,13 @@
     osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticSpellingCorrectionEnabled', type: bool, value: "{{ Keyboard_AutomaticSpellingCorrectionEnabled }}" }
     when: Keyboard_AutomaticSpellingCorrectionEnabled is defined
 
-  - name: "Keyboard - Use smart quotes"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticQuoteSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticQuoteSubstitutionEnabled }}" }
-    when: Keyboard_AutomaticQuoteSubstitutionEnabled is defined
-
-  - name: "Keyboard - Use smart dashes"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticDashSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticDashSubstitutionEnabled }}" }
-    when: Keyboard_AutomaticDashSubstitutionEnabled is defined
-
-  - name: "Keyboard - Automatic period substitution"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticPeriodSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticPeriodSubstitutionEnabled }}" }
-    when: Keyboard_AutomaticPeriodSubstitutionEnabled is defined
+  - name: "Keyboard - Use smart substitutions"
+    osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { key: 'NSAutomaticQuoteSubstitutionEnabled',  type: 'bool', value: '{{ Keyboard_AutomaticQuoteSubstitutionEnabled }}'}
+      - { key: 'NSAutomaticDashSubstitutionEnabled',   type: 'bool', value: '{{ Keyboard_AutomaticDashSubstitutionEnabled }}'}
+      - { key: 'NSAutomaticPeriodSubstitutionEnabled', type: 'bool', value: '{{ Keyboard_AutomaticPeriodSubstitutionEnabled }}'}
+    when: item.value != ''
 
   - name: "Keyboard - Full Keyboard Access"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{ Keyboard_AppleKeyboardUIMode }}" }

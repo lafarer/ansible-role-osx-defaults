@@ -154,6 +154,7 @@ Finder_ShowSidebar: yes                         # Show Side Bar
 Finder_ColumnShowIcons: yes                     # Show Preview
 Finder_FXShowPosixPathInTitle: no             # Show full POSIX path as Finder window title
 Finder_QuitMenuItem: no                       # Allow quitting via ⌘ + Q
+Finder_QLEnableTextSelection: no                # Select and Copy Text from Quick Look
 Finder_DVSIVSarrangeBy: grid                     # Desktop, Enable snap-to-grid for icons on the desktop and in other icon views
 Finder_DVSIVSiconSize: 64                        # Desktop, Set the size of icons on the desktop and in other icon views
 Finder_DVSIVSshowItemInfo: no                 # Desktop, Show item info near icons on the desktop and in other icon views
