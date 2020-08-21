@@ -1,18 +1,23 @@
 ---
-- name: "Mission Control - Automatically rearrange Spaces based on most recent use"
-  osx_defaults: { domain: 'com.apple.dock', key: 'mru-spaces', type: bool, value: "{{ MissionControl_MruSpaces }}" }
-  when: MissionControl_MruSpaces is defined
-  notify: restart Dock
+- block:
+  - name: "Mission Control - Automatically rearrange Spaces based on most recent use"
+    osx_defaults: { domain: 'com.apple.dock', key: 'mru-spaces', type: bool, value: "{{ MissionControl_MruSpaces }}" }
+    when: MissionControl_MruSpaces is defined
+    notify: restart Dock
 
-- name: "Mission Control - When switching to an application, switch to a Space with open windows for the application"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleSpacesSwitchOnActivate', type: bool, value: "{{ MissionControl_SwitchOnActivate }}" }
-  when: MissionControl_SwitchOnActivate is defined
+  - name: "Mission Control - When switching to an application, switch to a Space with open windows for the application"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleSpacesSwitchOnActivate', type: bool, value: "{{ MissionControl_SwitchOnActivate }}" }
+    when: MissionControl_SwitchOnActivate is defined
 
-- name: "Mission Control - Group windows by application in Mission Control"
-  osx_defaults: { domain: 'com.apple.dock', key: 'expose-group-apps', type: bool, value: "{{ MissionControl_GroupByApp }}" }
-  when: MissionControl_GroupByApp is defined
-  notify: restart Dock
+  - name: "Mission Control - Group windows by application in Mission Control"
+    osx_defaults: { domain: 'com.apple.dock', key: 'expose-group-apps', type: bool, value: "{{ MissionControl_GroupByApp }}" }
+    when: MissionControl_GroupByApp is defined
+    notify: restart Dock
 
-- name: "Mission Control - Displays have separate Spaces"
-  osx_defaults: { domain: 'com.apple.spaces', key: 'spans-displays', type: bool, value: "{{ MissionControl_SpansDisplays }}" }
-  when: MissionControl_SpansDisplays is defined
+  - name: "Mission Control - Displays have separate Spaces"
+    osx_defaults: { domain: 'com.apple.spaces', key: 'spans-displays', type: bool, value: "{{ MissionControl_SpansDisplays }}" }
+    when: MissionControl_SpansDisplays is defined
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

@@ -1,4 +1,9 @@
 ---
-- name: "iCloud - Save to iCloud by default"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDocumentSaveNewDocumentsToCloud', type: bool, value: "{{ ICloud_NSDocumentSaveNewDocumentsToCloud }}" }
-  when: ICloud_NSDocumentSaveNewDocumentsToCloud is defined
+- block:
+  - name: "iCloud - Save to iCloud by default"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDocumentSaveNewDocumentsToCloud', type: bool, value: "{{ ICloud_NSDocumentSaveNewDocumentsToCloud }}" }
+    when: ICloud_NSDocumentSaveNewDocumentsToCloud is defined
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

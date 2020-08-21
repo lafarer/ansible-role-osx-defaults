@@ -1,46 +1,48 @@
 ---
-- name: "AppStore - Automatically check for updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{ AppStore_AutomaticCheckEnabled }}" }
-  when: AppStore_AutomaticCheckEnabled is defined
-  become: true
-  notify: restart AppStore
+- block:
+  - name: "AppStore - Automatically check for updates"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticCheckEnabled', type: bool, value: "{{ AppStore_AutomaticCheckEnabled }}" }
+    when: AppStore_AutomaticCheckEnabled is defined
+    notify: restart AppStore
 
-- name: "AppStore - Download newly available updates in the background"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{ AppStore_AutomaticDownload }}" }
-  when: AppStore_AutomaticDownload is defined
-  become: true
-  notify: restart AppStore
+  - name: "AppStore - Download newly available updates in the background"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'AutomaticDownload', type: bool, value: "{{ AppStore_AutomaticDownload }}" }
+    when: AppStore_AutomaticDownload is defined
+    notify: restart AppStore
 
-- name: "AppStore - Install app updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{ AppStore_AutoUpdate }}" }
-  when: AppStore_AutoUpdate is defined
-  become: true
-  notify: restart AppStore
+  - name: "AppStore - Install app updates"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdate', type: bool, value: "{{ AppStore_AutoUpdate }}" }
+    when: AppStore_AutoUpdate is defined
+    notify: restart AppStore
 
-- name: "AppStore - Install OSX updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{ AppStore_AutoUpdateRestartRequired }}" }
-  when: AppStore_AutoUpdateRestartRequired is defined
-  become: true
-  notify: restart AppStore
+  - name: "AppStore - Install OSX updates"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.commerce', key: 'AutoUpdateRestartRequired', type: bool, value: "{{ AppStore_AutoUpdateRestartRequired }}" }
+    when: AppStore_AutoUpdateRestartRequired is defined
+    notify: restart AppStore
 
-- name: "AppStore - Install system data files"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{ AppStore_ConfigDataInstall }}" }
-  when: AppStore_ConfigDataInstall is defined
-  become: true
-  notify: restart AppStore
+  - name: "AppStore - Install system data files"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'ConfigDataInstall', type: bool, value: "{{ AppStore_ConfigDataInstall }}" }
+    when: AppStore_ConfigDataInstall is defined
+    notify: restart AppStore
 
-- name: "AppStore - Install security updates"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{ AppStore_CriticalUpdateInstall }}" }
-  when: AppStore_CriticalUpdateInstall is defined
-  become: true
-  notify: restart AppStore
+  - name: "AppStore - Install security updates"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.SoftwareUpdate', key: 'CriticalUpdateInstall', type: bool, value: "{{ AppStore_CriticalUpdateInstall }}" }
+    when: AppStore_CriticalUpdateInstall is defined
+    notify: restart AppStore
+  # the above block is run as superuser
+  become: yes
 
-- name: "AppStore - Check for software updates frequency"
-  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ScheduleFrequency', type: int, value: "{{ AppStore_ScheduleFrequency }}" }
-  when: AppStore_ScheduleFrequency is defined
-  notify: restart AppStore
+- block:
+  - name: "AppStore - Check for software updates frequency"
+    osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ScheduleFrequency', type: int, value: "{{ AppStore_ScheduleFrequency }}" }
+    when: AppStore_ScheduleFrequency is defined
+    notify: restart AppStore
 
-- name: "AppStore - Show debug menu"
-  osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ShowDebugMenu', type: bool, value: "{{ AppStore_ShowDebugMenu }}" }
-  when: AppStore_ShowDebugMenu is defined
-  notify: restart AppStore
+  - name: "AppStore - Show debug menu"
+    osx_defaults: { domain: 'com.apple.SoftwareUpdate', key: 'ShowDebugMenu', type: bool, value: "{{ AppStore_ShowDebugMenu }}" }
+    when: AppStore_ShowDebugMenu is defined
+    notify: restart AppStore
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

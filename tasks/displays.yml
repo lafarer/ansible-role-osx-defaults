@@ -1,23 +1,29 @@
 ---
-- name: "Displays - Automatically adjust brightness  (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'dAuto', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
-  when: Displays_AutomaticallyAdjustBrightness is defined
+- block:
+  - name: "Displays - Automatically adjust brightness  (AmbientLightSensor)"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Display Enabled', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
+    when: Displays_AutomaticallyAdjustBrightness is defined
 
-- name: "Displays - Automatically adjust brightness  (AmbientLightSensor)"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Display Enabled', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
-  become: true
-  when: Displays_AutomaticallyAdjustBrightness is defined
+  - name: "Displays - Enable HiDPI display modes (requires restart)"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.windowserver', key: 'DisplayResolutionEnabled', type: bool, value: "{{ Displays_DisplayResolutionEnabled }}" }
+    when: Displays_DisplayResolutionEnabled is defined
+  # the above block is run as superuser
+  become: yes
 
-- name: "Displays - Subpixel font rendering on non-Apple LCDs"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ Displays_AppleFontSmoothing }}" }
-  when: Displays_AppleFontSmoothing is defined
+- block:
+  - name: "Displays - Automatically adjust brightness  (BezelServices)"
+    osx_defaults: { domain: 'com.apple.BezelServices', key: 'dAuto', type: bool, value: "{{ Displays_AutomaticallyAdjustBrightness }}" }
+    when: Displays_AutomaticallyAdjustBrightness is defined
 
-- name: "Displays - Enable HiDPI display modes (requires restart)"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.windowserver', key: 'DisplayResolutionEnabled', type: bool, value: "{{ Displays_DisplayResolutionEnabled }}" }
-  become: true
-  when: Displays_DisplayResolutionEnabled is defined
+  - name: "Displays - Subpixel font rendering on non-Apple LCDs"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ Displays_AppleFontSmoothing }}" }
+    when: Displays_AppleFontSmoothing is defined
 
-- name: "Displays - Show mirroring options in the menu bar when available"
-  osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{ Displays_ShowInMenuBarIfPresent }}" }
-  when: Displays_ShowInMenuBarIfPresent is defined
-  notify: restart MenuBar
+  - name: "Displays - Show mirroring options in the menu bar when available"
+    osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{ Displays_ShowInMenuBarIfPresent }}" }
+    when: Displays_ShowInMenuBarIfPresent is defined
+    notify: restart MenuBar
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

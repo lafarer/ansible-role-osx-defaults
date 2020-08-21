@@ -1,16 +1,21 @@
 ---
-- name: "Dashboard - Disable Dashboard"
-  osx_defaults: { domain: 'com.apple.dashboard', key: 'mcx-disabled', type: bool, value: "{{ Dashboard_McxDisabled }}" }
-  when: Dashboard_McxDisabled is defined
+- block:
+  - name: "Dashboard - Disable Dashboard"
+    osx_defaults: { domain: 'com.apple.dashboard', key: 'mcx-disabled', type: bool, value: "{{ Dashboard_McxDisabled }}" }
+    when: Dashboard_McxDisabled is defined
 
-- name: "Dashboard - Dashboard state"
-  osx_defaults: { domain: 'com.apple.dashboard', key: 'enabled-state', type: int, value: "{{ Dashboard_EnabledState }}" }
-  when: Dashboard_EnabledState is defined
+  - name: "Dashboard - Dashboard state"
+    osx_defaults: { domain: 'com.apple.dashboard', key: 'enabled-state', type: int, value: "{{ Dashboard_EnabledState }}" }
+    when: Dashboard_EnabledState is defined
 
-- name: "Dashboard - Don’t show Dashboard as a Space"
-  osx_defaults: { domain: 'com.apple.dock', key: 'dashboard-in-overlay', type: bool, value: "{{ Dashboard_DontShowAsSpace }}" }
-  when: Dashboard_DontShowAsSpace is defined
+  - name: "Dashboard - Don’t show Dashboard as a Space"
+    osx_defaults: { domain: 'com.apple.dock', key: 'dashboard-in-overlay', type: bool, value: "{{ Dashboard_DontShowAsSpace }}" }
+    when: Dashboard_DontShowAsSpace is defined
 
-- name: "Dashboard - Enable Dashboard dev mode (allows keeping widgets on the desktop)"
-  osx_defaults: { domain: 'com.apple.dashboard', key: 'devmode', type: bool, value: "{{ Dashboard_DevMode }}" }
-  when: Dashboard_DevMode is defined
+  - name: "Dashboard - Enable Dashboard dev mode (allows keeping widgets on the desktop)"
+    osx_defaults: { domain: 'com.apple.dashboard', key: 'devmode', type: bool, value: "{{ Dashboard_DevMode }}" }
+    when: Dashboard_DevMode is defined
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

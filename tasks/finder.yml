@@ -1,194 +1,176 @@
 ---
-- name: "Finder - General - Show hard disks on the desktop"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowHardDrivesOnDesktop }}" }
-  when: Finder_ShowHardDrivesOnDesktop is defined
-  notify: restart Finder
+- block:
+  - name: "Finder - General - Show hard disks on the desktop"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowHardDrivesOnDesktop }}" }
+    when: Finder_ShowHardDrivesOnDesktop is defined
+    notify: restart Finder
 
-- name: "Finder - General - Show external disks on the desktop"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowExternalHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowExternalHardDrivesOnDesktop }}" }
-  when: Finder_ShowExternalHardDrivesOnDesktop is defined
-  notify: restart Finder
+  - name: "Finder - General - Show external disks on the desktop"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowExternalHardDrivesOnDesktop', type: bool, value: "{{ Finder_ShowExternalHardDrivesOnDesktop }}" }
+    when: Finder_ShowExternalHardDrivesOnDesktop is defined
+    notify: restart Finder
 
-- name: "Finder - General - Show CDs, DVDs and iPods on the desktop"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowRemovableMediaOnDesktop', type: bool, value: "{{ Finder_ShowRemovableMediaOnDesktop }}" }
-  when: Finder_ShowRemovableMediaOnDesktop is defined
-  notify: restart Finder
+  - name: "Finder - General - Show CDs, DVDs and iPods on the desktop"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowRemovableMediaOnDesktop', type: bool, value: "{{ Finder_ShowRemovableMediaOnDesktop }}" }
+    when: Finder_ShowRemovableMediaOnDesktop is defined
+    notify: restart Finder
 
-- name: "Finder - General - Show connected servers on the desktop"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowMountedServersOnDesktop', type: bool, value: "{{ Finder_ShowMountedServersOnDesktop }}" }
-  when: Finder_ShowMountedServersOnDesktop is defined
-  notify: restart Finder
+  - name: "Finder - General - Show connected servers on the desktop"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowMountedServersOnDesktop', type: bool, value: "{{ Finder_ShowMountedServersOnDesktop }}" }
+    when: Finder_ShowMountedServersOnDesktop is defined
+    notify: restart Finder
 
-- name: "Finder - General - New Finder windows show"
-  osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTarget', type: string, value: "{{ Finder_NewWindowTarget }}" }
-  when: Finder_NewWindowTarget is defined
-  register: result
-  notify: restart Finder
+  - name: "Finder - General - New Finder windows show"
+    osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTarget', type: string, value: "{{ Finder_NewWindowTarget }}" }
+    when: Finder_NewWindowTarget is defined
+    register: result
+    notify: restart Finder
 
-- name: "Finder - General - New Finder windows show"
-  osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
-  with_items:
-    - { name: "PfCm", value: "" }
-    - { name: "PfVo", value: "file:///" }
-    - { name: "PfHm", value: "file://${HOME}/" }
-    - { name: "PfDe", value: "file://${HOME}/Desktop/" }
-    - { name: "PfDo", value: "file://${HOME}/Documents/" }
-    - { name: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
-  when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget and result.changed
-  notify: restart Finder
+  - name: "Finder - General - New Finder windows show"
+    osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
+    with_items:
+      - { name: "PfCm", value: "" }
+      - { name: "PfVo", value: "file:///" }
+      - { name: "PfHm", value: "file://${HOME}/" }
+      - { name: "PfDe", value: "file://${HOME}/Desktop/" }
+      - { name: "PfDo", value: "file://${HOME}/Documents/" }
+      - { name: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
+    when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget and result.changed
+    notify: restart Finder
 
-- name: "Finder - General - Open folders in tabs instead of new windows"
-  osx_defaults: { domain: 'com.apple.finder', key: 'FinderSpawnTab', type: bool, value: "{{ Finder_FinderSpawnTab }}" }
-  when: Finder_FinderSpawnTab is defined
-  notify: restart Finder
+  - name: "Finder - General - Open folders in tabs instead of new windows"
+    osx_defaults: { domain: 'com.apple.finder', key: 'FinderSpawnTab', type: bool, value: "{{ Finder_FinderSpawnTab }}" }
+    when: Finder_FinderSpawnTab is defined
+    notify: restart Finder
 
-- name: "Finder - Advanced - Show all filename extensions"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ Finder_AppleShowAllExtensions }}" }
-  when: Finder_AppleShowAllExtensions is defined
-  notify: restart Finder
+  - name: "Finder - Advanced - Show all filename extensions"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ Finder_AppleShowAllExtensions }}" }
+    when: Finder_AppleShowAllExtensions is defined
+    notify: restart Finder
 
-- name: "Finder - Advanced - Show warning before changing an extension"
-  osx_defaults: { domain: 'com.apple.finder', key: 'FXEnableExtensionChangeWarning', type: bool, value: "{{ Finder_FXEnableExtensionChangeWarning }}" }
-  when: Finder_FXEnableExtensionChangeWarning is defined
-  notify: restart Finder
+  - name: "Finder - Advanced - Show warning before changing an extension"
+    osx_defaults: { domain: 'com.apple.finder', key: 'FXEnableExtensionChangeWarning', type: bool, value: "{{ Finder_FXEnableExtensionChangeWarning }}" }
+    when: Finder_FXEnableExtensionChangeWarning is defined
+    notify: restart Finder
 
-- name: "Finder - Advanced - Show warning before emptying the trash"
-  osx_defaults: { domain: 'com.apple.finder', key: 'WarnOnEmptyTrash', type: bool, value: "{{ Finder_WarnOnEmptyTrash }}" }
-  when: Finder_WarnOnEmptyTrash is defined
-  notify: restart Finder
+  - name: "Finder - Advanced - Show warning before emptying the trash"
+    osx_defaults: { domain: 'com.apple.finder', key: 'WarnOnEmptyTrash', type: bool, value: "{{ Finder_WarnOnEmptyTrash }}" }
+    when: Finder_WarnOnEmptyTrash is defined
+    notify: restart Finder
 
-- name: "Finder - Advanced - When performing a search"
-  osx_defaults: { domain: 'com.apple.finder', key: 'FXDefaultSearchScope', type: string, value: "{{ Finder_FXDefaultSearchScope }}" }
-  when: Finder_FXDefaultSearchScope is defined
-  notify: restart Finder
+  - name: "Finder - Advanced - When performing a search"
+    osx_defaults: { domain: 'com.apple.finder', key: 'FXDefaultSearchScope', type: string, value: "{{ Finder_FXDefaultSearchScope }}" }
+    when: Finder_FXDefaultSearchScope is defined
+    notify: restart Finder
 
-- name: "Finder - View - View as"
-  osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredViewStyle', type: string, value: "{{ Finder_FXPreferredViewStyle }}" }
-  when: Finder_FXPreferredViewStyle is defined
-  notify: restart Finder
+  - name: "Finder - View - View as"
+    osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredViewStyle', type: string, value: "{{ Finder_FXPreferredViewStyle }}" }
+    when: Finder_FXPreferredViewStyle is defined
+    notify: restart Finder
 
-- name: "Finder - View - Arrange By"
-  osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredGroupBy', type: string, value: "{{ Finder_FXPreferredGroupBy }}" }
-  when: Finder_FXPreferredGroupBy is defined
-  notify: restart Finder
+  - name: "Finder - View - Arrange By"
+    osx_defaults: { domain: 'com.apple.finder', key: 'FXPreferredGroupBy', type: string, value: "{{ Finder_FXPreferredGroupBy }}" }
+    when: Finder_FXPreferredGroupBy is defined
+    notify: restart Finder
 
-- name: "Finder - View - Show Tab Bar"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowTabView', type: bool, value: "{{ Finder_ShowTabView }}" }
-  when: Finder_ShowTabView is defined
-  notify: restart Finder
+  - name: "Finder - View - Show Tab Bar"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowTabView', type: bool, value: "{{ Finder_ShowTabView }}" }
+    when: Finder_ShowTabView is defined
+    notify: restart Finder
 
-- name: "Finder - View - Show Path Bar"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowPathbar', type: bool, value: "{{ Finder_ShowPathbar }}" }
-  when: Finder_ShowPathbar is defined
-  notify: restart Finder
+  - name: "Finder - View - Show Path Bar"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowPathbar', type: bool, value: "{{ Finder_ShowPathbar }}" }
+    when: Finder_ShowPathbar is defined
+    notify: restart Finder
 
-- name: "Finder - View - Show Status Bar"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowStatusBar', type: bool, value: "{{ Finder_ShowStatusBar }}" }
-  when: Finder_ShowStatusBar is defined
-  notify: restart Finder
+  - name: "Finder - View - Show Status Bar"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowStatusBar', type: bool, value: "{{ Finder_ShowStatusBar }}" }
+    when: Finder_ShowStatusBar is defined
+    notify: restart Finder
 
-- name: "Finder - View - Show Side Bar"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ShowSidebar', type: bool, value: "{{ Finder_ShowSidebar }}" }
-  when: Finder_ShowSidebar is defined
-  notify: restart Finder
+  - name: "Finder - View - Show Side Bar"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ShowSidebar', type: bool, value: "{{ Finder_ShowSidebar }}" }
+    when: Finder_ShowSidebar is defined
+    notify: restart Finder
 
-- name: "Finder - View - Show Preview"
-  osx_defaults: { domain: 'com.apple.finder', key: 'ColumnShowIcons', type: bool, value: "{{ Finder_ColumnShowIcons }}" }
-  when: Finder_ColumnShowIcons is defined
-  notify: restart Finder
+  - name: "Finder - View - Show Preview"
+    osx_defaults: { domain: 'com.apple.finder', key: 'ColumnShowIcons', type: bool, value: "{{ Finder_ColumnShowIcons }}" }
+    when: Finder_ColumnShowIcons is defined
+    notify: restart Finder
 
-- name: "Finder - Extra - Show full POSIX path as Finder window title"
-  osx_defaults: { domain: 'com.apple.finder', key: '_FXShowPosixPathInTitle', type: bool, value: "{{ Finder_FXShowPosixPathInTitle }}" }
-  when: Finder_FXShowPosixPathInTitle is defined
-  notify: restart Finder
+  - name: "Finder - Extra - Show full POSIX path as Finder window title"
+    osx_defaults: { domain: 'com.apple.finder', key: '_FXShowPosixPathInTitle', type: bool, value: "{{ Finder_FXShowPosixPathInTitle }}" }
+    when: Finder_FXShowPosixPathInTitle is defined
+    notify: restart Finder
 
-- name: "Finder - Extra - Show Hidden Files"
-  osx_defaults: { domain: 'com.apple.finder', key: 'AppleShowAllFiles', type: bool, value: "{{ Finder_AppleShowAllFiles }}" }
-  when: Finder_AppleShowAllFiles is defined
-  notify: restart Finder
+  - name: "Finder - Extra - Show Hidden Files"
+    osx_defaults: { domain: 'com.apple.finder', key: 'AppleShowAllFiles', type: bool, value: "{{ Finder_AppleShowAllFiles }}" }
+    when: Finder_AppleShowAllFiles is defined
+    notify: restart Finder
 
-- name: "Finder - Extra - Avoid creation of .DS_Store files on network volumes"
-  osx_defaults: { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: bool, value: "{{ Finder_DSDontWriteNetworkStores }}" }
-  when: Finder_DSDontWriteNetworkStores is defined
-  notify: restart Finder
+  - name: "Finder - Extra - Avoid creation of .DS_Store files on network volumes"
+    osx_defaults: { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: bool, value: "{{ Finder_DSDontWriteNetworkStores }}" }
+    when: Finder_DSDontWriteNetworkStores is defined
+    notify: restart Finder
 
-- name: "Finder - Extra - Disable disk image verification"
-  osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: '{{ item }}', type: bool, value: "{{ Finder_DisableDiskImageVerrification }}" }
-  when: Finder_DisableDiskImageVerrification is defined
-  with_items: [ "skip-verify", "skip-verify-locked", "skip-verify-remote"]
-  notify: restart Finder
+  - name: "Finder - Extra - Disable disk image verification"
+    osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: '{{ item }}', type: bool, value: "{{ Finder_DisableDiskImageVerrification }}" }
+    when: Finder_DisableDiskImageVerrification is defined
+    with_items: [ "skip-verify", "skip-verify-locked", "skip-verify-remote"]
+    notify: restart Finder
 
-- name: "Finder - Extra - Allow text selection in Quick Look/Preview"
-  osx_defaults: { domain: 'com.apple.finder', key: 'QLEnableTextSelection', type: bool, value: "{{ Finder_QLEnableTextSelection }}" }
-  when: Finder_QLEnableTextSelection is defined
-  notify: restart Finder
+  - name: "Finder - Extra - Allow text selection in Quick Look/Preview"
+    osx_defaults: { domain: 'com.apple.finder', key: 'QLEnableTextSelection', type: bool, value: "{{ Finder_QLEnableTextSelection }}" }
+    when: Finder_QLEnableTextSelection is defined
+    notify: restart Finder
 
-- name: "Finder - Extra - Allow quitting via ⌘ + Q"
-  osx_defaults: { domain: 'com.apple.finder', key: 'QuitMenuItem', type: bool, value: "{{ Finder_QuitMenuItem }}" }
-  when: Finder_QuitMenuItem is defined
-  notify: restart Finder
+  - name: "Finder - Extra - Allow quitting via ⌘ + Q"
+    osx_defaults: { domain: 'com.apple.finder', key: 'QuitMenuItem', type: bool, value: "{{ Finder_QuitMenuItem }}" }
+    when: Finder_QuitMenuItem is defined
+    notify: restart Finder
 
-- name: "Finder - Desktop - View - Icon - arrangeBy"
-  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy {{ Finder_DVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_DVSIVSarrangeBy is defined
-  notify: restart Finder
+  - name: "Finder - Desktop - IconViewSettings - Delete"
+    command: /usr/libexec/PlistBuddy -c "Delete :DesktopViewSettings:IconViewSettings:{{ item.property }}" ~/Library/Preferences/com.apple.finder.plist
+    loop:
+      - { property: 'arrangeBy', value: '{{ Finder_DVSIVSarrangeBy }}' }
+      - { property: 'iconSize', value: '{{ Finder_DVSIVSiconSize }}' }
+      - { property: 'showItemInfo', value: '{{ Finder_DVSIVSshowItemInfo }}' }
+      - { property: 'gridSpacing', value: '{{ Finder_DVSIVSgridSpacing }}' }
+      - { property: 'labelOnBottom', value: '{{ Finder_DVSIVSlabelOnBottom }}' }
+    when: item.value != '' # item.value is used to verify that there's a value to replace the value in the following task
+    notify: restart Finder
 
-- name: "Finder - Desktop - View - Icon - iconSize"
-  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize {{ Finder_DVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_DVSIVSiconSize is defined
-  notify: restart Finder
+  - name: "Finder - Desktop - IconViewSettings - Add"
+    command: /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:{{ item.property }} {{ item.type }} {{ item.value }}" ~/Library/Preferences/com.apple.finder.plist
+    loop:
+      - { property: 'arrangeBy', type: 'string', value: '{{ Finder_DVSIVSarrangeBy }}' }
+      - { property: 'iconSize', type: 'integer', value: '{{ Finder_DVSIVSiconSize }}' }
+      - { property: 'showItemInfo', type: 'bool', value: '{{ Finder_DVSIVSshowItemInfo }}' }
+      - { property: 'gridSpacing', type: 'integer', value: '{{ Finder_DVSIVSgridSpacing }}' }
+      - { property: 'labelOnBottom', type: 'bool', value: '{{ Finder_DVSIVSlabelOnBottom }}' }
+    when: item.value != ''
+    notify: restart Finder
 
-- name: "Finder - Desktop - View - Icon - showItemInfo"
-  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo {{ Finder_DVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_DVSIVSshowItemInfo is defined
-  notify: restart Finder
+  - name: "Finder - Standard - IconViewSettings - Delete"
+    command: /usr/libexec/PlistBuddy -c "Delete :StandardViewSettings:IconViewSettings:{{ item.property }}" ~/Library/Preferences/com.apple.finder.plist
+    loop:
+      - { property: 'arrangeBy', value: '{{ Finder_SVSIVSarrangeBy }}' }
+      - { property: 'iconSize', value: '{{ Finder_SVSIVSiconSize }}' }
+      - { property: 'showItemInfo', value: '{{ Finder_SVSIVSshowItemInfo }}' }
+      - { property: 'gridSpacing', value: '{{ Finder_SVSIVSgridSpacing }}' }
+    when: item.value != '' # item.value is used to verify that there's a value to replace the value in the following task
+    notify: restart Finder
 
-- name: "Finder - Desktop - View - Icon - gridSpacing"
-  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing {{ Finder_DVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_DVSIVSgridSpacing is defined
-  notify: restart Finder
-
-- name: "Finder - Desktop - View - Icon - labelOnBottom"
-  command: /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom {{ Finder_DVSIVSlabelOnBottom }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_DVSIVSlabelOnBottom is defined
-  notify: restart Finder
-
-- name: "Finder - Standard - View - Icon - arrangeBy"
-  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy {{ Finder_SVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_SVSIVSarrangeBy is defined
-  notify: restart Finder
-
-- name: "Finder - Standard - View - Icon - iconSize"
-  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize {{ Finder_SVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_SVSIVSiconSize is defined
-  notify: restart Finder
-
-- name: "Finder - Standard - View - Icon - showItemInfo"
-  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo {{ Finder_SVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_SVSIVSshowItemInfo is defined
-  notify: restart Finder
-
-- name: "Finder - Standard - View - Icon - gridSpacing"
-  command: /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing {{ Finder_SVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_SVSIVSgridSpacing is defined
-  notify: restart Finder
-
-- name: "Finder - FK_Standard - View - Icon - arrangeBy"
-  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy {{ Finder_FKSVSIVSarrangeBy }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_FKSVSIVSarrangeBy is defined
-  notify: restart Finder
-
-- name: "Finder - FK_Standard - View - Icon - iconSize"
-  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize {{ Finder_FKSVSIVSiconSize }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_FKSVSIVSiconSize is defined
-  notify: restart Finder
-
-- name: "Finder - FK_Standard - View - Icon - showItemInfo"
-  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo {{ Finder_FKSVSIVSshowItemInfo }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_FKSVSIVSshowItemInfo is defined
-  notify: restart Finder
-
-- name: "Finder - FK_Standard - View - Icon - gridSpacing"
-  command: /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing {{ Finder_FKSVSIVSgridSpacing }}" ~/Library/Preferences/com.apple.finder.plist
-  when: Finder_FKSVSIVSgridSpacing is defined
-  notify: restart Finder
+  - name: "Finder - Standard - IconViewSettings - Add"
+    command: /usr/libexec/PlistBuddy -c "Add :StandardViewSettings:IconViewSettings:{{ item.property }} {{ item.type }} {{ item.value }}" ~/Library/Preferences/com.apple.finder.plist
+    loop:
+      - { property: 'arrangeBy', type: 'string', value: '{{ Finder_SVSIVSarrangeBy }}' }
+      - { property: 'iconSize', type: 'integer', value: '{{ Finder_SVSIVSiconSize }}' }
+      - { property: 'showItemInfo', type: 'bool', value: '{{ Finder_SVSIVSshowItemInfo }}' }
+      - { property: 'gridSpacing', type: 'integer', value: '{{ Finder_SVSIVSgridSpacing }}' }
+    when: item.value != ''
+    notify: restart Finder
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

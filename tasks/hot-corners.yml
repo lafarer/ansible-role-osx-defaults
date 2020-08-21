@@ -1,47 +1,52 @@
 ---
-- name: "Hot Corners - Bottom Left Modifier"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-modifier', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableModifiers }}"
-  when: HotCorners_BottomLeftModifier is defined and item.name == HotCorners_BottomLeftModifier
-  notify: restart Dock
+- block:
+  - name: "Hot Corners - Bottom Left Modifier"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-modifier', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableModifiers }}"
+    when: HotCorners_BottomLeftModifier is defined and item.name == HotCorners_BottomLeftModifier
+    notify: restart Dock
 
-- name: "Hot Corners - Bottom Right Modifier"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-modifier', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableModifiers }}"
-  when: HotCorners_BottomRightModifier is defined and item.name == HotCorners_BottomRightModifier
-  notify: restart Dock
+  - name: "Hot Corners - Bottom Right Modifier"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-modifier', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableModifiers }}"
+    when: HotCorners_BottomRightModifier is defined and item.name == HotCorners_BottomRightModifier
+    notify: restart Dock
 
-- name: "Hot Corners - Top Left Modifier"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-modifier', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableModifiers }}"
-  when: HotCorners_TopLeftModifier is defined and item.name == HotCorners_TopLeftModifier
-  notify: restart Dock
+  - name: "Hot Corners - Top Left Modifier"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-modifier', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableModifiers }}"
+    when: HotCorners_TopLeftModifier is defined and item.name == HotCorners_TopLeftModifier
+    notify: restart Dock
 
-- name: "Hot Corners - Top Right Modifier"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-modifier', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableModifiers }}"
-  when: HotCorners_TopRightModifier is defined and item.name == HotCorners_TopRightModifier
-  notify: restart Dock
+  - name: "Hot Corners - Top Right Modifier"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-modifier', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableModifiers }}"
+    when: HotCorners_TopRightModifier is defined and item.name == HotCorners_TopRightModifier
+    notify: restart Dock
 
-- name: "Hot Corners - Bottom Left Action"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-corner', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableActions }}"
-  when: HotCorners_BottomLeftAction is defined and item.name == HotCorners_BottomLeftAction
+  - name: "Hot Corners - Bottom Left Action"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-bl-corner', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableActions }}"
+    when: HotCorners_BottomLeftAction is defined and item.name == HotCorners_BottomLeftAction
 
-- name: "Hot Corners - Bottom Right Action"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-corner', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableActions }}"
-  when: HotCorners_BottomRightAction is defined and item.name == HotCorners_BottomRightAction
-  notify: restart Dock
+  - name: "Hot Corners - Bottom Right Action"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-br-corner', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableActions }}"
+    when: HotCorners_BottomRightAction is defined and item.name == HotCorners_BottomRightAction
+    notify: restart Dock
 
-- name: "Hot Corners - Top Left Action"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-corner', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableActions }}"
-  when: HotCorners_TopLeftAction is defined and item.name == HotCorners_TopLeftAction
-  notify: restart Dock
+  - name: "Hot Corners - Top Left Action"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tl-corner', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableActions }}"
+    when: HotCorners_TopLeftAction is defined and item.name == HotCorners_TopLeftAction
+    notify: restart Dock
 
-- name: "Hot Corners - Top Right Action"
-  osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-corner', type: int, value: "{{ item.value }}" }
-  with_items: "{{ HotCorners_AvailableActions }}"
-  when: HotCorners_TopRightAction is defined and item.name == HotCorners_TopRightAction
-  notify: restart Dock
+  - name: "Hot Corners - Top Right Action"
+    osx_defaults: { domain: 'com.apple.dock', key: 'wvous-tr-corner', type: int, value: "{{ item.value }}" }
+    with_items: "{{ HotCorners_AvailableActions }}"
+    when: HotCorners_TopRightAction is defined and item.name == HotCorners_TopRightAction
+    notify: restart Dock
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

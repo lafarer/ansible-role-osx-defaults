@@ -1,54 +1,57 @@
 ---
-- name: "Date Time - Get the current timezone"
-  command: "systemsetup -gettimezone"
-  become: true
-  register: result
-  changed_when: False
-  when: DateTime_TimeZone is defined
+- block:
+  - name: "Date Time - Get the current timezone"
+    command: "systemsetup -gettimezone"
+    register: result
+    changed_when: False
+    when: DateTime_TimeZone is defined
 
-- name: "Date Time - Set the timezone"
-  command: "systemsetup -settimezone '{{ DateTime_TimeZone }}'"
-  become: true
-  when: DateTime_TimeZone is defined and DateTime_TimeZone not in result.stdout
-  notify: restart MenuBar
+  - name: "Date Time - Set the timezone"
+    command: "systemsetup -settimezone '{{ DateTime_TimeZone }}'"
+    when: DateTime_TimeZone is defined and DateTime_TimeZone not in result.stdout
+    notify: restart MenuBar
 
-- name: "Date Time - Set date and time automatically"
-  command: "systemsetup -setusingnetworktime {{ DateTime_AutomaticDateTime }}"
-  become: true
-  when: DateTime_AutomaticDateTime is defined
-  register: result
-  changed_when: "'already' not in result.stdout"
-  notify: restart MenuBar
+  - name: "Date Time - Set date and time automatically"
+    command: "systemsetup -setusingnetworktime {{ DateTime_AutomaticDateTime }}"
+    when: DateTime_AutomaticDateTime is defined
+    register: result
+    changed_when: "'already' not in result.stdout"
+    notify: restart MenuBar
 
-- name: "Date Time - Get the current time server"
-  command: "systemsetup -getnetworktimeserver"
-  become: true
-  register: result
-  changed_when: False
-  when: DateTime_TimeServer is defined
-- name: "Date Time - Set time server"
-  command: "systemsetup -setnetworktimeserver '{{ DateTime_TimeServer }}'"
-  become: true
-  when: DateTime_TimeServer is defined and DateTime_TimeServer not in result.stdout
-  notify: restart MenuBar
+  - name: "Date Time - Get the current time server"
+    command: "systemsetup -getnetworktimeserver"
+    register: result
+    changed_when: False
+    when: DateTime_TimeServer is defined
 
-- name: "Date Time - Set time zome automatically using current location"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{ DateTime_AutomaticTimeZone }}" }
-  become: true
-  when: DateTime_AutomaticTimeZone is defined
-  notify: restart MenuBar
+  - name: "Date Time - Set time server"
+    command: "systemsetup -setnetworktimeserver '{{ DateTime_TimeServer }}'"
+    when: DateTime_TimeServer is defined and DateTime_TimeServer not in result.stdout
+    notify: restart MenuBar
 
-- name: "Date Time - Menu bar clock format"
-  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'DateFormat', type: string, value: "{{ DateTime_DateFormat }}" }
-  when: DateTime_DateFormat is defined
-  notify: restart MenuBar
+  - name: "Date Time - Set time zome automatically using current location"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{ DateTime_AutomaticTimeZone }}" }
+    when: DateTime_AutomaticTimeZone is defined
+    notify: restart MenuBar
+  # the above block is run as superuser
+  become: yes
 
-- name: "Date Time - Flash the time separators"
-  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'FlashDateSeparators', type: bool, value: "{{ DateTime_FlashDateSeparators }}" }
-  when: DateTime_FlashDateSeparators is defined
-  notify: restart MenuBar
+- block:
+  - name: "Date Time - Menu bar clock format"
+    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'DateFormat', type: string, value: "{{ DateTime_DateFormat }}" }
+    when: DateTime_DateFormat is defined
+    notify: restart MenuBar
 
-- name: "Date Time - Analog menu bar clock"
-  osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'IsAnalog', type: bool, value: "{{ DateTime_IsAnalog }}" }
-  when: DateTime_IsAnalog is defined
-  notify: restart MenuBar
+  - name: "Date Time - Flash the time separators"
+    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'FlashDateSeparators', type: bool, value: "{{ DateTime_FlashDateSeparators }}" }
+    when: DateTime_FlashDateSeparators is defined
+    notify: restart MenuBar
+
+  - name: "Date Time - Analog menu bar clock"
+    osx_defaults: { domain: 'com.apple.menuextra.clock', key: 'IsAnalog', type: bool, value: "{{ DateTime_IsAnalog }}" }
+    when: DateTime_IsAnalog is defined
+    notify: restart MenuBar
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

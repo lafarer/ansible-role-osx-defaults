@@ -1,11 +1,16 @@
 ---
-- name: "Spotlight - Building orderedItems"
-  set_fact:
-    orderedItems: "{{ orderedItems| default([])  }} + [ '{{ item }}' ]"
-  with_items: "{{ Spotlight_OrderedItems }}"
-  when: Spotlight_OrderedItems is defined
+- block:
+  - name: "Spotlight - Building orderedItems"
+    set_fact:
+      orderedItems: "{{ orderedItems| default([])  }} + [ '{{ item }}' ]"
+    with_items: "{{ Spotlight_OrderedItems }}"
+    when: Spotlight_OrderedItems is defined
 
-- name: "Spotlight - Indexing Items"
-  osx_defaults: { domain: 'com.apple.spotlight', key: 'orderedItems', type: array, value: "{{ Spotlight_OrderedItems }}" }
-  when: orderedItems is defined and orderedItems != []
-  notify: restart Spotlight
+  - name: "Spotlight - Indexing Items"
+    osx_defaults: { domain: 'com.apple.spotlight', key: 'orderedItems', type: array, value: "{{ Spotlight_OrderedItems }}" }
+    when: orderedItems is defined and orderedItems != []
+    notify: restart Spotlight
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"
