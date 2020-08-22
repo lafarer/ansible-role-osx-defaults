@@ -1,6 +1,6 @@
 ---
 - block:
-  - name: "Safari - General - Safari opens with"
+  - name: "Safari - General - Opens with"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     with_items: "{{ Safari_OpenWithOptions }}"
     when:
@@ -13,31 +13,19 @@
     with_subelements:
       - "{{ Safari_NewWindowTab_Options }}"
       - value
-    when: (item.0.key == 'NewWindowBehavior' and (item.1.name == Safari_NewWindowBehavior or item.1.value == Safari_NewWindowBehavior) ) or
-          (item.0.key == 'NewTabBehavior' and (item.1.name == Safari_NewTabBehavior or item.1.value == Safari_NewTabBehavior) )
+    when: (item.0.key == 'NewWindowBehavior' and item.1.value == Safari_NewWindowBehavior) or
+          (item.0.key == 'NewTabBehavior' and item.1.value == Safari_NewTabBehavior)
 
 
-  - name: "Safari - General - New windows open with"
-    osx_defaults: { domain: 'com.apple.safari', key: 'NewWindowBehavior', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_NewWindowBehaviors }}"
-    when:
-      - Safari_NewWindowBehavior is defined
-      - (item.name == Safari_NewWindowBehavior or item.value == Safari_NewWindowBehavior)
-    notify: restart Safari
-
-  - name: "Safari - General - New tabs open with"
-    osx_defaults: { domain: 'com.apple.safari', key: 'NewTabBehavior', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_NewTabBehaviors }}"
-    when:
-      - Safari_NewTabBehavior is defined
-      - (item.name == Safari_NewTabBehavior or item.value == Safari_NewTabBehavior)
-    notify: restart Safari
 
   #- name: "Safari - General - Homepage"
 
   - name: "Safari - General - Remove history items"
-    osx_defaults: { domain: 'com.apple.safari', key: 'HistoryAgeInDaysLimit', type: int, value: "{{ Safari_HistoryAgeInDaysLimit }}" }
-    when: Safari_HistoryAgeInDaysLimit is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'HistoryAgeInDaysLimit', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_HistoryAgeInDaysLimitOptions }}"
+    when:
+        - Safari_HistoryAgeInDaysLimit is defined
+        - (item.name == Safari_HistoryAgeInDaysLimit or item.value == Safari_HistoryAgeInDaysLimit)
     notify: restart Safari
 
   #- name: "Safari - General - Favorites shows"
@@ -64,6 +52,10 @@
     osx_defaults: { domain: 'com.apple.safari', key: 'AutoOpenSafeDownloads', type: bool, value: "{{ Safari_AutoOpenSafeDownloads }}" }
     when: Safari_AutoOpenSafeDownloads is defined
     notify: restart Safari
+
+
+
+
 
   - name: "Safari - Tabs - Open pages in tabs instead of windows"
     osx_defaults: { domain: 'com.apple.safari', key: 'TabCreationPolicy', type: int, value: "{{ item.value }}" }
