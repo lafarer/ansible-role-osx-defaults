@@ -3,14 +3,14 @@ EnabledDisabled_Options:                      # to be used as selector
   - { name: "Disabled", value: 0 }
   - { name: "Enabled", value: 1 }
 
-ActivityMonitor_DockIconOptions:
+ActivityMonitor_DockIcon_Options:
   - { name: "Show Application Icon", value: 0 }
   - { name: "Show Network Usage", value: 2 }
   - { name: "Show Disk Activity", value: 3 }
   - { name: "Show CPU Usage", value: 5 }
   - { name: "Show CPU History", value: 6 }
 
-ActivityMonitor_ShowProcessesOptions:
+ActivityMonitor_ShowProcesses_Options:
   - { name: "Show All Processes", value: 100 }
   - { name: "Show All Processes, Hierarchically", value: 101 }
   - { name: "My Processes", value: 102 }
@@ -23,15 +23,15 @@ ActivityMonitor_ShowProcessesOptions:
 
 ActivityMonitor_Preferences:
   - { description: 'Show the main window when launching', key: 'OpenMainWindow', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
-  - { description: 'Dock Icon Type', key: 'IconType', type: 'int', value: '{{ ActivityMonitor_DockIconOptions }}'}
-  - { description: 'Show Processes Style', key: 'ShowCategory', type: 'int', value: '{{ ActivityMonitor_ShowProcessesOptions }}'}
+  - { description: 'Dock Icon Type', key: 'IconType', type: 'int', value: '{{ ActivityMonitor_DockIcon_Options }}'}
+  - { description: 'Show Processes Style', key: 'ShowCategory', type: 'int', value: '{{ ActivityMonitor_ShowProcesses_Options }}'}
 
 ApplicationFirewall_Preferences:
   - { description: 'Global State', key: 'globalstate', type: 'int', value: '{{ ApplicationFirewall_GlobalStates }}'}
   - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
   - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
   - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
-  - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: '{{ ApplicationFirewall_LoggingOptions }}'}
+  - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: '{{ ApplicationFirewall_Logging_Options }}'}
   - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
 
 ApplicationFirewall_GlobalStates:
@@ -39,19 +39,19 @@ ApplicationFirewall_GlobalStates:
   - { name: "On", value: 1 }
   - { name: "Block All Incoming Connections", value: 2 }
 
-ApplicationFirewall_LoggingOptions:
+ApplicationFirewall_Logging_Options:
   - { name: "Throttled", value: 0 }
   - { name: "Brief", value: 1 }
   - { name: "Detail", value: 2 }
 
-Displays_AppleFontSmoothingOptions:
+Displays_AppleFontSmoothing_Options:
   - { name: "Disabled", value: 0 }
   - { name: "Minimal",  value: 1 }
   - { name: "Medium",   value: 2 }
   - { name: "Smoother", value: 3 }
   - { name: "Strong",   value: 4 }
 
-Finder_NewWindowsShowOptions:
+Finder_NewWindowsShow_Options:
   - { name: "Computer",      shortcode: "PfCm", value: "" }
   - { name: "Computer's HD", shortcode: "PfVo", value: "file:///" }
   - { name: "Home",          shortcode: "PfHm", value: "file://${HOME}/" }
@@ -113,7 +113,7 @@ Safari_GeolocationPermissionPolicies:
   - { name: "Prompt for each site once each day", value: 1}
   - { name: "Prompt for each site one time only", value: 2}
 
-Safari_HistoryAgeInDaysLimitOptions:
+Safari_HistoryAgeInDaysLimits:
   - { name: "One day", value: 1 }
   - { name: "One week", value: 7 }
   - { name: "Two weeks", value: 14 }
@@ -137,12 +137,12 @@ Safari_NewWindowBehaviors:
 Safari_General_Options:
   - { description: 'New windows open with',      key: 'NewWindowBehavior',       type: 'int', value: '{{ Safari_NewWindowBehaviors }}'}
   - { description: 'New tabs open with',         key: 'NewTabBehavior',          type: 'int', value: '{{ Safari_NewTabBehaviors }}'}
-  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimitOptions }}'}
+  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimits }}'}
   - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: '{{ Safari_TopSitesGridArrangements }}'}
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: '{{ Safari_DownloadsClearingPolicies }}'}
   - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
 
-Safari_OpenWithOptions:
+ Safari_OpenWith_Options:
   - { name: "A new window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
   - { name: "A new window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 0}
   - { name: "A new private window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 1 }

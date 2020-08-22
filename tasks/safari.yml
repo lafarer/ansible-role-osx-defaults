@@ -2,7 +2,7 @@
 - block:
   - name: "Safari - General - Opens with"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
-    with_items: "{{ Safari_OpenWithOptions }}"
+    with_items: "{{  Safari_OpenWith_Options }}"
     when:
       - Safari_OpensWith is defined
       - (item.name == Safari_OpensWith or item.value == Safari_OpensWith)
@@ -43,10 +43,8 @@
           (item.0.key == 'AutoFillMiscellaneousForms' and (item.1.name == Safari_AutoFillMiscellaneousForms or item.1.value == Safari_AutoFillMiscellaneousForms|bool))
     notify: restart Safari
 
-  - fail:
-    ignore_errors: false
 
-  - name: "Safari - Search - Search Engine Display Name"
+  - name: "Safari - Search - Search Engine"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDefaultDisplayName', type: string, value: "{{ item }}" }
     loop:
       - "{{ Safari_SearchEngine }}"
@@ -83,6 +81,13 @@
     osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: bool, value: "{{ Safari_ShowFavoritesUnderSmartSearchField }}" }
     when: Safari_ShowFavoritesUnderSmartSearchField is defined
     notify: restart Safari
+
+
+
+
+  - fail:
+    ignore_errors: false
+
 
   - name: "Safari - Security - Fraudulent Sites - Warn when visiting a fraudulent website"
     osx_defaults: { domain: 'com.apple.safari', key: 'WarnAboutFraudulentWebsites', type: bool, value: "{{ Safari_WarnAboutFraudulentWebsites }}" }
