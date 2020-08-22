@@ -131,7 +131,7 @@ Safari_NewWindowBehaviors:
 Safari_General_Options:
   - { description: 'New windows open with',      key: 'NewWindowBehavior',       type: 'int', value: '{{ Safari_NewWindowBehaviors }}'}
   - { description: 'New tabs open with',         key: 'NewTabBehavior',          type: 'int', value: '{{ Safari_NewTabBehaviors }}'}
-  - { description: 'Retain history items for',       key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimitOptions }}'}
+  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimitOptions }}'}
   - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: '{{ Safari_TopSitesGridArrangements }}'}
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: '{{ Safari_DownloadsClearingPolicies }}'}
   - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
@@ -148,6 +148,12 @@ Safari_TabCreationPolicies:
   - { name: "Never", value: 0}
   - { name: "Automatically", value: 1}
   - { name: "Always", value: 2}
+
+Safari_Tabs_Options:
+  - { description: 'Open pages in tabs instead of windows',          key: 'TabCreationPolicy',            type: 'int',  value: '{{ Safari_TabCreationPolicies }}'}
+  - { description: 'CMD+click opens a link in a new tab',            key: 'CommandClickMakesTabs',        type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'When a new tab or window opens, make it active', key: 'OpenNewTabsInFront',           type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Use CMD+1 through CMD+9 to switch tabs',         key: 'Command1Through9SwitchesTabs', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
 
 Safari_TopSitesGridArrangements:
   - { name: "6 sites", value: 0}

@@ -20,33 +20,18 @@
           (item.0.key == 'DownloadsClearingPolicy' and (item.1.name == Safari_DownloadsClearingPolicy or item.1.value == Safari_DownloadsClearingPolicy)) or
           (item.0.key == 'AutoOpenSafeDownloads'   and (item.1.name == Safari_AutoOpenSafeDownloads   or item.1.value == Safari_AutoOpenSafeDownloads|bool))
 
+  - name: "Safari - Tabs"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_General_Options }}"
+      - value
+    when: (item.0.key == 'TabCreationPolicy'       and (item.1.name == Safari_TabCreationPolicy       or item.1.value == Safari_TabCreationPolicy)) or
+          (item.0.key == 'CommandClickMakesTabs'   and (item.1.name == Safari_CommandClickMakesTabs   or item.1.value == Safari_CommandClickMakesTabs|bool)) or
+          (item.0.key == 'OpenNewTabsInFront'      and (item.1.name == Safari_OpenNewTabsInFront      or item.1.value == Safari_OpenNewTabsInFront|bool)) or
+          (item.0.key == 'Command1Through9SwitchesTabs' and (item.1.name == Safari_Command1Through9SwitchesTabs or item.1.value == Safari_Command1Through9SwitchesTabs|bool))
+
   - fail:
     ignore_errors: false
-
-
-
-  - name: "Safari - Tabs - Open pages in tabs instead of windows"
-    osx_defaults: { domain: 'com.apple.safari', key: 'TabCreationPolicy', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_TabCreationPolicies }}"
-    when:
-      - Safari_TabCreationPolicy is defined
-      - (item.name == Safari_TabCreationPolicy or item.value == Safari_TabCreationPolicy)
-    notify: restart Safari
-
-  - name: "Safari - Tabs - cmd+click opens a link in a new tab"
-    osx_defaults: { domain: 'com.apple.safari', key: 'CommandClickMakesTabs', type: bool, value: "{{ Safari_CommandClickMakesTabs }}" }
-    when: Safari_CommandClickMakesTabs is defined
-    notify: restart Safari
-
-  - name: "Safari - Tabs - When a new tab or window opens, make it active"
-    osx_defaults: { domain: 'com.apple.safari', key: 'OpenNewTabsInFront', type: bool, value: "{{ Safari_OpenNewTabsInFront }}" }
-    when: Safari_OpenNewTabsInFront is defined
-    notify: restart Safari
-
-  - name: "Safari - Tabs - Use cmd+1 through cmd+9 to switch tabs"
-    osx_defaults: { domain: 'com.apple.safari', key: 'Command1Through9SwitchesTabs', type: bool, value: "{{ Safari_Command1Through9SwitchesTabs }}" }
-    when: Safari_Command1Through9SwitchesTabs is defined
-    notify: restart Safari
 
   - name: "Safari - Autofill - Using info from my Contact card"
     osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillFromAddressBook', type: bool, value: "{{ Safari_AutoFillFromAddressBook }}" }
