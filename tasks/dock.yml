@@ -9,10 +9,10 @@
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
   - name: "Dock - Persistent Apps - Add to dock"
-    osx_defaults: "{{ item }}"
+    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ item }}" }
     loop:
-      - { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: [] }
-      - { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ persistent_apps_array }}" }
+      - [] # first inject an empty array to clear dock
+      - "{{ persistent_apps_array }}" # then inject the freshly build list
     when: persistent_apps_array is defined and persistent_apps_array != []
     notify: restart Dock
 
@@ -23,10 +23,10 @@
     when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
 
   - name: "Dock - Persistent Others - Add to dock"
-    osx_defaults: "{{ item }}"
+    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ item }}" }
     loop:
-      - { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: [] }
-      - { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ persistent_others_array }}" }
+      - []
+      - "{{ persistent_others_array }}"
     when: persistent_others_array is defined and persistent_others_array != []
     notify: restart Dock
 
