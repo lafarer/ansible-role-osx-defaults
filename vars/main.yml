@@ -44,6 +44,14 @@ ApplicationFirewall_LoggingOptions:
   - { name: "Brief", value: 1 }
   - { name: "Detail", value: 2 }
 
+Finder_NewWindowsShowOptions:
+  - { name: "Computer",      shortcode: "PfCm", value: "" }
+  - { name: "Computer's HD", shortcode: "PfVo", value: "file:///" }
+  - { name: "Home",          shortcode: "PfHm", value: "file://${HOME}/" }
+  - { name: "Desktop",       shortcode: "PfDe", value: "file://${HOME}/Desktop/" }
+  - { name: "Documents",     shortcode: "PfDo", value: "file://${HOME}/Documents/" }
+  - { name: "All My Files",  shortcode: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
+
 HotCorners_AvailableModifiers:
   - { name: "Enabled", value: 0 }
   - { name: "Disabled", value: 1048576 }

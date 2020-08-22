@@ -138,7 +138,7 @@ Finder_ShowHardDrivesOnDesktop: no            # Show hard drives on the desktop
 Finder_ShowExternalHardDrivesOnDesktop: yes     # Show external hard drives on the desktop
 Finder_ShowRemovableMediaOnDesktop: yes         # Show CDs,DVDs and iPods on the desktop
 Finder_ShowMountedServersOnDesktop: no        # Show connected servers on the desktop
-Finder_NewWindowTarget: "PfAF"                   # New Finder windows shows (PfCm:Computer, PfVo:Computer's HD, PfHm:Home, PfDe:Desktop, PfDo:Documents, PfAF:All My files )
+Finder_NewWindowTarget: "All My Files"                   # New Finder windows shows ("Computer", "Computer's HD", "Home", "Desktop", "Documents", "All My Files" )
 Finder_FinderSpawnTab: yes                      # Open folders in tabs instead of new windows
 Finder_AppleShowAllExtensions: no             # Show all fiename extensions
 Finder_FXEnableExtensionChangeWarning: yes      # Show warning before changing an extension

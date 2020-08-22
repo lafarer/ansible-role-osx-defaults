@@ -1,6 +1,6 @@
 ---
 - block:
-  - name: "Finder - General - Show hard disks on the desktop"
+  - name: "Finder - General - Show Hard Disks On The Desktop"
     osx_defaults: { domain: 'com.apple.finder', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
       - { key: 'ShowHardDrivesOnDesktop',         type: 'bool',   value: '{{ Finder_ShowHardDrivesOnDesktop }}'}
@@ -23,15 +23,9 @@
     when: item.value != ''
     notify: restart Finder
 
-  - name: "Finder - General - New Finder windows show"
+  - name: "Finder - General - New Windows Show"
     osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
-    with_items:
-      - { name: "PfCm", value: "" }
-      - { name: "PfVo", value: "file:///" }
-      - { name: "PfHm", value: "file://${HOME}/" }
-      - { name: "PfDe", value: "file://${HOME}/Desktop/" }
-      - { name: "PfDo", value: "file://${HOME}/Documents/" }
-      - { name: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
+    with_items: "{{ Finder_NewWindowsShowOptions }}"
     when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget
     notify: restart Finder
 
@@ -62,7 +56,7 @@
     when: item.value != '' # item.value is used to verify that there's a value to replace the value in the following task
     notify: restart Finder
 
-  - name: "Finder - Advanced - Show all filename extensions"
+  - name: "Finder - Advanced - Show All Filename Extensions"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ Finder_AppleShowAllExtensions }}" }
     when: Finder_AppleShowAllExtensions is defined
     notify: restart Finder
@@ -79,24 +73,23 @@
     notify: restart Finder
 
   - name: "Finder - Extra - Various"
-    osx_defaults: { domain: 'com.apple.finder', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    osx_defaults: { domain: "{{ item.domain }}", key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
-      - { key: '_FXShowPosixPathInTitle', type: 'bool', value: '{{ Finder_FXShowPosixPathInTitle }}'}
-      - { key: 'AppleShowAllFiles',       type: 'bool', value: '{{ Finder_AppleShowAllFiles }}'}
-      - { key: 'QLEnableTextSelection',   type: 'bool', value: '{{ Finder_QLEnableTextSelection }}'}
-      - { key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
+      - { domain: 'com.apple.finder', key: '_FXShowPosixPathInTitle', type: 'bool', value: '{{ Finder_FXShowPosixPathInTitle }}'}
+      - { domain: 'com.apple.finder', key: 'AppleShowAllFiles',       type: 'bool', value: '{{ Finder_AppleShowAllFiles }}'}
+      - { domain: 'com.apple.finder', key: 'QLEnableTextSelection',   type: 'bool', value: '{{ Finder_QLEnableTextSelection }}'}
+      - { domain: 'com.apple.finder', key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
+      - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
     when: item.value != ''
     notify: restart Finder
 
-  - name: "Finder - Extra - Avoid creation of .DS_Store files on network volumes"
-    osx_defaults: { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: bool, value: "{{ Finder_DSDontWriteNetworkStores }}" }
-    when: Finder_DSDontWriteNetworkStores is defined
-    notify: restart Finder
-
-  - name: "Finder - Extra - Disable disk image verification"
+  - name: "Finder - Extra - Disable Disk Image Verification"
     osx_defaults: { domain: 'com.apple.frameworks.diskimages', key: '{{ item }}', type: bool, value: "{{ Finder_DisableDiskImageVerrification }}" }
     when: Finder_DisableDiskImageVerrification is defined
-    with_items: [ "skip-verify", "skip-verify-locked", "skip-verify-remote"]
+    with_items:
+      - "skip-verify"
+      - "skip-verify-locked"
+      - "skip-verify-remote"
     notify: restart Finder
   become: "{{ (target_user_id != ansible_user_id) | bool }}"
   become_user: "{{ target_user_id }}"
