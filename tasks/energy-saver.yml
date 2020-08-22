@@ -1,11 +1,15 @@
 ---
 - block:
   - name: "Energy Saver - Set the computer sleep time"
-    command: systemsetup -setcomputersleep "{{ EnergySaver_ComputerSleepTime }}"
+    command: systemsetup -setcomputersleep "{{ item }}"
+    loop:
+      - "{{ EnergySaver_ComputerSleepTime }}"
     when: EnergySaver_ComputerSleepTime is defined
 
   - name: "Energy Saver - Set the display sleep time"
-    command: systemsetup -setdisplaysleep "{{ EnergySaver_DisplaySleepTime }}"
+    command: systemsetup -setdisplaysleep "{{ item }}"
+    loop:
+      - "{{ EnergySaver_DisplaySleepTime }}"
     when: EnergySaver_DisplaySleepTime is defined
   # the above block is run as superuser
   become: yes

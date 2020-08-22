@@ -25,7 +25,7 @@
 
   - name: "Finder - General - New Windows Show"
     osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
-    with_items: "{{ Finder_NewWindowsShowOptions }}"
+    loop: "{{ Finder_NewWindowsShowOptions }}"
     when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget
     notify: restart Finder
 

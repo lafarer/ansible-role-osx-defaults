@@ -12,7 +12,9 @@
     notify: restart MenuBar
 
   - name: "Date Time - Set date and time automatically"
-    command: "systemsetup -setusingnetworktime {{ DateTime_AutomaticDateTime }}"
+    command: "systemsetup -setusingnetworktime {{ item }}"
+    loop:
+      - "{{ DateTime_AutomaticDateTime }}"
     when: DateTime_AutomaticDateTime is defined
     register: result
     changed_when: "'already' not in result.stdout"
@@ -25,12 +27,16 @@
     when: DateTime_TimeServer is defined
 
   - name: "Date Time - Set time server"
-    command: "systemsetup -setnetworktimeserver '{{ DateTime_TimeServer }}'"
+    command: "systemsetup -setnetworktimeserver '{{ item }}'"
+    loop:
+      - "{{ DateTime_TimeServer }}"
     when: DateTime_TimeServer is defined and DateTime_TimeServer not in result.stdout
     notify: restart MenuBar
 
   - name: "Date Time - Set time zome automatically using current location"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{ DateTime_AutomaticTimeZone }}" }
+    osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{ item }}" }
+    loop:
+      - "{{ DateTime_AutomaticTimeZone }}"
     when: DateTime_AutomaticTimeZone is defined
     notify: restart MenuBar
   # the above block is run as superuser

@@ -6,17 +6,22 @@
     register: BackGroundImage_Current
 
   - name: "Desktop & Screen Saver - Check if background image exists"
-    stat: path={{ DesktopScreenSaver_BackGroundImage }}
+    stat:
+      path: {{ DesktopScreenSaver_BackGroundImage }}
     changed_when: no
     register: BackGroundImage_New
 
   - name: "Desktop & Screen Saver - Change desktop background"
-    command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ DesktopScreenSaver_BackGroundImage }}'";
+    command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ item }}'";
+    loop:
+      - "{{ DesktopScreenSaver_BackGroundImage }}"
     when: DesktopScreenSaver_BackGroundImage is defined and BackGroundImage_New.stat.exists and BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
     notify: restart Dock
 
   - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
-    osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ DesktopScreenSaver_askForPassword }}" }
+    osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item }}" }
+    loop:
+      - "{{ DesktopScreenSaver_askForPassword }}"
     when: DesktopScreenSaver_askForPassword is defined
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
