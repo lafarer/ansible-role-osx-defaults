@@ -270,10 +270,10 @@ Safari_DebugMenu: no                          # Debug Menu
 Safari_OpensWith: "A new window"                 # General - Safari opens with ("A new window", "A new private window", "All windows from last session")
 Safari_NewWindowBehavior: "Favorites"                      # General - New windows open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites, 5:Tabs for Favorites)
 Safari_NewTabBehavior: "Favorites"                         # General - New tabs open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites)
-Safari_HistoryAgeInDaysLimit: "One year"                # General - Remove history items after (number of days - "One day", "One week", "Two weeks", "One month", "One year")
+Safari_HistoryAgeInDaysLimit: "One year"                # General - Retain history items for after (number of days - "One day", "One week", "Two weeks", "One month", "One year")
 Safari_TopSitesGridArrangement: "12 sites"                # General - Top Sites shows (0:6 sites, 1:12 sites, 2:24 sites)
 Safari_DownloadsClearingPolicy: "After one day"                # General - Remove download list items (0:Manually, 1:After one day, 2:Upon successfull download, 3:When Safari quits)
-Safari_AutoOpenSafeDownloads: yes               # General - Open 'safe' files after downloading
+Safari_AutoOpenSafeDownloads: yes               # General - Open "safe" files after downloading
 Safari_TabCreationPolicy: "Automatically"                      # Tabs - Open pages in tabs instead of windows (0:Never, 1:Automatically, 2:Always)
 Safari_CommandClickMakesTabs: yes               # Tabs - cmd+click opens a link in a new tab
 Safari_OpenNewTabsInFront: no                 # Tabs - When a new tab or window opens, make it active

@@ -131,10 +131,10 @@ Safari_NewWindowBehaviors:
 Safari_General_Options:
   - { description: 'New windows open with',      key: 'NewWindowBehavior',       type: 'int', value: '{{ Safari_NewWindowBehaviors }}'}
   - { description: 'New tabs open with',         key: 'NewTabBehavior',          type: 'int', value: '{{ Safari_NewTabBehaviors }}'}
-  - { description: 'Remove history items',       key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimitOptions }}'}
+  - { description: 'Retain history items for',       key: 'HistoryAgeInDaysLimit',   type: 'int', value: '{{ Safari_HistoryAgeInDaysLimitOptions }}'}
   - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: '{{ Safari_TopSitesGridArrangements }}'}
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: '{{ Safari_DownloadsClearingPolicies }}'}
-  - { description: 'Open 'safe' files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
 
 Safari_OpenWithOptions:
   - { name: "A new window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
