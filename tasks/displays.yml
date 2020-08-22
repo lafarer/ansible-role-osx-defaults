@@ -23,7 +23,7 @@
 
   - name: "Displays - Subpixel font rendering on non-Apple LCDs"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ item.value }}" }
-    loop: {{ Displays_AppleFontSmoothingOptions }}
+    loop: "{{ Displays_AppleFontSmoothingOptions }}"
     when:
       - Displays_AppleFontSmoothing is defined
       - (item.name == Displays_AppleFontSmoothing or item.value == Displays_AppleFontSmoothing)

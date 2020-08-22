@@ -7,7 +7,9 @@
     when: DateTime_TimeZone is defined
 
   - name: "Date Time - Set the timezone"
-    command: "systemsetup -settimezone '{{ DateTime_TimeZone }}'"
+    command: "systemsetup -settimezone '{{ item }}'"
+    loop:
+      - "{{ DateTime_TimeZone }}"
     when: DateTime_TimeZone is defined and DateTime_TimeZone not in result.stdout
     notify: restart MenuBar
 
