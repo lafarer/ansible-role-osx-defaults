@@ -96,6 +96,17 @@ LoginWindow_DisplayStyles:
   - { name: "List of users", value: 0 }
   - { name: "Name and password", value: 1 }
 
+Safari_Advanced_Options:
+  - { description: 'Automatic Extensions Upgrade', key: 'InstallExtensionUpdatesAutomatically', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit)', key: 'WebKitTabToLinksPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit2)', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Include Bonjour in the Bookmarks Menu', key: 'BookmarksMenuIncludesRendezvous', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Stop plug-ins to saver power',          key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Show Develop menu in menu bar',         key: 'IncludeDevelopMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Developer Extras Preference Key',       key: 'WebKitDeveloperExtrasEnabledPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Developer Extras',  key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Debug Menu',                            key: 'IncludeInternalDebugMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+
 Safari_Autofill_Options:
   - { description: 'Using info from my Contact card', key: 'AutoFillFromAddressBook',    type: 'bool', value: "{{ EnabledDisabled_Options }}"}
   - { description: 'Using names and passwords',       key: 'AutoFillPasswords',          type: 'bool', value: "{{ EnabledDisabled_Options }}"}
@@ -165,6 +176,11 @@ Safari_OpenWith_Options:
   - { name: "All windows from last session", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
   - { name: "All windows from last session", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 1}
 
+Safari_PrivacyNotifications_Options:
+  - { description: 'Website use of location services', key: 'SafariGeolocationPermissionPolicy', type: 'int',   value: "{{ Safari_GeolocationPermissionPolicies }}"}
+  - { description: 'Ask websites not to track me',     key: 'SendDoNotTrackHTTPHeader',          type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Allow websites to ask for permission to send push notifications', key: 'CanPromptForPushNotifications', type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
+
 Safari_SearchEngineIdentifiers:
   - { name: Yahoo, value: "com.yahoo.www" }
   - { name: Google, value: "com.google.www" }
@@ -174,16 +190,22 @@ Safari_SearchEngineIdentifiers:
 Safari_Search_Options:
   - { description: 'Search Engine Identifier',                  domain: 'NSGlobalDomain',   key: 'NSProviderIdentifier',         type: 'string', value: "{{ Safari_SearchEngineIdentifiers }}"}
   - { description: 'Include search engine suggestions',         domain: 'com.apple.safari', key: 'SuppressSearchSuggestions',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Smart Search: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Smart Search: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Smart Search: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Show full website address',   domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
 
 Safari_Security_Options:
   - { name: "Warn when visiting a fraudulent website", key: "WarnAboutFraudulentWebsites", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
   - { name: "Web Content: Enable Javascript",          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
-  - { name: "Web Content: Block pop-up windows",       key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Web Content: Allow pop-up windows",       key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
   - { name: "Web Content: Allow WebGL",                key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
   - { name: "Allow Plug-ins",                          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+
+Safari_SidebarViewModeIdentifiers:
+  - { value: 'Bookmarks' }
+  - { value: 'Reading List' }
+  - { value: 'Social Links' }
 
 Safari_TabCreationPolicies:
   - { name: "Never", value: 0}

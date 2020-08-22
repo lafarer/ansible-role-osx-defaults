@@ -61,7 +61,8 @@
           (item.0.key == 'SuppressSearchSuggestions'          and (item.1.name == Safari_IncludeSearchSuggestions           or item.1.value == Safari_IncludeSearchSuggestions|bool)) or
           (item.0.key == 'WebsiteSpecificSearchEnabled'       and (item.1.name == Safari_WebsiteSpecificSearchEnabled       or item.1.value == Safari_WebsiteSpecificSearchEnabled|bool)) or
           (item.0.key == 'PreloadTopHit'                      and (item.1.name == Safari_PreloadTopHit                      or item.1.value == Safari_PreloadTopHit|bool)) or
-          (item.0.key == 'ShowFavoritesUnderSmartSearchField' and (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField|bool))
+          (item.0.key == 'ShowFavoritesUnderSmartSearchField' and (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField|bool)) or
+          (item.0.key == 'ShowFullURLInSmartSearchField' and (item.1.name == Safari_ShowFullURLInSmartSearchField or item.1.value == Safari_ShowFullURLInSmartSearchField|bool))
     notify: restart Safari
 
   - name: "Safari - Security"
@@ -76,88 +77,56 @@
           (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled' and (item.1.name == Safari_AllowPlugins or item.1.value == Safari_AllowPlugins|bool))
     notify: restart Safari
 
-  - fail:
-    ignore_errors: false
-
   - name: "Safari - Privacy - Cookies and website data"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_CookiesAndWebsiteData_Options }}"
+    loop: "{{ Safari_CookiesAndWebsiteData_Options }}"
     when: Safari_Cookies is defined and item.name == Safari_Cookies
     notify: restart Safari
 
-  - name: "Safari - Privacy - Website use of location services"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SafariGeolocationPermissionPolicy', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_GeolocationPermissionPolicies }}"
-    when:
-      - Safari_SafariGeolocationPermissionPolicy is defined
-      - (item.name == Safari_SafariGeolocationPermissionPolicy or item.value == Safari_SafariGeolocationPermissionPolicy)
+  - name: "Safari - Privacy & Notifications"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_PrivacyNotifications_Options }}"
+      - value
+    when: (item.0.key == 'SafariGeolocationPermissionPolicy' and (item.1.name == Safari_SafariGeolocationPermissionPolicy or item.1.value == Safari_SafariGeolocationPermissionPolicy)) or
+          (item.0.key == 'SendDoNotTrackHTTPHeader'          and (item.1.name == Safari_SendDoNotTrackHTTPHeader          or item.1.value == Safari_SendDoNotTrackHTTPHeader|bool)) or
+          (item.0.key == 'CanPromptForPushNotifications'     and (item.1.name == Safari_CanPromptForPushNotifications     or item.1.value == Safari_CanPromptForPushNotifications|bool))
     notify: restart Safari
 
-  - name: "Safari - Privacy - Website tracking - Ask websites not to track me"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SendDoNotTrackHTTPHeader', type: bool, value: "{{ Safari_SendDoNotTrackHTTPHeader }}" }
-    when: Safari_SendDoNotTrackHTTPHeader is defined
+  - name: "Safari - Advanced"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_Advanced_Options }}"
+      - value
+    when: (item.0.key == 'InstallExtensionUpdatesAutomatically' and (item.1.name == Safari_InstallExtensionUpdatesAutomatically or item.1.value == Safari_InstallExtensionUpdatesAutomatically|bool)) or
+          (item.0.key == 'WebKitTabToLinksPreferenceKey' and (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks' and (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey|bool)) or
+          (item.0.key == 'BookmarksMenuIncludesRendezvous' and (item.1.name == Safari_BookmarksMenuIncludesRendezvous or item.1.value == Safari_BookmarksMenuIncludesRendezvous|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled' and (item.1.name == Safari_StopPuginsToSavePower or item.1.value == Safari_StopPuginsToSavePower|bool)) or
+          (item.0.key == 'IncludeDevelopMenu' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu|bool)) or
+          (item.0.key == 'WebKitDeveloperExtrasEnabledPreferenceKey' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu|bool)) or
+          (item.0.key == 'IncludeInternalDebugMenu' and (item.1.name == Safari_DebugMenu or item.1.value == Safari_DebugMenu|bool))
     notify: restart Safari
 
-  - name: "Safari - Notification - Allow websites to ask for permission to send push notifications"
-    osx_defaults: { domain: 'com.apple.safari', key: 'CanPromptForPushNotifications', type: bool, value: "{{ Safari_CanPromptForPushNotifications }}" }
-    when: Safari_CanPromptForPushNotifications is defined
-    notify: restart Safari
-
-  - name: "Safari - Exensions - Automatically update extensions from Safari Extensions Gallery"
-    osx_defaults: { domain: 'com.apple.safari', key: 'InstallExtensionUpdatesAutomatically', type: bool, value: "{{ Safari_InstallExtensionUpdatesAutomatically }}" }
-    when: Safari_InstallExtensionUpdatesAutomatically is defined
-    notify: restart Safari
-
-  - name: "Safari - Advanced - Smart Search Field - Show full website address"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: bool, value: "{{ Safari_ShowFullURLInSmartSearchField }}" }
-    when: Safari_ShowFullURLInSmartSearchField is defined
-    notify: restart Safari
-
-  - name: "Safari - Advanced - Accessibility - Never use font sizes smaller than"
-    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: '{{ item.type }}', value: "{{ Safari_WebKitMinimumFontSize }}" }
+  - name: "Safari - Advanced - Accessibility - Never use font sizes smaller than '{{ Safari_WebKitMinimumFontSize }}'"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: '{{ item.type }}', value: "{{ item.value }}" }
     with_items:
-      - { key: "WebKitMinimumFontSize", type: "int" }
-      - { key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2MinimumFontSize", type: "float" }
+      - { key: "WebKitMinimumFontSize", type: "int", value: "{{ Safari_WebKitMinimumFontSize }}"}
+      - { key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2MinimumFontSize", type: "float", value: "{{ Safari_WebKitMinimumFontSize }}" }
     when: Safari_WebKitMinimumFontSize is defined
     notify: restart Safari
 
-  - name: "Safari - Advanced - Accessibility - Press Tab to highlight ach item on a webpage"
-    osx_defaults: { domain: 'com.apple.safari', key: '{{ item }}', type: bool, value: "{{ Safari_WebKitTabToLinksPreferenceKey }}" }
-    with_items: [ "WebKitTabToLinksPreferenceKey", "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks" ]
-    when: Safari_WebKitTabToLinksPreferenceKey is defined
-    notify: restart Safari
-
-  - name: "Safari - Advanced - Bonjour - Include Bonjour in the Bookmarks Menu"
-    osx_defaults: { domain: 'com.apple.safari', key: 'BookmarksMenuIncludesRendezvous', type: bool, value: "{{ Safari_BookmarksMenuIncludesRendezvous }}" }
-    when: Safari_BookmarksMenuIncludesRendezvous is defined
-    notify: restart Safari
+  - fail:
+    ignore_errors: false
 
   #- name: "Safari - Advanced - Bonjour - Include Bonjour in the Favorites bar
-
-  - name: "Safari - Advanced - Internet plug-ins - Stop plug-ins to saver power"
-    osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: bool, value: "{{ Safari_StopPuginsToSavePower }}" }
-    when: Safari_StopPuginsToSavePower is defined
-    notify: restart Safari
 
   #- name: "Safari - Advanced - Style sheet
 
   #- name: "Safari - Advanced - Default encoding
 
   #- name: "Safari - Advanced - Proxies
-
-  - name: "Safari - Advanced - Show Develop menu in menu bar"
-    osx_defaults: { domain: 'com.apple.safari', key: '{{ item }}', type: bool, value: "{{ Safari_ShowDeloperMenu }}" }
-    with_items:
-      - "IncludeDevelopMenu"
-      - "WebKitDeveloperExtrasEnabledPreferenceKey"
-      - "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled"
-    when: Safari_ShowDeloperMenu is defined
-    notify: restart Safari
-
-  - name: "Safari - Advanced - Debug Menu"
-    osx_defaults: { domain: 'com.apple.safari', key: 'IncludeInternalDebugMenu', type: bool, value: "{{ Safari_DebugMenu }}" }
-    when: Safari_DebugMenu is defined
-    notify: restart Safari
 
   - name: "Safari - View - Show Favorites Bar"
     osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesBar-v2', type: bool, value: "{{ Safari_ShowFavoritesBar }}" }
@@ -180,8 +149,9 @@
     notify: restart Safari
 
   - name: "Safari - View - Show Sidebar Mode"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SidebarViewModeIdentifier', type: string, value: "{{ Safari_SidebarViewModeIdentifier }}" }
-    when: Safari_SidebarViewModeIdentifier is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'SidebarViewModeIdentifier', type: string, value: "{{ item.value }}" }
+    loop: "{{ Safari_SidebarViewModeIdentifiers }}"
+    when: Safari_SidebarViewModeIdentifier is defined and item.value == Safari_SidebarViewModeIdentifier
     notify: restart Safari
 
   - name: "Safari - Bookmarks - Show Frequently Visited in Favorites"
