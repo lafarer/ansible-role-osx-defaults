@@ -19,39 +19,32 @@
           (item.0.key == 'TopSitesGridArrangement' and (item.1.name == Safari_TopSitesGridArrangement or item.1.value == Safari_TopSitesGridArrangement)) or
           (item.0.key == 'DownloadsClearingPolicy' and (item.1.name == Safari_DownloadsClearingPolicy or item.1.value == Safari_DownloadsClearingPolicy)) or
           (item.0.key == 'AutoOpenSafeDownloads'   and (item.1.name == Safari_AutoOpenSafeDownloads   or item.1.value == Safari_AutoOpenSafeDownloads|bool))
+    notify: restart Safari
 
   - name: "Safari - Tabs"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
     with_subelements:
-      - "{{ Safari_General_Options }}"
+      - "{{ Safari_Tabs_Options }}"
       - value
     when: (item.0.key == 'TabCreationPolicy'       and (item.1.name == Safari_TabCreationPolicy       or item.1.value == Safari_TabCreationPolicy)) or
           (item.0.key == 'CommandClickMakesTabs'   and (item.1.name == Safari_CommandClickMakesTabs   or item.1.value == Safari_CommandClickMakesTabs|bool)) or
           (item.0.key == 'OpenNewTabsInFront'      and (item.1.name == Safari_OpenNewTabsInFront      or item.1.value == Safari_OpenNewTabsInFront|bool)) or
           (item.0.key == 'Command1Through9SwitchesTabs' and (item.1.name == Safari_Command1Through9SwitchesTabs or item.1.value == Safari_Command1Through9SwitchesTabs|bool))
+    notify: restart Safari
+
+  - name: "Safari - Autofill"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_Autofill_Options }}"
+      - value
+    when: (item.0.key == 'AutoFillFromAddressBook'    and (item.1.name == Safari_AutoFillFromAddressBook    or item.1.value == Safari_AutoFillFromAddressBook|bool)) or
+          (item.0.key == 'AutoFillPasswords'          and (item.1.name == Safari_AutoFillPasswords          or item.1.value == Safari_AutoFillPasswords|bool)) or
+          (item.0.key == 'AutoFillCreditCardData'     and (item.1.name == Safari_AutoFillCreditCardData     or item.1.value == Safari_AutoFillCreditCardData|bool)) or
+          (item.0.key == 'AutoFillMiscellaneousForms' and (item.1.name == Safari_AutoFillMiscellaneousForms or item.1.value == Safari_AutoFillMiscellaneousForms|bool))
+    notify: restart Safari
 
   - fail:
     ignore_errors: false
-
-  - name: "Safari - Autofill - Using info from my Contact card"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillFromAddressBook', type: bool, value: "{{ Safari_AutoFillFromAddressBook }}" }
-    when: Safari_AutoFillFromAddressBook is defined
-    notify: restart Safari
-
-  - name: "Safari - Autofill - Using names and passwords"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillPasswords', type: bool, value: "{{ Safari_AutoFillPasswords }}" }
-    when: Safari_AutoFillPasswords is defined
-    notify: restart Safari
-
-  - name: "Safari - Autofill - Credit cards"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillCreditCardData', type: bool, value: "{{ Safari_AutoFillCreditCardData }}" }
-    when: Safari_AutoFillCreditCardData is defined
-    notify: restart Safari
-
-  - name: "Safari - Autofill - Other forms"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AutoFillMiscellaneousForms', type: bool, value: "{{ Safari_AutoFillMiscellaneousForms }}" }
-    when: Safari_AutoFillMiscellaneousForms is defined
-    notify: restart Safari
 
   - name: "Safari - Search - Search Engine Display Name"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDefaultDisplayName', type: string, value: "{{ item }}" }

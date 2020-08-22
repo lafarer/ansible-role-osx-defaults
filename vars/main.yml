@@ -96,6 +96,12 @@ LoginWindow_DisplayStyles:
   - { name: "List of users", value: 0 }
   - { name: "Name and password", value: 1 }
 
+Safari_Autofill_Options:
+  - { description: 'Using info from my Contact card', key: 'AutoFillFromAddressBook',    type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Using names and passwords',       key: 'AutoFillPasswords',          type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Credit cards',                    key: 'AutoFillCreditCardData',     type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Other forms',                     key: 'AutoFillMiscellaneousForms', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+
 Safari_DownloadsClearingPolicies:
   - { name: "Manually", value: 0}
   - { name: "After one day", value: 1}
