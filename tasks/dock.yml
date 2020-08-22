@@ -2,25 +2,18 @@
 ## inspired from https://https://github.com/ideasonpurpose/ansible-playbooks/roles/dock/tasks/apps.yml
 ## MIT License, Copyright (c) 2013 Ideas On Purpose
 - block:
-  - name: "Dock - Persistent Apps - Reset"
-    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: [] }
-    when: Dock_PersistentApps is defined and Dock_PersistentApps != []
-    notify: restart Dock
-
   - name: "Dock - Persistent Apps - Buils apps list"
     set_fact:
       persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]"
     with_items: "{{ Dock_PersistentApps }}"
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
-  - name: "Dock - Persistent Apps - Add apps"
-    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ persistent_apps_array }}" }
+  - name: "Dock - Persistent Apps - Add to dock"
+    osx_defaults: "{{ item }}"
+    loop:
+      - { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: [] }
+      - { domain: 'com.apple.dock', key: 'persistent-apps', type: array, value: "{{ persistent_apps_array }}" }
     when: persistent_apps_array is defined and persistent_apps_array != []
-    notify: restart Dock
-
-  - name: "Dock - Persistent Others - Reset"
-    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: [] }
-    when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
     notify: restart Dock
 
   - name: "Dock - Persistent Others - Buils items list"
@@ -29,8 +22,11 @@
     with_items: "{{ Dock_PersistentOthers }}"
     when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
 
-  - name: "Dock - Persistent Others - Add "
-    osx_defaults: { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ persistent_others_array }}" }
+  - name: "Dock - Persistent Others - Add to dock"
+    osx_defaults: "{{ item }}"
+    loop:
+      - { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: [] }
+      - { domain: 'com.apple.dock', key: 'persistent-others', type: array, value: "{{ persistent_others_array }}" }
     when: persistent_others_array is defined and persistent_others_array != []
     notify: restart Dock
 
