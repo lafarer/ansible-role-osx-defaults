@@ -142,13 +142,26 @@ Safari_General_Options:
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: '{{ Safari_DownloadsClearingPolicies }}'}
   - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
 
- Safari_OpenWith_Options:
+Safari_OpenWith_Options:
   - { name: "A new window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
   - { name: "A new window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 0}
   - { name: "A new private window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 1 }
   - { name: "A new private window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 0}
   - { name: "All windows from last session", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
   - { name: "All windows from last session", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 1}
+
+Safari_SearchEngineIdentifiers:
+  - { name: Yahoo, value: "com.yahoo.www" }
+  - { name: Google, value: "com.google.www" }
+  - { name: Bing, value: "com.bing.www" }
+  - { name: DuckDuckGo, value: "com.duckduckgo" }
+
+Safari_Search_Options:
+  - { description: 'Search Engine Identifier',                  domain: 'NSGlobalDomain',   key: 'NSProviderIdentifier',         type: 'string', value: '{{ Safari_SearchEngineIdentifiers }}'}
+  - { description: 'Include search engine suggestions',         domain: 'com.apple.safari', key: 'SuppressSearchSuggestions',    type: 'bool',   value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Smart Search: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Smart Search: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Smart Search: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
 
 Safari_TabCreationPolicies:
   - { name: "Never", value: 0}

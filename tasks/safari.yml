@@ -1,11 +1,12 @@
 ---
 - block:
+
   - name: "Safari - General - Opens with"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     with_items: "{{  Safari_OpenWith_Options }}"
     when:
       - Safari_OpensWith is defined
-      - (item.name == Safari_OpensWith or item.value == Safari_OpensWith)
+      - item.name == Safari_OpensWith
     notify: restart Safari
 
   - name: "Safari - General"
@@ -51,43 +52,20 @@
     when: Safari_SearchEngine is defined
     notify: restart Safari
 
-  - name: "Safari - Search - Search Engine Identifier"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSProviderIdentifier', type: string, value: "{{ item.value }}" }
-    with_items:
-      - { name: Yahoo, value: "com.yahoo.www" }
-      - { name: Google, value: "com.google.www" }
-      - { name: Bing, value: "com.bing.www" }
-      - { name: DuckDuckGo, value: "com.duckduckgo" }
-    when: Safari_SearchEngine is defined and item.name == Safari_SearchEngine
-
-  - name: "Safari - Search - Include search engine suggestions"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SuppressSearchSuggestions', type: bool, value: "{{ not Safari_IncludeSearchSuggestions }}" }
-    when: Safari_IncludeSearchSuggestions is defined
+  - name: "Safari - Search"
+    osx_defaults: { domain: "{{ item.0.domain }}", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_Search_Options }}"
+      - value
+    when: (item.0.key == 'NSProviderIdentifier'               and (item.1.name == Safari_SearchEngine                       or item.1.value == Safari_SearchEngine)) or
+          (item.0.key == 'SuppressSearchSuggestions'          and (item.1.name == Safari_IncludeSearchSuggestions           or item.1.value == Safari_IncludeSearchSuggestions|bool)) or
+          (item.0.key == 'WebsiteSpecificSearchEnabled'       and (item.1.name == Safari_WebsiteSpecificSearchEnabled       or item.1.value == Safari_WebsiteSpecificSearchEnabled|bool)) or
+          (item.0.key == 'PreloadTopHit'                      and (item.1.name == Safari_PreloadTopHit                      or item.1.value == Safari_PreloadTopHit|bool)) or
+          (item.0.key == 'ShowFavoritesUnderSmartSearchField' and (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField|bool))
     notify: restart Safari
-
-  #- name: "Safari - Search - Smart Search Field - Include Safari suggestions"
-
-  - name: "Safari - Search - Smart Search Field - Enable Quick Website Search"
-    osx_defaults: { domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: bool, value: "{{ Safari_WebsiteSpecificSearchEnabled }}" }
-    when: Safari_WebsiteSpecificSearchEnabled is defined
-    notify: restart Safari
-
-  - name: "Safari - Search - Smart Search Field - Preload Top Hit in the background"
-    osx_defaults: { domain: 'com.apple.safari', key: 'PreloadTopHit', type: bool, value: "{{ Safari_PreloadTopHit }}" }
-    when: Safari_PreloadTopHit is defined
-    notify: restart Safari
-
-  - name: "Safari - Search - Smart Search Field - Show Favorites"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: bool, value: "{{ Safari_ShowFavoritesUnderSmartSearchField }}" }
-    when: Safari_ShowFavoritesUnderSmartSearchField is defined
-    notify: restart Safari
-
-
-
 
   - fail:
     ignore_errors: false
-
 
   - name: "Safari - Security - Fraudulent Sites - Warn when visiting a fraudulent website"
     osx_defaults: { domain: 'com.apple.safari', key: 'WarnAboutFraudulentWebsites', type: bool, value: "{{ Safari_WarnAboutFraudulentWebsites }}" }
