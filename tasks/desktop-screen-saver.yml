@@ -7,7 +7,7 @@
 
   - name: "Desktop & Screen Saver - Check if background image exists"
     stat:
-      path: {{ DesktopScreenSaver_BackGroundImage }}
+      path: "{{ DesktopScreenSaver_BackGroundImage }}"
     changed_when: no
     register: BackGroundImage_New
 
@@ -19,10 +19,9 @@
     notify: restart Dock
 
   - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
-    osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item }}" }
-    loop:
-      - "{{ DesktopScreenSaver_askForPassword }}"
-    when: DesktopScreenSaver_askForPassword is defined
+    osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }
+    loop: "{{ EnabledDisabled_Options }}"
+    when: item.name == DesktopScreenSaver_askForPassword
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ (target_user_id != ansible_user_id) | bool }}"
