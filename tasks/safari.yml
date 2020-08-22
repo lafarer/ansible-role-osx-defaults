@@ -8,52 +8,20 @@
       - (item.name == Safari_OpensWith or item.value == Safari_OpensWith)
     notify: restart Safari
 
-  - name: "Safari - General - New Windows and Tab"
+  - name: "Safari - General"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
     with_subelements:
-      - "{{ Safari_NewWindowTab_Options }}"
+      - "{{ Safari_General_Options }}"
       - value
-    when: (item.0.key == 'NewWindowBehavior' and item.1.value == Safari_NewWindowBehavior) or
-          (item.0.key == 'NewTabBehavior' and item.1.value == Safari_NewTabBehavior)
+    when: (item.0.key == 'NewWindowBehavior'       and (item.1.name == Safari_NewWindowBehavior       or item.1.value == Safari_NewWindowBehavior)) or
+          (item.0.key == 'NewTabBehavior'          and (item.1.name == Safari_NewTabBehavior          or item.1.value == Safari_NewTabBehavior)) or
+          (item.0.key == 'HistoryAgeInDaysLimit'   and (item.1.name == Safari_HistoryAgeInDaysLimit   or item.1.value == Safari_HistoryAgeInDaysLimit)) or
+          (item.0.key == 'TopSitesGridArrangement' and (item.1.name == Safari_TopSitesGridArrangement or item.1.value == Safari_TopSitesGridArrangement)) or
+          (item.0.key == 'DownloadsClearingPolicy' and (item.1.name == Safari_DownloadsClearingPolicy or item.1.value == Safari_DownloadsClearingPolicy)) or
+          (item.0.key == 'AutoOpenSafeDownloads'   and (item.1.name == Safari_AutoOpenSafeDownloads   or item.1.value == Safari_AutoOpenSafeDownloads|bool))
 
-
-
-  #- name: "Safari - General - Homepage"
-
-  - name: "Safari - General - Remove history items"
-    osx_defaults: { domain: 'com.apple.safari', key: 'HistoryAgeInDaysLimit', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_HistoryAgeInDaysLimitOptions }}"
-    when:
-        - Safari_HistoryAgeInDaysLimit is defined
-        - (item.name == Safari_HistoryAgeInDaysLimit or item.value == Safari_HistoryAgeInDaysLimit)
-    notify: restart Safari
-
-  #- name: "Safari - General - Favorites shows"
-
-  - name: "Safari - General - Top Sites shows"
-    osx_defaults: { domain: 'com.apple.safari', key: 'TopSitesGridArrangement', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_TopSitesGridArrangements }}"
-    when:
-      - Safari_TopSitesGridArrangement is defined
-      - (item.name == Safari_TopSitesGridArrangement or item.value == Safari_TopSitesGridArrangement)
-    notify: restart Safari
-
-  #- name: "Safari - General - File download location
-
-  - name: "Safari - General - Remove download list items"
-    osx_defaults: { domain: 'com.apple.safari', key: 'DownloadsClearingPolicy', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_DownloadsClearingPolicies }}"
-    when:
-      - Safari_DownloadsClearingPolicy is defined
-      - (item.name == Safari_DownloadsClearingPolicy or item.value == Safari_DownloadsClearingPolicy)
-    notify: restart Safari
-
-  - name: "Safari - General - Open 'safe' files after downloading"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AutoOpenSafeDownloads', type: bool, value: "{{ Safari_AutoOpenSafeDownloads }}" }
-    when: Safari_AutoOpenSafeDownloads is defined
-    notify: restart Safari
-
-
+  - fail:
+    ignore_errors: false
 
 
 
@@ -183,7 +151,7 @@
 
   - name: "Safari - Privacy - Website use of location services"
     osx_defaults: { domain: 'com.apple.safari', key: 'SafariGeolocationPermissionPolicy', type: int, value: "{{ item.value }}" }
-    with_items: "{{ Safari_SafariGeolocationPermissionPolicies }}"
+    with_items: "{{ Safari_GeolocationPermissionPolicies }}"
     when:
       - Safari_SafariGeolocationPermissionPolicy is defined
       - (item.name == Safari_SafariGeolocationPermissionPolicy or item.value == Safari_SafariGeolocationPermissionPolicy)
