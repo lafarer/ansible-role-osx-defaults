@@ -95,3 +95,49 @@ Keyboard_AppleKeyboardUIModeOptions:
 LoginWindow_DisplayStyles:
   - { name: "List of users", value: 0 }
   - { name: "Name and password", value: 1 }
+
+Safari_OpenWithOptionsi:
+  - { name: "A new window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: "0" }
+  - { name: "A new window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: "0"}
+  - { name: "A new private window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: "1" }
+  - { name: "A new private window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: "0"}
+  - { name: "All windows from last session", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: "0" }
+  - { name: "All windows from last session", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: "1"}
+
+Safari_NewWindowBehaviors:
+  - { name: "Hompage", value: "0"}
+  - { name: "Empty page", value: "1"}
+  - { name: "Same page", value: "2"}
+  - { name: "Favorites", value: "4"}
+  - { name: "Tabs for Favorites", value: "5"}
+
+Safari_NewTabBehaviors:
+  - { name: "Hompage", value: "0"}
+  - { name: "Empty page", value: "1"}
+  - { name: "Same page", value: "2"}
+  - { name: "Favorites", value: "4"}
+
+Safari_NewWindowTab_Options:
+  - { description: 'New windows open with', key: 'NewWindowBehavior', type: 'int', value: '{{ Safari_NewWindowBehaviors }}'}
+  - { description: 'New tabs open with', key: 'NewTabBehavior', type: 'int', value: '{{ Safari_NewTabBehaviors }}'}
+
+Safari_TopSitesGridArrangements:
+  - { name: "6 sites", value: "0"}
+  - { name: "12 sites", value: "1"}
+  - { name: "24 sites", value: "2"}
+
+Safari_DownloadsClearingPolicies:
+  - { name: "Manually", value: "0"}
+  - { name: "After one day", value: "1"}
+  - { name: "Upon successfull download", value: "2"}
+  - { name: "When Safari quits", value: "3"}
+
+Safari_TabCreationPolicies:
+  - { name: "Never", value: "0"}
+  - { name: "Automatically", value: "1"}
+  - { name: "Always", value: "2"}
+
+Safari_SafariGeolocationPermissionPolicies:
+  - { name: "Deny without prompting", value: "0"}
+  - { name: "Prompt for each site once each day", value: "1"}
+  - { name: "Prompt for each site one time only", value: "2"}

@@ -1,25 +1,36 @@
 ---
 - block:
   - name: "Safari - General - Safari opens with"
-    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: bool, value: "{{ item.value }}" }
-    with_items:
-      - { name: "A new window", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 0 }
-      - { name: "A new window", key: AlwaysRestoreSessionAtLaunch, value: 0}
-      - { name: "A new private window", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 1 }
-      - { name: "A new private window", key: AlwaysRestoreSessionAtLaunch, value: 0}
-      - { name: "All windows from last session", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 0 }
-      - { name: "All windows from last session", key: AlwaysRestoreSessionAtLaunch, value: 1}
-    when: Safari_OpensWith is defined and item.name == Safari_OpensWith
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    with_items: "{{ Safari_OpenWithOptions }}"
+    when:
+      - Safari_OpensWith is defined
+      - (item.name == Safari_OpensWith or item.value == Safari_OpensWith)
     notify: restart Safari
 
+  - name: "Safari - General - New Windows and Tab"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_NewWindowTab_Options }}"
+      - value
+    when: (item.0.key == 'NewWindowBehavior' and (item.1.name == Safari_NewWindowBehavior or item.1.value == Safari_NewWindowBehavior) ) or
+          (item.0.key == 'NewTabBehavior' and (item.1.name == Safari_NewTabBehavior or item.1.value == Safari_NewTabBehavior) )
+
+
   - name: "Safari - General - New windows open with"
-    osx_defaults: { domain: 'com.apple.safari', key: 'NewWindowBehavior', type: int, value: "{{ Safari_NewWindowBehavior }}" }
-    when: Safari_NewWindowBehavior is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'NewWindowBehavior', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_NewWindowBehaviors }}"
+    when:
+      - Safari_NewWindowBehavior is defined
+      - (item.name == Safari_NewWindowBehavior or item.value == Safari_NewWindowBehavior)
     notify: restart Safari
 
   - name: "Safari - General - New tabs open with"
-    osx_defaults: { domain: 'com.apple.safari', key: 'NewTabBehavior', type: int, value: "{{ Safari_NewTabBehavior }}" }
-    when: Safari_NewTabBehavior is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'NewTabBehavior', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_NewTabBehaviors }}"
+    when:
+      - Safari_NewTabBehavior is defined
+      - (item.name == Safari_NewTabBehavior or item.value == Safari_NewTabBehavior)
     notify: restart Safari
 
   #- name: "Safari - General - Homepage"
@@ -32,15 +43,21 @@
   #- name: "Safari - General - Favorites shows"
 
   - name: "Safari - General - Top Sites shows"
-    osx_defaults: { domain: 'com.apple.safari', key: 'TopSitesGridArrangement', type: int, value: "{{ Safari_TopSitesGridArrangement }}" }
-    when: Safari_TopSitesGridArrangement is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'TopSitesGridArrangement', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_TopSitesGridArrangements }}"
+    when:
+      - Safari_TopSitesGridArrangement is defined
+      - (item.name == Safari_TopSitesGridArrangement or item.value == Safari_TopSitesGridArrangement)
     notify: restart Safari
 
   #- name: "Safari - General - File download location
 
   - name: "Safari - General - Remove download list items"
-    osx_defaults: { domain: 'com.apple.safari', key: 'DownloadsClearingPolicy', type: int, value: "{{ Safari_DownloadsClearingPolicy }}" }
-    when: Safari_DownloadsClearingPolicy is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'DownloadsClearingPolicy', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_DownloadsClearingPolicies }}"
+    when:
+      - Safari_DownloadsClearingPolicy is defined
+      - (item.name == Safari_DownloadsClearingPolicy or item.value == Safari_DownloadsClearingPolicy)
     notify: restart Safari
 
   - name: "Safari - General - Open 'safe' files after downloading"
@@ -49,8 +66,11 @@
     notify: restart Safari
 
   - name: "Safari - Tabs - Open pages in tabs instead of windows"
-    osx_defaults: { domain: 'com.apple.safari', key: 'TabCreationPolicy', type: int, value: "{{ Safari_TabCreationPolicy }}" }
-    when: Safari_TabCreationPolicy is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'TabCreationPolicy', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_TabCreationPolicies }}"
+    when:
+      - Safari_TabCreationPolicy is defined
+      - (item.name == Safari_TabCreationPolicy or item.value == Safari_TabCreationPolicy)
     notify: restart Safari
 
   - name: "Safari - Tabs - cmd+click opens a link in a new tab"
@@ -88,12 +108,14 @@
     when: Safari_AutoFillMiscellaneousForms is defined
     notify: restart Safari
 
-  - name: "Safari - Search - Search engine"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDefaultDisplayName', type: string, value: "{{ Safari_SearchEngine }}" }
+  - name: "Safari - Search - Search Engine Display Name"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'NSDefaultDisplayName', type: string, value: "{{ item }}" }
+    loop:
+      - "{{ Safari_SearchEngine }}"
     when: Safari_SearchEngine is defined
     notify: restart Safari
 
-  - name: "Safari - Search - Search engine"
+  - name: "Safari - Search - Search Engine Identifier"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'NSProviderIdentifier', type: string, value: "{{ item.value }}" }
     with_items:
       - { name: Yahoo, value: "com.yahoo.www" }
@@ -168,8 +190,11 @@
     notify: restart Safari
 
   - name: "Safari - Privacy - Website use of location services"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SafariGeolocationPermissionPolicy', type: int, value: "{{ Safari_SafariGeolocationPermissionPolicy }}" }
-    when: Safari_SafariGeolocationPermissionPolicy is defined
+    osx_defaults: { domain: 'com.apple.safari', key: 'SafariGeolocationPermissionPolicy', type: int, value: "{{ item.value }}" }
+    with_items: "{{ Safari_SafariGeolocationPermissionPolicies }}"
+    when:
+      - Safari_SafariGeolocationPermissionPolicy is defined
+      - (item.name == Safari_SafariGeolocationPermissionPolicy or item.value == Safari_SafariGeolocationPermissionPolicy)
     notify: restart Safari
 
   - name: "Safari - Privacy - Website tracking - Ask websites not to track me"
@@ -226,8 +251,16 @@
 
   - name: "Safari - Advanced - Show Develop menu in menu bar"
     osx_defaults: { domain: 'com.apple.safari', key: '{{ item }}', type: bool, value: "{{ Safari_ShowDeloperMenu }}" }
-    with_items: [ "IncludeDevelopMenu", "WebKitDeveloperExtrasEnabledPreferenceKey", "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" ]
+    with_items:
+      - "IncludeDevelopMenu"
+      - "WebKitDeveloperExtrasEnabledPreferenceKey"
+      - "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled"
     when: Safari_ShowDeloperMenu is defined
+    notify: restart Safari
+
+  - name: "Safari - Advanced - Debug Menu"
+    osx_defaults: { domain: 'com.apple.safari', key: 'IncludeInternalDebugMenu', type: bool, value: "{{ Safari_DebugMenu }}" }
+    when: Safari_DebugMenu is defined
     notify: restart Safari
 
   - name: "Safari - View - Show Favorites Bar"
@@ -258,11 +291,6 @@
   - name: "Safari - Bookmarks - Show Frequently Visited in Favorites"
     osx_defaults: { domain: 'com.apple.safari', key: 'ShowFrequentlyVisitedSites', type: bool, value: "{{ Safari_ShowFrequentlyVisitedSites }}" }
     when: Safari_ShowFrequentlyVisitedSites is defined
-    notify: restart Safari
-
-  - name: "Safari - Debug Menu"
-    osx_defaults: { domain: 'com.apple.safari', key: 'IncludeInternalDebugMenu', type: bool, value: "{{ Safari_DebugMenu }}" }
-    when: Safari_DebugMenu is defined
     notify: restart Safari
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
