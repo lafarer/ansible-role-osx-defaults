@@ -3,7 +3,7 @@
 
   - name: "Safari - General - Opens with"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
-    with_items: "{{  Safari_OpenWith_Options }}"
+    loop: "{{  Safari_OpenWith_Options }}"
     when:
       - Safari_OpensWith is defined
       - item.name == Safari_OpensWith
@@ -64,49 +64,24 @@
           (item.0.key == 'ShowFavoritesUnderSmartSearchField' and (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField|bool))
     notify: restart Safari
 
+  - name: "Safari - Security"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_Security_Options }}"
+      - value
+    when: (item.0.key == 'WarnAboutFraudulentWebsites' and (item.1.name == Safari_WarnAboutFraudulentWebsites or item.1.value == Safari_WarnAboutFraudulentWebsites|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled' and (item.1.name == Safari_JavaScriptEnabled or item.1.value == Safari_JavaScriptEnabled|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically' and not (item.1.name == Safari_BlockPopupWindows or item.1.value == Safari_BlockPopupWindows|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled' and (item.1.name == Safari_AllowWebGL or item.1.value == Safari_AllowWebGL|bool)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled' and (item.1.name == Safari_AllowPlugins or item.1.value == Safari_AllowPlugins|bool))
+    notify: restart Safari
+
   - fail:
     ignore_errors: false
 
-  - name: "Safari - Security - Fraudulent Sites - Warn when visiting a fraudulent website"
-    osx_defaults: { domain: 'com.apple.safari', key: 'WarnAboutFraudulentWebsites', type: bool, value: "{{ Safari_WarnAboutFraudulentWebsites }}" }
-    when: Safari_WarnAboutFraudulentWebsites is defined
-    notify: restart Safari
-
-  - name: "Safari - Security - Web Content - Enable Javascript"
-    osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled', type: bool, value: "{{ Safari_JavaScriptEnabled }}" }
-    when: Safari_JavaScriptEnabled is defined
-    notify: restart Safari
-
-  - name: "Safari - Security - Web Content - Block pop-up windows"
-    osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically', type: bool, value: "{{ not Safari_BlockPopupWindows }}" }
-    when: Safari_BlockPopupWindows is defined
-    notify: restart Safari
-
-  - name: "Safari - Security - Web Content - Allow WebGL"
-    osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled', type: bool, value: "{{ Safari_AllowWebGL }}" }
-    when: Safari_AllowWebGL is defined
-    notify: restart Safari
-
-  - name: "Safari - Security - Internet plug-ins - Allow Plug-ins"
-    osx_defaults: { domain: 'com.apple.safari', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled', type: bool, value: "{{ Safari_AllowPlugins }}" }
-    when: Safari_AllowPlugins is defined
-    notify: restart Safari
-
   - name: "Safari - Privacy - Cookies and website data"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: int, value: "{{ item.value }}" }
-    with_items:
-      - { name: "Always block", key: "BlockStoragePolicy", value: 0 }
-      - { name: "Always block", key: "WebKitStorageBlockingPolicy", value: 2 }
-      - { name: "Always block", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 2 }
-      - { name: "Always from current website only", key: "BlockStoragePolicy", value: 3 }
-      - { name: "Always from current website only", key: "WebKitStorageBlockingPolicy", value: 1 }
-      - { name: "Always from current website only", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
-      - { name: "Allow from websites I visit", key: "BlockStoragePolicy", value: 2 }
-      - { name: "Allow from websites I visit", key: "WebKitStorageBlockingPolicy", value: 1 }
-      - { name: "Allow from websites I visit", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
-      - { name: "Always allow", key: "BlockStoragePolicy", value: 1 }
-      - { name: "Always allow", key: "WebKitStorageBlockingPolicy", value: 0 }
-      - { name: "Always allow", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 0 }
+    with_items: "{{ Safari_CookiesAndWebsiteData_Options }}"
     when: Safari_Cookies is defined and item.name == Safari_Cookies
     notify: restart Safari
 
