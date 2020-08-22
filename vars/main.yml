@@ -87,3 +87,7 @@ HotCorners_Actions:
   - { description: 'Bottom Right', key: 'wvous-br-corner', value: '{{ HotCorners_AvailableActions }}'}
   - { description: 'Top Left',     key: 'wvous-tl-corner', value: '{{ HotCorners_AvailableActions }}'}
   - { description: 'Top Right',    key: 'wvous-tr-corner', value: '{{ HotCorners_AvailableActions }}'}
+
+Keyboard_AppleKeyboardUIModeOptions:
+  - { name: "Text boxes and lists only", value: 1 }
+  - { name: "All controls", value: 3 }

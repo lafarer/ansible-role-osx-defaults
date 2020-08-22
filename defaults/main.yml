@@ -179,7 +179,7 @@ Keyboard_AutomaticSpellingCorrectionEnabled: no # Correct spelling automatically
 Keyboard_AutomaticQuoteSubstitutionEnabled: no  # Use smart quotes
 Keyboard_AutomaticDashSubstitutionEnabled: no   # Use smart dashes
 Keyboard_AutomaticPeriodSubstitutionEnabled: no # Automatic period substitution
-Keyboard_AppleKeyboardUIMode: 3                    # Full Keyboard Access (1 : Text boxes and lists only, 3 : All controls)
+Keyboard_AppleKeyboardUIMode: "All controls"                    # Full Keyboard Access (1 : Text boxes and lists only, 3 : All controls)
 Keyboard_PowerButtonSleepsSystem: no            # Prevent accidental Power button presses from sleeping system
 Keyboard_PressAndHoldEnabled: no                # Disable press-and-hold for keys in favor of key repeat
 
