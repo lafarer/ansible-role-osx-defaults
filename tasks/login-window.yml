@@ -1,6 +1,5 @@
 ---
 - block:
-
   - name: "Login Window - Settings"
     osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
@@ -12,12 +11,12 @@
       - { description: "Show password hints - Retries until hint", key: 'RetriesUntilHint', type: 'int', value: '{{ LoginWindow_RetriesUntilHint }}'}
     when: item.value != ''
 
-  - name: "Login Window - Display Login Window as list or fields"
+  - name: "Login Window - Display Style"
     osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'SHOWFULLNAME', type: bool, value: "{{ item.value }}" }
-    with_items:
-      - { name: "List of users", value: 0 }
-      - { name: "Name and password", value: 1 }
-    when: LoginWindow_Display is defined and item.name == LoginWindow_Display
+    loop: "{{ LoginWindow_DisplayStyles }}"
+    when:
+      - LoginWindow_Display is defined
+      - (item.name == LoginWindow_Display or item.value == LoginWindow_Display)
 
   - name: "Check if login screen background image exists"
     stat: path={{ LoginWindow_DesktopPicture }}
@@ -25,7 +24,12 @@
     register: LoginWindow_DesktopPicture_New
 
   - name: "Login Window - Change login screen background"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'DesktopPicture', type: string, value: "{{ LoginWindow_DesktopPicture }}" }
-    when: LoginWindow_DesktopPicture is defined  and LoginWindow_DesktopPicture != "" and LoginWindow_DesktopPicture_New.stat.exists
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'DesktopPicture', type: string, value: "{{ item }}" }
+    loop:
+      - "{{ LoginWindow_DesktopPicture }}"
+    when:
+      - LoginWindow_DesktopPicture is defined
+      - LoginWindow_DesktopPicture != ""
+      - LoginWindow_DesktopPicture_New.stat.exists
   # the above block is run as superuser
   become: yes
