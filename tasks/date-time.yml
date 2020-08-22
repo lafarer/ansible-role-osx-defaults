@@ -6,10 +6,6 @@
     changed_when: False
     when: DateTime_TimeZone is defined
 
-  - debug:
-      msg: "{{ result }}"
-    when: verbose|bool
-
   - name: "Date Time - Set the timezone"
     command: "systemsetup -settimezone '{{ item }}'"
     loop:
