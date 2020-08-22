@@ -1,7 +1,7 @@
 ---
 - block:
   - name: "Safari - General - Safari opens with"
-    osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: bool, value: "{{ item.value }}" }
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: bool, value: "{{ item.value }}" }
     with_items:
       - { name: "A new window", key: OpenPrivateWindowWhenNotRestoringSessionAtLaunch, value: 0 }
       - { name: "A new window", key: AlwaysRestoreSessionAtLaunch, value: 0}
@@ -150,7 +150,7 @@
     notify: restart Safari
 
   - name: "Safari - Privacy - Cookies and website data"
-    osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: int, value: "{{ item.value }}" }
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: int, value: "{{ item.value }}" }
     with_items:
       - { name: "Always block", key: "BlockStoragePolicy", value: 0 }
       - { name: "Always block", key: "WebKitStorageBlockingPolicy", value: 2 }
@@ -193,7 +193,7 @@
     notify: restart Safari
 
   - name: "Safari - Advanced - Accessibility - Never use font sizes smaller than"
-    osx_defaults: { domain: 'com.apple.safari', key: '{{ item.key }}', type: '{{ item.type }}', value: "{{ Safari_WebKitMinimumFontSize }}" }
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: '{{ item.type }}', value: "{{ Safari_WebKitMinimumFontSize }}" }
     with_items:
       - { key: "WebKitMinimumFontSize", type: "int" }
       - { key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2MinimumFontSize", type: "float" }
