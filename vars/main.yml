@@ -44,6 +44,13 @@ ApplicationFirewall_LoggingOptions:
   - { name: "Brief", value: 1 }
   - { name: "Detail", value: 2 }
 
+Displays_AppleFontSmoothingOptions:
+  - { name: "Disabled", value: 0 }
+  - { name: "Minimal",  value: 1 }
+  - { name: "Medium",   value: 2 }
+  - { name: "Smoother", value: 3 }
+  - { name: "Strong",   value: 4 }
+
 Finder_NewWindowsShowOptions:
   - { name: "Computer",      shortcode: "PfCm", value: "" }
   - { name: "Computer's HD", shortcode: "PfVo", value: "file:///" }

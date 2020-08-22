@@ -22,10 +22,11 @@
     when: Displays_AutomaticallyAdjustBrightness is defined
 
   - name: "Displays - Subpixel font rendering on non-Apple LCDs"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ item }}" }
-    loop:
-      - "{{ Displays_AppleFontSmoothing }}"
-    when: Displays_AppleFontSmoothing is defined
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleFontSmoothing', type: int, value: "{{ item.value }}" }
+    loop: {{ Displays_AppleFontSmoothingOptions }}
+    when:
+      - Displays_AppleFontSmoothing is defined
+      - (item.name == Displays_AppleFontSmoothing or item.value == Displays_AppleFontSmoothing)
 
   - name: "Displays - Show mirroring options in the menu bar when available"
     osx_defaults: { domain: 'com.apple.airplay', key: 'showInMenuBarIfPresent', type: bool, value: "{{ item }}" }
