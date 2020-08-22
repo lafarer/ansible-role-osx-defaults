@@ -1,16 +1,19 @@
 ---
 - block:
+  - debug:
+      msg: "{{ Keyboard_kDimTime }}"
+    when: verbose|bool
+
   - name: "Keyboard - Global - AmbientLightSensor"
     osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
-      - { description: 'Adjust keyboard brightness in low light', key: 'Automatic Keyboard Enabled', type: 'bool', value: "{{ Keyboard_kDim }}"}
-      - { description: 'Dim keyboard after idle time in seconds', key: 'Keyboard Dim Time', type: 'int', value: "{{ Keyboard_kDimTime }}"}
+      - { description: 'Adjust keyboard brightness in low light', key: 'Automatic Keyboard Enabled', type: 'bool',  value: "{{ Keyboard_kDim }}" }
+      - { description: 'Dim keyboard after idle time in seconds', key: 'Keyboard Dim Time',          type: 'float', value: "{{ Keyboard_kDimTime }}" }
     when: item.value != ''
   # the above block is run as superuser
   become: yes
 
 - block:
-
   - name: "Keyboard - User - Full Keyboard Access"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{ item.value }}" }
     loop: "{{ Keyboard_AppleKeyboardUIModeOptions }}"
