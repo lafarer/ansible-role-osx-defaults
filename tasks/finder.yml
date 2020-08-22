@@ -57,7 +57,9 @@
     notify: restart Finder
 
   - name: "Finder - Advanced - Show All Filename Extensions"
-    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ Finder_AppleShowAllExtensions }}" }
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ item }}" }
+    loop:
+      - "{{ Finder_AppleShowAllExtensions }}"
     when: Finder_AppleShowAllExtensions is defined
     notify: restart Finder
 
@@ -82,6 +84,6 @@
       - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
     when: item.value != ''
     notify: restart Finder
-    
+
   become: "{{ (target_user_id != ansible_user_id) | bool }}"
   become_user: "{{ target_user_id }}"
