@@ -14,8 +14,8 @@ target_user_id: "{{ ansible_user_id }}"       # Define the username for which yo
 ```
 
 ```
-ActivityMonitor_Enabled: no                   # Enable ActivityMonitor configuration
-ActivityMonitor_OpenMainWindow: no            # Show the main window when launching Activity Monitor
+ActivityMonitor_Enabled: no                      # Enable ActivityMonitor configuration
+ActivityMonitor_OpenMainWindow: "Disabled"       # Show the main window when launching Activity Monitor
 ActivityMonitor_IconType: ""                     # Activity Monitor Dock icon
                                                  # Show Application Icon
                                                  # Show Network Usage

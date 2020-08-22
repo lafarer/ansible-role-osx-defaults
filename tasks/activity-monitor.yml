@@ -1,34 +1,13 @@
 ---
 - block:
-  - name: "Activity Monitor - Show the main window when launching Activity Monitor"
-    osx_defaults: { domain: 'com.apple.ActivityMonitor', key: 'OpenMainWindow', type: bool, value: "{{ ActivityMonitor_OpenMainWindow }}" }
-    when: ActivityMonitor_OpenMainWindow is defined
-    notify: restart ActivityMonitor
-
-  - name: "Activity Monitor - Activity Monitor Dock Icon"
-    osx_defaults: { domain: 'com.apple.ActivityMonitor', key: 'IconType', type: int, value: "{{ item.value }}" }
-    with_items:
-      - { name: "Show Application Icon", value: 0 }
-      - { name: "Show Network Usage", value: 2 }
-      - { name: "Show Disk Activity", value: 3 }
-      - { name: "Show CPU Usage", value: 5 }
-      - { name: "Show CPU History", value: 6 }
-    when: ActivityMonitor_IconType is defined and item.name == ActivityMonitor_IconType
-    notify: restart ActivityMonitor
-
-  - name: "Activity Monitor - Show all processes in Activity Monitor"
-    osx_defaults: { domain: 'com.apple.ActivityMonitor', key: 'ShowCategory', type: int, value: "{{ item.value }}" }
-    with_items:
-      - { name: "Show All Processes", value: 100 }
-      - { name: "Show All Processes, Hierarchically", value: 101 }
-      - { name: "My Processes", value: 102 }
-      - { name: "System Processes", value: 103 }
-      - { name: "Other Processes", value: 104 }
-      - { name: "Active Processes", value: 105 }
-      - { name: "Inactive Processes", value: 106 }
-      - { name: "Windowed Processes", value: 107 }
-      - { name: "GPU Processes", value: 110 }
-    when: ActivityMonitor_ShowCategory is defined and item.name == ActivityMonitor_ShowCategory
+  - name: "Activity Monitor"
+    osx_defaults: { domain: 'com.apple.ActivityMonitor', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ ActivityMonitor_Preferences }}"
+      - value
+    when: (item.0.key == 'OpenMainWindow' and item.1.name == ActivityMonitor_OpenMainWindow ) or
+          (item.0.key == 'IconType' and item.1.name == ActivityMonitor_IconType ) or
+          (item.0.key == 'ShowCategory' and item.1.name == ActivityMonitor_ShowCategory )
     notify: restart ActivityMonitor
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

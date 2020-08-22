@@ -3,7 +3,30 @@ EnabledDisabled_Options:                      # to be used as selector
   - { name: "Disabled", value: 0 }
   - { name: "Enabled", value: 1 }
 
-ApplicationFirewall_Options:
+ActivityMonitor_DockIconOptions:
+  - { name: "Show Application Icon", value: 0 }
+  - { name: "Show Network Usage", value: 2 }
+  - { name: "Show Disk Activity", value: 3 }
+  - { name: "Show CPU Usage", value: 5 }
+  - { name: "Show CPU History", value: 6 }
+
+ActivityMonitor_ShowProcessesOptions:
+  - { name: "Show All Processes", value: 100 }
+  - { name: "Show All Processes, Hierarchically", value: 101 }
+  - { name: "My Processes", value: 102 }
+  - { name: "System Processes", value: 103 }
+  - { name: "Other Processes", value: 104 }
+  - { name: "Active Processes", value: 105 }
+  - { name: "Inactive Processes", value: 106 }
+  - { name: "Windowed Processes", value: 107 }
+  - { name: "GPU Processes", value: 110 }
+
+ActivityMonitor_Preferences:
+  - { description: 'Show the main window when launching', key: 'OpenMainWindow', type: 'bool', value: '{{ EnabledDisabled_Options }}'}
+  - { description: 'Dock Icon Type', key: 'IconType', type: 'int', value: '{{ ActivityMonitor_DockIconOptions }}'}
+  - { description: 'Show Processes Style', key: 'ShowCategory', type: 'int', value: '{{ ActivityMonitor_ShowProcessesOptions }}'}
+
+ApplicationFirewall_Preferences:
   - { description: 'Global State', key: 'globalstate', type: 'int', value: '{{ ApplicationFirewall_GlobalStates }}'}
   - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}
   - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: '{{ EnabledDisabled_Options }}'}

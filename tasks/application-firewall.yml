@@ -3,7 +3,7 @@
   - name: "Application Firewall"
     osx_defaults: { domain: '/Library/Preferences/com.apple.alf', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
     with_subelements:
-      - "{{ ApplicationFirewall_Options }}"
+      - "{{ ApplicationFirewall_Preferences }}"
       - value
     when: (item.0.key == 'globalstate' and item.1.name == ApplicationFirewall_GlobalState) or
           (item.0.key == 'allowdownloadsignedenabled' and item.1.name == ApplicationFirewall_AllowDownloadSigned) or
