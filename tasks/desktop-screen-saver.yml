@@ -1,11 +1,11 @@
 ---
 - block:
-  - name: "Get the current background image"
+  - name: "Desktop & Screen Saver - Get the current background image"
     command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data";
     changed_when: no
     register: BackGroundImage_Current
 
-  - name: "Check if background image exists"
+  - name: "Desktop & Screen Saver - Check if background image exists"
     stat: path={{ DesktopScreenSaver_BackGroundImage }}
     changed_when: no
     register: BackGroundImage_New
