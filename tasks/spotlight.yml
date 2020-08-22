@@ -7,7 +7,8 @@
     when: Spotlight_OrderedItems is defined
 
   - name: "Spotlight - Indexing Items"
-    osx_defaults: { domain: 'com.apple.spotlight', key: 'orderedItems', type: array, value: "{{ Spotlight_OrderedItems }}" }
+    osx_defaults: { domain: 'com.apple.spotlight', key: 'orderedItems', type: array, value: "{{ item }}" }
+    pool: "{{ Spotlight_OrderedItems }}"
     when: orderedItems is defined and orderedItems != []
     notify: restart Spotlight
   # Privilege escalation to `target_user_id` is only required for inner steps when
