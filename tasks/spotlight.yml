@@ -9,6 +9,7 @@
   - name: "Spotlight - Apply List of Indexing Items"
     osx_defaults: { domain: 'com.apple.spotlight', key: 'orderedItems', type: array, value: "{{ Spotlight_OrderedItems }}" }
     when: orderedItems is defined and orderedItems != []
+    changed_when: no
     notify: restart Spotlight
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

@@ -14,6 +14,7 @@
       - [] # first inject an empty array to clear dock
       - "{{ persistent_apps_array }}" # then inject the freshly build list
     when: persistent_apps_array is defined and persistent_apps_array != []
+    changed_when: no
     notify: restart Dock
 
   - name: "Dock - Persistent Others - Buils items list"
@@ -28,6 +29,7 @@
       - []
       - "{{ persistent_others_array }}"
     when: persistent_others_array is defined and persistent_others_array != []
+    changed_when: no
     notify: restart Dock
 
   - name: "Dock - Appearance"

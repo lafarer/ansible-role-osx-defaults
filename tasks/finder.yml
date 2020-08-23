@@ -40,6 +40,7 @@
       - { key: 'gridSpacing', type: 'integer', value: '{{ Finder_DVSIVSgridSpacing }}' }
       - { key: 'labelOnBottom', type: 'bool', value: '{{ Finder_DVSIVSlabelOnBottom }}' }
     when: item.value != ''
+    changed_when: no
     notify: restart Finder
   # It is necessary to `Delete` then `Add` the IconView preferences because:
   # - if they are not existing it is not possible to use `Set` and is necessary to use `Add`
@@ -54,6 +55,7 @@
       - { key: 'showItemInfo', type: 'bool', value: '{{ Finder_SVSIVSshowItemInfo }}' }
       - { key: 'gridSpacing', type: 'integer', value: '{{ Finder_SVSIVSgridSpacing }}' }
     when: item.value != '' # item.value is used to verify that there's a value to replace the value in the following task
+    changed_when: no
     notify: restart Finder
 
   - name: "Finder - Advanced - Show All Filename Extensions"
