@@ -1,7 +1,11 @@
 ---
-EnabledDisabled_Options:                      # to be used as selector
+EnabledDisabled_Options:
   - { name: "Disabled", value: 0 }
   - { name: "Enabled", value: 1 }
+
+EnabledDisabled_Alternate_Options:
+  - { name: "Disabled", value: 0 }
+  - { name: "Enabled", value: 2 }
 
 ActivityMonitor_DockIcon_Options:
   - { name: "Show Application Icon", value: 0 }
@@ -230,3 +234,36 @@ Safari_View_Preferences:
   - { description: 'Show Sidebar',            key: 'ShowSidebarInNewWindows',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
   - { description: 'Show Frequently Visited', key: 'ShowFrequentlyVisitedSites', type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
   - { description: 'Show Sidebar Mode',       key: 'SidebarViewModeIdentifier',  type: 'string', value: "{{ Safari_SidebarViewModeIdentifiers }}" }
+
+TrackpadThreeFingerVertSwipeGestures:
+  - { name: "Disabled", value: 0 }
+  - { name: "Four Fingers Mission Control/App Exposé", value: 1 }
+  - { name: "Three and Four Fingers Mission Control/App Exposé", value: 2 }
+
+TrackpadTwoFingerFromRightEdgeSwipeGestures:
+  - { name: "Disabled", value: 0 }
+  - { name: "Notification Center", value: 3 }
+
+Trackpad_Options:
+  - { description: 'Clicking',                                 key: 'Clicking',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'DragLock',                                 key: 'DragLock',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Dragging',                                 key: 'Dragging',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Pinch',                                    key: 'TrackpadPinch',                              type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Right Click',                              key: 'TrackpadRightClick',                         type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Rotate',                                   key: 'TrackpadRotate',                             type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Scroll',                                   key: 'TrackpadScroll',                             type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Horizontal Scroll',                        key: 'TrackpadHorizScroll',                        type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Momentum Scroll',                          key: 'TrackpadMomentumScroll',                     type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Corner Secondary Click',                   key: 'TrackpadCornerSecondaryClick',               type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Two Finger Double TapGesture',             key: 'TrackpadTwoFingerDoubleTapGesture',          type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Two Finger From Right Edge Swipe Gesture', key: 'TrackpadTwoFingerFromRightEdgeSwipeGesture', type: 'int',  value: "{{ TrackpadTwoFingerFromRightEdgeSwipeGestures }}" }
+  - { description: 'Three Finger Drag',                        key: 'TrackpadThreeFingerDrag',                    type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Horizontal Swipe Gesture',    key: 'TrackpadThreeFingerHorizSwipeGesture',       type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Tap Gesture',                 key: 'TrackpadThreeFingerTapGesture',              type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Vertical Swipe Gesture',      key: 'TrackpadThreeFingerVertSwipeGesture',        type: 'int',  value: "{{ TrackpadThreeFingerVertSwipeGestures }}" }
+  - { description: 'Four Finger Horizontal Swipe Gesture',     key: 'TrackpadFourFingerHorizSwipeGesture',        type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Four Finger Pinch Gesture',                key: 'TrackpadFourFingerPinchGesture',             type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Four Finger Vert SwipeGesture',            key: 'TrackpadFourFingerVertSwipeGesture',         type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'FiveFinger Pinch Gesture',                 key: 'TrackpadFiveFingerPinchGesture',             type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Hand Resting',                             key: 'TrackpadHandResting',                        type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'USB Mouse Stops Trackpad',                 key: 'USBMouseStopsTrackpad',                      type: 'int',  value: "{{ EnabledDisabled_Options }}" }

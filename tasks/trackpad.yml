@@ -1,92 +1,33 @@
 ---
 - block:
-  - name: "Trackpad - Set Tap to Click"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'Clicking', type: bool, value: "{{ Trackpad_Clicking }}" }
-    when: Trackpad_Clicking is defined
+  - name: "Trackpad"
+    osx_defaults: { domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Trackpad_Options }}"
+      - value
+    when: (item.0.key == 'Clicking'                             and (item.1.name == Trackpad_Clicking                             or item.1.value == Trackpad_Clicking)) or
+          (item.0.key == 'DragLock'                             and (item.1.name == Trackpad_DragLock                             or item.1.value == Trackpad_DragLock)) or
+          (item.0.key == 'Dragging'                             and (item.1.name == Trackpad_Dragging                             or item.1.value == Trackpad_Dragging)) or
+          (item.0.key == 'TrackpadCornerSecondaryClick'         and (item.1.name == Trackpad_TrackpadCornerSecondaryClick         or item.1.value == Trackpad_TrackpadCornerSecondaryClick)) or
+          (item.0.key == 'TrackpadFiveFingerPinchGesture'       and (item.1.name == Trackpad_TrackpadFiveFingerPinchGesture       or item.1.value == Trackpad_TrackpadFiveFingerPinchGesture)) or
+          (item.0.key == 'TrackpadFourFingerHorizSwipeGesture'  and (item.1.name == Trackpad_TrackpadFourFingerHorizSwipeGesture  or item.1.value == Trackpad_TrackpadFourFingerHorizSwipeGesture)) or
+          (item.0.key == 'TrackpadFourFingerPinchGesture'       and (item.1.name == Trackpad_TrackpadFourFingerPinchGesture       or item.1.value == Trackpad_TrackpadFourFingerPinchGesture)) or
+          (item.0.key == 'TrackpadFourFingerVertSwipeGesture'   and (item.1.name == Trackpad_TrackpadFourFingerVertSwipeGesture   or item.1.value == Trackpad_TrackpadFourFingerVertSwipeGesture)) or
+          (item.0.key == 'TrackpadHandResting'                  and (item.1.name == Trackpad_TrackpadHandResting                  or item.1.value == Trackpad_TrackpadHandResting)) or
+          (item.0.key == 'TrackpadHorizScroll'                  and (item.1.name == Trackpad_TrackpadHorizScroll                  or item.1.value == Trackpad_TrackpadHorizScroll)) or
+          (item.0.key == 'TrackpadMomentumScroll'               and (item.1.name == Trackpad_TrackpadMomentumScroll               or item.1.value == Trackpad_TrackpadMomentumScroll)) or
+          (item.0.key == 'TrackpadPinch'                        and (item.1.name == Trackpad_TrackpadPinch                        or item.1.value == Trackpad_TrackpadPinch)) or
+          (item.0.key == 'TrackpadRightClick'                   and (item.1.name == Trackpad_TrackpadRightClick                   or item.1.value == Trackpad_TrackpadRightClick)) or
+          (item.0.key == 'TrackpadRotate'                       and (item.1.name == Trackpad_TrackpadRotate                       or item.1.value == Trackpad_TrackpadRotate)) or
+          (item.0.key == 'TrackpadScroll'                       and (item.1.name == Trackpad_TrackpadScroll                       or item.1.value == Trackpad_TrackpadScroll)) or
+          (item.0.key == 'TrackpadThreeFingerDrag'              and (item.1.name == Trackpad_TrackpadThreeFingerDrag              or item.1.value == Trackpad_TrackpadThreeFingerDrag)) or
+          (item.0.key == 'TrackpadThreeFingerHorizSwipeGesture' and (item.1.name == Trackpad_TrackpadThreeFingerHorizSwipeGesture or item.1.value == Trackpad_TrackpadThreeFingerHorizSwipeGesture)) or
+          (item.0.key == 'TrackpadThreeFingerTapGesture'        and (item.1.name == Trackpad_TrackpadThreeFingerTapGesture        or item.1.value == Trackpad_TrackpadThreeFingerTapGesture)) or
+          (item.0.key == 'TrackpadThreeFingerVertSwipeGesture'  and (item.1.name == Trackpad_TrackpadThreeFingerVertSwipeGesture  or item.1.value == Trackpad_TrackpadThreeFingerVertSwipeGesture)) or
+          (item.0.key == 'TrackpadTwoFingerDoubleTapGesture'    and (item.1.name == Trackpad_TrackpadTwoFingerDoubleTapGesture    or item.1.value == Trackpad_TrackpadTwoFingerDoubleTapGesture)) or
+          (item.0.key == 'USBMouseStopsTrackpad'                and (item.1.name == Trackpad_USBMouseStopsTrackpad                or item.1.value == Trackpad_USBMouseStopsTrackpad)) or
+          (item.0.key == 'TrackpadTwoFingerFromRightEdgeSwipeGesture' and (item.1.name == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture or item.1.value == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture))
 
-  - name: "Trackpad - Set DragLock"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'DragLock', type: bool, value: "{{ Trackpad_DragLock }}" }
-    when: Trackpad_DragLock is defined
-
-  - name: "Trackpad - Set Dragging"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'Dragging', type: bool, value: "{{ Trackpad_Dragging }}" }
-    when: Trackpad_Dragging is defined
-
-  - name: "Trackpad - Set Trackpad Corner Secondary Click"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadCornerSecondaryClick', type: int, value: "{{ Trackpad_TrackpadCornerSecondaryClick }}" }
-    when: Trackpad_TrackpadCornerSecondaryClick is defined
-
-  - name: "Trackpad - Set Trackpad FiveFinger Pinch Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadFiveFingerPinchGesture', type: int, value: "{{ Trackpad_TrackpadFiveFingerPinchGesture }}" }
-    when: Trackpad_TrackpadFiveFingerPinchGesture is defined
-
-  - name: "Trackpad - Set Trackpad Four Finger Horizontal Swipe Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadFourFingerHorizSwipeGesture', type: int, value: "{{ Trackpad_TrackpadFourFingerHorizSwipeGesture }}" }
-    when: Trackpad_TrackpadFourFingerHorizSwipeGesture is defined
-
-  - name: "Trackpad - Set Trackpad Four Finger Pinch Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadFourFingerPinchGesture', type: int, value: "{{ Trackpad_TrackpadFourFingerPinchGesture }}" }
-    when: Trackpad_TrackpadFourFingerPinchGesture is defined
-
-  - name: "Trackpad - Set Trackpad Four Finger Vert SwipeGesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadFourFingerVertSwipeGesture', type: int, value: "{{ Trackpad_TrackpadFourFingerVertSwipeGesture }}" }
-    when: Trackpad_TrackpadFourFingerVertSwipeGesture is defined
-
-  - name: "Trackpad - Set Trackpad Hand Resting"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadHandResting', type: int, value: "{{ Trackpad_TrackpadHandResting }}" }
-    when: Trackpad_TrackpadHandResting is defined
-
-  - name: "Trackpad - Set Trackpad Horizontal Scroll"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadHorizScroll', type: int, value: "{{ Trackpad_TrackpadHorizScroll }}" }
-    when: Trackpad_TrackpadHorizScroll is defined
-
-  - name: "Trackpad - Set Trackpad Momentum Scroll"
-    osx_defaults: { domain: 'as', key: 'TrackpadMomentumScroll', type: int, value: "{{ Trackpad_TrackpadMomentumScroll }}" }
-    when: Trackpad_TrackpadMomentumScroll is defined
-
-  - name: "Trackpad - Set Trackpad Pinch"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadPinch', type: int, value: "{{ Trackpad_TrackpadPinch }}" }
-    when: Trackpad_TrackpadPinch is defined
-
-  - name: "Trackpad - Set Trackpad Right Click"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadRightClick', type: int, value: "{{ Trackpad_TrackpadRightClick }}" }
-    when: Trackpad_TrackpadRightClick is defined
-
-  - name: "Trackpad - Set Trackpad Rotate"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadRotate', type: int, value: "{{ Trackpad_TrackpadRotate }}" }
-    when: Trackpad_TrackpadRotate is defined
-
-  - name: "Trackpad - Set Trackpad Scroll"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadScroll', type: int, value: "{{ Trackpad_TrackpadScroll }}" }
-    when: Trackpad_TrackpadScroll is defined
-
-  - name: "Trackpad - Set Trackpad Three Finger Drag"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadThreeFingerDrag', type: int, value: "{{ Trackpad_TrackpadThreeFingerDrag }}" }
-    when: Trackpad_TrackpadThreeFingerDrag is defined
-
-  - name: "Trackpad - Set Trackpad Three Finger Horizontal Swipe Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadThreeFingerHorizSwipeGesture', type: int, value: "{{ Trackpad_TrackpadThreeFingerHorizSwipeGesture }}" }
-    when: Trackpad_TrackpadThreeFingerHorizSwipeGesture is defined
-
-  - name: "Trackpad - Set Trackpad Three Finger Tap Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadThreeFingerTapGesture', type: int, value: "{{ Trackpad_TrackpadThreeFingerTapGesture }}" }
-    when: Trackpad_TrackpadThreeFingerTapGesture is defined
-
-  - name: "Trackpad - Set Trackpad Three Finger Vertical Swipe Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadThreeFingerVertSwipeGesture', type: int, value: "{{ Trackpad_TrackpadThreeFingerVertSwipeGesture }}" }
-    when: Trackpad_TrackpadThreeFingerVertSwipeGesture is defined
-
-  - name: "Trackpad - Set Trackpad Two Finger Double TapGesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadTwoFingerDoubleTapGesture', type: int, value: "{{ Trackpad_TrackpadTwoFingerDoubleTapGesture }}" }
-    when: Trackpad_TrackpadTwoFingerDoubleTapGesture is defined
-
-  - name: "Trackpad - Set Trackpad Two Finger From Right Edge Swipe Gesture"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'TrackpadTwoFingerFromRightEdgeSwipeGesture', type: int, value: "{{ Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture }}" }
-    when: Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture is defined
-
-  - name: "Trackpad - Set USB Mouse Stops Trackpad"
-    osx_defaults: { domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad', key: 'USBMouseStopsTrackpad', type: int, value: "{{ Trackpad_USBMouseStopsTrackpad }}" }
-    when: Trackpad_USBMouseStopsTrackpad is defined
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ (target_user_id != ansible_user_id) | bool }}"
