@@ -27,7 +27,7 @@
     osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
     loop: "{{ Finder_NewWindowsShow_Options }}"
     when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget
-    change_when: no
+    changed_when: no
     notify: restart Finder
 
   - name: "Finder - Desktop - IconViewSettings"
