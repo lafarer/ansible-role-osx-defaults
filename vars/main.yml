@@ -222,3 +222,11 @@ Safari_TopSitesGridArrangements:
   - { name: "6 sites", value: 0}
   - { name: "12 sites", value: 1}
   - { name: "24 sites", value: 2}
+
+Safari_View_Preferences:
+  - { description: 'Show Favorites Bar',      key: 'ShowFavoritesBar-v2',        type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Tab Bar',            key: 'AlwaysShowTabBar',           type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Status Bar',         key: 'ShowOverlayStatusBar',       type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Sidebar',            key: 'ShowSidebarInNewWindows',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Show Frequently Visited', key: 'ShowFrequentlyVisitedSites', type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Sidebar Mode',       key: 'SidebarViewModeIdentifier',  type: 'string', value: "{{ Safari_SidebarViewModeIdentifiers }}" }

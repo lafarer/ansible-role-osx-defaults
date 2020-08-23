@@ -117,9 +117,6 @@
     when: Safari_WebKitMinimumFontSize is defined
     notify: restart Safari
 
-  - fail:
-    ignore_errors: false
-
   #- name: "Safari - Advanced - Bonjour - Include Bonjour in the Favorites bar
 
   #- name: "Safari - Advanced - Style sheet
@@ -128,36 +125,19 @@
 
   #- name: "Safari - Advanced - Proxies
 
-  - name: "Safari - View - Show Favorites Bar"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowFavoritesBar-v2', type: bool, value: "{{ Safari_ShowFavoritesBar }}" }
-    when: Safari_ShowFavoritesBar is defined
+  - name: "Safari - View Preferences"
+    osx_defaults: { domain: 'com.apple.safari', key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    with_subelements:
+      - "{{ Safari_View_Preferences }}"
+      - value
+    when: (item.0.key == 'ShowFavoritesBar-v2'        and (item.1.name == Safari_ShowFavoritesBar           or item.1.value == Safari_ShowFavoritesBar|bool))           or
+          (item.0.key == 'AlwaysShowTabBar'           and (item.1.name == Safari_AlwaysShowTabBar           or item.1.value == Safari_AlwaysShowTabBar|bool))           or
+          (item.0.key == 'ShowOverlayStatusBar'       and (item.1.name == Safari_ShowOverlayStatusBar       or item.1.value == Safari_ShowOverlayStatusBar|bool))       or
+          (item.0.key == 'ShowSidebarInNewWindows'    and (item.1.name == Safari_ShowSidebarInNewWindows    or item.1.value == Safari_ShowSidebarInNewWindows|bool))    or
+          (item.0.key == 'ShowFrequentlyVisitedSites' and (item.1.name == Safari_ShowFrequentlyVisitedSites or item.1.value == Safari_ShowFrequentlyVisitedSites|bool)) or
+          (item.0.key == 'SidebarViewModeIdentifier'  and item.1.value == Safari_SidebarViewModeIdentifier)
     notify: restart Safari
 
-  - name: "Safari - View - Show Tab Bar"
-    osx_defaults: { domain: 'com.apple.safari', key: 'AlwaysShowTabBar', type: bool, value: "{{ Safari_AlwaysShowTabBar }}" }
-    when: Safari_AlwaysShowTabBar is defined
-    notify: restart Safari
-
-  - name: "Safari - View - Show Status Bar"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowOverlayStatusBar', type: bool, value: "{{ Safari_ShowOverlayStatusBar }}" }
-    when: Safari_ShowOverlayStatusBar is defined
-    notify: restart Safari
-
-  - name: "Safari - View - Show Sidebar"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowSidebarInNewWindows', type: bool, value: "{{ Safari_ShowSidebarInNewWindows }}" }
-    when: Safari_ShowSidebarInNewWindows is defined
-    notify: restart Safari
-
-  - name: "Safari - View - Show Sidebar Mode"
-    osx_defaults: { domain: 'com.apple.safari', key: 'SidebarViewModeIdentifier', type: string, value: "{{ item.value }}" }
-    loop: "{{ Safari_SidebarViewModeIdentifiers }}"
-    when: Safari_SidebarViewModeIdentifier is defined and item.value == Safari_SidebarViewModeIdentifier
-    notify: restart Safari
-
-  - name: "Safari - Bookmarks - Show Frequently Visited in Favorites"
-    osx_defaults: { domain: 'com.apple.safari', key: 'ShowFrequentlyVisitedSites', type: bool, value: "{{ Safari_ShowFrequentlyVisitedSites }}" }
-    when: Safari_ShowFrequentlyVisitedSites is defined
-    notify: restart Safari
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ (target_user_id != ansible_user_id) | bool }}"
