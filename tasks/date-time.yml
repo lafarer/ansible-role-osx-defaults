@@ -3,7 +3,7 @@
   - name: "Date Time - Get the current timezone"
     command: "systemsetup -gettimezone"
     register: result
-    changed_when: False
+    changed_when: no
     when: DateTime_TimeZone is defined
 
   - name: "Date Time - Set the timezone"
@@ -25,7 +25,7 @@
   - name: "Date Time - Get the current time server"
     command: "systemsetup -getnetworktimeserver"
     register: result
-    changed_when: False
+    changed_when: no
     when: DateTime_TimeServer is defined
 
   - name: "Date Time - Set time server"

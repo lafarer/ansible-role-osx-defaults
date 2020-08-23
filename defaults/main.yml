@@ -59,7 +59,7 @@ DateTime_IsAnalog: no                         # Analog menu bar clock
 DesktopScreenSaver_Enabled: no                # Enable Desktop and Screen Saver configuration
 DesktopScreenSaver_BackGroundImage: ""           # Background iamge
 #/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
-DesktopScreenSaver_askForPassword: "False"        # Require password after sleep or screen saver begins
+DesktopScreenSaver_askForPassword: no        # Require password after sleep or screen saver begins
 
 DiskImages_Enabled: no                        # Enable DiskImages configuration
 DiskImages_SkipVerify: no                     # Skip Verification
@@ -86,7 +86,7 @@ Dock_LargeSize: 128                              # Icon size of magnified Dock i
 Dock_Orientation: "bottom"                       # Dock orientation: left, bottom, right
 Dock_MinEffect: "genie"                          # Minimization effect: genie, scale, suck
 Dock_AppleActionOnDoubleClick: "Maximize"        # Double-click a window's title title bar to: None, Minimize, Maximize
-Dock_MinimizeToApplication: no                # Minimize windows appliction into icon (true, false)
+Dock_MinimizeToApplication: no                # Minimize windows appliction into icon (yes, no)
 Dock_LaunchAnim: yes                            # Animate opening applications
 Dock_Autohide: no                             # Automatically hide and show the Dock
 Dock_Autohide_Time_Modifier: 0                   # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
@@ -188,11 +188,11 @@ LanguageRegion_Enabled: no                    # Enable Language and Region confi
 #LanguageRegion_Languages: [ "en", "fr" ]        # Preferred languages (in order of preference e.g. [ "en", "fr" ])
 LanguageRegion_Locale: "en_US@currency=USD"      # Locale and Currency (United States : en_US@currency=USD, Great Britian : en_GB@currency=EUR)
 LanguageRegion_MeasurementUnits: "Inches"        # Measure Units (Inches, Centimeters)
-LanguageRegion_Force24HourTime: "true"           # Force 12/24 hour time
-LanguageRegion_MetricUnits: "false"              # Set Metric Units
+LanguageRegion_Force24HourTime: yes           # Force 12/24 hour time
+LanguageRegion_MetricUnits: no              # Set Metric Units
 
 LaunchServices_Enabled: no                    # Enable Launch Services configuration
-LaunchServices_LSQuarantine: yes                # false = disable the “Are you sure you want to open this application?” dialog
+LaunchServices_LSQuarantine: yes                # no = disable the “Are you sure you want to open this application?” dialog
 
 LoginWindow_Enabled: no                       # Enable Launch Services configuration
 LoginWindow_DisableConsoleAccess: no          # Toggle login for hidden user '>Console'
