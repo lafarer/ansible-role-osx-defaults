@@ -374,6 +374,7 @@ Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - En
       vars:
         Bluetooth_Enabled: yes
         Bluetooth_ShowInMenuBar: no
+        target_user_id: 'testuser_name'
 
       roles:
          - { role: lafarer.osx-defaults }
