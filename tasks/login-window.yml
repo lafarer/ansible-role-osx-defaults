@@ -1,0 +1,35 @@
+---
+- block:
+  - name: "Login Window - Settings"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { description: "Toggle login for hidden user '>Console'", key: 'DisableConsoleAccess', type: 'bool', value: '{{ LoginWindow_DisableConsoleAccess }}'}
+      - { description: "Toggle guest login", key: 'GuestEnabled', type: 'bool', value: '{{ LoginWindow_GuestEnabled }}'}
+      - { description: "Add a message to the login screen", key: 'LoginwindowText', type: 'string', value: '{{ LoginWindow_LoginwindowText }}'}
+      - { description: "Disable shutdown and restart button on login Window", key: 'PowerOffDisabled', type: 'bool', value: '{{ LoginWindow_ShutDownDisabled }}'}
+      - { description: "Show input menu", key: 'showInputMenu', type: 'bool', value: '{{ LoginWindow_showInputMenu }}'}
+      - { description: "Show password hints - Retries until hint", key: 'RetriesUntilHint', type: 'int', value: '{{ LoginWindow_RetriesUntilHint }}'}
+    when: item.value != ''
+
+  - name: "Login Window - Display Style"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'SHOWFULLNAME', type: bool, value: "{{ item.value }}" }
+    loop: "{{ LoginWindow_DisplayStyles }}"
+    when:
+      - LoginWindow_Display is defined
+      - (item.name == LoginWindow_Display or item.value == LoginWindow_Display)
+
+  - name: "Check if login screen background image exists"
+    stat: path={{ LoginWindow_DesktopPicture }}
+    changed_when: no
+    register: LoginWindow_DesktopPicture_New
+
+  - name: "Login Window - Change login screen background"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'DesktopPicture', type: string, value: "{{ item }}" }
+    loop:
+      - "{{ LoginWindow_DesktopPicture }}"
+    when:
+      - LoginWindow_DesktopPicture is defined
+      - LoginWindow_DesktopPicture != ""
+      - LoginWindow_DesktopPicture_New.stat.exists
+  # the above block is run as superuser
+  become: yes

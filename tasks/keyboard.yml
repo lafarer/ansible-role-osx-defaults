@@ -1,54 +1,54 @@
 ---
-- name: "Keyboard - Set key repeat rate"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'KeyRepeat', type: int, value: "{{ Keyboard_KeyRepeat }}" }
-  when: Keyboard_KeyRepeat is defined
+- block:
+  - name: "Keyboard - Global - AmbientLightSensor"
+    osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { description: 'Adjust keyboard brightness in low light', key: 'Automatic Keyboard Enabled', type: 'bool',  value: "{{ Keyboard_kDim }}" }
+      - { description: 'Dim keyboard after idle time in seconds', key: 'Keyboard Dim Time', type: 'string', value: "{{ Keyboard_kDimTime }}" }
+    when: item.value != ''
+  # the above block is run as superuser
+  become: yes
 
-- name: "Keyboard - Set delay until repeat (in milliseconds)"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'InitialKeyRepeat', type: int, value: "{{ Keyboard_InitialKeyRepeat }}" }
-  when: Keyboard_InitialKeyRepeat is defined
+- block:
+  - name: "Keyboard - User - Full Keyboard Access"
+    osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{ item.value }}" }
+    loop: "{{ Keyboard_AppleKeyboardUIModeOptions }}"
+    when:
+      - Keyboard_AppleKeyboardUIMode is defined
+      - (Keyboard_AppleKeyboardUIMode == item.name or Keyboard_AppleKeyboardUIMode == item.value)
 
-- name: "Keyboard - Use F1, F2, etc. keys as standard function keys"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'com.apple.Keyboard_fnState', type: bool, value: "{{ Keyboard_fnState }}" }
-  when: Keyboard_fnState is defined
+  - name: "Keyboard - User - Prevent accidental Power button presses from sleeping system"
+    osx_defaults: { domain: 'com.apple.loginwindow', key: 'PowerButtonSleepsSystem', type: bool, value: "{{ item }}" }
+    loop:
+      - "{{ Keyboard_PowerButtonSleepsSystem }}"
+    when: Keyboard_PowerButtonSleepsSystem is defined
 
-- name: "Keyboard - Adjust keyboard brightness in low light (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDim', type: bool, value: "{{ Keyboard_kDim }}" }
-  when: Keyboard_kDim is defined
+  - name: "Keyboard - User - BezelServices"
+    osx_defaults: { domain: 'com.apple.BezelServices', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value  }}" }
+    loop:
+      - { description: 'Adjust keyboard brightness in low light', key: 'kDim', type: 'bool', value: '{{ Keyboard_kDim }}'}
+      - { description: 'Dim keyboard after idle time in seconds', key: 'kDimTime', type: 'int', value: '{{ Keyboard_kDimTime }}'}
+    when: item.value != ''
 
-- name: "Keyboard - Adjust keyboard brightness in low light (AmbientLightSensor)"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Automatic Keyboard Enabled', type: bool, value: "{{ Keyboard_kDim }}" }
-  become: true
-  when: Keyboard_kDim is defined
+  - name: "Keyboard - User - Keys"
+    osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value  }}" }
+    loop:
+      - { description: 'Use Fn keys as standard function keys', key: 'com.apple.Keyboard_fnState', type: 'bool', value: '{{ Keyboard_fnState }}'}
+      - { description: 'Set key repeat rate', key: 'KeyRepeat', type: 'int', value: '{{ Keyboard_KeyRepeat }}'}
+      - { description: 'Set delay until repeat (in milliseconds)', key: 'InitialKeyRepeat', type: 'int', value: '{{ Keyboard_InitialKeyRepeat }}'}
+      - { description: 'Disable press-and-hold for keys in favor of key repeat', key: 'ApplePressAndHoldEnabled', type: 'bool', value: '{{ Keyboard_PressAndHoldEnabled }}'}
+    when: item.value != ''
 
-- name: "Keyboard - Dim keyboard after idle time in seconds (BezelServices)"
-  osx_defaults: { domain: 'com.apple.BezelServices', key: 'kDimTime', type: int, value: "{{ Keyboard_kDimTime }}" }
-  when: Keyboard_kDim is defined and Keyboard_kDim == "true" and Keyboard_kDimTime is defined
+  - name: "Keyboard - User - Automatic Spelling Correction & Smart Substitutions"
+    osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { key: 'NSAutomaticSpellingCorrectionEnabled',  type: 'bool', value: '{{ Keyboard_AutomaticSpellingCorrectionEnabled }}'}
+      - { key: 'NSAutomaticQuoteSubstitutionEnabled',   type: 'bool', value: '{{ Keyboard_AutomaticQuoteSubstitutionEnabled }}'}
+      - { key: 'NSAutomaticDashSubstitutionEnabled',    type: 'bool', value: '{{ Keyboard_AutomaticDashSubstitutionEnabled }}'}
+      - { key: 'NSAutomaticPeriodSubstitutionEnabled',  type: 'bool', value: '{{ Keyboard_AutomaticPeriodSubstitutionEnabled }}'}
+    when: item.value != ''
 
-- name: "Keyboard - Dim keyboard after idle time in seconds (AmbientLightSensor) {{ Keyboard_kDimTime }}"
-  osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: 'Keyboard Dim Time', type: int, value: "{{ Keyboard_kDimTime }}" }
-  become: true
-  when: Keyboard_kDim is defined and Keyboard_kDim == "true" and Keyboard_kDimTime is defined
-
-- name: "Keyboard - Correct spelling automatically"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticSpellingCorrectionEnabled', type: bool, value: "{{ Keyboard_AutomaticSpellingCorrectionEnabled }}" }
-  when: Keyboard_AutomaticSpellingCorrectionEnabled is defined
-
-- name: "Keyboard - Use smart quotes"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticQuoteSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticQuoteSubstitutionEnabled }}" }
-  when: Keyboard_AutomaticQuoteSubstitutionEnabled is defined
-
-- name: "Keyboard - Use smart dashes"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'NSAutomaticDashSubstitutionEnabled', type: bool, value: "{{ Keyboard_AutomaticDashSubstitutionEnabled }}" }
-  when: Keyboard_AutomaticDashSubstitutionEnabled is defined
-
-- name: "Keyboard - Full Keyboard Access"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleKeyboardUIMode', type: int, value: "{{ Keyboard_AppleKeyboardUIMode }}" }
-  when: Keyboard_AppleKeyboardUIMode is defined
-
-- name: "Keyboard - Prevent accidental Power button presses from sleeping system"
-  osx_defaults: { domain: 'com.apple.loginwindow', key: 'PowerButtonSleepsSystem', type: bool, value: "{{ Keyboard_PowerButtonSleepsSystem }}" }
-  when: Keyboard_PowerButtonSleepsSystem is defined
-
-- name: "Keyboard - Disable press-and-hold for keys in favor of key repeat"
-  osx_defaults: { domain: 'NSGlobalDomain', key: 'ApplePressAndHoldEnabled', type: bool, value: "{{ Keyboard_PressAndHoldEnabled }}" }
-  when: Keyboard_PressAndHoldEnabled is defined
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"

@@ -1,0 +1,269 @@
+---
+EnabledDisabled_Options:
+  - { name: "Disabled", value: 0 }
+  - { name: "Enabled", value: 1 }
+
+EnabledDisabled_Alternate_Options:
+  - { name: "Disabled", value: 0 }
+  - { name: "Enabled", value: 2 }
+
+ActivityMonitor_DockIcon_Options:
+  - { name: "Show Application Icon", value: 0 }
+  - { name: "Show Network Usage", value: 2 }
+  - { name: "Show Disk Activity", value: 3 }
+  - { name: "Show CPU Usage", value: 5 }
+  - { name: "Show CPU History", value: 6 }
+
+ActivityMonitor_ShowProcesses_Options:
+  - { name: "Show All Processes", value: 100 }
+  - { name: "Show All Processes, Hierarchically", value: 101 }
+  - { name: "My Processes", value: 102 }
+  - { name: "System Processes", value: 103 }
+  - { name: "Other Processes", value: 104 }
+  - { name: "Active Processes", value: 105 }
+  - { name: "Inactive Processes", value: 106 }
+  - { name: "Windowed Processes", value: 107 }
+  - { name: "GPU Processes", value: 110 }
+
+ActivityMonitor_Preferences:
+  - { description: 'Show the main window when launching', key: 'OpenMainWindow', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Dock Icon Type', key: 'IconType', type: 'int', value: "{{ ActivityMonitor_DockIcon_Options }}"}
+  - { description: 'Show Processes Style', key: 'ShowCategory', type: 'int', value: "{{ ActivityMonitor_ShowProcesses_Options }}"}
+
+ApplicationFirewall_Preferences:
+  - { description: 'Global State', key: 'globalstate', type: 'int', value: "{{ ApplicationFirewall_GlobalStates }}"}
+  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: "{{ ApplicationFirewall_Logging_Options }}"}
+  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+
+ApplicationFirewall_GlobalStates:
+  - { name: "Off", value: 0 }
+  - { name: "On", value: 1 }
+  - { name: "Block All Incoming Connections", value: 2 }
+
+ApplicationFirewall_Logging_Options:
+  - { name: "Throttled", value: 0 }
+  - { name: "Brief", value: 1 }
+  - { name: "Detail", value: 2 }
+
+Displays_AppleFontSmoothing_Options:
+  - { name: "Disabled", value: 0 }
+  - { name: "Minimal",  value: 1 }
+  - { name: "Medium",   value: 2 }
+  - { name: "Smoother", value: 3 }
+  - { name: "Strong",   value: 4 }
+
+Finder_NewWindowsShow_Options:
+  - { name: "Computer",      shortcode: "PfCm", value: "" }
+  - { name: "Computer's HD", shortcode: "PfVo", value: "file:///" }
+  - { name: "Home",          shortcode: "PfHm", value: "file://${HOME}/" }
+  - { name: "Desktop",       shortcode: "PfDe", value: "file://${HOME}/Desktop/" }
+  - { name: "Documents",     shortcode: "PfDo", value: "file://${HOME}/Documents/" }
+  - { name: "All My Files",  shortcode: "PfAF", value: "file:///System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch" }
+
+HotCorners_AvailableModifiers:
+  - { name: "Enabled", value: 0 }
+  - { name: "Disabled", value: 1048576 }
+
+HotCorners_AvailableActions:
+  - { name: "no-op", value: 0 }
+  - { name: "Disabled", value: 1 }
+  - { name: "Mission Control", value: 2 }
+  - { name: "Show Application Windows", value: 3 }
+  - { name: "Desktop", value: 4 }
+  - { name: "Start Screen Saver", value: 5 }
+  - { name: "Disable Screen Saver", value: 6 }
+  - { name: "Dashboard", value: 7 }
+  - { name: "Put Display To Sleep", value: 10 }
+  - { name: "Launchpad", value: 11 }
+  - { name: "Notification Center", value: 12 }
+
+HotCorners_Modifiers:
+  - { description: 'Bottom Left',  key: 'wvous-bl-modifier', value: "{{ HotCorners_AvailableModifiers }}"}
+  - { description: 'Bottom Right', key: 'wvous-br-modifier', value: "{{ HotCorners_AvailableModifiers }}"}
+  - { description: 'Top Left',     key: 'wvous-tl-modifier', value: "{{ HotCorners_AvailableModifiers }}"}
+  - { description: 'Top Right',    key: 'wvous-tr-modifier', value: "{{ HotCorners_AvailableModifiers }}"}
+
+HotCorners_Actions:
+  - { description: 'Bottom Left',  key: 'wvous-bl-corner', value: "{{ HotCorners_AvailableActions }}"}
+  - { description: 'Bottom Right', key: 'wvous-br-corner', value: "{{ HotCorners_AvailableActions }}"}
+  - { description: 'Top Left',     key: 'wvous-tl-corner', value: "{{ HotCorners_AvailableActions }}"}
+  - { description: 'Top Right',    key: 'wvous-tr-corner', value: "{{ HotCorners_AvailableActions }}"}
+
+Keyboard_AppleKeyboardUIModeOptions:
+  - { name: "Text boxes and lists only", value: 1 }
+  - { name: "All controls", value: 3 }
+
+LoginWindow_DisplayStyles:
+  - { name: "List of users", value: 0 }
+  - { name: "Name and password", value: 1 }
+
+Safari_Advanced_Options:
+  - { description: 'Automatic Extensions Upgrade', key: 'InstallExtensionUpdatesAutomatically', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit)', key: 'WebKitTabToLinksPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit2)', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Include Bonjour in the Bookmarks Menu', key: 'BookmarksMenuIncludesRendezvous', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Stop plug-ins to saver power',          key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Show Develop menu in menu bar',         key: 'IncludeDevelopMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Developer Extras Preference Key',       key: 'WebKitDeveloperExtrasEnabledPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Developer Extras',  key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Debug Menu',                            key: 'IncludeInternalDebugMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+
+Safari_Autofill_Options:
+  - { description: 'Using info from my Contact card', key: 'AutoFillFromAddressBook',    type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Using names and passwords',       key: 'AutoFillPasswords',          type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Credit cards',                    key: 'AutoFillCreditCardData',     type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Other forms',                     key: 'AutoFillMiscellaneousForms', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+
+Safari_CookiesAndWebsiteData_Options:
+  - { name: "Always block",                     key: "BlockStoragePolicy",          value: 0 }
+  - { name: "Always block",                     key: "WebKitStorageBlockingPolicy", value: 2 }
+  - { name: "Always block",                     key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 2 }
+  - { name: "Always from current website only", key: "BlockStoragePolicy",          value: 3 }
+  - { name: "Always from current website only", key: "WebKitStorageBlockingPolicy", value: 1 }
+  - { name: "Always from current website only", key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
+  - { name: "Allow from websites I visit",      key: "BlockStoragePolicy",          value: 2 }
+  - { name: "Allow from websites I visit",      key: "WebKitStorageBlockingPolicy", value: 1 }
+  - { name: "Allow from websites I visit",      key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 1 }
+  - { name: "Always allow",                     key: "BlockStoragePolicy",          value: 1 }
+  - { name: "Always allow",                     key: "WebKitStorageBlockingPolicy", value: 0 }
+  - { name: "Always allow",                     key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2StorageBlockingPolicy", value: 0 }
+
+
+Safari_DownloadsClearingPolicies:
+  - { name: "Manually", value: 0}
+  - { name: "After one day", value: 1}
+  - { name: "Upon successfull download", value: 2}
+  - { name: "When Safari quits", value: 3}
+
+Safari_General_Options:
+  - { description: 'New windows open with',      key: 'NewWindowBehavior',       type: 'int', value: "{{ Safari_NewWindowBehaviors }}"}
+  - { description: 'New tabs open with',         key: 'NewTabBehavior',          type: 'int', value: "{{ Safari_NewTabBehaviors }}"}
+  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: "{{ Safari_HistoryAgeInDaysLimits }}"}
+  - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: "{{ Safari_TopSitesGridArrangements }}"}
+  - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: "{{ Safari_DownloadsClearingPolicies }}"}
+  - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+
+Safari_GeolocationPermissionPolicies:
+  - { name: "Deny without prompting", value: 0}
+  - { name: "Prompt for each site once each day", value: 1}
+  - { name: "Prompt for each site one time only", value: 2}
+
+Safari_HistoryAgeInDaysLimits:
+  - { name: "One day", value: 1 }
+  - { name: "One week", value: 7 }
+  - { name: "Two weeks", value: 14 }
+  - { name: "One month", value: 31 }
+  - { name: "Six months", value: 182 }
+  - { name: "One year", value: 365 }
+
+Safari_NewTabBehaviors:
+  - { name: "Hompage", value: 0}
+  - { name: "Empty page", value: 1}
+  - { name: "Same page", value: 2}
+  - { name: "Favorites", value: 4}
+
+Safari_NewWindowBehaviors:
+  - { name: "Hompage", value: 0}
+  - { name: "Empty page", value: 1}
+  - { name: "Same page", value: 2}
+  - { name: "Favorites", value: 4}
+  - { name: "Tabs for Favorites", value: 5}
+
+Safari_OpenWith_Options:
+  - { name: "A new window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
+  - { name: "A new window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 0}
+  - { name: "A new private window", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 1 }
+  - { name: "A new private window", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 0}
+  - { name: "All windows from last session", key: "OpenPrivateWindowWhenNotRestoringSessionAtLaunch", type: 'bool', value: 0 }
+  - { name: "All windows from last session", key: "AlwaysRestoreSessionAtLaunch", type: 'bool', value: 1}
+
+Safari_PrivacyNotifications_Options:
+  - { description: 'Website use of location services', key: 'SafariGeolocationPermissionPolicy', type: 'int',   value: "{{ Safari_GeolocationPermissionPolicies }}"}
+  - { description: 'Ask websites not to track me',     key: 'SendDoNotTrackHTTPHeader',          type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Allow websites to ask for permission to send push notifications', key: 'CanPromptForPushNotifications', type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
+
+Safari_SearchEngineIdentifiers:
+  - { name: Yahoo, value: "com.yahoo.www" }
+  - { name: Google, value: "com.google.www" }
+  - { name: Bing, value: "com.bing.www" }
+  - { name: DuckDuckGo, value: "com.duckduckgo" }
+
+Safari_Search_Options:
+  - { description: 'Search Engine Identifier',                  domain: 'NSGlobalDomain',   key: 'NSProviderIdentifier',         type: 'string', value: "{{ Safari_SearchEngineIdentifiers }}"}
+  - { description: 'Include search engine suggestions',         domain: 'com.apple.safari', key: 'SuppressSearchSuggestions',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'SmartSearchField: Show full website address',   domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+
+Safari_Security_Options:
+  - { name: "Warn when visiting a fraudulent website", key: "WarnAboutFraudulentWebsites", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Web Content: Enable Javascript",          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Web Content: Allow pop-up windows",       key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Web Content: Allow WebGL",                key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Allow Plug-ins",                          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+
+Safari_SidebarViewModeIdentifiers:
+  - { value: 'Bookmarks' }
+  - { value: 'Reading List' }
+  - { value: 'Social Links' }
+
+Safari_TabCreationPolicies:
+  - { name: "Never", value: 0}
+  - { name: "Automatically", value: 1}
+  - { name: "Always", value: 2}
+
+Safari_Tabs_Options:
+  - { description: 'Open pages in tabs instead of windows',          key: 'TabCreationPolicy',            type: 'int',  value: "{{ Safari_TabCreationPolicies }}"}
+  - { description: 'CMD+click opens a link in a new tab',            key: 'CommandClickMakesTabs',        type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'When a new tab or window opens, make it active', key: 'OpenNewTabsInFront',           type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Use CMD+1 through CMD+9 to switch tabs',         key: 'Command1Through9SwitchesTabs', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+
+Safari_TopSitesGridArrangements:
+  - { name: "6 sites", value: 0}
+  - { name: "12 sites", value: 1}
+  - { name: "24 sites", value: 2}
+
+Safari_View_Preferences:
+  - { description: 'Show Favorites Bar',      key: 'ShowFavoritesBar-v2',        type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Tab Bar',            key: 'AlwaysShowTabBar',           type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Status Bar',         key: 'ShowOverlayStatusBar',       type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Sidebar',            key: 'ShowSidebarInNewWindows',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Show Frequently Visited', key: 'ShowFrequentlyVisitedSites', type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Sidebar Mode',       key: 'SidebarViewModeIdentifier',  type: 'string', value: "{{ Safari_SidebarViewModeIdentifiers }}" }
+
+TrackpadThreeFingerVertSwipeGestures:
+  - { name: "Disabled", value: 0 }
+  - { name: "Four Fingers Mission Control/App Exposé", value: 1 }
+  - { name: "Three and Four Fingers Mission Control/App Exposé", value: 2 }
+
+TrackpadTwoFingerFromRightEdgeSwipeGestures:
+  - { name: "Disabled", value: 0 }
+  - { name: "Notification Center", value: 3 }
+
+Trackpad_Options:
+  - { description: 'Clicking',                                 key: 'Clicking',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'DragLock',                                 key: 'DragLock',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Dragging',                                 key: 'Dragging',                                   type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Pinch',                                    key: 'TrackpadPinch',                              type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Right Click',                              key: 'TrackpadRightClick',                         type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Rotate',                                   key: 'TrackpadRotate',                             type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Scroll',                                   key: 'TrackpadScroll',                             type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Horizontal Scroll',                        key: 'TrackpadHorizScroll',                        type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Momentum Scroll',                          key: 'TrackpadMomentumScroll',                     type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Corner Secondary Click',                   key: 'TrackpadCornerSecondaryClick',               type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Two Finger Double TapGesture',             key: 'TrackpadTwoFingerDoubleTapGesture',          type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Two Finger From Right Edge Swipe Gesture', key: 'TrackpadTwoFingerFromRightEdgeSwipeGesture', type: 'int',  value: "{{ TrackpadTwoFingerFromRightEdgeSwipeGestures }}" }
+  - { description: 'Three Finger Drag',                        key: 'TrackpadThreeFingerDrag',                    type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Horizontal Swipe Gesture',    key: 'TrackpadThreeFingerHorizSwipeGesture',       type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Tap Gesture',                 key: 'TrackpadThreeFingerTapGesture',              type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Vertical Swipe Gesture',      key: 'TrackpadThreeFingerVertSwipeGesture',        type: 'int',  value: "{{ TrackpadThreeFingerVertSwipeGestures }}" }
+  - { description: 'Four Finger Horizontal Swipe Gesture',     key: 'TrackpadFourFingerHorizSwipeGesture',        type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Four Finger Pinch Gesture',                key: 'TrackpadFourFingerPinchGesture',             type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Four Finger Vert SwipeGesture',            key: 'TrackpadFourFingerVertSwipeGesture',         type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'FiveFinger Pinch Gesture',                 key: 'TrackpadFiveFingerPinchGesture',             type: 'int',  value: "{{ EnabledDisabled_Alternate_Options }}" }
+  - { description: 'Hand Resting',                             key: 'TrackpadHandResting',                        type: 'int',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'USB Mouse Stops Trackpad',                 key: 'USBMouseStopsTrackpad',                      type: 'int',  value: "{{ EnabledDisabled_Options }}" }

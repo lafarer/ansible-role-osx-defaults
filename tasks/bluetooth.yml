@@ -1,12 +1,17 @@
 ---
-- name: "Bluetooth - Check if Bluetooth is already in menu bar"
-  command: "defaults read com.apple.systemuiserver menuExtras"
-  register: result
-  changed_when: False
+- block:
+  - name: "Bluetooth - Check if Bluetooth is already in menu bar"
+    command: "defaults read com.apple.systemuiserver menuExtras"
+    register: result
+    changed_when: no
 
-- name: "Bluetooth - Show Bluetooth in menu bar"
-  command: defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
-  when: Bluetooth_ShowInMenuBar is defined and Bluetooth_ShowInMenuBar == "true" and 'Bluetooth.menu' not in result.stdout
-  notify: restart MenuBar
+  - name: "Bluetooth - Show Bluetooth in menu bar"
+    command: defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+    when: Bluetooth_ShowInMenuBar is defined and Bluetooth_ShowInMenuBar is true and 'Bluetooth.menu' not in result.stdout
+    notify: restart MenuBar
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become_user: "{{ target_user_id }}"
 
 # TODO: support remove from menubar
