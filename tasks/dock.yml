@@ -48,6 +48,9 @@
       - { key: 'show-process-indicators',  type: 'boolean', value: '{{ Dock_ShowProcessIndicators }}'}
       - { key: 'showhidden',               type: 'boolean', value: '{{ Dock_ShowHidden }}'}
       - { key: 'mouse-over-hilite-stack',  type: 'boolean', value: '{{ Dock_MouseOverHiliteStack }}'}
+      - { key: 'mod-count',                type: 'int',     value: '1'}
+      - { key: 'version',                  type: 'int',     value: '1'}
+      # set `version` and `mod-count` to '1' to prevent DockFixUp to be replace the whole Dock in case of a new user
     when: item.value != ''
     notify: restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
