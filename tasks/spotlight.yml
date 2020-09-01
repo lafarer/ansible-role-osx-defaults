@@ -3,7 +3,7 @@
   - name: "Spotlight - Building List of Indexing Items"
     set_fact:
       orderedItems: "{{ orderedItems| default([])  }} + [ '{{ item }}' ]"
-    with_items: "{{ Spotlight_OrderedItems }}"
+    loop: "{{ Spotlight_OrderedItems }}"
     when: Spotlight_OrderedItems is defined
 
   - name: "Spotlight - Apply List of Indexing Items"

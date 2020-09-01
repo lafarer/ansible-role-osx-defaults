@@ -5,7 +5,7 @@
   - name: "Dock - Persistent Apps - Buils apps list"
     set_fact:
       persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]"
-    with_items: "{{ Dock_PersistentApps }}"
+    loop: "{{ Dock_PersistentApps }}"
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
   - name: "Dock - Persistent Apps - Add to dock"

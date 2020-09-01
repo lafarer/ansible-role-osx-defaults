@@ -111,7 +111,7 @@
 
   - name: "Safari - Advanced - Accessibility - Never use font sizes smaller than '{{ Safari_WebKitMinimumFontSize }}'"
     osx_defaults: { domain: 'com.apple.safari', key: "{{ item.key }}", type: '{{ item.type }}', value: "{{ item.value }}" }
-    with_items:
+    loop:
       - { key: "WebKitMinimumFontSize", type: "int", value: "{{ Safari_WebKitMinimumFontSize }}"}
       - { key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2MinimumFontSize", type: "float", value: "{{ Safari_WebKitMinimumFontSize }}" }
     when: Safari_WebKitMinimumFontSize is defined
