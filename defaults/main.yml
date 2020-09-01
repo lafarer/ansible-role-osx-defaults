@@ -1,5 +1,5 @@
 ---
-target_user_id: "{{ ansible_user_id }}"          # Define the username for which you want to apply the configurations
+target_user_id: "{{ ansible_user }}"          # Define the username for which you want to apply the configurations
 
 ActivityMonitor_Enabled: no                      # Enable ActivityMonitor configuration
 ActivityMonitor_OpenMainWindow: "Disabled"       # Show the main window when launching Activity Monitor

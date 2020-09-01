@@ -10,6 +10,6 @@
           (item.0.key == 'ShowCategory' and item.1.name == ActivityMonitor_ShowCategory )
     notify: restart ActivityMonitor
   # Privilege escalation to `target_user_id` is only required for inner steps when
-  # the `target_user_id` doesn't match the `ansible_user_id`
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  # the `target_user_id` doesn't match the `ansible_user`
+  become: "{{ target_user_id != ansible_user }}"
   become_user: "{{ target_user_id }}"
