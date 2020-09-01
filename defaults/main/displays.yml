@@ -1,0 +1,5 @@
+---
+Displays_AutomaticallyAdjustBrightness: no       # Automatically adjust brightness
+Displays_ShowInMenuBarIfPresent: yes             # Show mirroring options in the menu bar when available
+Displays_AppleFontSmoothing: "Medium"            # Subpixel font rendering on non-Apple LCDs (0:Disabled, 1:Minimal, 2:Medium, 3:Smoother, 4:Strong)
+Displays_DisplayResolutionEnabled: yes           # Enable HiDPI display modes (requires restart)

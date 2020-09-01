@@ -1,0 +1,4 @@
+---
+DesktopScreenSaver_BackGroundImage: ""           # Background iamge
+#/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
+DesktopScreenSaver_askForPassword: no            # Require password after sleep or screen saver begins

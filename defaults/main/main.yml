@@ -1,0 +1,24 @@
+---
+target_user_id: "{{ ansible_user }}"          # Define the username for which you want to apply the configurations
+ActivityMonitor_Enabled: no                      # Enable ActivityMonitor configuration
+ApplicationFirewall_Enabled: no                  # Enable Application Firewall
+Bluetooth_Enabled: no                            # Enable Bluetooth configuration
+Dashboard_Enabled: no                            # Enable Dashboard configuration
+DateTime_Enabled: no                             # Enable Date Time configuration
+DesktopScreenSaver_Enabled: no                   # Enable Desktop and Screen Saver configuration
+DiskImages_Enabled: no                           # Enable DiskImages configuration
+Displays_Enabled: no                             # Enable Displays configuration
+Dock_Enabled: no                                 # Enable Dock configuration
+EnergySaver_Enabled: no                          # Enable Energy Saver configuration
+Finder_Enabled: no                               # Enable Finder configuration
+General_Enabled: no                              # Enable General configuration
+HotCorners_Enabled: no                           # Enable Hot Corners configura  tions
+ICloud_Enabled: no                               # Enable iCloud configuration
+Keyboard_Enabled: no                             # Enable Keyboard configuration
+LanguageRegion_Enabled: no                       # Enable Language and Region configuration
+LaunchServices_Enabled: no                       # Enable Launch Services configuration
+LoginWindow_Enabled: no                          # Enable Launch Services configuration
+MissionControl_Enabled: no                       # Enable Mission Control configuration
+Safari_Enabled: no                               # Enable Safari configuration
+Spotlight_Enabled: no                            # Enable Spotlight configuration
+Trackpad_Enabled: no                             # Enable Trackpad configuration

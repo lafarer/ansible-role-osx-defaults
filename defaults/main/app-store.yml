@@ -1,0 +1,10 @@
+---
+AppStore_Enabled: no                             # Enable AppStore configuration
+AppStore_AutomaticCheckEnabled: no               # Automatically check for updates
+AppStore_AutomaticDownload: no                   # Download newly available updates in the background
+AppStore_AutoUpdate: no                          # Install app updates
+AppStore_AutoUpdateRestartRequired: no           # Install OSX updates
+AppStore_ConfigDataInstall: no                   # Install system data files
+AppStore_CriticalUpdateInstall: no               # Install security updates
+AppStore_ScheduleFrequency: 7                    # Check for software updates (in days)
+AppStore_ShowDebugMenu: no                       # Show debug menu

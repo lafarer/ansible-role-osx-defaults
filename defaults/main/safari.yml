@@ -1,0 +1,44 @@
+---
+Safari_DebugMenu: no                             # Debug Menu
+Safari_OpensWith: "A new window"                 # General - Safari opens with ("A new window", "A new private window", "All windows from last session")
+Safari_NewWindowBehavior: "Favorites"            # General - New windows open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites, 5:Tabs for Favorites)
+Safari_NewTabBehavior: "Favorites"               # General - New tabs open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites)
+Safari_HistoryAgeInDaysLimit: "One year"         # General - Retain history items for after (number of days - "One day", "One week", "Two weeks", "One month", "One year")
+Safari_TopSitesGridArrangement: "12 sites"       # General - Top Sites shows (0:6 sites, 1:12 sites, 2:24 sites)
+Safari_DownloadsClearingPolicy: "After one day"  # General - Remove download list items (0:Manually, 1:After one day, 2:Upon successfull download, 3:When Safari quits)
+Safari_AutoOpenSafeDownloads: yes                # General - Open "safe" files after downloading
+Safari_TabCreationPolicy: "Automatically"        # Tabs - Open pages in tabs instead of windows (0:Never, 1:Automatically, 2:Always)
+Safari_CommandClickMakesTabs: yes                # Tabs - cmd+click opens a link in a new tab
+Safari_OpenNewTabsInFront: no                    # Tabs - When a new tab or window opens, make it active
+Safari_Command1Through9SwitchesTabs: yes         # Tabs - Use cmd+1 through cmd+9 to switch tabs
+Safari_AutoFillFromAddressBook: yes              # Autofill - Using info from my Contact card
+Safari_AutoFillPasswords: yes                    # Autofill - Using names and passwords
+Safari_AutoFillCreditCardData: yes               # Autofill - Using Credit cards
+Safari_AutoFillMiscellaneousForms: yes           # Autofill - Using Other forms
+Safari_SearchEngine: "Google"                    # Search - Search engine (Google, Yahoo, Bing, DuckDuckGo)
+Safari_IncludeSearchSuggestions: yes             # Search - Include search engine suggestions
+Safari_WebsiteSpecificSearchEnabled: yes         # Search - Smart Search Field - Enable Quick Website Search
+Safari_PreloadTopHit: yes                        # Search - Smart Search Field - Preload Top Hit in the background
+Safari_ShowFavoritesUnderSmartSearchField: yes   # Search - Smart Search Field - Show Favorites
+Safari_WarnAboutFraudulentWebsites: yes          # Security - Fraudulent Sites - Warn when visiting a fraudulent website
+Safari_JavaScriptEnabled: yes                    # Security - Web Content - Enable Javascript
+Safari_BlockPopupWindows: no                     # Security - Web Content - Block pop-up windows
+Safari_AllowWebGL: yes                           # Security - Web Content - Allow WebGL
+Safari_AllowPlugins: yes                         # Security - Internet plug-ins - Allow Plug-ins
+Safari_Cookies: "Always from current website only" # Privacy - Cookies and website data ("Always block", "Always from current website only", "Allow from websites I visit", "Always allow")
+Safari_SafariGeolocationPermissionPolicy: "Prompt for each site one time only" # Privacy - Website use of location services (0:Deny without prompting, 1:Prompt for each site once each day, 2:Prompt for each site one time only)
+Safari_SendDoNotTrackHTTPHeader: no              # Privacy - Website tracking - Ask websites not to track me
+Safari_CanPromptForPushNotifications: yes        # Notification - Allow websites to ask for permission to send push notifications
+Safari_InstallExtensionUpdatesAutomatically: yes # Exensions - Automatically update extensions from Safari Extensions Gallery
+Safari_ShowFullURLInSmartSearchField: no         # Advanced - Smart Search Field - Show full website address
+Safari_WebKitMinimumFontSize: 0                  # Advanced - Accessibility - Never use font sizes smaller than (0 means disabled)
+Safari_WebKitTabToLinksPreferenceKey: no         # Advanced - Accessibility - Press Tab to highlight ach item on a webpage
+Safari_BookmarksMenuIncludesRendezvous: no       # Advanced - Bonjour - Include Bonjour in the Bookmarks Menu
+Safari_StopPuginsToSavePower: yes                # Advanced - Internet plug-ins - Stop plug-ins to saver power
+Safari_ShowDeloperMenu: no                       # Advanced - Show Develop menu in menu bar
+Safari_ShowFavoritesBar: no                      #  View - Show Favorites Bar
+Safari_AlwaysShowTabBar: no                      # View - Show Tab Bar
+Safari_ShowOverlayStatusBar: no                  # View - Show Status Bar
+Safari_ShowSidebarInNewWindows: no               # View - Show Sidebar
+Safari_SidebarViewModeIdentifier: "Bookmarks"    # View - Show Sidebar Mode ("Bookmarks","Reading List","Social Links")
+Safari_ShowFrequentlyVisitedSites: yes           # Bookmarks - Show Frequently Visited in Favorites

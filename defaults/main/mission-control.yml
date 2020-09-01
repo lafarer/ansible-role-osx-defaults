@@ -1,0 +1,5 @@
+---
+MissionControl_MruSpaces: no                     # Automatically rearrange Spaces based on most recent use
+MissionControl_SwitchOnActivate: yes             # When switching to an application, switch to a Space with open windows for the application
+MissionControl_GroupByApp: yes                   # Group windows by application in Mission Control
+MissionControl_SpansDisplays: yes                # Displays have separate Spaces

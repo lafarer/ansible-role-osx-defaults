@@ -1,0 +1,5 @@
+---
+Dashboard_McxDisabled: yes                       # Disable Dashboard
+Dashboard_EnabledState: 1                        # Dashboard state (1: Off, 2: As Space, 3: As Overlay)
+Dashboard_DontShowAsSpace: yes                   # Don’t show Dashboard as a Space
+Dashboard_DevMode: no                            # Enable Dashboard dev mode (allows keeping widgets on the desktop)

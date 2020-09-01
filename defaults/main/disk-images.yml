@@ -1,0 +1,4 @@
+---
+DiskImages_SkipVerify: no                        # Skip Verification
+DiskImages_SkipVerifyLocked: no                  # Skip Verification for Locked Disk Images
+DiskImages_SkipVerifyRemote: no                  # Skip Verification for Remote Disk Images

@@ -1,0 +1,13 @@
+---
+Keyboard_KeyRepeat: 0                            # Set key repeat rate (Off: 300000, Slow: 120, Fast: 2)
+Keyboard_InitialKeyRepeat: 10                    # Set delay until repeat, in milliseconds (Long: 120, Short: 15)
+Keyboard_fnState: no                             # Use F1, F2, etc. keys as standard function keys
+Keyboard_kDim: no                                # Adjust keyboard brightness in low light
+Keyboard_kDimTime: 0                             # Dim keyboard after idle time (in seconds, 0 is Never)
+Keyboard_AutomaticSpellingCorrectionEnabled: no  # Correct spelling automatically
+Keyboard_AutomaticQuoteSubstitutionEnabled: no   # Use smart quotes
+Keyboard_AutomaticDashSubstitutionEnabled: no    # Use smart dashes
+Keyboard_AutomaticPeriodSubstitutionEnabled: no  # Automatic period substitution
+Keyboard_AppleKeyboardUIMode: "All controls"     # Full Keyboard Access (1 : Text boxes and lists only, 3 : All controls)
+Keyboard_PowerButtonSleepsSystem: no             # Prevent accidental Power button presses from sleeping system
+Keyboard_PressAndHoldEnabled: no                 # Disable press-and-hold for keys in favor of key repeat
