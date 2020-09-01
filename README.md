@@ -340,10 +340,14 @@ Spotlight_OrderedItems:
 ```
 
 ```
-Trackpad_Enabled: no                                      # Enable Trackpad configuration
+Trackpad_ClickHapticFeedback: "Medium"                    # Set Haptic Feedback strength 0 - "Light", 1 - "Medium", 2 - "Firm"
 Trackpad_Clicking: "Enabled"                              # Tap to Click
-Trackpad_DragLock: "Disabled"                             # DragLock
 Trackpad_Dragging: "Enabled"                              # Dragging
+Trackpad_DragLock: "Disabled"                             # DragLock
+Trackpad_ForceClickAndHapticFeedback: "Disabled"          # Force Click and haptic feedback
+Trackpad_ScrollDirectionNatural: "Enabled"                # Enable Natural Scroll Direction (it's a macOS default)
+Trackpad_SilentClicking: "Disabled"                       # Silent clicking
+Trackpad_TrackingSpeed: "Medium"                          # Modulate the tracking speed "Very Slow", "Slow", "Medium", "Fast", "Really Fast"
 Trackpad_TrackpadCornerSecondaryClick: "Enabled"          # 0 - Disabled, 2 - Enabled
 Trackpad_TrackpadFiveFingerPinchGesture: "Enabled"        # 0 - Disabled, 2 - Enabled
 Trackpad_TrackpadFourFingerHorizSwipeGesture: "Enabled"   # 0 - Disabled, 2 - Enabled
@@ -361,7 +365,7 @@ Trackpad_TrackpadThreeFingerHorizSwipeGesture: "Disabled" # 0 - Disabled, 1 - En
 Trackpad_TrackpadThreeFingerTapGesture: "Disabled"        # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadThreeFingerVertSwipeGesture: "Three and Four Fingers Mission Control/App Exposé" # 0 - Disabled, 1 - Four Fingers Mission Control/App Exposé, # 2 - Three and Four Fingers Mission Control/App Exposé
 Trackpad_TrackpadTwoFingerDoubleTapGesture: "Disabled"    # 0 - Disabled, 1 - Enabled
-Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture: "Notification Center" #  0 - Disabled, 3 - Notification Center
+Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGestapure: "Notification Center" #  0 - Disabled, 3 - Notification Center
 Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - Enabled
 ```
 

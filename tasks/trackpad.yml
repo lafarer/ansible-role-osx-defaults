@@ -1,13 +1,18 @@
 ---
 - block:
   - name: "Trackpad"
-    osx_defaults: { domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    osx_defaults: { domain: "{{ item.0.domain }}", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
     with_subelements:
       - "{{ Trackpad_Options }}"
       - value
     when: (item.0.key == 'Clicking'                             and (item.1.name == Trackpad_Clicking                             or item.1.value == Trackpad_Clicking)) or
           (item.0.key == 'DragLock'                             and (item.1.name == Trackpad_DragLock                             or item.1.value == Trackpad_DragLock)) or
           (item.0.key == 'Dragging'                             and (item.1.name == Trackpad_Dragging                             or item.1.value == Trackpad_Dragging)) or
+          (item.0.key == 'ActuateDetents'                       and (item.1.name == Trackpad_ForceClickAndHapticFeedback          or item.1.value == Trackpad_ForceClickAndHapticFeedback)) or
+          (item.0.key == 'ForceSuppressed'                  and not (item.1.name == Trackpad_ForceClickAndHapticFeedback          or item.1.value == Trackpad_ForceClickAndHapticFeedback)) or
+          (item.0.key == 'ActuationStrength'                and not (item.1.name == Trackpad_SilentClicking                       or item.1.value == Trackpad_SilentClicking)) or
+          (item.0.key == 'FirstClickThreshold'                  and (item.1.name == Trackpad_ClickHapticFeedback                  or item.1.value == Trackpad_ClickHapticFeedback)) or
+          (item.0.key == 'SecondClickThreshold'                 and (item.1.name == Trackpad_ClickHapticFeedback                  or item.1.value == Trackpad_ClickHapticFeedback)) or
           (item.0.key == 'TrackpadCornerSecondaryClick'         and (item.1.name == Trackpad_TrackpadCornerSecondaryClick         or item.1.value == Trackpad_TrackpadCornerSecondaryClick)) or
           (item.0.key == 'TrackpadFiveFingerPinchGesture'       and (item.1.name == Trackpad_TrackpadFiveFingerPinchGesture       or item.1.value == Trackpad_TrackpadFiveFingerPinchGesture)) or
           (item.0.key == 'TrackpadFourFingerHorizSwipeGesture'  and (item.1.name == Trackpad_TrackpadFourFingerHorizSwipeGesture  or item.1.value == Trackpad_TrackpadFourFingerHorizSwipeGesture)) or
@@ -20,6 +25,8 @@
           (item.0.key == 'TrackpadRightClick'                   and (item.1.name == Trackpad_TrackpadRightClick                   or item.1.value == Trackpad_TrackpadRightClick)) or
           (item.0.key == 'TrackpadRotate'                       and (item.1.name == Trackpad_TrackpadRotate                       or item.1.value == Trackpad_TrackpadRotate)) or
           (item.0.key == 'TrackpadScroll'                       and (item.1.name == Trackpad_TrackpadScroll                       or item.1.value == Trackpad_TrackpadScroll)) or
+          (item.0.key == 'com.apple.swipescrolldirection'       and (item.1.name == Trackpad_ScrollDirectionNatural               or item.1.value == Trackpad_ScrollDirectionNatural)) or
+          (item.0.key == 'com.apple.trackpad.scaling'           and (item.1.name == Trackpad_TrackingSpeed                        or item.1.value == Trackpad_TrackingSpeed)) or
           (item.0.key == 'TrackpadThreeFingerDrag'              and (item.1.name == Trackpad_TrackpadThreeFingerDrag              or item.1.value == Trackpad_TrackpadThreeFingerDrag)) or
           (item.0.key == 'TrackpadThreeFingerHorizSwipeGesture' and (item.1.name == Trackpad_TrackpadThreeFingerHorizSwipeGesture or item.1.value == Trackpad_TrackpadThreeFingerHorizSwipeGesture)) or
           (item.0.key == 'TrackpadThreeFingerTapGesture'        and (item.1.name == Trackpad_TrackpadThreeFingerTapGesture        or item.1.value == Trackpad_TrackpadThreeFingerTapGesture)) or
@@ -27,7 +34,6 @@
           (item.0.key == 'TrackpadTwoFingerDoubleTapGesture'    and (item.1.name == Trackpad_TrackpadTwoFingerDoubleTapGesture    or item.1.value == Trackpad_TrackpadTwoFingerDoubleTapGesture)) or
           (item.0.key == 'USBMouseStopsTrackpad'                and (item.1.name == Trackpad_USBMouseStopsTrackpad                or item.1.value == Trackpad_USBMouseStopsTrackpad)) or
           (item.0.key == 'TrackpadTwoFingerFromRightEdgeSwipeGesture' and (item.1.name == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture or item.1.value == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture))
-
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user`
   become: "{{ target_user_id != ansible_user }}"
