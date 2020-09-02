@@ -1,5 +1,5 @@
 ---
-EnabledDisabled_Options_Boolean_Boolean:
+EnabledDisabled_Options_Boolean:
   - { name: "Disabled", value: no }
   - { name: "Enabled", value: yes }
 
