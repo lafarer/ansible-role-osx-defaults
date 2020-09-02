@@ -1,7 +1,7 @@
 ---
 - block:
   - name: "SetupAssistant"
-    osx_defaults: { domain: 'com.apple.SetupAssistant', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value|bool }}" }
+    osx_defaults: { domain: 'com.apple.SetupAssistant', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
       - { key: "DidSeeActivationLock",                        type: "bool",   value: "{{ SetupAssistant_DidSeeActivationLock }}" }
       - { key: "DidSeeAppearanceSetup",                       type: "bool",   value: "{{ SetupAssistant_DidSeeAppearanceSetup }}" }
