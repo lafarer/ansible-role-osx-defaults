@@ -38,6 +38,8 @@ Safari_Enabled: no                               # Enable Safari configuration
 SetupAssistant_Enabled: no                       # Enable SetupAssistant configuration
 Spotlight_Enabled: no
 ```
+When a toggle for a component is enabled than the role will take in consideration the variables dedicated to the specific component as list below.
+
 
 ```
 ActivityMonitor_OpenMainWindow: "Disabled"       # Show the main window when launching Activity Monitor
