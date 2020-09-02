@@ -411,6 +411,9 @@ Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - En
          - { role: lafarer.osx-defaults }
 ```
 
+## Known Issues
+* On MacOS Catalina 10.15.x Desktop Image assignation doesn't work, apparently it is changed the way the `/Library/Application Support/Dock/desktoppicture.db` is manipulated
+
 ## License
 
 BSD
