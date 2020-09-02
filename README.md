@@ -10,7 +10,7 @@ Ansible 2.0
 
 ## Role Variables
 ```
-target_user_id: "{{ ansible_user }}"          # Define the username for which you want to apply the configurations
+target_user_id: "{{ ansible_user_id }}"          # Define the username for which you want to apply the configurations
 ```
 
 ```

@@ -88,5 +88,5 @@
     when: item.value != ''
     notify: restart Finder
 
-  become: "{{ target_user_id != ansible_user }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
