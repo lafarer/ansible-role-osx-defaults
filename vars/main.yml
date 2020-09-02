@@ -1,5 +1,9 @@
 ---
-EnabledDisabled_Options:
+EnabledDisabled_Options_Boolean_Boolean:
+  - { name: "Disabled", value: no }
+  - { name: "Enabled", value: yes }
+
+EnabledDisabled_Options_Integer:
   - { name: "Disabled", value: 0 }
   - { name: "Enabled", value: 1 }
 
@@ -26,17 +30,17 @@ ActivityMonitor_ShowProcesses_Options:
   - { name: "GPU Processes", value: 110 }
 
 ActivityMonitor_Preferences:
-  - { description: 'Show the main window when launching', key: 'OpenMainWindow', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Show the main window when launching', key: 'OpenMainWindow', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
   - { description: 'Dock Icon Type', key: 'IconType', type: 'int', value: "{{ ActivityMonitor_DockIcon_Options }}"}
   - { description: 'Show Processes Style', key: 'ShowCategory', type: 'int', value: "{{ ActivityMonitor_ShowProcesses_Options }}"}
 
 ApplicationFirewall_Preferences:
   - { description: 'Global State', key: 'globalstate', type: 'int', value: "{{ ApplicationFirewall_GlobalStates }}"}
-  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
   - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: "{{ ApplicationFirewall_Logging_Options }}"}
-  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 ApplicationFirewall_GlobalStates:
   - { name: "Off", value: 0 }
@@ -101,21 +105,21 @@ LoginWindow_DisplayStyles:
   - { name: "Name and password", value: 1 }
 
 Safari_Advanced_Options:
-  - { description: 'Automatic Extensions Upgrade', key: 'InstallExtensionUpdatesAutomatically', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Use TAB to highlight each webpage item (Webkit)', key: 'WebKitTabToLinksPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Use TAB to highlight each webpage item (Webkit2)', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Include Bonjour in the Bookmarks Menu', key: 'BookmarksMenuIncludesRendezvous', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Stop plug-ins to saver power',          key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Show Develop menu in menu bar',         key: 'IncludeDevelopMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Developer Extras Preference Key',       key: 'WebKitDeveloperExtrasEnabledPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Developer Extras',  key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Debug Menu',                            key: 'IncludeInternalDebugMenu', type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Automatic Extensions Upgrade', key: 'InstallExtensionUpdatesAutomatically', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit)', key: 'WebKitTabToLinksPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Use TAB to highlight each webpage item (Webkit2)', key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Include Bonjour in the Bookmarks Menu', key: 'BookmarksMenuIncludesRendezvous', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Stop plug-ins to saver power',          key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Show Develop menu in menu bar',         key: 'IncludeDevelopMenu', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Developer Extras Preference Key',       key: 'WebKitDeveloperExtrasEnabledPreferenceKey', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Developer Extras',  key: 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Debug Menu',                            key: 'IncludeInternalDebugMenu', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_Autofill_Options:
-  - { description: 'Using info from my Contact card', key: 'AutoFillFromAddressBook',    type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Using names and passwords',       key: 'AutoFillPasswords',          type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Credit cards',                    key: 'AutoFillCreditCardData',     type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Other forms',                     key: 'AutoFillMiscellaneousForms', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Using info from my Contact card', key: 'AutoFillFromAddressBook',    type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Using names and passwords',       key: 'AutoFillPasswords',          type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Credit cards',                    key: 'AutoFillCreditCardData',     type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Other forms',                     key: 'AutoFillMiscellaneousForms', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_CookiesAndWebsiteData_Options:
   - { name: "Always block",                     key: "BlockStoragePolicy",          value: 0 }
@@ -144,7 +148,7 @@ Safari_General_Options:
   - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: "{{ Safari_HistoryAgeInDaysLimit_Options }}"}
   - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: "{{ Safari_TopSitesGridArrangements }}"}
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: "{{ Safari_DownloadsClearingPolicies }}"}
-  - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_GeolocationPermissionPolicies:
   - { name: "Deny without prompting", value: 0}
@@ -182,8 +186,8 @@ Safari_OpenWith_Options:
 
 Safari_PrivacyNotifications_Options:
   - { description: 'Website use of location services', key: 'SafariGeolocationPermissionPolicy', type: 'int',   value: "{{ Safari_GeolocationPermissionPolicies }}"}
-  - { description: 'Ask websites not to track me',     key: 'SendDoNotTrackHTTPHeader',          type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Allow websites to ask for permission to send push notifications', key: 'CanPromptForPushNotifications', type: 'bool',  value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Ask websites not to track me',     key: 'SendDoNotTrackHTTPHeader',          type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Allow websites to ask for permission to send push notifications', key: 'CanPromptForPushNotifications', type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_SearchEngineIdentifiers:
   - { name: Yahoo, value: "com.yahoo.www" }
@@ -193,18 +197,18 @@ Safari_SearchEngineIdentifiers:
 
 Safari_Search_Options:
   - { description: 'Search Engine Identifier',                  domain: 'NSGlobalDomain',   key: 'NSProviderIdentifier',         type: 'string', value: "{{ Safari_SearchEngineIdentifiers }}"}
-  - { description: 'Include search engine suggestions',         domain: 'com.apple.safari', key: 'SuppressSearchSuggestions',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'SmartSearchField: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'SmartSearchField: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'SmartSearchField: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'SmartSearchField: Show full website address',   domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'Include search engine suggestions',         domain: 'com.apple.safari', key: 'SuppressSearchSuggestions',    type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'SmartSearchField: Enable Quick Website Search', domain: 'com.apple.safari', key: 'WebsiteSpecificSearchEnabled', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'SmartSearchField: Preload Top Hit in the background', domain: 'com.apple.safari', key: 'PreloadTopHit', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'SmartSearchField: Show Favorites',              domain: 'com.apple.safari', key: 'ShowFavoritesUnderSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'SmartSearchField: Show full website address',   domain: 'com.apple.safari', key: 'ShowFullURLInSmartSearchField', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_Security_Options:
-  - { name: "Warn when visiting a fraudulent website", key: "WarnAboutFraudulentWebsites", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
-  - { name: "Web Content: Enable Javascript",          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
-  - { name: "Web Content: Allow pop-up windows",       key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
-  - { name: "Web Content: Allow WebGL",                key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
-  - { name: "Allow Plug-ins",                          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled", type: 'bool', value: "{{ EnabledDisabled_Options }}" }
+  - { name: "Warn when visiting a fraudulent website", key: "WarnAboutFraudulentWebsites", type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { name: "Web Content: Enable Javascript",          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled", type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { name: "Web Content: Allow pop-up windows",       key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically", type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { name: "Web Content: Allow WebGL",                key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled", type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { name: "Allow Plug-ins",                          key: "com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled", type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}" }
 
 Safari_SidebarViewModeIdentifiers:
   - { value: 'Bookmarks' }
@@ -218,9 +222,9 @@ Safari_TabCreationPolicies:
 
 Safari_Tabs_Options:
   - { description: 'Open pages in tabs instead of windows',          key: 'TabCreationPolicy',            type: 'int',  value: "{{ Safari_TabCreationPolicies }}"}
-  - { description: 'CMD+click opens a link in a new tab',            key: 'CommandClickMakesTabs',        type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'When a new tab or window opens, make it active', key: 'OpenNewTabsInFront',           type: 'bool', value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Use CMD+1 through CMD+9 to switch tabs',         key: 'Command1Through9SwitchesTabs', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
+  - { description: 'CMD+click opens a link in a new tab',            key: 'CommandClickMakesTabs',        type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'When a new tab or window opens, make it active', key: 'OpenNewTabsInFront',           type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Use CMD+1 through CMD+9 to switch tabs',         key: 'Command1Through9SwitchesTabs', type: 'bool', value: "{{ EnabledDisabled_Options_Boolean }}"}
 
 Safari_TopSitesGridArrangements:
   - { name: "6 sites", value: 0}
@@ -228,11 +232,11 @@ Safari_TopSitesGridArrangements:
   - { name: "24 sites", value: 2}
 
 Safari_View_Preferences:
-  - { description: 'Show Favorites Bar',      key: 'ShowFavoritesBar-v2',        type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Show Tab Bar',            key: 'AlwaysShowTabBar',           type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Show Status Bar',         key: 'ShowOverlayStatusBar',       type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Show Sidebar',            key: 'ShowSidebarInNewWindows',    type: 'bool',   value: "{{ EnabledDisabled_Options }}"}
-  - { description: 'Show Frequently Visited', key: 'ShowFrequentlyVisitedSites', type: 'bool',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Show Favorites Bar',      key: 'ShowFavoritesBar-v2',        type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Show Tab Bar',            key: 'AlwaysShowTabBar',           type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Show Status Bar',         key: 'ShowOverlayStatusBar',       type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Show Sidebar',            key: 'ShowSidebarInNewWindows',    type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Show Frequently Visited', key: 'ShowFrequentlyVisitedSites', type: 'bool',   value: "{{ EnabledDisabled_Options_Boolean }}" }
   - { description: 'Show Sidebar Mode',       key: 'SidebarViewModeIdentifier',  type: 'string', value: "{{ Safari_SidebarViewModeIdentifiers }}" }
 
 Trackpad_ClickHapticFeedback_Options:
@@ -257,32 +261,32 @@ Trackpad_TrackingSpeed_Options:
   - { name: "Really Fast", value: '3' }
 
 Trackpad_Options:
-  - { description: 'Clicking',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Clicking',                                   type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'DragLock',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'DragLock',                                   type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Dragging',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Dragging',                                   type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuateDetents',                             type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ForceSuppressed',                            type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Silent Clicking',                          domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuationStrength',                          type: 'int',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Clicking',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Clicking',                                   type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'DragLock',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'DragLock',                                   type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Dragging',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Dragging',                                   type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuateDetents',                             type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ForceSuppressed',                            type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Silent Clicking',                          domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuationStrength',                          type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'ClickHapticFeedback',                      domain: "com.apple.AppleMultitouchTrackpad", key: 'FirstClickThreshold',                        type: 'int',   value: "{{ Trackpad_ClickHapticFeedback_Options }}" }
   - { description: 'ClickHapticFeedback',                      domain: "com.apple.AppleMultitouchTrackpad", key: 'SecondClickThreshold',                       type: 'int',   value: "{{ Trackpad_ClickHapticFeedback_Options }}" }
-  - { description: 'Pinch',                                    domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadPinch',                              type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Right Click',                              domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadRightClick',                         type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Rotate',                                   domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadRotate',                             type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Scroll',                                   domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadScroll',                             type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Horizontal Scroll',                        domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadHorizScroll',                        type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Momentum Scroll',                          domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadMomentumScroll',                     type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Natural Scroll Direction',                 domain: "NSGlobalDomain",                    key: 'com.apple.swipescrolldirection',             type: 'bool',  value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Pinch',                                    domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadPinch',                              type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Right Click',                              domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadRightClick',                         type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Rotate',                                   domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadRotate',                             type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Scroll',                                   domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadScroll',                             type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Horizontal Scroll',                        domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadHorizScroll',                        type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Momentum Scroll',                          domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadMomentumScroll',                     type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Natural Scroll Direction',                 domain: "NSGlobalDomain",                    key: 'com.apple.swipescrolldirection',             type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
   - { description: 'Tracking Speed',                           domain: "NSGlobalDomain",                    key: 'com.apple.trackpad.scaling',                 type: 'float', value: "{{ Trackpad_TrackingSpeed_Options }}" }
   - { description: 'Corner Secondary Click',                   domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadCornerSecondaryClick',               type: 'int',   value: "{{ EnabledDisabled_Alternate_Options }}" }
-  - { description: 'Two Finger Double TapGesture',             domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadTwoFingerDoubleTapGesture',          type: 'int',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Two Finger Double TapGesture',             domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadTwoFingerDoubleTapGesture',          type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'Two Finger From Right Edge Swipe Gesture', domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadTwoFingerFromRightEdgeSwipeGesture', type: 'int',   value: "{{ TrackpadTwoFingerFromRightEdgeSwipeGestures }}" }
-  - { description: 'Three Finger Drag',                        domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerDrag',                    type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Three Finger Horizontal Swipe Gesture',    domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerHorizSwipeGesture',       type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'Three Finger Tap Gesture',                 domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerTapGesture',              type: 'int',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Three Finger Drag',                        domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerDrag',                    type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Three Finger Horizontal Swipe Gesture',    domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerHorizSwipeGesture',       type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'Three Finger Tap Gesture',                 domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerTapGesture',              type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'Three Finger Vertical Swipe Gesture',      domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadThreeFingerVertSwipeGesture',        type: 'int',   value: "{{ TrackpadThreeFingerVertSwipeGestures }}" }
   - { description: 'Four Finger Horizontal Swipe Gesture',     domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadFourFingerHorizSwipeGesture',        type: 'int',   value: "{{ EnabledDisabled_Alternate_Options }}" }
   - { description: 'Four Finger Pinch Gesture',                domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadFourFingerPinchGesture',             type: 'int',   value: "{{ EnabledDisabled_Alternate_Options }}" }
   - { description: 'Four Finger Vert SwipeGesture',            domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadFourFingerVertSwipeGesture',         type: 'int',   value: "{{ EnabledDisabled_Alternate_Options }}" }
   - { description: 'FiveFinger Pinch Gesture',                 domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadFiveFingerPinchGesture',             type: 'int',   value: "{{ EnabledDisabled_Alternate_Options }}" }
-  - { description: 'Hand Resting',                             domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadHandResting',                        type: 'int',   value: "{{ EnabledDisabled_Options }}" }
-  - { description: 'USB Mouse Stops Trackpad',                 domain: "com.apple.AppleMultitouchTrackpad", key: 'USBMouseStopsTrackpad',                      type: 'int',   value: "{{ EnabledDisabled_Options }}" }
+  - { description: 'Hand Resting',                             domain: "com.apple.AppleMultitouchTrackpad", key: 'TrackpadHandResting',                        type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
+  - { description: 'USB Mouse Stops Trackpad',                 domain: "com.apple.AppleMultitouchTrackpad", key: 'USBMouseStopsTrackpad',                      type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
