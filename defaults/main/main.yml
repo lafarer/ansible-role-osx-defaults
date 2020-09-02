@@ -21,4 +21,5 @@ LoginWindow_Enabled: no                          # Enable Launch Services config
 MissionControl_Enabled: no                       # Enable Mission Control configuration
 Safari_Enabled: no                               # Enable Safari configuration
 Spotlight_Enabled: no                            # Enable Spotlight configuration
+SetupAssistant_Enabled: no                       # Enable SetupAssistant configuration
 Trackpad_Enabled: no                             # Enable Trackpad configuration

@@ -15,6 +15,31 @@ target_user_id: "{{ ansible_user }}"          # Define the username for which yo
 
 ```
 ActivityMonitor_Enabled: no                      # Enable ActivityMonitor configuration
+AppStore_Enabled: no                             # Enable AppStore configuration
+Dashboard_Enabled: no                            # Enable Dashboard configuration
+Bluetooth_Enabled: no                            # Enable Bluetooth configuration
+ApplicationFirewall_Enabled: no                  # Enable Application Firewall
+DateTime_Enabled: no                             # Enable Date Time configuration
+DesktopScreenSaver_Enabled: no                   # Enable Desktop and Screen Saver configuration
+DiskImages_Enabled: no                           # Enable DiskImages configuration
+LoginWindow_Enabled: no                          # Enable Launch Services configuration
+LaunchServices_Enabled: no                       # Enable Launch Services configuration
+Finder_Enabled: no                               # Enable Finder configuration
+Displays_Enabled: no                             # Enable Displays configuration
+Dock_Enabled: no                                 # Enable Dock configuration
+EnergySaver_Enabled: no                          # Enable Energy Saver configuration
+General_Enabled: no                              # Enable General configuration
+HotCorners_Enabled: no                           # Enable Hot Corners configurations
+ICloud_Enabled: no                               # Enable iCloud configuration
+Keyboard_Enabled: no                             # Enable Keyboard configuration
+LanguageRegion_Enabled: no                       # Enable Language and Region configuration
+MissionControl_Enabled: no                       # Enable Mission Control configuration
+Safari_Enabled: no                               # Enable Safari configuration
+SetupAssistant_Enabled: no                       # Enable SetupAssistant configuration
+Spotlight_Enabled: no
+```
+
+```
 ActivityMonitor_OpenMainWindow: "Disabled"       # Show the main window when launching Activity Monitor
 ActivityMonitor_IconType: ""                     # Activity Monitor Dock icon
                                                  # Show Application Icon
@@ -35,7 +60,6 @@ ActivityMonitor_ShowCategory: ""                 # Show all processes in Activit
 ```
 
 ```
-AppStore_Enabled: no                             # Enable AppStore configuration
 AppStore_AutomaticCheckEnabled: no               # Automatically check for updates
 AppStore_AutomaticDownload: no                   # Download newly available updates in the background
 AppStore_AutoUpdate: no                          # Install app updates
@@ -47,7 +71,6 @@ AppStore_ShowDebugMenu: no                       # Show debug menu
 ```
 
 ```
-ApplicationFirewall_Enabled: no                  # Enable Application Firewall
 ApplicationFirewall_GlobalState: "Off"           # "On", "Off", "Block All Incoming Connections"
 ApplicationFirewall_AllowDownloadSigned: "Disabled"  # Automatically allow downloaded signed software to receive incoming connections
 ApplicationFirewall_AllowSigned: "Disabled"      # Automatically Allow built-in software to receive incoming connections - s0 Disable, 1 Enable
@@ -57,12 +80,10 @@ ApplicationFirewall_Stealth: "Disabled"          # Enable stealth mode
 ```
 
 ```
-Bluetooth_Enabled: no                            # Enable Bluetooth configuration
 Bluetooth_ShowInMenuBar: no                      # Show Bluetooth in menu bar
 ```
 
 ```
-Dashboard_Enabled: no                            # Enable Dashboard configuration
 Dashboard_McxDisabled: yes                       # Disable Dashboard
 Dashboard_EnabledState: 1                        # Dashboard state (1: Off, 2: As Space, 3: As Overlay)
 Dashboard_DontShowAsSpace: yes                   # Don’t show Dashboard as a Space
@@ -70,7 +91,6 @@ Dashboard_DevMode: no                            # Enable Dashboard dev mode (al
 ```
 
 ```
-DateTime_Enabled: no                             # Enable Date Time configuration
 DateTime_TimeZone: "Europe/Brussels"             # Set the timezone; see `systemsetup -listtimezones` for other values
 DateTime_AutomaticDateTime: "on"                 # Set date and time automatically (on | off)
 DateTime_TimeServer: "time.apple.com"            # Set time server
@@ -81,21 +101,18 @@ DateTime_IsAnalog: no                            # Analog menu bar clock
 ```
 
 ```
-DesktopScreenSaver_Enabled: no                   # Enable Desktop and Screen Saver configuration
 DesktopScreenSaver_BackGroundImage: ""           # Background iamge
 #/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
 DesktopScreenSaver_askForPassword: "Disable"     # Require password after sleep or screen saver begins
 ```
 
 ```
-DiskImages_Enabled: no                           # Enable DiskImages configuration
 DiskImages_SkipVerify: no                        # Skip Verification
 DiskImages_SkipVerifyLocked: no                  # Skip Verification for Locked Disk Images
 DiskImages_SkipVerifyRemote: no                  # Skip Verification for Remote Disk Images
 ```
 
 ```
-Displays_Enabled: no                             # Enable Displays configuration
 Displays_AutomaticallyAdjustBrightness: no       # Automatically adjust brightness
 Displays_ShowInMenuBarIfPresent: yes             # Show mirroring options in the menu bar when available
 Displays_AppleFontSmoothing: "Medium"            # Subpixel font rendering on non-Apple LCDs (0:Disabled, 1:Minimal, 2:Medium, 3:Smoother, 4:Strong)
@@ -103,7 +120,6 @@ Displays_DisplayResolutionEnabled: yes           # Enable HiDPI display modes (r
 ```
 
 ```
-Dock_Enabled: no                                 # Enable Dock configuration
 Dock_PersistentApps: []                          # A plain path string, if empty [] it won't change anything
   # - /Applications/Safari.app
   # - /Applications/System Preferences.app
@@ -127,13 +143,11 @@ Dock_MouseOverHiliteStack: yes                   # Enable highlight hover effect
 ```
 
 ```
-EnergySaver_Enabled: no                          # Enable Energy Saver configuration
 EnergySaver_ComputerSleepTime: "Never"           # Never, or number of minutes
 EnergySaver_DisplaySleepTime: "10"               # Never, or number of minutes
 ```
 
 ```
-Finder_Enabled: no                               # Enable Finder configuration
 Finder_ShowHardDrivesOnDesktop: no               # Show hard drives on the desktop
 Finder_ShowExternalHardDrivesOnDesktop: yes      # Show external hard drives on the desktop
 Finder_ShowRemovableMediaOnDesktop: yes          # Show CDs,DVDs and iPods on the desktop
@@ -168,7 +182,6 @@ Finder_SVSIVSgridSpacing: 54                     # Standard, Increase grid spaci
 ```
 
 ```
-General_Enabled: no                              # Enable General configuration
 General_AppleAquaColorVariant: 1                 # Set appearance (1: Blue, 6: Graphite)
 General_AppleInterfaceStyle: ""                  # Use Dark menu bar and Dock (Empty or "Dark")
 General_AutoHideMenuBar: no                      # Automatically hide and show the menu bar
@@ -182,7 +195,6 @@ General_NSScrollAnimationEnabled: yes            # Smooth scrolling (Disable on 
 ```
 
 ```
-HotCorners_Enabled: no                           # Enable Hot Corners configurations
 HotCorners_AvailableModifiers:
     - { name: "Enabled", value: 0 }
     - { name: "Disabled", value: 1048576 }
@@ -209,12 +221,10 @@ HotCorners_TopRightAction: "Desktop"             # Chose one of the availlable a
 ```
 
 ```
-ICloud_Enabled: no                               # Enable iCloud configuration
 ICloud_NSDocumentSaveNewDocumentsToCloud: yes    # Save to iCloud by default
 ```
 
 ```
-Keyboard_Enabled: no                             # Enable Keyboard configuration
 Keyboard_KeyRepeat: 0                            # Set key repeat rate (Off: 300000, Slow: 120, Fast: 2)
 Keyboard_InitialKeyRepeat: 10                    # Set delay until repeat, in milliseconds (Long: 120, Short: 15)
 Keyboard_fnState: no                             # Use F1, F2, etc. keys as standard function keys
@@ -230,7 +240,6 @@ Keyboard_PressAndHoldEnabled: no                 # Disable press-and-hold for ke
 ```
 
 ```
-LanguageRegion_Enabled: no                       # Enable Language and Region configuration
 #TODO: https://github.com/ansible/ansible-modules-extras/issues/2610
 #LanguageRegion_Languages: [ "en", "fr" ]        # Preferred languages (in order of preference e.g. [ "en", "fr" ])
 LanguageRegion_Locale: "en_US@currency=USD"      # Locale and Currency (United States : en_US@currency=USD, Great Britian : en_GB@currency=EUR)
@@ -240,12 +249,10 @@ LanguageRegion_MetricUnits: no                   # Set Metric Units
 ```
 
 ```
-LaunchServices_Enabled: no                       # Enable Launch Services configuration
 LaunchServices_LSQuarantine: yes                 # no = disable the “Are you sure you want to open this application?” dialog
 ```
 
 ```
-LoginWindow_Enabled: no                          # Enable Launch Services configuration
 LoginWindow_DisableConsoleAccess: no             # Toggle login for hidden user '>Console'
 LoginWindow_GuestEnabled: no                     # Toggle guest login
 LoginWindow_LoginwindowText: ""                  # Text message to show in the login screen
@@ -257,7 +264,6 @@ LoginWindow_Display: "List of users"             # Display Login Window as list 
 ```
 
 ```
-MissionControl_Enabled: no                       # Enable Mission Control configuration
 MissionControl_MruSpaces: no                     # Automatically rearrange Spaces based on most recent use
 MissionControl_SwitchOnActivate: yes             # When switching to an application, switch to a Space with open windows for the application
 MissionControl_GroupByApp: yes                   # Group windows by application in Mission Control
@@ -265,7 +271,6 @@ MissionControl_SpansDisplays: yes                # Displays have separate Spaces
 ```
 
 ```
-Safari_Enabled: no                               # Enable Safari configuration
 Safari_DebugMenu: no                             # Debug Menu
 Safari_OpensWith: "A new window"                 # General - Safari opens with ("A new window", "A new private window", "All windows from last session")
 Safari_NewWindowBehavior: "Favorites"            # General - New windows open with (0:Hompage, 1:Empty page, 2:Same page, 4:Favorites, 5:Tabs for Favorites)
@@ -312,7 +317,27 @@ Safari_ShowFrequentlyVisitedSites: yes           # Bookmarks - Show Frequently V
 ```
 
 ```
-Spotlight_Enabled: no
+# when set to `yes` it will prevent the show of the SetupAssistant widow requesting consent for the specific option
+# Usually helpful only when configurating a new user account
+SetupAssistant_DidSeeActivationLock: no
+SetupAssistant_DidSeeAppearanceSetup: no
+SetupAssistant_DidSeeApplePaySetup: no
+SetupAssistant_DidSeeAvatarSetup: no
+SetupAssistant_DidSeeCloudDiagnostics: no
+SetupAssistant_DidSeeCloudSetup: no
+SetupAssistant_DidSeePrivacy: no
+SetupAssistant_DidSeeScreenTime: no
+SetupAssistant_DidSeeSiriSetup: no
+SetupAssistant_DidSeeSyncSetup: no
+SetupAssistant_DidSeeSyncSetup2: no
+SetupAssistant_DidSeeTouchIDSetup: no
+SetupAssistant_DidSeeTrueTone: no
+SetupAssistant_DidSeeTrueTonePrivacy: no
+SetupAssistant_DidSeeiCloudLoginForStorageServices: no
+SetupAssistant_SkipFirstLoginOptimization: no
+```
+
+```
 # Spotlight_OrderedItems is an Array
 Spotlight_OrderedItems:
   - '{"enabled" = 1;"name" = "APPLICATIONS";}'
