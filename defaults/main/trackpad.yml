@@ -24,5 +24,5 @@ Trackpad_TrackpadThreeFingerHorizSwipeGesture: "Disabled" # 0 - Disabled, 1 - En
 Trackpad_TrackpadThreeFingerTapGesture: "Disabled"        # 0 - Disabled, 1 - Enabled
 Trackpad_TrackpadThreeFingerVertSwipeGesture: "Three and Four Fingers Mission Control/App Exposé" # 0 - Disabled, 1 - Four Fingers Mission Control/App Exposé, # 2 - Three and Four Fingers Mission Control/App Exposé
 Trackpad_TrackpadTwoFingerDoubleTapGesture: "Disabled"    # 0 - Disabled, 1 - Enabled
-Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGestapure: "Notification Center" #  0 - Disabled, 3 - Notification Center
+Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture: "Notification Center" #  0 - Disabled, 3 - Notification Center
 Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - Enabled
