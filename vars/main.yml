@@ -141,7 +141,7 @@ Safari_DownloadsClearingPolicies:
 Safari_General_Options:
   - { description: 'New windows open with',      key: 'NewWindowBehavior',       type: 'int', value: "{{ Safari_NewWindowBehaviors }}"}
   - { description: 'New tabs open with',         key: 'NewTabBehavior',          type: 'int', value: "{{ Safari_NewTabBehaviors }}"}
-  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: "{{ Safari_HistoryAgeInDaysLimits }}"}
+  - { description: 'Retain history items for',   key: 'HistoryAgeInDaysLimit',   type: 'int', value: "{{ Safari_HistoryAgeInDaysLimit_Options }}"}
   - { description: 'Top Sites shows',            key: 'TopSitesGridArrangement', type: 'int', value: "{{ Safari_TopSitesGridArrangements }}"}
   - { description: 'Remove download list items', key: 'DownloadsClearingPolicy', type: 'int', value: "{{ Safari_DownloadsClearingPolicies }}"}
   - { description: 'Open "safe" files after downloading', key: 'AutoOpenSafeDownloads', type: 'bool', value: "{{ EnabledDisabled_Options }}"}
@@ -151,7 +151,7 @@ Safari_GeolocationPermissionPolicies:
   - { name: "Prompt for each site once each day", value: 1}
   - { name: "Prompt for each site one time only", value: 2}
 
-Safari_HistoryAgeInDaysLimits:
+Safari_HistoryAgeInDaysLimit_Options:
   - { name: "One day", value: 1 }
   - { name: "One week", value: 7 }
   - { name: "Two weeks", value: 14 }
