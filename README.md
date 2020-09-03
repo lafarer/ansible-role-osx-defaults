@@ -104,7 +104,6 @@ DateTime_IsAnalog: no                            # Analog menu bar clock
 
 ```
 DesktopScreenSaver_BackGroundImage: ""           # Background iamge
-#/Users/eric/src/github/lafarer/osx-ansible-config/images/toy-story-02.jpg
 DesktopScreenSaver_askForPassword: "Disable"     # Require password after sleep or screen saver begins
 ```
 
@@ -138,7 +137,7 @@ Dock_AppleActionOnDoubleClick: "Maximize"        # Double-click a window's title
 Dock_MinimizeToApplication: no                   # Minimize windows appliction into icon (yes, no)
 Dock_LaunchAnim: yes                             # Animate opening applications
 Dock_Autohide: no                                # Automatically hide and show the Dock
-Dock_Autohide_Time_Modifier: 0                   # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
+Dock_AutohideTimeModifier: 0                     # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
 Dock_ShowProcessIndicators: yes                  # Show indicator for open applications
 Dock_ShowHidden: no                              # Display translucent Dock icons for hidden applications
 Dock_MouseOverHiliteStack: yes                   # Enable highlight hover effect for the grid view of a stack (Dock)
@@ -257,7 +256,7 @@ LaunchServices_LSQuarantine: yes                 # no = disable the “Are you s
 ```
 LoginWindow_DisableConsoleAccess: no             # Toggle login for hidden user '>Console'
 LoginWindow_GuestEnabled: no                     # Toggle guest login
-LoginWindow_LoginwindowText: ""                  # Text message to show in the login screen
+LoginWindow_LoginWindowText: ""                  # Text message to show in the login screen
 LoginWindow_DesktopPicture: ""                   # Change login screen background
 LoginWindow_ShutDownDisabled: no                 # Disable shutdown and restart button on login Window
 LoginWindow_showInputMenu: no                    # Show input menu in login window
