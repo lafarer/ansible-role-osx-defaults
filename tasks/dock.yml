@@ -5,7 +5,7 @@
   - name: "Dock - Persistent Apps - Buils apps list"
     set_fact:
       persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]"
-    with_items: "{{ Dock_PersistentApps }}"
+    loop: "{{ Dock_PersistentApps }}"
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
   - name: "Dock - Persistent Apps - Add to dock"
@@ -44,13 +44,16 @@
       - { key: 'minimize-to-application',  type: 'boolean', value: '{{ Dock_MinimizeToApplication }}'}
       - { key: 'launchanim',               type: 'boolean', value: '{{ Dock_LaunchAnim }}'}
       - { key: 'autohide',                 type: 'bool',    value: '{{ Dock_Autohide }}'}
-      - { key: 'autohide-time-modifier',   type: 'int',     value: '{{ Dock_Autohide_Time_Modifier }}'}
+      - { key: 'autohide-time-modifier',   type: 'int',     value: '{{ Dock_AutohideTimeModifier }}'}
       - { key: 'show-process-indicators',  type: 'boolean', value: '{{ Dock_ShowProcessIndicators }}'}
       - { key: 'showhidden',               type: 'boolean', value: '{{ Dock_ShowHidden }}'}
       - { key: 'mouse-over-hilite-stack',  type: 'boolean', value: '{{ Dock_MouseOverHiliteStack }}'}
+      - { key: 'mod-count',                type: 'int',     value: '1'}
+      - { key: 'version',                  type: 'int',     value: '1'}
+      # set `version` and `mod-count` to '1' to prevent DockFixUp to be replace the whole Dock in case of a new user
     when: item.value != ''
     notify: restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"

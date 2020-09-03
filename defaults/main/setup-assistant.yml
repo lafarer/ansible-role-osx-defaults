@@ -1,0 +1,19 @@
+---
+# when set to `yes` it will prevent the show of the SetupAssistant widow requesting consent for the specific option
+# Usually helpful only when configurating a new user account
+SetupAssistant_DidSeeActivationLock: no
+SetupAssistant_DidSeeAppearanceSetup: no
+SetupAssistant_DidSeeApplePaySetup: no
+SetupAssistant_DidSeeAvatarSetup: no
+SetupAssistant_DidSeeCloudDiagnostics: no
+SetupAssistant_DidSeeCloudSetup: no
+SetupAssistant_DidSeePrivacy: no
+SetupAssistant_DidSeeScreenTime: no
+SetupAssistant_DidSeeSiriSetup: no
+SetupAssistant_DidSeeSyncSetup: no
+SetupAssistant_DidSeeSyncSetup2: no
+SetupAssistant_DidSeeTouchIDSetup: no
+SetupAssistant_DidSeeTrueTone: no
+SetupAssistant_DidSeeTrueTonePrivacy: no
+SetupAssistant_DidSeeiCloudLoginForStorageServices: no
+SetupAssistant_SkipFirstLoginOptimization: no

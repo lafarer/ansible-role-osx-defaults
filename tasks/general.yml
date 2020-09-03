@@ -20,7 +20,7 @@
 
   - name: "General - Highlight color"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleHighlightColor', type: string, value: "{{ item.value }}" }
-    with_items:
+    loop:
       - { name: Red, value: "1.000000 0.733333 0.721569" }
       - { name: Orange, value: "1.000000 0.874510 0.701961" }
       - { name: Yellow, value: "1.000000 0.937255 0.690196" }
@@ -33,5 +33,5 @@
     when: General_AppleHighlightColor is defined and item.name == General_AppleHighlightColor
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"

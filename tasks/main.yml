@@ -1,7 +1,7 @@
 ---
 - { include: activity-monitor.yml,      tags: "activity-monitor",      when: ActivityMonitor_Enabled|default(no) }
 - { include: app-store.yml,             tags: "app-store",             when: AppStore_Enabled|default(no) }
-- { include: application-firewall.yml,      tags: "application-firewall",      when: ApplicationFirewall_Enabled|default(no) }
+- { include: application-firewall.yml,  tags: "application-firewall",  when: ApplicationFirewall_Enabled|default(no) }
 - { include: bluetooth.yml,             tags: "bluetooth",             when: Bluetooth_Enabled|default(no) }
 - { include: dashboard.yml,             tags: "dashboard",             when: Dashboard_Enabled|default(no) }
 - { include: date-time.yml,             tags: "date-time",             when: DateTime_Enabled|default(no) }
@@ -20,5 +20,6 @@
 - { include: login-window.yml,          tags: "login-window",          when: LoginWindow_Enabled|default(no) }
 - { include: mission-control.yml,       tags: "mission-control",       when: MissionControl_Enabled|default(no) }
 - { include: safari.yml,                tags: "safari",                when: Safari_Enabled|default(no) }
+- { include: setup-assistant.yml,       tags: "setup-assistant",       when: SetupAssistant_Enabled|default(no) }
 - { include: spotlight.yml,             tags: "spotlight",             when: Spotlight_Enabled|default(no) }
 - { include: trackpad.yml,              tags: "Trackpad",              when: Trackpad_Enabled|default(no) }

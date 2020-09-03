@@ -1,0 +1,18 @@
+---
+ActivityMonitor_OpenMainWindow: "Disabled"       # Show the main window when launching Activity Monitor
+ActivityMonitor_IconType: ""                     # Activity Monitor Dock icon
+                                                 # Show Application Icon
+                                                 # Show Network Usage
+                                                 # Show Disk Activity
+                                                 # Show CPU Usage
+                                                 # Show CPU History
+ActivityMonitor_ShowCategory: ""                 # Show all processes in Activity Monitor
+                                                 # Show All Processes
+                                                 # Show All Processes, Hierarchically
+                                                 # My Processes
+                                                 # System Processes
+                                                 # Other Processes
+                                                 # Active Processes
+                                                 # Inactive Processes
+                                                 # Windowed Processes
+                                                 # GPU Processes

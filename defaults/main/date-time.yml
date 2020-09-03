@@ -1,0 +1,8 @@
+---
+DateTime_TimeZone: "Europe/Brussels"             # Set the timezone; see `systemsetup -listtimezones` for other values
+DateTime_AutomaticDateTime: "on"                 # Set date and time automatically (on | off)
+DateTime_TimeServer: "time.apple.com"            # Set time server
+DateTime_AutomaticTimeZone: yes                  # Set time zome automatically using current location
+DateTime_DateFormat: "h:mm"                      # Menu bar clock format ("h:mm": Default, "HH": Use a 24-hour clock, "a": Show AM/PM, "ss": Display the time with seconds
+DateTime_FlashDateSeparators: no                 # Flash the time separators
+DateTime_IsAnalog: no                            # Analog menu bar clock

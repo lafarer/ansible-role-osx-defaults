@@ -1,38 +1,38 @@
 ---
 - name: restart ActivityMonitor
   command: killall "Activity Monitor"
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
   ignore_errors: yes
 
 - name: restart AppStore
   command: killall "App Store"
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
   ignore_errors: yes
 
 - name: restart MenuBar
   command: killall SystemUIServer
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
   ignore_errors: yes
 
 - name: restart Dock
   command: killall Dock
   ignore_errors: yes
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
 
 - name: restart Finder
   command: killall Finder
   ignore_errors: yes
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
 
 - name: restart Safari
   command: killall Safari
   ignore_errors: yes
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"
 
 - name: restart Spotlight

@@ -1,0 +1,23 @@
+---
+
+HotCorners_BottomLeftModifier: "Enabled"         # Enabled, Disabled
+HotCorners_BottomRightModifier: "Enabled"        # Enabled, Disabled
+HotCorners_TopLeftModifier: "Disabled"           # Enabled, Disabled
+HotCorners_TopRightModifier: "Enabled"           # Enabled, Disabled
+
+HotCorners_BottomLeftAction: "Mission Control"   # Chose one of the availlable actions
+HotCorners_BottomRightAction: "Show Application  Windows" # Chose one of the availlable actions
+HotCorners_TopLeftAction: "Disabled"             # Chose one of the availlable actions
+HotCorners_TopRightAction: "Desktop"             # Chose one of the availlable actions
+# HotCorners Available Actions:
+#     - { name: "no-op", value: 0 }
+#     - { name: "Disabled", value: 1 }
+#     - { name: "Mission Control", value: 2 }
+#     - { name: "Show Application Windows", value: 3 }
+#     - { name: "Desktop", value: 4 }
+#     - { name: "Start Screen Saver", value: 5 }
+#     - { name: "Disable Screen Saver", value: 6 }
+#     - { name: "Dashboard", value: 7 }
+#     - { name: "Put Display To Sleep", value: 10 }
+#     - { name: "Launchpad", value: 11 }
+#     - { name: "Notification Center", value: 12 }

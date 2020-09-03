@@ -1,0 +1,9 @@
+---
+LoginWindow_DisableConsoleAccess: no             # Toggle login for hidden user '>Console'
+LoginWindow_GuestEnabled: no                     # Toggle guest login
+LoginWindow_LoginWindowText: ""                  # Text message to show in the login screen
+LoginWindow_DesktopPicture: ""                   # Change login screen background
+LoginWindow_ShutDownDisabled: no                 # Disable shutdown and restart button on login Window
+LoginWindow_showInputMenu: no                    # Show input menu in login window
+LoginWindow_RetriesUntilHint: 0                  # Show password hints - Retries until hint, 0=disable, any other number to define the number of tries
+LoginWindow_Display: "List of users"             # Display Login Window as list or fields: 'List of users' or 'Name and password'

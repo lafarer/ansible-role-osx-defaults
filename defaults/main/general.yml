@@ -1,0 +1,11 @@
+---
+General_AppleAquaColorVariant: 1                 # Set appearance (1: Blue, 6: Graphite)
+General_AppleInterfaceStyle: ""                  # Use Dark menu bar and Dock (Empty or "Dark")
+General_AutoHideMenuBar: no                      # Automatically hide and show the menu bar
+General_AppleHighlightColor: "Blue"              # Highlight color (Red, Orange, Yellow, Green, Blue, Purple, Pink, Brown, Graphite)
+General_SidebarIconSize: 1                       # Sidebar icon size (Small: 1, Medium: 2, Large: 3)
+General_AppleShowScrollBars: "Automatic"         # Scroll bar visibility (WhenScrolling, Automatic, Always)
+General_AppleScrollerPagingBehavior: 0           # Click in the scrollbar to (0: Jump to the next page, 1: Jump to the spot that's clicked)
+General_NSCloseAlwaysConfirmsChanges: no         # Ask to keep changes when closing documents
+General_CloseWindowsWhenQuittingApp: no          # Close windows when quitting an application
+General_NSScrollAnimationEnabled: yes            # Smooth scrolling (Disable on older Macs)

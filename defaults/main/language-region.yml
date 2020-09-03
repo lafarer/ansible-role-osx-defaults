@@ -1,0 +1,7 @@
+---
+#TODO: https://github.com/ansible/ansible-modules-extras/issues/2610
+#LanguageRegion_Languages: [ "en", "fr" ]        # Preferred languages (in order of preference e.g. [ "en", "fr" ])
+LanguageRegion_Locale: "en_US@currency=USD"      # Locale and Currency (United States : en_US@currency=USD, Great Britian : en_GB@currency=EUR)
+LanguageRegion_MeasurementUnits: "Inches"        # Measure Units (Inches, Centimeters)
+LanguageRegion_Force24HourTime: yes              # Force 12/24 hour time
+LanguageRegion_MetricUnits: no                   # Set Metric Units

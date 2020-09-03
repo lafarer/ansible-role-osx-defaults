@@ -1,0 +1,3 @@
+---
+EnergySaver_ComputerSleepTime: "Never"           # Never, or number of minutes
+EnergySaver_DisplaySleepTime: "10"               # Never, or number of minutes

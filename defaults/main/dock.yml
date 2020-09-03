@@ -1,0 +1,21 @@
+---
+Dock_PersistentApps: []                          # A plain path string, if empty [] it won't change anything
+  # - /Applications/Safari.app
+  # - /Applications/System Preferences.app
+Dock_PersistentOthers: []                        # Either a plain path string or a dict like "{path: /path, type: [file | directory], arrange: [1-5] }"
+  # - /Applications/Setapp
+  # - { path: "~/Library/Downloads", type: directory, arrange: 2}
+  # - { path: "/Applications/Firefox.app", type: file, arrange: 3}
+Dock_TileSize: 64                                # Dock size
+Dock_Magnification: yes                          # Dock magnification
+Dock_LargeSize: 128                              # Icon size of magnified Dock items
+Dock_Orientation: "bottom"                       # Dock orientation: left, bottom, right
+Dock_MinEffect: "genie"                          # Minimization effect: genie, scale, suck
+Dock_AppleActionOnDoubleClick: "Maximize"        # Double-click a window's title title bar to: None, Minimize, Maximize
+Dock_MinimizeToApplication: no                   # Minimize windows appliction into icon (yes, no)
+Dock_LaunchAnim: yes                             # Animate opening applications
+Dock_Autohide: no                                # Automatically hide and show the Dock
+Dock_AutohideTimeModifier: 0                   # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
+Dock_ShowProcessIndicators: yes                  # Show indicator for open applications
+Dock_ShowHidden: no                              # Display translucent Dock icons for hidden applications
+Dock_MouseOverHiliteStack: yes                   # Enable highlight hover effect for the grid view of a stack (Dock)

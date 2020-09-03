@@ -20,9 +20,9 @@
 
   - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
     osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }
-    loop: "{{ EnabledDisabled_Options }}"
+    loop: "{{ EnabledDisabled_Options_Integer }}"
     when: item.name == DesktopScreenSaver_askForPassword
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
-  become: "{{ (target_user_id != ansible_user_id) | bool }}"
+  become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"

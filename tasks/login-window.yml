@@ -5,7 +5,7 @@
     loop:
       - { description: "Toggle login for hidden user '>Console'", key: 'DisableConsoleAccess', type: 'bool', value: '{{ LoginWindow_DisableConsoleAccess }}'}
       - { description: "Toggle guest login", key: 'GuestEnabled', type: 'bool', value: '{{ LoginWindow_GuestEnabled }}'}
-      - { description: "Add a message to the login screen", key: 'LoginwindowText', type: 'string', value: '{{ LoginWindow_LoginwindowText }}'}
+      - { description: "Add a message to the login screen", key: 'LoginwindowText', type: 'string', value: '{{ LoginWindow_LoginWindowText }}'}
       - { description: "Disable shutdown and restart button on login Window", key: 'PowerOffDisabled', type: 'bool', value: '{{ LoginWindow_ShutDownDisabled }}'}
       - { description: "Show input menu", key: 'showInputMenu', type: 'bool', value: '{{ LoginWindow_showInputMenu }}'}
       - { description: "Show password hints - Retries until hint", key: 'RetriesUntilHint', type: 'int', value: '{{ LoginWindow_RetriesUntilHint }}'}

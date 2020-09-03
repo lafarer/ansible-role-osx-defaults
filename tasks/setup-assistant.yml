@@ -1,0 +1,34 @@
+---
+- block:
+  - name: "SetupAssistant"
+    osx_defaults: { domain: 'com.apple.SetupAssistant', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    loop:
+      - { key: "DidSeeActivationLock",                        type: "bool",   value: "{{ SetupAssistant_DidSeeActivationLock }}" }
+      - { key: "DidSeeAppearanceSetup",                       type: "bool",   value: "{{ SetupAssistant_DidSeeAppearanceSetup }}" }
+      - { key: "DidSeeApplePaySetup",                         type: "bool",   value: "{{ SetupAssistant_DidSeeApplePaySetup }}" }
+      - { key: "DidSeeAvatarSetup",                           type: "bool",   value: "{{ SetupAssistant_DidSeeAvatarSetup }}" }
+      - { key: "DidSeeCloudDiagnostics",                      type: "bool",   value: "{{ SetupAssistant_DidSeeCloudDiagnostics }}" }
+      - { key: "DidSeeCloudSetup",                            type: "bool",   value: "{{ SetupAssistant_DidSeeCloudSetup }}" }
+      - { key: "DidSeePrivacy",                               type: "bool",   value: "{{ SetupAssistant_DidSeePrivacy }}" }
+      - { key: "DidSeeScreenTime",                            type: "bool",   value: "{{ SetupAssistant_DidSeeScreenTime }}" }
+      - { key: "DidSeeSiriSetup",                             type: "bool",   value: "{{ SetupAssistant_DidSeeSiriSetup }}" }
+      - { key: "DidSeeSyncSetup",                             type: "bool",   value: "{{ SetupAssistant_DidSeeSyncSetup }}" }
+      - { key: "DidSeeSyncSetup2",                            type: "bool",   value: "{{ SetupAssistant_DidSeeSyncSetup2 }}" }
+      - { key: "DidSeeTouchIDSetup",                          type: "bool",   value: "{{ SetupAssistant_DidSeeTouchIDSetup }}" }
+      - { key: "DidSeeTrueTone",                              type: "bool",   value: "{{ SetupAssistant_DidSeeTrueTone }}" }
+      - { key: "DidSeeTrueTonePrivacy",                       type: "bool",   value: "{{ SetupAssistant_DidSeeTrueTonePrivacy }}" }
+      - { key: "DidSeeiCloudLoginForStorageServices",         type: "bool",   value: "{{ SetupAssistant_DidSeeiCloudLoginForStorageServices }}" }
+      - { key: "SkipFirstLoginOptimization",                  type: "bool",   value: "{{ SetupAssistant_SkipFirstLoginOptimization }}" }
+      - { key: "LastPrivacyBundleVersion",                    type: "int",    value: "2" }
+      - { key: "LastPreLoginTasksPerformedBuild",             type: "string", value: "{{ ansible_osversion }}" }
+      - { key: "LastPreLoginTasksPerformedVersion",           type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeenBuddyBuildVersion",                   type: "string", value: "{{ ansible_osversion }}" }
+      - { key: "LastSeenCloudProductVersion",                 type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeenDiagnosticsProductVersion",           type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeenSiriProductVersion",                  type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeenSyncProductVersion",                  type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeeniCloudStorageServicesProductVersion", type: "string", value: "{{ ansible_distribution_version }}" }
+  # Privilege escalation to `target_user_id` is only required for inner steps when
+  # the `target_user_id` doesn't match the `ansible_user_id`
+  become: "{{ target_user_id != ansible_user_id }}"
+  become_user: "{{ target_user_id }}"
