@@ -36,11 +36,11 @@ ActivityMonitor_Preferences:
 
 ApplicationFirewall_Preferences:
   - { description: 'Global State', key: 'globalstate', type: 'int', value: "{{ ApplicationFirewall_GlobalStates }}"}
-  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
-  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
-  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Allow Downloaded Signed Software', key: 'allowdownloadsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Integer }}"}
+  - { description: 'Allow Built-in Software', key: 'allowsignedenabled', type: 'int', value: "{{ EnabledDisabled_Options_Integer }}"}
+  - { description: 'Enable Logging', key: 'loggingenabled', type: 'int', value: "{{ EnabledDisabled_Options_Integer }}"}
   - { description: 'Logging Options', key: 'loggingoption', type: 'int', value: "{{ ApplicationFirewall_Logging_Options }}"}
-  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: "{{ EnabledDisabled_Options_Boolean }}"}
+  - { description: 'Stealth Mode', key: 'stealthenabled', type: 'int', value: "{{ EnabledDisabled_Options_Integer }}"}
 
 ApplicationFirewall_GlobalStates:
   - { name: "Off", value: 0 }
