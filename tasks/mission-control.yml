@@ -10,7 +10,6 @@
       - { description: 'Displays have separate Spaces', domain: 'com.apple.spaces', key: 'spans-displays', type: 'bool', value: "{{ MissionControl_SpansDisplays }}"}
     when: item.value != ''
     notify: restart Dock
-    
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
