@@ -1,73 +1,64 @@
 ---
 - block:
-
-  - name: "Desktop & Screen Saver - Check if background image exists"
-    stat:
-      path: "{{ DesktopScreenSaver_BackGroundImage }}"
-    changed_when: no
-    register: BackGroundImage_New
-    when: DesktopScreenSaver_BackGroundImage is defined
-
-  - name:
+  - name: When DesktopScreenSaver_BackGroundImage is defined
     block:
 
-    - name: Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'
-      copy:
-        src: "{{ DesktopScreenSaver_BackGroundImage }}"
-        dest: "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
-        owner: "{{ target_user_id }}"
-        mode: '0644'
+    - name: "Desktop & Screen Saver - Check if background image exists"
+      stat:
+        path: "{{ DesktopScreenSaver_BackGroundImage }}"
+      changed_when: no
+      register: BackGroundImage_New
 
-    - name: Backgroup Image for macOS 10.9 to 10.14
+    - name: "Desktop & Screen Saver - Get the current background image"
+      command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
+      changed_when: no
+      register: BackGroundImage_Current
+
+    - name: When current image is different than DesktopScreenSaver_BackGroundImage
       block:
-      - name: "Desktop & Screen Saver - Get the current background image"
-        command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data";
-        changed_when: no
-        register: BackGroundImage_Current
+      - name: Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'
+        copy:
+          src: "{{ DesktopScreenSaver_BackGroundImage }}"
+          dest: "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
+          owner: "{{ target_user_id }}"
+          mode: '0644'
 
-      - name: "Desktop & Screen Saver - Change desktop background"
-        command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ item }}'";
-        loop:
-          - "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
-        when:
-          - BackGroundImage_New.stat.exists
-          - BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
-        notify: restart Dock
+      - name: When macOS versio is 10.9 or superior
+        block:
+          - name: "Desktop & Screen Saver - Change desktop background"
+            command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "{{ item }}"
+            loop:
+              - "DELETE FROM data;"
+              - "DELETE FROM displays;"
+              - "DELETE FROM pictures;"
+              - "DELETE FROM preferences;"
+              - "DELETE FROM prefs;"
+              # - "DELETE FROM spaces;"
+              - "INSERT INTO pictures (space_id, display_id) VALUES (null, null);"
+              - "INSERT INTO data (value) VALUES ('$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}');" # Picture for standard backgroup
+              - "INSERT INTO data (value) VALUES (1);" # Scaling method (Fill Screen (1), Center (3), Stretch to Fill Screen (4), Fit to Screen (5))
+              - "INSERT INTO data (value) VALUES (0.07);" # Fill color
+              - "INSERT INTO preferences (key, data_id, picture_id) VALUES (1, 1, 1);" # Set the `Image path`, to `entry 1` of data table for 1st picture (which in our case means all spaces/displays by default).
+              - "INSERT INTO preferences (key, data_id, picture_id) VALUES (2, 2, 1);" # set Scaling method to 'entry 2' of data table
+              - "INSERT INTO preferences (key, data_id, picture_id) VALUES (3, 3, 1);" # set fill colour to 'entry 3' of data table
+              - "INSERT INTO preferences (key, data_id, picture_id) VALUES (4, 3, 1);" # set fill colour to 'entry 3' of data table
+              - "INSERT INTO preferences (key, data_id, picture_id) VALUES (5, 3, 1);" # set fill colour to 'entry 3' of data table
+              # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (9, 3, 1);" # Enable automatic changing
+              # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (10, 3, 1);" # Directory path to images
+              # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (11, 3, 1);" # Image changing interval
+              # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (12, 3, 1);" # Random order
+              # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (16, 3, 1);" # Current image (used when automatic
+              # matrix explained at
+              # https://stackoverflow.com/questions/33533304/change-scaling-for-all-desktop-backgrounds-on-mac-via-a-script/42194904 changing is enabled)
+            notify: restart Dock
+        # end block
+        when: ansible_facts['distribution_version'] is version('10.9', '>=')
       # end block
-      when: ansible_facts['distribution_version'] is version('10.9', '>=') and ansible_facts['distribution_version'] is version('10.15', '<')
-
-    - name: Backgroup Image for macOS 10.15 or superior
-      block:
-        - name: "Desktop & Screen Saver - Change desktop background"
-          command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "{{ item }}"
-          loop:
-            - "DELETE FROM data;"
-            - "DELETE FROM displays;"
-            - "DELETE FROM pictures;"
-            - "DELETE FROM preferences;"
-            - "DELETE FROM prefs;"
-            # - "DELETE FROM spaces;"
-            - "INSERT INTO pictures (space_id, display_id) VALUES (null, null);"
-            - "INSERT INTO data (value) VALUES ('$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}');" # Picture for standard backgroup
-            - "INSERT INTO data (value) VALUES (1);" # Scaling method (Fill Screen (1), Center (3), Stretch to Fill Screen (4), Fit to Screen (5))
-            - "INSERT INTO data (value) VALUES (0.07);" # Fill color
-            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (1, 1, 1);" # Set the `Image path`, to `entry 1` of data table for 1st picture (which in our case means all spaces/displays by default).
-            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (2, 2, 1);" # set Scaling method to 'entry 2' of data table
-            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (3, 3, 1);" # set fill colour to 'entry 3' of data table
-            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (4, 3, 1);" # set fill colour to 'entry 3' of data table
-            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (5, 3, 1);" # set fill colour to 'entry 3' of data table
-            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (9, 3, 1);" # Enable automatic changing
-            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (10, 3, 1);" # Directory path to images
-            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (11, 3, 1);" # Image changing interval
-            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (12, 3, 1);" # Random order
-            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (16, 3, 1);" # Current image (used when automatic changing is enabled)
-          notify: restart Dock
-      # end block
-      when: ansible_facts['distribution_version'] is version('10.15', '>=')
+      when:
+        - BackGroundImage_New.stat.exists
+        - BackGroundImage_Current.stdout != "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
     # end block
-    when:
-      - DesktopScreenSaver_BackGroundImage is defined
-      - BackGroundImage_New.stat.exists
+    when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage != ''
 
   - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
     osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }
