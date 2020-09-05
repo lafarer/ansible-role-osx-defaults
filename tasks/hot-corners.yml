@@ -1,7 +1,7 @@
 ---
 - block:
   - name: "Hot Corners - Modifiers"
-    osx_defaults: { domain: 'com.apple.dock', key: "{{ item.0.key }}", type: int, value: "{{ item.1.value}}" }
+    osx_defaults: { domain: 'com.apple.dock', key: "{{ item.0.key }}", type: int, value: "{{ item.1.value }}" }
     with_subelements:
       - "{{ HotCorners_Modifiers }}"
       - value
@@ -13,7 +13,7 @@
     notify: restart Dock
 
   - name: "Hot Corners - Actions"
-    osx_defaults: { domain: 'com.apple.dock', key: "{{ item.0.key }}", type: int, value: "{{ item.1.value}}" }
+    osx_defaults: { domain: 'com.apple.dock', key: "{{ item.0.key }}", type: int, value: "{{ item.1.value }}" }
     with_subelements:
       - "{{ HotCorners_Actions }}"
       - value
