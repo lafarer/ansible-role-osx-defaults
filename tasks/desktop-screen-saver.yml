@@ -28,9 +28,7 @@
     - name: Backgroup Image for macOS 10.15 or superior
       block:
         - name: "Desktop & Screen Saver - Change desktop background"
-          command:
-            argv:
-              - sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db {{ item }}
+          command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "{{ item }}"
           loop:
             - "DELETE FROM data;"
             - "DELETE FROM displays;"
