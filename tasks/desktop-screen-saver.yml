@@ -9,6 +9,12 @@
       changed_when: no
       register: BackGroundImage_New
 
+    - name: "Desktop & Screen Saver - Set the destination path for {{ DesktopScreenSaver_BackGroundImage |  basename }}"
+      set_fact:
+        new_background_picture_dest_path: "{{ item }}"
+      loop:
+        - "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
+
     - name: "Desktop & Screen Saver - Get the current background image"
       command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
       changed_when: no
@@ -19,7 +25,7 @@
       - name: Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'
         copy:
           src: "{{ DesktopScreenSaver_BackGroundImage }}"
-          dest: "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
+          dest: "{{ new_background_picture_dest_path }}"
           owner: "{{ target_user_id }}"
           mode: '0644'
 
@@ -35,7 +41,7 @@
               - "DELETE FROM prefs;"
               # - "DELETE FROM spaces;"
               - "INSERT INTO pictures (space_id, display_id) VALUES (null, null);"
-              - "INSERT INTO data (value) VALUES ('$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}');" # Picture for standard backgroup
+              - "INSERT INTO data (value) VALUES ('{{ new_background_picture_dest_path }}');" # Picture for standard backgroup
               - "INSERT INTO data (value) VALUES (1);" # Scaling method (Fill Screen (1), Center (3), Stretch to Fill Screen (4), Fit to Screen (5))
               - "INSERT INTO data (value) VALUES (0.07);" # Fill color
               - "INSERT INTO preferences (key, data_id, picture_id) VALUES (1, 1, 1);" # Set the `Image path`, to `entry 1` of data table for 1st picture (which in our case means all spaces/displays by default).
@@ -56,7 +62,7 @@
       # end block
       when:
         - BackGroundImage_New.stat.exists
-        - BackGroundImage_Current.stdout != "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
+        - BackGroundImage_Current.stdout != new_background_picture_dest_path
     # end block
     when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage != ''
 
