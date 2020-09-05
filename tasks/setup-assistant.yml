@@ -19,7 +19,7 @@
       - { key: "DidSeeTrueTonePrivacy",                       type: "bool",   value: "{{ SetupAssistant_DidSeeTrueTonePrivacy }}" }
       - { key: "DidSeeiCloudLoginForStorageServices",         type: "bool",   value: "{{ SetupAssistant_DidSeeiCloudLoginForStorageServices }}" }
       - { key: "SkipFirstLoginOptimization",                  type: "bool",   value: "{{ SetupAssistant_SkipFirstLoginOptimization }}" }
-      - { key: "LastPrivacyBundleVersion",                    type: "int",    value: "2" }
+      - { key: "LastPrivacyBundleVersion",                    type: "string", value: "2" }
       - { key: "LastPreLoginTasksPerformedBuild",             type: "string", value: "{{ ansible_osversion }}" }
       - { key: "LastPreLoginTasksPerformedVersion",           type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
       - { key: "LastSeenBuddyBuildVersion",                   type: "string", value: "{{ ansible_osversion }}" }
