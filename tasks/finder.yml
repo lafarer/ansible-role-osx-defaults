@@ -32,14 +32,17 @@
 
   - name: "Finder - Desktop - IconViewSettings"
     shell: |
-      /usr/libexec/PlistBuddy -c "Delete :DesktopViewSettings:IconViewSettings:{{ item.key }}" ~/Library/Preferences/com.apple.finder.plist
-      /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:{{ item.key }} {{ item.type }} {{ item.value }}" ~/Library/Preferences/com.apple.finder.plist
+      /usr/libexec/PlistBuddy -c "Delete {{ key_base }}{{ item.key }}" "{{ plist_file }}"
+      /usr/libexec/PlistBuddy -c "Add {{ key_base }}{{ item.key }} {{ item.type }} {{ item.value }}" "{{ plist_file }}"
     loop:
       - { key: 'arrangeBy', type: 'string', value: '{{ Finder_DVSIVSarrangeBy }}' }
       - { key: 'iconSize', type: 'integer', value: '{{ Finder_DVSIVSiconSize }}' }
       - { key: 'showItemInfo', type: 'bool', value: '{{ Finder_DVSIVSshowItemInfo }}' }
       - { key: 'gridSpacing', type: 'integer', value: '{{ Finder_DVSIVSgridSpacing }}' }
       - { key: 'labelOnBottom', type: 'bool', value: '{{ Finder_DVSIVSlabelOnBottom }}' }
+    vars:
+      key_base: ':DesktopViewSettings:IconViewSettings:'
+      plist_file: '~/Library/Preferences/com.apple.finder.plist'
     when: item.value != ''
     changed_when: no
     notify: restart Finder
@@ -48,13 +51,16 @@
   # - if we use `Add` and the item already exists it throws an error
   - name: "Finder - Standard - IconViewSettings"
     shell: |
-      /usr/libexec/PlistBuddy -c "Delete :StandardViewSettings:IconViewSettings:{{ item.key }}" ~/Library/Preferences/com.apple.finder.plist
-      /usr/libexec/PlistBuddy -c "Add :StandardViewSettings:IconViewSettings:{{ item.key }} {{ item.type }} {{ item.value }}" ~/Library/Preferences/com.apple.finder.plist
+      /usr/libexec/PlistBuddy -c "Delete {{ key_base }}{{ item.key }}" "{{ plist_file }}"
+      /usr/libexec/PlistBuddy -c "Add {{ key_base }}{{ item.key }} {{ item.type }} {{ item.value }}" "{{ plist_file }}"
     loop:
       - { key: 'arrangeBy', type: 'string', value: '{{ Finder_SVSIVSarrangeBy }}' }
       - { key: 'iconSize', type: 'integer', value: '{{ Finder_SVSIVSiconSize }}' }
       - { key: 'showItemInfo', type: 'bool', value: '{{ Finder_SVSIVSshowItemInfo }}' }
       - { key: 'gridSpacing', type: 'integer', value: '{{ Finder_SVSIVSgridSpacing }}' }
+    vars:
+      key_base: ':StandardViewSettings:IconViewSettings:'
+      plist_file: '~/Library/Preferences/com.apple.finder.plist'
     when: item.value != '' # item.value is used to verify that there's a value to replace the value in the following task
     changed_when: no
     notify: restart Finder
