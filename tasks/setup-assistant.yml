@@ -19,15 +19,15 @@
       - { key: "DidSeeTrueTonePrivacy",                       type: "bool",   value: "{{ SetupAssistant_DidSeeTrueTonePrivacy }}" }
       - { key: "DidSeeiCloudLoginForStorageServices",         type: "bool",   value: "{{ SetupAssistant_DidSeeiCloudLoginForStorageServices }}" }
       - { key: "SkipFirstLoginOptimization",                  type: "bool",   value: "{{ SetupAssistant_SkipFirstLoginOptimization }}" }
-      - { key: "LastPrivacyBundleVersion",                    type: "int",    value: "2" }
+      - { key: "LastPrivacyBundleVersion",                    type: "string", value: "2" }
       - { key: "LastPreLoginTasksPerformedBuild",             type: "string", value: "{{ ansible_osversion }}" }
-      - { key: "LastPreLoginTasksPerformedVersion",           type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastPreLoginTasksPerformedVersion",           type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
       - { key: "LastSeenBuddyBuildVersion",                   type: "string", value: "{{ ansible_osversion }}" }
-      - { key: "LastSeenCloudProductVersion",                 type: "string", value: "{{ ansible_distribution_version }}" }
-      - { key: "LastSeenDiagnosticsProductVersion",           type: "string", value: "{{ ansible_distribution_version }}" }
-      - { key: "LastSeenSiriProductVersion",                  type: "string", value: "{{ ansible_distribution_version }}" }
-      - { key: "LastSeenSyncProductVersion",                  type: "string", value: "{{ ansible_distribution_version }}" }
-      - { key: "LastSeeniCloudStorageServicesProductVersion", type: "string", value: "{{ ansible_distribution_version }}" }
+      - { key: "LastSeenCloudProductVersion",                 type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
+      - { key: "LastSeenDiagnosticsProductVersion",           type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
+      - { key: "LastSeenSiriProductVersion",                  type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
+      - { key: "LastSeenSyncProductVersion",                  type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
+      - { key: "LastSeeniCloudStorageServicesProductVersion", type: "string", value: "{{ ansible_facts['distribution_version'] }}" }
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"

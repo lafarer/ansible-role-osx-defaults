@@ -1,9 +1,6 @@
 ---
-- block:
-  - name: "Desktop & Screen Saver - Get the current background image"
-    command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data";
-    changed_when: no
-    register: BackGroundImage_Current
+- name: When DesktopScreenSaver_BackGroundImage is defined
+  block:
 
   - name: "Desktop & Screen Saver - Check if background image exists"
     stat:
@@ -11,20 +8,101 @@
     changed_when: no
     register: BackGroundImage_New
 
-  - name: "Desktop & Screen Saver - Change desktop background"
-    command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ item }}'";
+  - name: "Desktop & Screen Saver - Set the destination path for {{ DesktopScreenSaver_BackGroundImage |  basename }}"
+    set_fact:
+      new_background_picture_dest_path: "{{ item | expanduser }}"
     loop:
-      - "{{ DesktopScreenSaver_BackGroundImage }}"
-    when:
-      - DesktopScreenSaver_BackGroundImage is defined
-      - BackGroundImage_New.stat.exists
-      - BackGroundImage_Current.stdout != DesktopScreenSaver_BackGroundImage
-    notify: restart Dock
+      - "/Users/{{ target_user_id }}/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
 
-  - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
-    osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }
-    loop: "{{ EnabledDisabled_Options_Integer }}"
-    when: item.name == DesktopScreenSaver_askForPassword
+  - name: new_background_picture_dest_path
+    debug:
+      var: new_background_picture_dest_path
+    when: verbose | bool
+
+  - name: try to get information about the current background image
+    block:
+    - name: "Desktop & Screen Saver - Get the current background image"
+      command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
+      changed_when: no
+      register: BackGroundImage_Current
+      ignore_errors: no
+      become: "{{ target_user_id != ansible_user_id }}"
+      become_user: "{{ target_user_id }}"
+
+    rescue:
+    - name: rescue tasks that is executed only in case the previous task(s) fail
+      block:
+      - name: "Make sure that '/Users/{{ target_user_id }}/Library/Application\ Support/Dock/' exists."
+        file:
+          path: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/"
+          state: directory
+          owner: "{{ target_user_id }}"
+          mode: '0755'
+
+      - name: "Copy {{ ansible_user_id }}'s desktoppicture.db into {{ target_user_id }} home dir."
+        copy:
+          remote_src: yes
+          src: "/Users/{{ ansible_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+          dest: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+          force: yes
+          owner: "{{ target_user_id }}"
+          mode: '0644'
+      become: yes
+      when: (target_user_id != ansible_user_id)
+
+  - name: When current image is different than DesktopScreenSaver_BackGroundImage
+    block:
+    - name: "Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'"
+      copy:
+        src: "{{ DesktopScreenSaver_BackGroundImage }}"
+        dest: "{{ new_background_picture_dest_path }}"
+        owner: "{{ target_user_id }}"
+        mode: '0644'
+      become: yes
+
+    - name: When macOS versio is 10.9 or superior
+      block:
+        - name: "Desktop & Screen Saver - Change desktop background"
+          command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "{{ item }}"
+          loop:
+            - "DELETE FROM data;"
+            - "DELETE FROM displays;"
+            - "DELETE FROM pictures;"
+            - "DELETE FROM preferences;"
+            - "DELETE FROM prefs;"
+            # - "DELETE FROM spaces;"
+            - "INSERT INTO pictures (space_id, display_id) VALUES (null, null);"
+            - "INSERT INTO data (value) VALUES ('{{ new_background_picture_dest_path }}');" # Picture for standard backgroup
+            - "INSERT INTO data (value) VALUES (1);" # Scaling method (Fill Screen (1), Center (3), Stretch to Fill Screen (4), Fit to Screen (5))
+            - "INSERT INTO data (value) VALUES (0.07);" # Fill color
+            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (1, 1, 1);" # Set the `Image path`, to `entry 1` of data table for 1st picture (which in our case means all spaces/displays by default).
+            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (2, 2, 1);" # set Scaling method to 'entry 2' of data table
+            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (3, 3, 1);" # set fill colour to 'entry 3' of data table
+            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (4, 3, 1);" # set fill colour to 'entry 3' of data table
+            - "INSERT INTO preferences (key, data_id, picture_id) VALUES (5, 3, 1);" # set fill colour to 'entry 3' of data table
+            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (9, 3, 1);" # Enable automatic changing
+            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (10, 3, 1);" # Directory path to images
+            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (11, 3, 1);" # Image changing interval
+            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (12, 3, 1);" # Random order
+            # - "INSERT INTO preferences (key, data_id, picture_id) VALUES (16, 3, 1);" # Current image (used when automatic
+            # matrix explained at
+            # https://stackoverflow.com/questions/33533304/change-scaling-for-all-desktop-backgrounds-on-mac-via-a-script/42194904 changing is enabled)
+          become: "{{ target_user_id != ansible_user_id }}"
+          become_user: "{{ target_user_id }}"
+          notify: restart Dock
+      # end block
+      when: ansible_facts['distribution_version'] is version('10.9', '>=')
+    # end block
+    when:
+      - BackGroundImage_New.stat.exists
+      - BackGroundImage_Current.stdout != new_background_picture_dest_path
+  # end block
+  when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage != ''
+
+- name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
+  osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }
+  loop: "{{ EnabledDisabled_Options_Integer }}"
+  when: item.name == DesktopScreenSaver_askForPassword
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
