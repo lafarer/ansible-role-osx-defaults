@@ -3,10 +3,10 @@
   - name: "Dashboard"
     osx_defaults: { domain: "{{ item.domain }}", key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
-      - { description: 'Disable Dashboard', domain: 'com.apple.dashboard', key: 'mcx-disabled',  type: 'bool', value: '{{ Dashboard_McxDisabled }}' }
-      - { description: 'Dashboard State',   domain: 'com.apple.dashboard', key: 'enabled-state', type: 'int',  value: '{{ Dashboard_EnabledState }}' }
-      - { description: 'Enable Dev Mode',   domain: 'com.apple.dashboard', key: 'devmode',       type: 'bool', value: '{{ Dashboard_DevMode }}' }
-      - { description: 'In Overlay (not Space)', domain: 'com.apple.dock', key:  'dashboard-in-overlay', type: 'bool', value: '{{ Dashboard_DontShowAsSpace }}' }
+      - { description: 'Disable Dashboard', domain: 'com.apple.dashboard', key: 'mcx-disabled', type: 'bool', value: '{{ Dashboard_McxDisabled }}' }
+      - { description: 'Dashboard State', domain: 'com.apple.dashboard', key: 'enabled-state', type: 'int', value: '{{ Dashboard_EnabledState }}' }
+      - { description: 'Enable Dev Mode', domain: 'com.apple.dashboard', key: 'devmode', type: 'bool', value: '{{ Dashboard_DevMode }}' }
+      - { description: 'In Overlay', domain: 'com.apple.dock', key: 'dashboard-in-overlay', type: 'bool', value: '{{ Dashboard_DontShowAsSpace }}' }
     when: item.value != ''
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

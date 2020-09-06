@@ -14,12 +14,12 @@
     with_subelements:
       - "{{ Safari_General_Options }}"
       - value
-    when: (item.0.key == 'NewWindowBehavior'       and (item.1.name == Safari_NewWindowBehavior       or item.1.value == Safari_NewWindowBehavior)) or
-          (item.0.key == 'NewTabBehavior'          and (item.1.name == Safari_NewTabBehavior          or item.1.value == Safari_NewTabBehavior)) or
-          (item.0.key == 'HistoryAgeInDaysLimit'   and (item.1.name == Safari_HistoryAgeInDaysLimit   or item.1.value == Safari_HistoryAgeInDaysLimit)) or
+    when: (item.0.key == 'NewWindowBehavior' and (item.1.name == Safari_NewWindowBehavior or item.1.value == Safari_NewWindowBehavior)) or
+          (item.0.key == 'NewTabBehavior' and (item.1.name == Safari_NewTabBehavior or item.1.value == Safari_NewTabBehavior)) or
+          (item.0.key == 'HistoryAgeInDaysLimit' and (item.1.name == Safari_HistoryAgeInDaysLimit or item.1.value == Safari_HistoryAgeInDaysLimit)) or
           (item.0.key == 'TopSitesGridArrangement' and (item.1.name == Safari_TopSitesGridArrangement or item.1.value == Safari_TopSitesGridArrangement)) or
           (item.0.key == 'DownloadsClearingPolicy' and (item.1.name == Safari_DownloadsClearingPolicy or item.1.value == Safari_DownloadsClearingPolicy)) or
-          (item.0.key == 'AutoOpenSafeDownloads'   and (item.1.name == Safari_AutoOpenSafeDownloads   or item.1.value == Safari_AutoOpenSafeDownloads))
+          (item.0.key == 'AutoOpenSafeDownloads' and (item.1.name == Safari_AutoOpenSafeDownloads or item.1.value == Safari_AutoOpenSafeDownloads))
     notify: restart Safari
 
   - name: "Safari - Tabs"
@@ -27,10 +27,11 @@
     with_subelements:
       - "{{ Safari_Tabs_Options }}"
       - value
-    when: (item.0.key == 'TabCreationPolicy'       and (item.1.name == Safari_TabCreationPolicy       or item.1.value == Safari_TabCreationPolicy)) or
-          (item.0.key == 'CommandClickMakesTabs'   and (item.1.name == Safari_CommandClickMakesTabs   or item.1.value == Safari_CommandClickMakesTabs)) or
-          (item.0.key == 'OpenNewTabsInFront'      and (item.1.name == Safari_OpenNewTabsInFront      or item.1.value == Safari_OpenNewTabsInFront)) or
-          (item.0.key == 'Command1Through9SwitchesTabs' and (item.1.name == Safari_Command1Through9SwitchesTabs or item.1.value == Safari_Command1Through9SwitchesTabs))
+    when: (item.0.key == 'TabCreationPolicy' and (item.1.name == Safari_TabCreationPolicy or item.1.value == Safari_TabCreationPolicy)) or
+          (item.0.key == 'CommandClickMakesTabs' and (item.1.name == Safari_CommandClickMakesTabs or item.1.value == Safari_CommandClickMakesTabs)) or
+          (item.0.key == 'OpenNewTabsInFront' and (item.1.name == Safari_OpenNewTabsInFront or item.1.value == Safari_OpenNewTabsInFront)) or
+          (item.0.key == 'Command1Through9SwitchesTabs' and
+          (item.1.name == Safari_Command1Through9SwitchesTabs or item.1.value == Safari_Command1Through9SwitchesTabs))
     notify: restart Safari
 
   - name: "Safari - Autofill"
@@ -38,10 +39,14 @@
     with_subelements:
       - "{{ Safari_Autofill_Options }}"
       - value
-    when: (item.0.key == 'AutoFillFromAddressBook'    and (item.1.name == Safari_AutoFillFromAddressBook    or item.1.value == Safari_AutoFillFromAddressBook)) or
-          (item.0.key == 'AutoFillPasswords'          and (item.1.name == Safari_AutoFillPasswords          or item.1.value == Safari_AutoFillPasswords)) or
-          (item.0.key == 'AutoFillCreditCardData'     and (item.1.name == Safari_AutoFillCreditCardData     or item.1.value == Safari_AutoFillCreditCardData)) or
-          (item.0.key == 'AutoFillMiscellaneousForms' and (item.1.name == Safari_AutoFillMiscellaneousForms or item.1.value == Safari_AutoFillMiscellaneousForms))
+    when: (item.0.key == 'AutoFillFromAddressBook' and
+          (item.1.name == Safari_AutoFillFromAddressBook or item.1.value == Safari_AutoFillFromAddressBook)) or
+          (item.0.key == 'AutoFillPasswords' and
+          (item.1.name == Safari_AutoFillPasswords or item.1.value == Safari_AutoFillPasswords)) or
+          (item.0.key == 'AutoFillCreditCardData' and
+          (item.1.name == Safari_AutoFillCreditCardData or item.1.value == Safari_AutoFillCreditCardData)) or
+          (item.0.key == 'AutoFillMiscellaneousForms' and
+          (item.1.name == Safari_AutoFillMiscellaneousForms or item.1.value == Safari_AutoFillMiscellaneousForms))
     notify: restart Safari
 
 
@@ -57,12 +62,16 @@
     with_subelements:
       - "{{ Safari_Search_Options }}"
       - value
-    when: (item.0.key == 'NSProviderIdentifier'               and (item.1.name == Safari_SearchEngine                       or item.1.value == Safari_SearchEngine)) or
-          (item.0.key == 'SuppressSearchSuggestions'          and (item.1.name == Safari_IncludeSearchSuggestions           or item.1.value == Safari_IncludeSearchSuggestions)) or
-          (item.0.key == 'WebsiteSpecificSearchEnabled'       and (item.1.name == Safari_WebsiteSpecificSearchEnabled       or item.1.value == Safari_WebsiteSpecificSearchEnabled)) or
-          (item.0.key == 'PreloadTopHit'                      and (item.1.name == Safari_PreloadTopHit                      or item.1.value == Safari_PreloadTopHit)) or
-          (item.0.key == 'ShowFavoritesUnderSmartSearchField' and (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField)) or
-          (item.0.key == 'ShowFullURLInSmartSearchField' and (item.1.name == Safari_ShowFullURLInSmartSearchField or item.1.value == Safari_ShowFullURLInSmartSearchField))
+    when: (item.0.key == 'NSProviderIdentifier' and (item.1.name == Safari_SearchEngine or item.1.value == Safari_SearchEngine)) or
+          (item.0.key == 'SuppressSearchSuggestions' and
+          (item.1.name == Safari_IncludeSearchSuggestions or item.1.value == Safari_IncludeSearchSuggestions)) or
+          (item.0.key == 'WebsiteSpecificSearchEnabled' and
+          (item.1.name == Safari_WebsiteSpecificSearchEnabled or item.1.value == Safari_WebsiteSpecificSearchEnabled)) or
+          (item.0.key == 'PreloadTopHit' and (item.1.name == Safari_PreloadTopHit or item.1.value == Safari_PreloadTopHit)) or
+          (item.0.key == 'ShowFavoritesUnderSmartSearchField' and
+          (item.1.name == Safari_ShowFavoritesUnderSmartSearchField or item.1.value == Safari_ShowFavoritesUnderSmartSearchField)) or
+          (item.0.key == 'ShowFullURLInSmartSearchField' and
+          (item.1.name == Safari_ShowFullURLInSmartSearchField or item.1.value == Safari_ShowFullURLInSmartSearchField))
     notify: restart Safari
 
   - name: "Safari - Security"
@@ -70,11 +79,16 @@
     with_subelements:
       - "{{ Safari_Security_Options }}"
       - value
-    when: (item.0.key == 'WarnAboutFraudulentWebsites' and (item.1.name == Safari_WarnAboutFraudulentWebsites or item.1.value == Safari_WarnAboutFraudulentWebsites)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled' and (item.1.name == Safari_JavaScriptEnabled or item.1.value == Safari_JavaScriptEnabled)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically' and not (item.1.name == Safari_BlockPopupWindows or item.1.value == Safari_BlockPopupWindows)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled' and (item.1.name == Safari_AllowWebGL or item.1.value == Safari_AllowWebGL)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled' and (item.1.name == Safari_AllowPlugins or item.1.value == Safari_AllowPlugins))
+    when: (item.0.key == 'WarnAboutFraudulentWebsites' and
+          (item.1.name == Safari_WarnAboutFraudulentWebsites or item.1.value == Safari_WarnAboutFraudulentWebsites)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled' and
+          (item.1.name == Safari_JavaScriptEnabled or item.1.value == Safari_JavaScriptEnabled)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically' and
+          not (item.1.name == Safari_BlockPopupWindows or item.1.value == Safari_BlockPopupWindows)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2WebGLEnabled' and
+          (item.1.name == Safari_AllowWebGL or item.1.value == Safari_AllowWebGL)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled' and
+          (item.1.name == Safari_AllowPlugins or item.1.value == Safari_AllowPlugins))
     notify: restart Safari
 
   - name: "Safari - Privacy - Cookies and website data"
@@ -88,9 +102,12 @@
     with_subelements:
       - "{{ Safari_PrivacyNotifications_Options }}"
       - value
-    when: (item.0.key == 'SafariGeolocationPermissionPolicy' and (item.1.name == Safari_SafariGeolocationPermissionPolicy or item.1.value == Safari_SafariGeolocationPermissionPolicy)) or
-          (item.0.key == 'SendDoNotTrackHTTPHeader'          and (item.1.name == Safari_SendDoNotTrackHTTPHeader          or item.1.value == Safari_SendDoNotTrackHTTPHeader)) or
-          (item.0.key == 'CanPromptForPushNotifications'     and (item.1.name == Safari_CanPromptForPushNotifications     or item.1.value == Safari_CanPromptForPushNotifications))
+    when: (item.0.key == 'SafariGeolocationPermissionPolicy' and
+          (item.1.name == Safari_SafariGeolocationPermissionPolicy or item.1.value == Safari_SafariGeolocationPermissionPolicy)) or
+          (item.0.key == 'SendDoNotTrackHTTPHeader' and
+          (item.1.name == Safari_SendDoNotTrackHTTPHeader or item.1.value == Safari_SendDoNotTrackHTTPHeader)) or
+          (item.0.key == 'CanPromptForPushNotifications' and
+          (item.1.name == Safari_CanPromptForPushNotifications or item.1.value == Safari_CanPromptForPushNotifications))
     notify: restart Safari
 
   - name: "Safari - Advanced"
@@ -98,14 +115,21 @@
     with_subelements:
       - "{{ Safari_Advanced_Options }}"
       - value
-    when: (item.0.key == 'InstallExtensionUpdatesAutomatically' and (item.1.name == Safari_InstallExtensionUpdatesAutomatically or item.1.value == Safari_InstallExtensionUpdatesAutomatically)) or
-          (item.0.key == 'WebKitTabToLinksPreferenceKey' and (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks' and (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey)) or
-          (item.0.key == 'BookmarksMenuIncludesRendezvous' and (item.1.name == Safari_BookmarksMenuIncludesRendezvous or item.1.value == Safari_BookmarksMenuIncludesRendezvous)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled' and (item.1.name == Safari_StopPuginsToSavePower or item.1.value == Safari_StopPuginsToSavePower)) or
-          (item.0.key == 'IncludeDevelopMenu' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu)) or
+    when: (item.0.key == 'InstallExtensionUpdatesAutomatically' and
+          (item.1.name == Safari_InstallExtensionUpdatesAutomatically or item.1.value == Safari_InstallExtensionUpdatesAutomatically)) or
+          (item.0.key == 'WebKitTabToLinksPreferenceKey' and
+          (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks' and
+          (item.1.name == Safari_WebKitTabToLinksPreferenceKey or item.1.value == Safari_WebKitTabToLinksPreferenceKey)) or
+          (item.0.key == 'BookmarksMenuIncludesRendezvous' and
+          (item.1.name == Safari_BookmarksMenuIncludesRendezvous or item.1.value == Safari_BookmarksMenuIncludesRendezvous)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2PlugInSnapshottingEnabled' and
+          (item.1.name == Safari_StopPuginsToSavePower or item.1.value == Safari_StopPuginsToSavePower)) or
+          (item.0.key == 'IncludeDevelopMenu' and
+          (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu)) or
           (item.0.key == 'WebKitDeveloperExtrasEnabledPreferenceKey' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu)) or
-          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled' and (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu)) or
+          (item.0.key == 'com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled' and
+          (item.1.name == Safari_ShowDeloperMenu or item.1.value == Safari_ShowDeloperMenu)) or
           (item.0.key == 'IncludeInternalDebugMenu' and (item.1.name == Safari_DebugMenu or item.1.value == Safari_DebugMenu))
     notify: restart Safari
 
@@ -130,12 +154,13 @@
     with_subelements:
       - "{{ Safari_View_Preferences }}"
       - value
-    when: (item.0.key == 'ShowFavoritesBar-v2'        and (item.1.name == Safari_ShowFavoritesBar           or item.1.value == Safari_ShowFavoritesBar))           or
-          (item.0.key == 'AlwaysShowTabBar'           and (item.1.name == Safari_AlwaysShowTabBar           or item.1.value == Safari_AlwaysShowTabBar))           or
-          (item.0.key == 'ShowOverlayStatusBar'       and (item.1.name == Safari_ShowOverlayStatusBar       or item.1.value == Safari_ShowOverlayStatusBar))       or
-          (item.0.key == 'ShowSidebarInNewWindows'    and (item.1.name == Safari_ShowSidebarInNewWindows    or item.1.value == Safari_ShowSidebarInNewWindows))    or
-          (item.0.key == 'ShowFrequentlyVisitedSites' and (item.1.name == Safari_ShowFrequentlyVisitedSites or item.1.value == Safari_ShowFrequentlyVisitedSites)) or
-          (item.0.key == 'SidebarViewModeIdentifier'  and item.1.value == Safari_SidebarViewModeIdentifier)
+    when: (item.0.key == 'ShowFavoritesBar-v2' and (item.1.name == Safari_ShowFavoritesBar or item.1.value == Safari_ShowFavoritesBar)) or
+          (item.0.key == 'AlwaysShowTabBar' and (item.1.name == Safari_AlwaysShowTabBar or item.1.value == Safari_AlwaysShowTabBar)) or
+          (item.0.key == 'ShowOverlayStatusBar' and (item.1.name == Safari_ShowOverlayStatusBar or item.1.value == Safari_ShowOverlayStatusBar)) or
+          (item.0.key == 'ShowSidebarInNewWindows' and (item.1.name == Safari_ShowSidebarInNewWindows or item.1.value == Safari_ShowSidebarInNewWindows)) or
+          (item.0.key == 'ShowFrequentlyVisitedSites' and
+          (item.1.name == Safari_ShowFrequentlyVisitedSites or item.1.value == Safari_ShowFrequentlyVisitedSites)) or
+          (item.0.key == 'SidebarViewModeIdentifier' and item.1.value == Safari_SidebarViewModeIdentifier)
     notify: restart Safari
 
   # Privilege escalation to `target_user_id` is only required for inner steps when

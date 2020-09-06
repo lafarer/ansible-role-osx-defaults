@@ -4,15 +4,15 @@
   - name: "General - Appearance"
     osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
-      - { description: 'Set appearance',  key: 'AppleAquaColorVariant', type: 'int', value: "{{ General_AppleAquaColorVariant }}"}
-      - { description: 'Use Dark menu bar and Dock', key: 'AppleInterfaceStyle', type: 'string', value: "{{ General_AppleInterfaceStyle }}"}
-      - { description: 'Automatically hide and show the menu bar', key: '_HIHideMenuBar', type: 'bool', value: "{{ General_AutoHideMenuBar }}"}
-      - { description: 'Sidebar icon size', key: 'NSTableViewDefaultSizeMode', type: 'int', value: "{{ General_SidebarIconSize }}"}
-      - { description: 'Scroll bar visibility', key: 'AppleShowScrollBars', type: 'string', value: "{{ General_AppleShowScrollBars }}"}
-      - { description: 'Scroll bar click behavior', key: 'AppleScrollerPagingBehavior', type: 'bool', value: "{{ General_AppleScrollerPagingBehavior }}"}
-      - { description: 'Ask to keep changes when closing documents', key: 'NSCloseAlwaysConfirmsChanges', type: 'bool', value: "{{ General_NSCloseAlwaysConfirmsChanges }}"}
-      - { description: 'Close windows when quitting an application', key: 'NSQuitAlwaysKeepsWindows', type: 'bool', value: "{{ not General_CloseWindowsWhenQuittingApp }}"}
-      - { description: 'Smooth scrolling', key: 'NSScrollAnimationEnabled', type: 'bool', value: "{{ General_NSScrollAnimationEnabled }}"}
+      - { description: 'Set appearance',  key: 'AppleAquaColorVariant', type: 'int', value: "{{ General_AppleAquaColorVariant }}" }
+      - { description: 'Use Dark menu bar and Dock', key: 'AppleInterfaceStyle', type: 'string', value: "{{ General_AppleInterfaceStyle }}" }
+      - { description: 'Automatically hide and show the menu bar', key: '_HIHideMenuBar', type: 'bool', value: "{{ General_AutoHideMenuBar }}" }
+      - { description: 'Sidebar icon size', key: 'NSTableViewDefaultSizeMode', type: 'int', value: "{{ General_SidebarIconSize }}" }
+      - { description: 'Scroll bar visibility', key: 'AppleShowScrollBars', type: 'string', value: "{{ General_AppleShowScrollBars }}" }
+      - { description: 'Scroll bar click behavior', key: 'AppleScrollerPagingBehavior', type: 'bool', value: "{{ General_AppleScrollerPagingBehavior }}" }
+      - { description: 'Ask to keep changes when closing documents', key: 'NSCloseAlwaysConfirmsChanges', type: 'bool', value: "{{ General_NSCloseAlwaysConfirmsChanges }}" } # noqa 204
+      - { description: 'Close windows when quitting an application', key: 'NSQuitAlwaysKeepsWindows', type: 'bool', value: "{{ not General_CloseWindowsWhenQuittingApp }}" } # noqa 204
+      - { description: 'Smooth scrolling', key: 'NSScrollAnimationEnabled', type: 'bool', value: "{{ General_NSScrollAnimationEnabled }}" }
     when: item.value != ''
     notify:
       - restart MenuBar

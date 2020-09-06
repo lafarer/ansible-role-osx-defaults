@@ -1,7 +1,7 @@
 ---
 - block:
   - name: "Keyboard - Global - AmbientLightSensor"
-    osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
+    osx_defaults: { domain: '/Library/Preferences/com.apple.iokit.AmbientLightSensor', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" } # noqa 204
     loop:
       - { description: 'Adjust keyboard brightness in low light', key: 'Automatic Keyboard Enabled', type: 'bool',  value: "{{ Keyboard_kDim }}" }
       - { description: 'Dim keyboard after idle time in seconds', key: 'Keyboard Dim Time', type: 'string', value: "{{ Keyboard_kDimTime }}" }
@@ -36,7 +36,7 @@
       - { description: 'Use Fn keys as standard function keys', key: 'com.apple.Keyboard_fnState', type: 'bool', value: '{{ Keyboard_fnState }}'}
       - { description: 'Set key repeat rate', key: 'KeyRepeat', type: 'int', value: '{{ Keyboard_KeyRepeat }}'}
       - { description: 'Set delay until repeat (in milliseconds)', key: 'InitialKeyRepeat', type: 'int', value: '{{ Keyboard_InitialKeyRepeat }}'}
-      - { description: 'Disable press-and-hold for keys in favor of key repeat', key: 'ApplePressAndHoldEnabled', type: 'bool', value: '{{ Keyboard_PressAndHoldEnabled }}'}
+      - { description: 'Disable press-and-hold, prefer key repeat', key: 'ApplePressAndHoldEnabled', type: 'bool', value: '{{ Keyboard_PressAndHoldEnabled }}'}
     when: item.value != ''
 
   - name: "Keyboard - User - Automatic Spelling Correction & Smart Substitutions"
