@@ -4,7 +4,7 @@
 - block:
   - name: "Dock - Persistent Apps - Buils apps list"
     set_fact:
-      persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]"
+      persistent_apps_array: "{{ persistent_apps_array|default([])  }} + [ '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>' ]" # noqa 204
     loop: "{{ Dock_PersistentApps }}"
     when: Dock_PersistentApps is defined and Dock_PersistentApps != []
 
@@ -19,7 +19,7 @@
 
   - name: "Dock - Persistent Others - Buils items list"
     set_fact:
-      persistent_others_array: "{{ persistent_others_array|default([])  }} + [ '<dict><key>tile-type</key><string>{{ item.type | default('directory') }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>' ]"
+      persistent_others_array: "{{ persistent_others_array|default([])  }} + [ '<dict><key>tile-type</key><string>{{ item.type | default('directory') }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>' ]" # noqa 204
     loop: "{{ Dock_PersistentOthers }}"
     when: Dock_PersistentOthers is defined and Dock_PersistentOthers != []
 

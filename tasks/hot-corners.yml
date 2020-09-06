@@ -22,7 +22,6 @@
           (item.0.key == 'wvous-tl-corner' and item.1.name == HotCorners_TopLeftAction) or
           (item.0.key == 'wvous-tr-corner' and item.1.name == HotCorners_TopRightAction)
     notify: restart Dock
-
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"

@@ -4,13 +4,28 @@
   - name: "Mission Control"
     osx_defaults: { domain: 'com.apple.dock', key: 'mru-spaces', type: bool, value: "{{ MissionControl_MruSpaces }}" }
     loop:
-      - { description: 'Automatically rearrange Spaces based on most recent use', domain: 'com.apple.dock', key: 'mru-spaces', type: 'bool', value: "{{ MissionControl_MruSpaces }}"}
-      - { description: 'Switch to a Space with open windows for the application', domain: 'NSGlobalDomain', key: 'AppleSpacesSwitchOnActivate', type: 'bool', value: "{{ MissionControl_SwitchOnActivate }}"}
-      - { description: 'Group windows by application in Mission Control', domain: 'com.apple.dock', key: 'expose-group-apps', type: 'bool', value: "{{ MissionControl_GroupByApp }}"}
-      - { description: 'Displays have separate Spaces', domain: 'com.apple.spaces', key: 'spans-displays', type: 'bool', value: "{{ MissionControl_SpansDisplays }}"}
+      - description: 'Automatically rearrange Spaces based on most recent use'
+        domain: 'com.apple.dock'
+        key: 'mru-spaces'
+        type: 'bool'
+        value: "{{ MissionControl_MruSpaces }}"
+      - description: 'Switch to a Space with open windows for the application'
+        domain: 'NSGlobalDomain'
+        key: 'AppleSpacesSwitchOnActivate'
+        type: 'bool'
+        value: "{{ MissionControl_SwitchOnActivate }}"
+      - description: 'Group windows by application in Mission Control'
+        domain: 'com.apple.dock'
+        key: 'expose-group-apps'
+        type: 'bool'
+        value: "{{ MissionControl_GroupByApp }}"
+      - description: 'Displays have separate Spaces'
+        domain: 'com.apple.spaces'
+        key: 'spans-displays'
+        type: 'bool'
+        value: "{{ MissionControl_SpansDisplays }}"
     when: item.value != ''
     notify: restart Dock
-    
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
