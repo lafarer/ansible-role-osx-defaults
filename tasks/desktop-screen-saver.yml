@@ -25,24 +25,34 @@
       command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
       changed_when: no
       register: BackGroundImage_Current
+      ignore_errors: no
       become: "{{ target_user_id != ansible_user_id }}"
       become_user: "{{ target_user_id }}"
 
+
     rescue:
-    - name: "Copy {{ ansible_user_id }}'s desktoppicture.db into {{ target_user_id }} home dir."
-      copy:
-        remote_src: yes
-        src: "/Users/{{ ansible_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
-        dest: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
-        force: yes
-        owner: "{{ target_user_id }}"
-        mode: '0644'
+    - block:
+      - name: "Make sure that '/Users/{{ target_user_id }}/Library/Application\ Support/Dock/' exists."
+        file:
+          path: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/"
+          state: directory
+          owner: "{{ target_user_id }}"
+          mode: '0755'
+          
+      - name: "Copy {{ ansible_user_id }}'s desktoppicture.db into {{ target_user_id }} home dir."
+        copy:
+          remote_src: yes
+          src: "/Users/{{ ansible_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+          dest: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+          force: yes
+          owner: "{{ target_user_id }}"
+          mode: '0644'
       become: yes
-      when: target_user_id != ansible_user_id
+      when: (target_user_id != ansible_user_id)
 
   - name: When current image is different than DesktopScreenSaver_BackGroundImage
     block:
-    - name: Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'
+    - name: "Copy '{{ DesktopScreenSaver_BackGroundImage | basename }}' image to '~/Pictures'"
       copy:
         src: "{{ DesktopScreenSaver_BackGroundImage }}"
         dest: "{{ new_background_picture_dest_path }}"
