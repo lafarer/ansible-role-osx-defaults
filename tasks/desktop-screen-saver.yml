@@ -19,12 +19,26 @@
       var: new_background_picture_dest_path
     when: verbose | bool
 
-  - name: "Desktop & Screen Saver - Get the current background image"
-    command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
-    changed_when: no
-    register: BackGroundImage_Current
-    become: "{{ target_user_id != ansible_user_id }}"
-    become_user: "{{ target_user_id }}"
+  - name: try to get information about the current background image
+    block:
+    - name: "Desktop & Screen Saver - Get the current background image"
+      command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
+      changed_when: no
+      register: BackGroundImage_Current
+      become: "{{ target_user_id != ansible_user_id }}"
+      become_user: "{{ target_user_id }}"
+
+    rescue:
+    - name: "Copy {{ ansible_user_id }}'s desktoppicture.db into {{ target_user_id }} home dir."
+      copy:
+        remote_src: yes
+        src: "/Users/{{ ansible_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+        dest: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/desktoppicture.db"
+        force: yes
+        owner: "{{ target_user_id }}"
+        mode: '0644'
+      become: yes
+      when: target_user_id != ansible_user_id
 
   - name: When current image is different than DesktopScreenSaver_BackGroundImage
     block:
