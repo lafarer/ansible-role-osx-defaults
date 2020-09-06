@@ -15,10 +15,20 @@
       loop:
         - "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
 
+    - name: new_background_picture_dest_path
+      debug:
+        var: new_background_picture_dest_path
+      when: bool|true
+
     - name: "Desktop & Screen Saver - Get the current background image"
       command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
       changed_when: no
       register: BackGroundImage_Current
+
+    - name: BackGroundImage_Current
+      debug:
+        var: BackGroundImage_Current
+      when: bool|true
 
     - name: When current image is different than DesktopScreenSaver_BackGroundImage
       block:
@@ -62,7 +72,7 @@
       # end block
       when:
         - BackGroundImage_New.stat.exists
-        - BackGroundImage_Current.stdout != new_background_picture_dest_path
+        - BackGroundImage_Current.stdout != new_background_picture_dest_path | expanduser
     # end block
     when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage != ''
 
