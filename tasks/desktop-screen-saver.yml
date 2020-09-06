@@ -13,7 +13,7 @@
       set_fact:
         new_background_picture_dest_path: "{{ item }}"
       loop:
-        - "$HOME/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
+        - "~/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
 
     - name: new_background_picture_dest_path
       debug:
