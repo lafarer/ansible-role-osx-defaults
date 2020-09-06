@@ -18,7 +18,7 @@
     - name: new_background_picture_dest_path
       debug:
         var: new_background_picture_dest_path
-      when: bool|true
+      when: varbose | bool
 
     - name: "Desktop & Screen Saver - Get the current background image"
       command: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "select value from data limit 1";
@@ -28,7 +28,7 @@
     - name: BackGroundImage_Current
       debug:
         var: BackGroundImage_Current
-      when: bool|true
+      when: varbose | bool
 
     - name: When current image is different than DesktopScreenSaver_BackGroundImage
       block:
