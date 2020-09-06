@@ -12,9 +12,7 @@
     set_fact:
       new_background_picture_dest_path: "{{ item | expanduser }}"
     loop:
-      - "~/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
-    become: "{{ target_user_id != ansible_user_id }}"
-    become_user: "{{ target_user_id }}"
+      - "/Users/{{ target_user_id }}/Pictures/{{ DesktopScreenSaver_BackGroundImage | basename }}"
 
   - name: new_background_picture_dest_path
     debug:
