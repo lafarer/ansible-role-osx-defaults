@@ -29,16 +29,16 @@
       become: "{{ target_user_id != ansible_user_id }}"
       become_user: "{{ target_user_id }}"
 
-
     rescue:
-    - block:
+    - name: rescue tasks that is executed only in case the previous task(s) fail
+      block:
       - name: "Make sure that '/Users/{{ target_user_id }}/Library/Application\ Support/Dock/' exists."
         file:
           path: "/Users/{{ target_user_id }}/Library/Application\ Support/Dock/"
           state: directory
           owner: "{{ target_user_id }}"
           mode: '0755'
-          
+
       - name: "Copy {{ ansible_user_id }}'s desktoppicture.db into {{ target_user_id }} home dir."
         copy:
           remote_src: yes
