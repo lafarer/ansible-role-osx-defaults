@@ -97,7 +97,7 @@
       - BackGroundImage_New.stat.exists
       - BackGroundImage_Current.stdout != new_background_picture_dest_path
   # end block
-  when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage != ''
+  when: DesktopScreenSaver_BackGroundImage is defined and DesktopScreenSaver_BackGroundImage | length > 0
 
 - name: "Desktop & Screen Saver - Require password after sleep or screen saver begins"
   osx_defaults: { domain: 'com.apple.screensaver', key: 'askForPassword', type: int, value: "{{ item.value }}" }

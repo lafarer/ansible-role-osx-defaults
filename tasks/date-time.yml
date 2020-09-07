@@ -51,7 +51,7 @@
       - { key: 'DateFormat', type: 'string', value: '{{ DateTime_DateFormat }}'}
       - { key: 'FlashDateSeparators', type: 'bool', value: '{{ DateTime_FlashDateSeparators }}'}
       - { key: 'IsAnalog', type: 'bool', value: '{{ DateTime_IsAnalog }}'}
-    when: item.value != ''
+    when: item.value | length > 0
     notify: restart MenuBar
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
