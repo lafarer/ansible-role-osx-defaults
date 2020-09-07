@@ -9,7 +9,7 @@
       - { description: "Disable shutdown and restart button", key: 'PowerOffDisabled', type: 'bool', value: '{{ LoginWindow_ShutDownDisabled }}'}
       - { description: "Show input menu", key: 'showInputMenu', type: 'bool', value: '{{ LoginWindow_showInputMenu }}'}
       - { description: "Show password hints - Retries until hint", key: 'RetriesUntilHint', type: 'int', value: '{{ LoginWindow_RetriesUntilHint }}'}
-    when: item.value != ''
+    when: item.value | length > 0
 
   - name: "Login Window - Display Style"
     osx_defaults: { domain: '/Library/Preferences/com.apple.loginwindow', key: 'SHOWFULLNAME', type: bool, value: "{{ item.value }}" }
@@ -29,7 +29,7 @@
       - "{{ LoginWindow_DesktopPicture }}"
     when:
       - LoginWindow_DesktopPicture is defined
-      - LoginWindow_DesktopPicture != ""
+      - LoginWindow_DesktopPicture | length > 0
       - LoginWindow_DesktopPicture_New.stat.exists
   # the above block is run as superuser
   become: yes

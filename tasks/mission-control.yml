@@ -24,7 +24,7 @@
         key: 'spans-displays'
         type: 'bool'
         value: "{{ MissionControl_SpansDisplays }}"
-    when: item.value != ''
+    when: item.value | length > 0
     notify: restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
