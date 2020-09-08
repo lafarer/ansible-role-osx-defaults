@@ -5,7 +5,7 @@
     loop:
       - { description: 'Adjust keyboard brightness in low light', key: 'Automatic Keyboard Enabled', type: 'bool',  value: "{{ Keyboard_kDim }}" }
       - { description: 'Dim keyboard after idle time in seconds', key: 'Keyboard Dim Time', type: 'string', value: "{{ Keyboard_kDimTime }}" }
-    when: item.value | length > 0
+    when: item.value | string | length > 0
   # the above block is run as superuser
   become: yes
 
@@ -28,7 +28,7 @@
     loop:
       - { description: 'Adjust keyboard brightness in low light', key: 'kDim', type: 'bool', value: '{{ Keyboard_kDim }}'}
       - { description: 'Dim keyboard after idle time in seconds', key: 'kDimTime', type: 'int', value: '{{ Keyboard_kDimTime }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
 
   - name: "Keyboard - User - Keys"
     osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value  }}" }
@@ -37,7 +37,7 @@
       - { description: 'Set key repeat rate', key: 'KeyRepeat', type: 'int', value: '{{ Keyboard_KeyRepeat }}'}
       - { description: 'Set delay until repeat (in milliseconds)', key: 'InitialKeyRepeat', type: 'int', value: '{{ Keyboard_InitialKeyRepeat }}'}
       - { description: 'Disable press-and-hold, prefer key repeat', key: 'ApplePressAndHoldEnabled', type: 'bool', value: '{{ Keyboard_PressAndHoldEnabled }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
 
   - name: "Keyboard - User - Automatic Spelling Correction & Smart Substitutions"
     osx_defaults: { domain: 'NSGlobalDomain', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
@@ -46,7 +46,7 @@
       - { key: 'NSAutomaticQuoteSubstitutionEnabled',   type: 'bool', value: '{{ Keyboard_AutomaticQuoteSubstitutionEnabled }}'}
       - { key: 'NSAutomaticDashSubstitutionEnabled',    type: 'bool', value: '{{ Keyboard_AutomaticDashSubstitutionEnabled }}'}
       - { key: 'NSAutomaticPeriodSubstitutionEnabled',  type: 'bool', value: '{{ Keyboard_AutomaticPeriodSubstitutionEnabled }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
 
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

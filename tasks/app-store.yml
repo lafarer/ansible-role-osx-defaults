@@ -7,7 +7,7 @@
       - { key: 'AutomaticDownload',     type: 'bool', value: '{{ AppStore_AutomaticDownload }}'}
       - { key: 'ConfigDataInstall',     type: 'bool', value: '{{ AppStore_ConfigDataInstall }}'}
       - { key: 'CriticalUpdateInstall', type: 'bool', value: '{{ AppStore_CriticalUpdateInstall }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart AppStore
 
   - name: "AppStore - Global - Install Apps Auto Updates"
@@ -15,7 +15,7 @@
     loop:
       - { key: 'AutoUpdate',                type: 'bool', value: '{{ AppStore_AutoUpdate }}'}
       - { key: 'AutoUpdateRestartRequired', type: 'bool', value: '{{ AppStore_AutoUpdateRestartRequired }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart AppStore
   # the above block is run as superuser
   become: yes
@@ -26,7 +26,7 @@
     loop:
       - { key: 'ScheduleFrequency', type: 'int', value: '{{ AppStore_ScheduleFrequency }}'}
       - { key: 'ShowDebugMenu', type: 'bool', value: '{{ AppStore_ShowDebugMenu }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart AppStore
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

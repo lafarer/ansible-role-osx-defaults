@@ -13,7 +13,7 @@
       - { description: 'Ask to keep changes when closing documents', key: 'NSCloseAlwaysConfirmsChanges', type: 'bool', value: "{{ General_NSCloseAlwaysConfirmsChanges }}" } # noqa 204
       - { description: 'Close windows when quitting an application', key: 'NSQuitAlwaysKeepsWindows', type: 'bool', value: "{{ not General_CloseWindowsWhenQuittingApp }}" } # noqa 204
       - { description: 'Smooth scrolling', key: 'NSScrollAnimationEnabled', type: 'bool', value: "{{ General_NSScrollAnimationEnabled }}" }
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify:
       - restart MenuBar
       - restart Dock

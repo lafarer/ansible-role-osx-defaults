@@ -51,7 +51,7 @@
       - { key: 'mod-count',                type: 'int',     value: '1'}
       - { key: 'version',                  type: 'int',     value: '1'}
       # set `version` and `mod-count` to '1' to prevent DockFixUp to be replace the whole Dock in case of a new user
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`

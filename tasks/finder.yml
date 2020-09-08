@@ -7,7 +7,7 @@
       - { key: 'ShowExternalHardDrivesOnDesktop', type: 'bool',   value: '{{ Finder_ShowExternalHardDrivesOnDesktop }}'}
       - { key: 'ShowRemovableMediaOnDesktop',     type: 'bool',   value: '{{ Finder_ShowRemovableMediaOnDesktop }}'}
       - { key: 'ShowMountedServersOnDesktop',     type: 'bool',   value: '{{ Finder_ShowMountedServersOnDesktop }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart Finder
 
   - name: "Finder - General - View Settings"
@@ -20,7 +20,7 @@
       - { key: 'ShowStatusBar',        type: 'bool',   value: '{{ Finder_ShowStatusBar }}'}
       - { key: 'ShowSidebar',          type: 'bool',   value: '{{ Finder_ShowSidebar }}'}
       - { key: 'ColumnShowIcons',      type: 'bool',   value: '{{ Finder_ColumnShowIcons }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart Finder
 
   - name: "Finder - General - New Windows Show"
@@ -43,7 +43,7 @@
     vars:
       key_base: ':DesktopViewSettings:IconViewSettings:'
       plist_file: '~/Library/Preferences/com.apple.finder.plist'
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     changed_when: no
     notify: restart Finder
   # It is necessary to `Delete` then `Add` the IconView preferences because:
@@ -61,7 +61,7 @@
     vars:
       key_base: ':StandardViewSettings:IconViewSettings:'
       plist_file: '~/Library/Preferences/com.apple.finder.plist'
-    when: item.value | length > 0 # item.value is used to verify that there's a value to replace the value in the following task
+    when: item.value | string | length > 0 # item.value is used to verify that there's a value to replace the value in the following task
     changed_when: no
     notify: restart Finder
 
@@ -80,7 +80,7 @@
       - { key: 'FXDefaultSearchScope',           type: 'string', value: '{{ Finder_FXDefaultSearchScope }}'}
       - { key: 'NewWindowTarget',                type: 'string', value: '{{ Finder_NewWindowTarget }}'}
       - { key: 'FinderSpawnTab',                 type: 'bool',   value: '{{ Finder_FinderSpawnTab }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart Finder
 
   - name: "Finder - Extra - Various"
@@ -91,7 +91,7 @@
       - { domain: 'com.apple.finder', key: 'QLEnableTextSelection',   type: 'bool', value: '{{ Finder_QLEnableTextSelection }}'}
       - { domain: 'com.apple.finder', key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
       - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
-    when: item.value | length > 0
+    when: item.value | string | length > 0
     notify: restart Finder
 
   become: "{{ target_user_id != ansible_user_id }}"
