@@ -8,7 +8,7 @@
       - { key: 'ShowRemovableMediaOnDesktop',     type: 'bool',   value: '{{ Finder_ShowRemovableMediaOnDesktop }}'}
       - { key: 'ShowMountedServersOnDesktop',     type: 'bool',   value: '{{ Finder_ShowMountedServersOnDesktop }}'}
     when: item.value | string | length > 0
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - General - View Settings"
     osx_defaults: { domain: 'com.apple.finder', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value  }}" }
@@ -21,14 +21,14 @@
       - { key: 'ShowSidebar',          type: 'bool',   value: '{{ Finder_ShowSidebar }}'}
       - { key: 'ColumnShowIcons',      type: 'bool',   value: '{{ Finder_ColumnShowIcons }}'}
     when: item.value | string | length > 0
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - General - New Windows Show"
     osx_defaults: { domain: 'com.apple.finder', key: 'NewWindowTargetPath', type: string, value: "{{ item.value }}" }
     loop: "{{ Finder_NewWindowsShow_Options }}"
     when: Finder_NewWindowTarget is defined and item.name == Finder_NewWindowTarget
     changed_when: no
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - Desktop - IconViewSettings"
     shell: |
@@ -45,7 +45,7 @@
       plist_file: '~/Library/Preferences/com.apple.finder.plist'
     when: item.value | string | length > 0
     changed_when: no
-    notify: restart Finder
+    notify: Restart Finder
   # It is necessary to `Delete` then `Add` the IconView preferences because:
   # - if they are not existing it is not possible to use `Set` and is necessary to use `Add`
   # - if we use `Add` and the item already exists it throws an error
@@ -63,14 +63,14 @@
       plist_file: '~/Library/Preferences/com.apple.finder.plist'
     when: item.value | string | length > 0 # item.value is used to verify that there's a value to replace the value in the following task
     changed_when: no
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - Advanced - Show All Filename Extensions"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleShowAllExtensions', type: bool, value: "{{ item }}" }
     loop:
       - "{{ Finder_AppleShowAllExtensions }}"
     when: Finder_AppleShowAllExtensions is defined
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - Advanced - Various"
     osx_defaults: { domain: 'com.apple.finder', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
@@ -81,7 +81,7 @@
       - { key: 'NewWindowTarget',                type: 'string', value: '{{ Finder_NewWindowTarget }}'}
       - { key: 'FinderSpawnTab',                 type: 'bool',   value: '{{ Finder_FinderSpawnTab }}'}
     when: item.value | string | length > 0
-    notify: restart Finder
+    notify: Restart Finder
 
   - name: "Finder - Extra - Various"
     osx_defaults: { domain: "{{ item.domain }}", key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
@@ -92,7 +92,7 @@
       - { domain: 'com.apple.finder', key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
       - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
     when: item.value | string | length > 0
-    notify: restart Finder
+    notify: Restart Finder
 
   become: "{{ target_user_id != ansible_user_id }}"
   become_user: "{{ target_user_id }}"

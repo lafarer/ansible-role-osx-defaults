@@ -89,7 +89,7 @@
             # https://stackoverflow.com/questions/33533304/change-scaling-for-all-desktop-backgrounds-on-mac-via-a-script/42194904 changing is enabled)
           become: "{{ target_user_id != ansible_user_id }}"
           become_user: "{{ target_user_id }}"
-          notify: restart Dock
+          notify: Restart Dock
       # end block
       when: ansible_facts['distribution_version'] is version('10.9', '>=')
     # end block
