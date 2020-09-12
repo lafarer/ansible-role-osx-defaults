@@ -11,7 +11,7 @@
     loop:
       - "{{ DateTime_TimeZone }}"
     when: DateTime_TimeZone is defined and DateTime_TimeZone not in result.stdout
-    notify: restart MenuBar
+    notify: Restart MenuBar
 
   - name: "Date Time - Set date and time automatically"
     command: "systemsetup -setusingnetworktime {{ item }}"
@@ -20,7 +20,7 @@
     when: DateTime_AutomaticDateTime is defined
     register: result
     changed_when: "'already' not in result.stdout"
-    notify: restart MenuBar
+    notify: Restart MenuBar
 
   - name: "Date Time - Get the current time server"
     command: "systemsetup -getnetworktimeserver"
@@ -33,14 +33,14 @@
     loop:
       - "{{ DateTime_TimeServer }}"
     when: DateTime_TimeServer is defined and DateTime_TimeServer not in result.stdout
-    notify: restart MenuBar
+    notify: Restart MenuBar
 
   - name: "Date Time - Set time zome automatically using current location"
     osx_defaults: { domain: '/Library/Preferences/com.apple.timezone.auto.plist', key: 'Active', type: bool, value: "{{ item }}" }
     loop:
       - "{{ DateTime_AutomaticTimeZone }}"
     when: DateTime_AutomaticTimeZone is defined
-    notify: restart MenuBar
+    notify: Restart MenuBar
   # the above block is run as superuser
   become: yes
 
@@ -52,7 +52,7 @@
       - { key: 'FlashDateSeparators', type: 'bool', value: '{{ DateTime_FlashDateSeparators }}'}
       - { key: 'IsAnalog', type: 'bool', value: '{{ DateTime_IsAnalog }}'}
     when: item.value | string | length > 0
-    notify: restart MenuBar
+    notify: Restart MenuBar
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"

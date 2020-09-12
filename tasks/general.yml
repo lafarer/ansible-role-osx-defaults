@@ -15,8 +15,8 @@
       - { description: 'Smooth scrolling', key: 'NSScrollAnimationEnabled', type: 'bool', value: "{{ General_NSScrollAnimationEnabled }}" }
     when: item.value | string | length > 0
     notify:
-      - restart MenuBar
-      - restart Dock
+      - Restart MenuBar
+      - Restart Dock
 
   - name: "General - Highlight color"
     osx_defaults: { domain: 'NSGlobalDomain', key: 'AppleHighlightColor', type: string, value: "{{ item.value }}" }

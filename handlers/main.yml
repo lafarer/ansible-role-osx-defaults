@@ -1,46 +1,40 @@
 ---
-- name: restart ActivityMonitor
+- name: Restart ActivityMonitor
   command: killall "Activity Monitor"
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
   ignore_errors: yes
 
-- name: restart AppStore
+- name: Restart AppStore
   command: killall "App Store"
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
   ignore_errors: yes
 
-- name: restart MenuBar
+- name: Restart MenuBar
   command: killall SystemUIServer
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
   ignore_errors: yes
 
-- name: restart Dock
+- name: Restart Dock
   command: killall Dock
   ignore_errors: yes
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
 
-- name: restart Finder
+- name: Restart Finder
   command: killall Finder
   ignore_errors: yes
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
 
-- name: restart Safari
+- name: Restart Safari
   command: killall Safari
   ignore_errors: yes
-  become: "{{ target_user_id != ansible_user_id }}"
-  become_user: "{{ target_user_id }}"
+  when: target_user_id == ansible_user_id
 
-- name: restart Spotlight
+- name: Restart Spotlight
   command: killall mds
   ignore_errors: yes
   become: yes
 
-- name: restart LaunchServices
+- name: Restart LaunchServices
   command: killall launchservicesd
   ignore_errors: yes
   become: yes

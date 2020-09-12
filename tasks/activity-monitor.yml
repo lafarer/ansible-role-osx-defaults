@@ -8,7 +8,7 @@
     when: (item.0.key == 'OpenMainWindow' and item.1.name == ActivityMonitor_OpenMainWindow ) or
           (item.0.key == 'IconType' and item.1.name == ActivityMonitor_IconType ) or
           (item.0.key == 'ShowCategory' and item.1.name == ActivityMonitor_ShowCategory )
-    notify: restart ActivityMonitor
+    notify: Restart ActivityMonitor
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
