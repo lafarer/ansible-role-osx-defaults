@@ -5,9 +5,9 @@
     with_subelements:
       - "{{ Trackpad_Options }}"
       - value
-    when: (item.0.key == 'Clicking' and (item.1.name == Trackpad_Clicking or item.1.value == Trackpad_Clicking)) or
-          (item.0.key == 'DragLock' and (item.1.name == Trackpad_DragLock or item.1.value == Trackpad_DragLock)) or
-          (item.0.key == 'Dragging' and (item.1.name == Trackpad_Dragging or item.1.value == Trackpad_Dragging)) or
+    when: (item.0.key == 'Clicking' and (item.1.name == Trackpad_Clicking or item.1.value|bool == Trackpad_Clicking|bool)) or
+          (item.0.key == 'DragLock' and (item.1.name == Trackpad_DragLock or item.1.value|bool == Trackpad_DragLock|bool)) or
+          (item.0.key == 'Dragging' and (item.1.name == Trackpad_Dragging or item.1.value|bool == Trackpad_Dragging|bool)) or
           (item.0.key == 'ActuateDetents' and
           (item.1.name == Trackpad_ForceClickAndHapticFeedback or item.1.value == Trackpad_ForceClickAndHapticFeedback)) or
           (item.0.key == 'ForceSuppressed' and

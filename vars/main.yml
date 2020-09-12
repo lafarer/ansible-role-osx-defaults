@@ -1,7 +1,7 @@
 ---
 EnabledDisabled_Options_Boolean:
-  - { name: "Disabled", value: no }
-  - { name: "Enabled", value: yes }
+  - { name: "Disabled", value: False }
+  - { name: "Enabled", value: True }
 
 EnabledDisabled_Options_Integer:
   - { name: "Disabled", value: 0 }
