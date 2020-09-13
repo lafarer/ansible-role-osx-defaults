@@ -5,7 +5,7 @@
     with_subelements:
       - "{{ Trackpad_Options }}"
       - value
-    when: (item.0.key == 'com.apple.mouse.tapBehaviord' and (item.1.name == Trackpad_Clicking or item.1.value|string == Trackpad_Clicking|string )) or
+    when: (item.0.key == 'com.apple.mouse.tapBehavior' and (item.1.name == Trackpad_Clicking or item.1.value|string == Trackpad_Clicking|string )) or
           (item.0.key == 'Clicking' and (item.1.name == Trackpad_Clicking or item.1.value|string == Trackpad_Clicking|string )) or
           (item.0.key == 'DragLock' and (item.1.name == Trackpad_DragLock or item.1.value|string == Trackpad_DragLock|string )) or
           (item.0.key == 'Dragging' and (item.1.name == Trackpad_Dragging or item.1.value|string == Trackpad_Dragging|string )) or
