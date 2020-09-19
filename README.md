@@ -407,7 +407,7 @@ Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - En
         target_user_id: 'testuser_name'
 
       roles:
-         - { role: lafarer.osx-defaults }
+         - { role: lafarer.osx_defaults }
 ```
 
 ## Known Issues
