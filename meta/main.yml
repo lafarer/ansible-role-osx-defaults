@@ -3,6 +3,7 @@ galaxy_info:
   author: Eric Lafargue
   description: Ansible role to configure defaults on OSX.
   license: BSD
+  role_name: osx_defaults
   min_ansible_version: 2.0
   platforms:
     - name: macOS
