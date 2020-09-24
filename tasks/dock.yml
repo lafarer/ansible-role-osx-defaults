@@ -15,7 +15,7 @@
       - "{{ persistent_apps_array }}" # then inject the freshly build list
     when: persistent_apps_array is defined and persistent_apps_array != []
     changed_when: no
-    notify: restart Dock
+    notify: Restart Dock
 
   - name: "Dock - Persistent Others - Buils items list"
     set_fact:
@@ -30,7 +30,7 @@
       - "{{ persistent_others_array }}"
     when: persistent_others_array is defined and persistent_others_array != []
     changed_when: no
-    notify: restart Dock
+    notify: Restart Dock
 
   - name: "Dock - Appearance"
     osx_defaults: { domain: 'com.apple.dock', key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
@@ -51,8 +51,8 @@
       - { key: 'mod-count',                type: 'int',     value: '1'}
       - { key: 'version',                  type: 'int',     value: '1'}
       # set `version` and `mod-count` to '1' to prevent DockFixUp to be replace the whole Dock in case of a new user
-    when: item.value | length > 0
-    notify: restart Dock
+    when: item.value | string | length > 0
+    notify: Restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"

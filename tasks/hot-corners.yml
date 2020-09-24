@@ -10,7 +10,7 @@
           (item.0.key == 'wvous-br-modifier' and item.1.name == HotCorners_BottomRightModifier) or
           (item.0.key == 'wvous-tl-modifier' and item.1.name == HotCorners_TopLeftModifier) or
           (item.0.key == 'wvous-tr-modifier' and item.1.name == HotCorners_TopRightModifier)
-    notify: restart Dock
+    notify: Restart Dock
 
   - name: "Hot Corners - Actions"
     osx_defaults: { domain: 'com.apple.dock', key: "{{ item.0.key }}", type: int, value: "{{ item.1.value }}" }
@@ -21,7 +21,7 @@
           (item.0.key == 'wvous-br-corner' and item.1.name == HotCorners_BottomRightAction) or
           (item.0.key == 'wvous-tl-corner' and item.1.name == HotCorners_TopLeftAction) or
           (item.0.key == 'wvous-tr-corner' and item.1.name == HotCorners_TopRightAction)
-    notify: restart Dock
+    notify: Restart Dock
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
