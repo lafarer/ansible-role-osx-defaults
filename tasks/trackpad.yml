@@ -1,13 +1,14 @@
 ---
 - block:
   - name: "Trackpad"
-    osx_defaults: { domain: "{{ item.0.domain }}", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
+    osx_defaults: { domain: "{{ item.0.domain }}",  host: "{{ item.0.host|default('') }}", key: "{{ item.0.key }}", type: "{{ item.0.type }}", value: "{{ item.1.value }}" }
     with_subelements:
       - "{{ Trackpad_Options }}"
       - value
-    when: (item.0.key == 'Clicking' and (item.1.name == Trackpad_Clicking or item.1.value == Trackpad_Clicking)) or
-          (item.0.key == 'DragLock' and (item.1.name == Trackpad_DragLock or item.1.value == Trackpad_DragLock)) or
-          (item.0.key == 'Dragging' and (item.1.name == Trackpad_Dragging or item.1.value == Trackpad_Dragging)) or
+    when: (item.0.key == 'com.apple.mouse.tapBehavior' and (item.1.name == Trackpad_Clicking or item.1.value|string == Trackpad_Clicking|string )) or
+          (item.0.key == 'Clicking' and (item.1.name == Trackpad_Clicking or item.1.value|string == Trackpad_Clicking|string )) or
+          (item.0.key == 'DragLock' and (item.1.name == Trackpad_DragLock or item.1.value|string == Trackpad_DragLock|string )) or
+          (item.0.key == 'Dragging' and (item.1.name == Trackpad_Dragging or item.1.value|string == Trackpad_Dragging|string )) or
           (item.0.key == 'ActuateDetents' and
           (item.1.name == Trackpad_ForceClickAndHapticFeedback or item.1.value == Trackpad_ForceClickAndHapticFeedback)) or
           (item.0.key == 'ForceSuppressed' and
@@ -47,6 +48,7 @@
           (item.0.key == 'USBMouseStopsTrackpad' and (item.1.name == Trackpad_USBMouseStopsTrackpad or item.1.value == Trackpad_USBMouseStopsTrackpad)) or
           (item.0.key == 'TrackpadTwoFingerFromRightEdgeSwipeGesture' and
           (item.1.name == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture or item.1.value == Trackpad_TrackpadTwoFingerFromRightEdgeSwipeGesture))
+  # end block
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
   become: "{{ target_user_id != ansible_user_id }}"
