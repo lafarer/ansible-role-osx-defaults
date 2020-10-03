@@ -403,7 +403,7 @@ Trackpad_USBMouseStopsTrackpad: "Disabled"                # 0 - Disabled, 1 - En
 ```
     - hosts: servers
       vars:
-        Bluetooth_Enabled: yes
+        Configure_Bluetooth: yes
         Bluetooth_ShowInMenuBar: no
         target_user_id: 'testuser_name'
 
