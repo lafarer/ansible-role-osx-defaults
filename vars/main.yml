@@ -1,4 +1,29 @@
 ---
+Configure_ActivityMonitor: "{{ ActivityMonitor_Enabled if ActivityMonitor_Enabled | length > 0 }}"
+Configure_AppStore:  "{{ AppStore_Enabled if AppStore_Enabled | length > 0 }}"
+Configure_ApplicationFirewall: "{{ ApplicationFirewall_Enabled if ApplicationFirewall_Enabled | length > 0 }}"
+Configure_Bluetooth: "{{ Bluetooth_Enabled if Bluetooth_Enabled | length > 0 }}"
+Configure_Dashboard: "{{ Dashboard_Enabled if Dashboard_Enabled | length > 0 }}"
+Configure_DateTime: "{{ DateTime_Enabled if DateTime_Enabled | length > 0 }}"
+Configure_DesktopScreenSaver: "{{ DesktopScreenSaver_Enabled if DesktopScreenSaver_Enabled | length > 0 }}"
+Configure_DiskImages: "{{ DiskImages_Enabled if DiskImages_Enabled | length > 0 }}"
+Configure_Displays: "{{ Displays_Enabled if Displays_Enabled | length > 0 }}"
+Configure_Dock: "{{ Dock_Enabled: if : | length > 0 }}"
+Configure_EnergySaver: "{{ EnergySaver_Enabled if EnergySaver_Enabled | length > 0 }}"
+Configure_Finder: "{{ Finder_Enabled if Finder_Enabled | length > 0 }}"
+Configure_General: "{{ General_Enabled if General_Enabled | length > 0 }}"
+Configure_HotCorners: "{{ HotCorners_Enabled if HotCorners_Enabled | length > 0 }}"
+Configure_iCloud: "{{ ICloud_Enabled if ICloud_Enabled | length > 0 }}"
+Configure_Keyboard: "{{ Keyboard_Enabled if Keyboard_Enabled | length > 0 }}"
+Configure_LanguageRegion: "{{ LanguageRegion_Enabled if LanguageRegion_Enabled | length > 0 }}"
+Configure_LaunchServices: "{{ LaunchServices_Enabled if LaunchServices_Enabled | length > 0 }}"
+Configure_LoginWindow: "{{ LoginWindow_Enabled if LoginWindow_Enabled | length > 0 }}"
+Configure_MissionControl: "{{ MissionControl_Enabled if MissionControl_Enabled | length > 0 }}"
+Configure_Safari: "{{ Safari_Enabled if Safari_Enabled | length > 0 }}"
+Configure_SetupAssistant: "{{ Spotlight_Enabled if Spotlight_Enabled | length > 0 }}"
+Configure_Spotlight: "{{ SetupAssistant_Enabled if SetupAssistant_Enabled | length > 0 }}"
+Configure_Trackpad: "{{ Trackpad_Enabled if Trackpad_Enabled | length > 0 }}"
+
 EnabledDisabled_Options_Boolean:
   - { name: "Disabled", value: False }
   - { name: "Enabled", value: True }

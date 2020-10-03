@@ -14,29 +14,30 @@ target_user_id: "{{ ansible_user_id }}"          # Define the username for which
 ```
 
 ```
-ActivityMonitor_Enabled: no                      # Enable ActivityMonitor configuration
-AppStore_Enabled: no                             # Enable AppStore configuration
-Dashboard_Enabled: no                            # Enable Dashboard configuration
-Bluetooth_Enabled: no                            # Enable Bluetooth configuration
-ApplicationFirewall_Enabled: no                  # Enable Application Firewall
-DateTime_Enabled: no                             # Enable Date Time configuration
-DesktopScreenSaver_Enabled: no                   # Enable Desktop and Screen Saver configuration
-DiskImages_Enabled: no                           # Enable DiskImages configuration
-LoginWindow_Enabled: no                          # Enable Launch Services configuration
-LaunchServices_Enabled: no                       # Enable Launch Services configuration
-Finder_Enabled: no                               # Enable Finder configuration
-Displays_Enabled: no                             # Enable Displays configuration
-Dock_Enabled: no                                 # Enable Dock configuration
-EnergySaver_Enabled: no                          # Enable Energy Saver configuration
-General_Enabled: no                              # Enable General configuration
-HotCorners_Enabled: no                           # Enable Hot Corners configurations
-ICloud_Enabled: no                               # Enable iCloud configuration
-Keyboard_Enabled: no                             # Enable Keyboard configuration
-LanguageRegion_Enabled: no                       # Enable Language and Region configuration
-MissionControl_Enabled: no                       # Enable Mission Control configuration
-Safari_Enabled: no                               # Enable Safari configuration
-SetupAssistant_Enabled: no                       # Enable SetupAssistant configuration
-Spotlight_Enabled: no
+Configure_ActivityMonitor: no                    # Enable ActivityMonitor configuration
+Configure_AppStore: no                           # Enable AppStore configuration
+Configure_ApplicationFirewall: no                # Enable Application Firewall
+Configure_Bluetooth: no                          # Enable Bluetooth configuration
+Configure_Dashboard: no                          # Enable Dashboard configuration
+Configure_DateTime: no                           # Enable Date Time configuration
+Configure_DesktopScreenSaver: no                 # Enable Desktop and Screen Saver configuration
+Configure_DiskImages: no                         # Enable DiskImages configuration
+Configure_Displays: no                           # Enable Displays configuration
+Configure_Dock: no                               # Enable Dock configuration
+Configure_EnergySaver: no                        # Enable Energy Saver configuration
+Configure_Finder: no                             # Enable Finder configuration
+Configure_General: no                            # Enable General configuration
+Configure_HotCorners: no                         # Enable Hot Corners configurations
+Configure_iCloud: no                             # Enable iCloud configuration
+Configure_Keyboard: no                           # Enable Keyboard configuration
+Configure_LanguageRegion: no                     # Enable Language and Region configuration
+Configure_LaunchServices: no                     # Enable Launch Services configuration
+Configure_LoginWindow: no                        # Enable Launch Services configuration
+Configure_MissionControl: no                     # Enable Mission Control configuration
+Configure_Safari: no                             # Enable Safari configuration
+Configure_SetupAssistant: no                     # Enable Setup Assistant configuration
+Configure_Spotlight: no                          # Enable Spotlight configuration
+Configure_Trackpad: no                           # Enable Trackpad configuration
 ```
 When a toggle for a component is enabled than the role will take in consideration the variables dedicated to the specific component as list below.
 
@@ -103,7 +104,7 @@ DateTime_IsAnalog: no                            # Analog menu bar clock
 ```
 
 ```
-DesktopScreenSaver_BackGroundImage: ""           # Background iamge
+DesktopScreenSaver_BackGroundImage: ""           # Background image
 DesktopScreenSaver_askForPassword: "Disable"     # Require password after sleep or screen saver begins
 ```
 
