@@ -14,6 +14,8 @@ target_user_id: "{{ ansible_user_id }}"          # Define the username for which
 ```
 
 ```
+# retro compatibility with old *_Enabled variable name is maintained
+
 Configure_ActivityMonitor: no                    # Enable ActivityMonitor configuration
 Configure_AppStore: no                           # Enable AppStore configuration
 Configure_ApplicationFirewall: no                # Enable Application Firewall
