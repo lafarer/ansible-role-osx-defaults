@@ -1,5 +1,4 @@
 ---
-AppStore_Enabled: no                             # Enable AppStore configuration
 AppStore_AutomaticCheckEnabled: no               # Automatically check for updates
 AppStore_AutomaticDownload: no                   # Download newly available updates in the background
 AppStore_AutoUpdate: no                          # Install app updates
