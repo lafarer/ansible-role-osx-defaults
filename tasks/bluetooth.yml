@@ -7,7 +7,7 @@
 
   - name: "Bluetooth - Show Bluetooth in menu bar"
     command: defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
-    when: Bluetooth_ShowInMenuBar is defined and Bluetooth_ShowInMenuBar is true and 'Bluetooth.menu' not in result.stdout
+    when: Bluetooth_ShowInMenuBar is defined and (Bluetooth_ShowInMenuBar | bool) and 'Bluetooth.menu' not in result.stdout
     notify: Restart MenuBar
   # Privilege escalation to `target_user_id` is only required for inner steps when
   # the `target_user_id` doesn't match the `ansible_user_id`
