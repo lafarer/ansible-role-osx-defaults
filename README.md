@@ -158,7 +158,7 @@ Finder_ShowRemovableMediaOnDesktop: yes          # Show CDs,DVDs and iPods on th
 Finder_ShowMountedServersOnDesktop: no           # Show connected servers on the desktop
 Finder_NewWindowTarget: "All My Files"           # New Finder windows shows ("Computer", "Computer's HD", "Home", "Desktop", "Documents", "All My Files" )
 Finder_FinderSpawnTab: yes                       # Open folders in tabs instead of new windows
-Finder_AppleShowAllExtensions: no                # Show all fiename extensions
+Finder_AppleShowAllExtensions: no                # Show all filename extensions
 Finder_FXEnableExtensionChangeWarning: yes       # Show warning before changing an extension
 Finder_WarnOnEmptyTrash: no                      # Show warning before emptying the trash
 Finder_FXDefaultSearchScope: "SCev"              # When performing a search (SCev:Search This Mac, SCcf:Search the Current Folder, SCsp:Use the Previous Search Scope)
