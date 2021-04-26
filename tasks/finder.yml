@@ -91,6 +91,7 @@
       - { domain: 'com.apple.finder', key: 'QLEnableTextSelection',   type: 'bool', value: '{{ Finder_QLEnableTextSelection }}'}
       - { domain: 'com.apple.finder', key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
       - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
+      - { domain: 'com.apple.desktopservices', key: 'DSDontWriteUSBStores', type: 'bool', value: '{{ Finder_DSDontWriteUSBStores }}'}
     when: item.value | string | length > 0
     notify: Restart Finder
 
