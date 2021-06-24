@@ -292,7 +292,7 @@ Trackpad_Options:
   - { description: 'Clicking',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Clicking', type: 'int',  value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'DragLock',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'DragLock',                                   type: 'int',  value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'Dragging',                                 domain: "com.apple.AppleMultitouchTrackpad", key: 'Dragging',                                   type: 'int',  value: "{{ EnabledDisabled_Options_Integer }}" }
-  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuateDetents',                             type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
+  - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuateDetents',                             type: 'int',  value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'Force Click & Haptic Feedback',            domain: "com.apple.AppleMultitouchTrackpad", key: 'ForceSuppressed',                            type: 'bool',  value: "{{ EnabledDisabled_Options_Boolean }}" }
   - { description: 'Silent Clicking',                          domain: "com.apple.AppleMultitouchTrackpad", key: 'ActuationStrength',                          type: 'int',   value: "{{ EnabledDisabled_Options_Integer }}" }
   - { description: 'ClickHapticFeedback',                      domain: "com.apple.AppleMultitouchTrackpad", key: 'FirstClickThreshold',                        type: 'int',   value: "{{ Trackpad_ClickHapticFeedback_Options }}" }
