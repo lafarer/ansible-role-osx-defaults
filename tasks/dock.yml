@@ -46,6 +46,7 @@
       - { key: 'autohide',                 type: 'bool',    value: '{{ Dock_Autohide }}'}
       - { key: 'autohide-time-modifier',   type: 'int',     value: '{{ Dock_AutohideTimeModifier }}'}
       - { key: 'show-process-indicators',  type: 'boolean', value: '{{ Dock_ShowProcessIndicators }}'}
+      - { key: 'show-recents',             type: 'boolean', value: '{{ Dock_ShowRecentItems }}'}
       - { key: 'showhidden',               type: 'boolean', value: '{{ Dock_ShowHidden }}'}
       - { key: 'mouse-over-hilite-stack',  type: 'boolean', value: '{{ Dock_MouseOverHiliteStack }}'}
       - { key: 'mod-count',                type: 'int',     value: '1'}
