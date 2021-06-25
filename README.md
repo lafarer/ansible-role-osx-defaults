@@ -142,6 +142,7 @@ Dock_LaunchAnim: yes                             # Animate opening applications
 Dock_Autohide: no                                # Automatically hide and show the Dock
 Dock_AutohideTimeModifier: 0                     # 0 - Disable, other Int value - Define Animation timing when hiding/showing the Dock
 Dock_ShowProcessIndicators: yes                  # Show indicator for open applications
+Dock_ShowRecentItems: yes                        # Show recent applications used in the dock (Catalina)
 Dock_ShowHidden: no                              # Display translucent Dock icons for hidden applications
 Dock_MouseOverHiliteStack: yes                   # Enable highlight hover effect for the grid view of a stack (Dock)
 ```

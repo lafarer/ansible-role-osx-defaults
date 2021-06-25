@@ -87,7 +87,7 @@
     osx_defaults: { domain: "{{ item.domain }}", key: "{{ item.key }}", type: "{{ item.type }}", value: "{{ item.value }}" }
     loop:
       - { domain: 'com.apple.finder', key: '_FXShowPosixPathInTitle', type: 'bool', value: '{{ Finder_FXShowPosixPathInTitle }}'}
-      - { domain: 'com.apple.finder', key: 'AppleShowAllFiles',       type: 'bool', value: '{{ Finder_AppleShowAllFiles }}'}
+      - { domain: 'com.apple.finder', key: 'AppleShowAllFiles',       type: 'string', value: '{{ Finder_AppleShowAllFiles }}'}
       - { domain: 'com.apple.finder', key: 'QLEnableTextSelection',   type: 'bool', value: '{{ Finder_QLEnableTextSelection }}'}
       - { domain: 'com.apple.finder', key: 'QuitMenuItem',            type: 'bool', value: '{{ Finder_QuitMenuItem }}'}
       - { domain: 'com.apple.desktopservices', key: 'DSDontWriteNetworkStores', type: 'bool', value: '{{ Finder_DSDontWriteNetworkStores }}'}
