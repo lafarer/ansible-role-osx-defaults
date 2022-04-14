@@ -1,0 +1,122 @@
+---
+# Keep retro-compatibility with *_Enabled toggles
+- name: Backwards compatibility with Configure_ActivityMonitorActivityMonitor_Enabled
+  ansible.builtin.set_fact:
+    Configure_ActivityMonitor: '{{ ActivityMonitor_Enabled }}'
+  when: ActivityMonitor_Enabled is defined
+
+- name: Backwards compatibility with Configure_AppStoreAppStore_Enabled
+  ansible.builtin.set_fact:
+    Configure_AppStore: '{{ AppStore_Enabled }}'
+  when: AppStore_Enabled is defined
+
+- name: Backwards compatibility with Configure_ApplicationFirewallApplicationFirewall_Enabled
+  ansible.builtin.set_fact:
+    Configure_ApplicationFirewall: '{{ ApplicationFirewall_Enabled }}'
+  when: ApplicationFirewall_Enabled is defined
+
+- name: Backwards compatibility with Configure_BluetoothBluetooth_Enabled
+  ansible.builtin.set_fact:
+    Configure_Bluetooth: '{{ Bluetooth_Enabled }}'
+  when: Bluetooth_Enabled is defined
+
+- name: Backwards compatibility with Configure_DashboardDashboard_Enabled
+  ansible.builtin.set_fact:
+    Configure_Dashboard: '{{ Dashboard_Enabled }}'
+  when: Dashboard_Enabled is defined
+
+- name: Backwards compatibility with Configure_DateTimeDateTime_Enabled
+  ansible.builtin.set_fact:
+    Configure_DateTime: '{{ DateTime_Enabled }}'
+  when: DateTime_Enabled is defined
+
+- name: Backwards compatibility with Configure_DesktopScreenSaverDesktopScreenSaver_Enabled
+  ansible.builtin.set_fact:
+    Configure_DesktopScreenSaver: '{{ DesktopScreenSaver_Enabled }}'
+  when: DesktopScreenSaver_Enabled is defined
+
+- name: Backwards compatibility with Configure_DiskImagesDiskImages_Enabled
+  ansible.builtin.set_fact:
+    Configure_DiskImages: '{{ DiskImages_Enabled }}'
+  when: DiskImages_Enabled is defined
+
+- name: Backwards compatibility with Configure_DisplaysDisplays_Enabled
+  ansible.builtin.set_fact:
+    Configure_Displays: '{{ Displays_Enabled }}'
+  when: Displays_Enabled is defined
+
+- name: Backwards compatibility with Configure_DockDock_Enabled
+  ansible.builtin.set_fact:
+    Configure_Dock: '{{ Dock_Enabled }}'
+  when: Dock_Enabled is defined
+
+- name: Backwards compatibility with Configure_EnergySaverEnergySaver_Enabled
+  ansible.builtin.set_fact:
+    Configure_EnergySaver: '{{ EnergySaver_Enabled }}'
+  when: EnergySaver_Enabled is defined
+
+- name: Backwards compatibility with Configure_FinderFinder_Enabled
+  ansible.builtin.set_fact:
+    Configure_Finder: '{{ Finder_Enabled }}'
+  when: Finder_Enabled is defined
+
+- name: Backwards compatibility with Configure_GeneralGeneral_Enabled
+  ansible.builtin.set_fact:
+    Configure_General: '{{ General_Enabled }}'
+  when: General_Enabled is defined
+
+- name: Backwards compatibility with Configure_HotCornersHotCorners_Enabled
+  ansible.builtin.set_fact:
+    Configure_HotCorners: '{{ HotCorners_Enabled }}'
+  when: HotCorners_Enabled is defined
+
+- name: Backwards compatibility with Configure_KeyboardKeyboard_Enabled
+  ansible.builtin.set_fact:
+    Configure_Keyboard: '{{ Keyboard_Enabled }}'
+  when: Keyboard_Enabled is defined
+
+- name: Backwards compatibility with Configure_LanguageRegionLanguageRegion_Enabled
+  ansible.builtin.set_fact:
+    Configure_LanguageRegion: '{{ LanguageRegion_Enabled }}'
+  when: LanguageRegion_Enabled is defined
+
+- name: Backwards compatibility with Configure_LaunchServicesLaunchServices_Enabled
+  ansible.builtin.set_fact:
+    Configure_LaunchServices: '{{ LaunchServices_Enabled }}'
+  when: LaunchServices_Enabled is defined
+
+- name: Backwards compatibility with Configure_LoginWindowLoginWindow_Enabled
+  ansible.builtin.set_fact:
+    Configure_LoginWindow: '{{ LoginWindow_Enabled }}'
+  when: LoginWindow_Enabled is defined
+
+- name: Backwards compatibility with Configure_MissionControlMissionControl_Enabled
+  ansible.builtin.set_fact:
+    Configure_MissionControl: '{{ MissionControl_Enabled }}'
+  when: MissionControl_Enabled is defined
+
+- name: Backwards compatibility with Configure_SafariSafari_Enabled
+  ansible.builtin.set_fact:
+    Configure_Safari: '{{ Safari_Enabled }}'
+  when: Safari_Enabled is defined
+
+- name: Backwards compatibility with Configure_SetupAssistantSpotlight_Enabled
+  ansible.builtin.set_fact:
+    Configure_SetupAssistant: '{{ Spotlight_Enabled }}'
+  when: Spotlight_Enabled is defined
+
+- name: Backwards compatibility with Configure_SpotlightSetupAssistant_Enabled
+  ansible.builtin.set_fact:
+    Configure_Spotlight: '{{ SetupAssistant_Enabled }}'
+  when: SetupAssistant_Enabled is defined
+
+- name: Backwards compatibility with Configure_TrackpadTrackpad_Enabled
+  ansible.builtin.set_fact:
+    Configure_Trackpad: '{{ Trackpad_Enabled }}'
+  when: Trackpad_Enabled is defined
+
+- name: Backwards compatibility with Configure_iCloudICloud_Enabled
+  ansible.builtin.set_fact:
+    Configure_iCloud: '{{ ICloud_Enabled }}'
+  when: ICloud_Enabled is defined
+...
